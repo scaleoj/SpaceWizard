@@ -12,6 +12,9 @@ GameObject:
   - component: {fileID: 6499572893989045817}
   - component: {fileID: 6499572893989045816}
   - component: {fileID: 6499572893989045819}
+  - component: {fileID: 3477908906950364253}
+  - component: {fileID: 3777685616265259584}
+  - component: {fileID: 8481014022869903852}
   m_Layer: 0
   m_Name: TestCharacter
   m_TagString: Untagged
@@ -92,3 +95,45 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &3477908906950364253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6499572893989045818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 316cbb713a60f5d458abc4c632825822, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentValue: {fileID: 11400000, guid: 612b7751da6d1df488ac7e925fcb66b9, type: 2}
+  maxValue: {fileID: 11400000, guid: 2ec07e66d388c6c4089bae3bc5aaf8fe, type: 2}
+--- !u!114 &3777685616265259584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6499572893989045818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 876009e7e27b3824483df4f6a9942842, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentValue: {fileID: 11400000, guid: 788d48b8c1495ec468a2ca206f89d0dd, type: 2}
+  maxValue: {fileID: 11400000, guid: 73691b1ac6642f24d9b952f3841ce062, type: 2}
+--- !u!114 &8481014022869903852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6499572893989045818}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7ca48e44f6e1d74385ec5d57fb6dc38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentValue: {fileID: 11400000, guid: 36a7c3ec88f81804e95b82fd73e18a3e, type: 2}
+  maxValue: {fileID: 11400000, guid: e3fb265026984a24d913ef6074c8ea1b, type: 2}
