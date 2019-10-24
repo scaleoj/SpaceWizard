@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.mambojambostudios.unity-atoms": "https://github.com/AdamRamberg/unity-atoms.git#canary",
     "com.unity.ads": "2.0.8",
     "com.unity.analytics": "3.3.2",
     "com.unity.collab-proxy": "1.2.16",
@@ -37,5 +38,11 @@
     "com.unity.modules.vr": "1.0.0",
     "com.unity.modules.wind": "1.0.0",
     "com.unity.modules.xr": "1.0.0"
+  },
+  "lock": {
+    "com.mambojambostudios.unity-atoms": {
+      "hash": "a45918ee43893c8feebe68af258e83f36cf31915",
+      "revision": "canary"
+    }
   }
 }
