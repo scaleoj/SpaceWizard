@@ -9,6 +9,8 @@ public interface IInputprovider
     bool mouseRelease();
 
     bool mouseIsPressed();
-    
-    
+
+    float Vertical();
+
+    float Horizontal();
 }
