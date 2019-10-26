@@ -9,12 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f64af2ed99cb146358b8752c3e393fcc, type: 3}
-  m_Name: StdMaxMagicShield
+  m_Script: {fileID: 11500000, guid: 31db0d5231939e848a7c0038dae9eecc, type: 3}
+  m_Name: TestCharacterStats
   m_EditorClassIdentifier: 
-  _developerDescription: 
-  _value: 0
-  _initialValue: 0
-  _oldValue: 0
-  Changed: {fileID: 0}
-  ChangedWithHistory: {fileID: 0}
+  currentHealth: 10
+  maxHealth: 10
+  currentMP: 10
+  maxMP: 10
+  currentArmour: 10
+  maxArmour: 10
+  currentMS: 10
+  maxMS: 10
+  currentAP: 0

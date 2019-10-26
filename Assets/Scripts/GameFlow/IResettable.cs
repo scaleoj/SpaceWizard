@@ -2,4 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Armour : Stats{}
+public interface IResettable
+{
+   void ResetOnMatchEnd();
+}
