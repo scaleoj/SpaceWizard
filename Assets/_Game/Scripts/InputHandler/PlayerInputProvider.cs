@@ -4,19 +4,19 @@ using UnityEngine;
 
 public class PlayerInputProvider : MonoBehaviour, IInputprovider
 {
-    public bool mouseDown()
+    public bool mouse0Down()
     {
-        throw new System.NotImplementedException();
+        return Input.GetMouseButtonDown(0);
     }
 
-    public bool mouseRelease()
+    public bool mouse0Release()
     {
-        throw new System.NotImplementedException();
+        return Input.GetMouseButtonUp(0);
     }
 
-    public bool mouseIsPressed()
+    public bool mouse0IsPressed()
     {
-        throw new System.NotImplementedException();
+        return Input.GetMouseButton(0);
     }
 
     public float Vertical()
@@ -32,5 +32,10 @@ public class PlayerInputProvider : MonoBehaviour, IInputprovider
     public float Horizontal()
     {
         return Input.GetAxis("Vertical");
+    }
+
+    public Vector3 mousePos()
+    {
+        return Input.mousePosition;
     }
 }

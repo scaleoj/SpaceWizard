@@ -1,14 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public interface IInputprovider
 {
-    bool mouseDown();
+    bool mouse0Down();
 
-    bool mouseRelease();
+    bool mouse0Release();
 
-    bool mouseIsPressed();
+    bool mouse0IsPressed();
+
+    float scrollWheelDelta();
+
+    Vector3 mousePos();
 
     float Vertical();
 
