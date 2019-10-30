@@ -24,6 +24,11 @@ public class PlayerInputProvider : MonoBehaviour, IInputprovider
         return Input.GetAxis("Horizontal");
     }
 
+    public float scrollWheelDelta()
+    {
+        return Input.mouseScrollDelta.y;
+    }
+
     public float Horizontal()
     {
         return Input.GetAxis("Vertical");

@@ -1164,7 +1164,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: -0.3774438, z: 4.62e-43, w: -0.3774438}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1599,8 +1599,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baef3e06dec2f984587f72b6b50bc448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraMaxXrange: 0
-  cameraMaxZRange: 0
+  cameraMaxXrange: 5
+  cameraMaxZRange: 5
   cameraMovementSpeed: 0.08
 --- !u!114 &963194230
 MonoBehaviour:
