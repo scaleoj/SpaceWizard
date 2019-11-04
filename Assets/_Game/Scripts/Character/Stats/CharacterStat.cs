@@ -13,6 +13,7 @@ using UnityEngine.Events;
 [CreateAssetMenu(menuName = "Character")]
 public class CharacterStat : ScriptableObject
 {
+
    [Header("Health")]
    [SerializeField] private int currentHealth;
    [SerializeField] private int maxHealth;
@@ -27,6 +28,9 @@ public class CharacterStat : ScriptableObject
    [SerializeField] private int maxMS;
    [Header("Action Points")]
    [SerializeField] private int currentAP;
+   [Header("Initiative")]
+   [Range(1,10)]
+   [SerializeField] private int initiative;
    
    //Getter, Setter
    public int MaxHealth
@@ -81,5 +85,11 @@ public class CharacterStat : ScriptableObject
    {
        get => currentMS;
        set => currentMS = Mathf.Clamp(currentMS, 0, maxMS);
+   }
+
+   public int Initiative
+   {
+       get => initiative;
+       set => initiative = value < 0 ? 0 : value;
    }
 }
