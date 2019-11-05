@@ -16,9 +16,9 @@ MonoBehaviour:
   maxHealth: 10
   currentMP: 10
   maxMP: 10
-  currentArmour: 5
+  currentArmour: 10
   maxArmour: 10
   currentMS: 10
   maxMS: 10
-  currentAP: 0
+  currentAP: 3
   initiative: 0
