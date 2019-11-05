@@ -31,4 +31,10 @@ public class Character : MonoBehaviour, IResettable
         charStats.CurrentMP = charStats.MaxMP;
         charStats.CurrentMS = charStats.MaxMS;
     }
+
+    public CharacterStat CharStats
+    {
+        get => charStats;
+        set => charStats = value;
+    }
 }

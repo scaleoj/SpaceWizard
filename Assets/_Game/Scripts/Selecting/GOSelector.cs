@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
+using UnityAtoms;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 using Vector3 = UnityEngine.Vector3;
@@ -8,7 +9,8 @@ using Vector3 = UnityEngine.Vector3;
 public class GOSelector : MonoBehaviour
 {
     [SerializeField] private PlayerInputProvider m_input;
-    [SerializeField] private GoContainer selectGO;
+    [SerializeField] private GameObjectVariable mouseSelectedGameObject;
+    [SerializeField] private GameObjectEvent currentGameObjectChanged;
     private Camera cam;
     
     void Start()
@@ -23,7 +25,8 @@ public class GOSelector : MonoBehaviour
             Ray rayfromMouse = cam.ScreenPointToRay(m_input.mousePos());
             if (Physics.Raycast(rayfromMouse.origin, rayfromMouse.direction, out hit, 50f))
             {
-                selectGO.CurrSelectedGo = hit.transform.gameObject;
+                mouseSelectedGameObject.Value = hit.transform.gameObject;
+                currentGameObjectChanged.Raise(mouseSelectedGameObject.Value);
             }
         }
     }
