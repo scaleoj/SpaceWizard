@@ -1,29 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class QueueManager : MonoBehaviour
 {
     
-    private ArrayList unitQueue;
+    private Dictionary<GameObject, int> initSheet; //Sheet for the initiative
+    private List<KeyValuePair<GameObject, int>> queue;
     
     
     // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        unitQueue = new ArrayList();
+        initSheet = new Dictionary<GameObject, int>();
+        List<KeyValuePair<GameObject, int>> queue = new List<KeyValuePair<GameObject, int>>();
     }
 
-    void Spawn(Character c)
+    public void SpawnUnit(GameObject c)
     {
-        unitQueue.Add(c);
-    }
-
-    void Kill(Character c)
-    {
-        if (unitQueue.Contains(c))
+        var link = c.GetComponent<Character>();
+        
+        if (!initSheet.ContainsKey(c))
         {
-            unitQueue.Remove(c);
+            initSheet.Add(c, link.CharStats.Initiative);
+            UpdateList();
+        }
+        else
+        {
+            Debug.Log("Character konnte nicht hinzugefügt werden");
+        }
+    }
+
+    public void KillUnit(GameObject c)
+    {
+        if (initSheet.ContainsKey(c))
+        {
+            initSheet.Remove(c);
+            UpdateList();
         }
         else
         {
@@ -31,9 +45,16 @@ public class QueueManager : MonoBehaviour
         }
     }
 
-    void Sort()
+    private void UpdateList()
     {
-        //Sort Implementierung
+        queue = initSheet.ToList();
+    }
+
+    private void Sort()
+    {
+        UpdateList();
+        queue.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value)
+        );
     }
 
     // Update is called once per frame
