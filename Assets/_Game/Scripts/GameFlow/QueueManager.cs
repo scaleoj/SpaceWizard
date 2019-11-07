@@ -8,6 +8,7 @@ public class QueueManager : MonoBehaviour
     
     private Dictionary<GameObject, int> initSheet; //Sheet for the initiative
     private List<KeyValuePair<GameObject, int>> queue;
+    private int activePosition = 0;
     
     
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class QueueManager : MonoBehaviour
         if (!initSheet.ContainsKey(c))
         {
             initSheet.Add(c, link.CharStats.Initiative);
+            link.CharStats.Active = false;
             UpdateList();
         }
         else
@@ -38,11 +40,55 @@ public class QueueManager : MonoBehaviour
         {
             initSheet.Remove(c);
             UpdateList();
+            checkEnd();
         }
         else
         {
             Debug.LogError("Killed Character is not in Queue");
         }
+    }
+
+    public void Next()
+    {
+        if (activePosition < queue.Count - 1)
+        {
+            var link = queue[activePosition].Key.GetComponent<Character>();
+            link.CharStats.Active = false;
+            ++activePosition;
+            link = queue[activePosition].Key.GetComponent<Character>();
+            link.CharStats.Active = true;
+        }
+        else
+        {
+            var link = queue[activePosition].Key.GetComponent<Character>();
+            link.CharStats.Active = false;
+            activePosition = 0;
+            link = queue[activePosition].Key.GetComponent<Character>();
+            link.CharStats.Active = true;
+        }
+    }
+
+    private bool checkEnd()
+    {
+        var check = -1;
+        foreach (var element in queue)
+        {
+            var link = queue[activePosition].Key.GetComponent<Character>();
+            if (check == -1)
+            {
+                check = link.CharStats.Team;
+            }
+            else
+            {
+                if (check != link.CharStats.Team)
+                {
+                    return false;
+                }
+            }
+            
+        }
+
+        return true;
     }
 
     private void UpdateList()

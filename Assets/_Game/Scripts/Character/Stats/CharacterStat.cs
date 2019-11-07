@@ -28,9 +28,17 @@ public class CharacterStat : ScriptableObject
    [SerializeField] private int maxMS;
    [Header("Action Points")]
    [SerializeField] private int currentAP;
-   [Header("Initiative")]
-   [Range(1,10)]
-   [SerializeField] private int initiative;
+
+   [Header("Initiative")] [Range(1, 10)] [SerializeField]
+   private int initiative;
+
+   private bool active; //ShowinInspector missing
+
+   [Header("Team des Characters")]
+   [SerializeField]
+   [Range(0,1)]
+   private int team;//Teamcodes have to be decided, Option for several Teams at the same time
+   
    
    //Getter, Setter
    public int MaxHealth
@@ -91,5 +99,13 @@ public class CharacterStat : ScriptableObject
    {
        get => initiative;
        set => initiative = value < 0 ? 0 : value;
+   }
+
+   public bool Active { get; set; }
+
+   public int Team
+   {
+       get => team;
+       set => team = value < 0 ? 0 : value;
    }
 }
