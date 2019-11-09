@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityAtoms;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
+
 /*
  *    Container for all Stat of a Character. If a value Changes an Event will be called.
  *
@@ -20,14 +22,19 @@ public class CharacterStat : ScriptableObject
    [Header("Magic Points")]
    [SerializeField] private int currentMP;
    [SerializeField] private int maxMP;
+   [FormerlySerializedAs("currentArmour")]
    [Header("Armour")]
-   [SerializeField] private int currentArmour;
-   [SerializeField] private int maxArmour;
+   [SerializeField] private int currentArmor;
+   [FormerlySerializedAs("maxArmour")] [SerializeField] private int maxArmor;
    [Header("Magic Shield")]
    [SerializeField] private int currentMS;
    [SerializeField] private int maxMS;
    [Header("Action Points")]
    [SerializeField] private int currentAP;
+
+   [Header("Weapons")] 
+   [SerializeField] private Weapon primaryWeapon;
+   [SerializeField] private Weapon secondaryWeapon;
 
    [Header("Initiative")] [Range(1, 10)] [SerializeField]
    private int initiative;
@@ -55,8 +62,8 @@ public class CharacterStat : ScriptableObject
 
    public int MaxArmour
    {
-       get => maxArmour;
-       set => maxArmour = value < 0 ? 0 : value;
+       get => maxArmor;
+       set => maxArmor = value < 0 ? 0 : value;
    }
 
    public int MaxMS
@@ -85,8 +92,8 @@ public class CharacterStat : ScriptableObject
 
    public int CurrentArmour
    {
-       get => currentArmour;
-       set => currentArmour =  Mathf.Clamp(currentArmour, 0, maxArmour);
+       get => currentArmor;
+       set => currentArmor =  Mathf.Clamp(currentArmor, 0, maxArmor);
    }
 
    public int CurrentMS
@@ -99,6 +106,18 @@ public class CharacterStat : ScriptableObject
    {
        get => initiative;
        set => initiative = value < 0 ? 0 : value;
+   }
+
+   public Weapon PrimaryWeapon
+   {
+       get => primaryWeapon;
+       set => primaryWeapon = value;
+   }
+
+   public Weapon SecondaryWeapon
+   {
+       get => secondaryWeapon;
+       set => secondaryWeapon = value;
    }
 
    public bool Active { get; set; }
