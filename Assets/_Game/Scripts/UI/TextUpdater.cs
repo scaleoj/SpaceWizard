@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityAtoms;
@@ -35,9 +36,9 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>
                            stats.MaxHealth + "\n" + "Armor " + stats.CurrentArmour + "/" + stats.MaxArmour + "\n" +
                            "MS    " + stats.CurrentMS + "/" + stats.MaxMS + "\n" + "AP    " +  stats.CurrentAP;
         }
-        catch 
+        catch (Exception e)
         {
-            Debug.Log("Warning: The Current Stats Text cannot be changed.");
+            Debug.Log("Warning: The Current Stats Text cannot be changed. Error" + e);
         }
     }
 
