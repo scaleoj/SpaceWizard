@@ -7,11 +7,11 @@ public class TileGrid : MonoBehaviour
     [Header("The width of the Grid")]
     [Range(1,50)]
     [SerializeField]
-    private int _width = 10;
+    private int width = 10;
     [Header("The Depth of the Grid")]
     [Range(1,50)]
     [SerializeField]
-    private int _depth = 10;
+    private int depth = 10;
     [SerializeField]
     private float distanceBetweenPoints = 1f;
 
@@ -23,14 +23,14 @@ public class TileGrid : MonoBehaviour
 
     private void Awake()
     {
-        _oldWidth = _width;
-        _oldDepth = _depth;
+        _oldWidth = width;
+        _oldDepth = depth;
         var awakeCounter = 0;
         cubes = new List<GameObject>();
-        neighbours = new GameObject[_width,_depth];
-        for (var i = 0; i < _depth; i++)
+        neighbours = new GameObject[width,depth];
+        for (var i = 0; i < depth; i++)
         {
-            for (var j = 0; j < _width; j++)
+            for (var j = 0; j < width; j++)
             {
                 cubes.Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
                 neighbours[j, i] = cubes[awakeCounter];
@@ -46,9 +46,9 @@ public class TileGrid : MonoBehaviour
 
     private void Update()
     {
-        if (_oldWidth == _width)
+        if (_oldWidth == width)
         {
-            if (_oldDepth == _depth)
+            if (_oldDepth == depth)
             {
                 return;
             }
@@ -63,16 +63,16 @@ public class TileGrid : MonoBehaviour
 
             }
         }
-        _oldDepth = _depth;
-        _oldWidth = _width;
+        _oldDepth = depth;
+        _oldWidth = width;
 
         cubes.Clear();
         neighbours = null;
-        neighbours = new GameObject[_width, _depth];
+        neighbours = new GameObject[width, depth];
         var updateCounter2 = 0;
-        for (var i = 0; i < _depth; ++i)
+        for (var i = 0; i < depth; ++i)
         {
-            for (var j = 0; j < _width; ++j)
+            for (var j = 0; j < width; ++j)
             {
                 cubes.Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
                 neighbours[j, i] = cubes[updateCounter2];
@@ -98,15 +98,15 @@ public class TileGrid : MonoBehaviour
         GameObject bot = null;
         GameObject top = null;
         var found = false;
-        for(var i = 0; i < _depth; ++i)
+        for(var i = 0; i < depth; ++i)
         {
-            for (var j = 0; j < _width; j++)
+            for (var j = 0; j < width; j++)
             {
                 if (neighbours[j, i] != start) continue;
                 left = j-1 < 0 ? null : neighbours[j - 1, i];
                 bot = i-1 < 0 ? null : neighbours[j, i-1];
-                right = j+1 > _width ? null : neighbours[j + 1, i];
-                top = i+1 > _depth ? null : neighbours[j, i+1];
+                right = j+1 > width ? null : neighbours[j + 1, i];
+                top = i+1 > depth ? null : neighbours[j, i+1];
                 //QuerNachbarn auch?
                 found = true;
                 break;
