@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-[ExecuteInEditMode]
+[ExecuteAlways]
 public class TileGrid : MonoBehaviour
 {
     [Header("The width of the Grid")]
@@ -27,18 +27,11 @@ public class TileGrid : MonoBehaviour
             {
                 cubes.Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
                 cubes[k].transform.position = new Vector3(j * distanceBetweenPoints, 0, i * distanceBetweenPoints);
+                cubes[k].transform.localScale = new Vector3(cubes[k].transform.localScale.x, cubes[k].transform.localScale.y / 4, cubes[k].transform.localScale.z);
                 ++k;
 
             }
         }
-    }
-    
-    
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
 }
