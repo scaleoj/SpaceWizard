@@ -21,7 +21,7 @@ public class TileGrid : MonoBehaviour
     public List<GameObject> cubes;
     private GameObject[,] neighbours;
 
-    void Awake()
+    private void Awake()
     {
         _oldWidth = _width;
         _oldDepth = _depth;
