@@ -17,9 +17,11 @@ public class TileGrid : MonoBehaviour
 
     private int _oldWidth;
     private int _oldDepth;
+    private float _oldDistance;
+    private bool distanceChanged = false;
     
     public List<GameObject> cubes;
-    private GameObject[,] neighbours;
+    private GameObject[,] _neighbours;
 
     private void Awake()
     {
@@ -27,13 +29,13 @@ public class TileGrid : MonoBehaviour
         _oldDepth = depth;
         var awakeCounter = 0;
         cubes = new List<GameObject>();
-        neighbours = new GameObject[width,depth];
+        _neighbours = new GameObject[width,depth];
         for (var i = 0; i < depth; i++)
         {
             for (var j = 0; j < width; j++)
             {
                 cubes.Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
-                neighbours[j, i] = cubes[awakeCounter];
+                _neighbours[j, i] = cubes[awakeCounter];
                 cubes[awakeCounter].transform.SetParent(gameObject.transform);
                 cubes[awakeCounter].name = "Tile " + awakeCounter;
                 cubes[awakeCounter].transform.position = new Vector3(j * distanceBetweenPoints, 0, i * distanceBetweenPoints);
@@ -50,7 +52,12 @@ public class TileGrid : MonoBehaviour
         {
             if (_oldDepth == depth)
             {
-                return;
+                if (_oldDistance + 0.001f >= distanceBetweenPoints && _oldDistance - 0.001f <= distanceBetweenPoints)
+                {
+                    distanceChanged = true;
+                    return;
+                }
+
             }
         }
         var updateCounter1 = 0;
@@ -65,28 +72,34 @@ public class TileGrid : MonoBehaviour
         }
         _oldDepth = depth;
         _oldWidth = width;
+        _oldDistance = distanceBetweenPoints;
 
         cubes.Clear();
-        neighbours = null;
-        neighbours = new GameObject[width, depth];
+        _neighbours = null;
+        _neighbours = new GameObject[width, depth];
         var updateCounter2 = 0;
         for (var i = 0; i < depth; ++i)
         {
             for (var j = 0; j < width; ++j)
             {
                 cubes.Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
-                neighbours[j, i] = cubes[updateCounter2];
+                _neighbours[j, i] = cubes[updateCounter2];
                 cubes[updateCounter2].transform.SetParent(gameObject.transform);
                 cubes[updateCounter2].name = "Tile " + updateCounter2;
                 cubes[updateCounter2].transform.position = new Vector3(j * distanceBetweenPoints, 0, i * distanceBetweenPoints);
                 cubes[updateCounter2].transform.localScale = new Vector3(cubes[updateCounter2].transform.localScale.x, cubes[updateCounter2].transform.localScale.y / 5, cubes[updateCounter2].transform.localScale.z);
+               /* if (distanceChanged)
+                {
+                    cubes[updateCounter2].transform.localScale = new Vector3(cubes[updateCounter2].transform.localScale.x *distanceBetweenPoints, cubes[updateCounter2].transform.localScale.y, cubes[updateCounter2].transform.localScale.z*distanceBetweenPoints); 
+                    distanceChanged = false;
+                } */
                 ++updateCounter2;
 
             }
         }
     }
 
-    public GameObject[] getNeighbours(GameObject start)
+    public GameObject[] GetNeighbours(GameObject start)
     {
         if (!(cubes.Contains(start)))
         {
@@ -102,11 +115,11 @@ public class TileGrid : MonoBehaviour
         {
             for (var j = 0; j < width; j++)
             {
-                if (neighbours[j, i] != start) continue;
-                left = j-1 < 0 ? null : neighbours[j - 1, i];
-                bot = i-1 < 0 ? null : neighbours[j, i-1];
-                right = j+1 > width ? null : neighbours[j + 1, i];
-                top = i+1 > depth ? null : neighbours[j, i+1];
+                if (_neighbours[j, i] != start) continue;
+                left = j-1 < 0 ? null : _neighbours[j - 1, i];
+                bot = i-1 < 0 ? null : _neighbours[j, i-1];
+                right = j+1 > width ? null : _neighbours[j + 1, i];
+                top = i+1 > depth ? null : _neighbours[j, i+1];
                 //QuerNachbarn auch?
                 found = true;
                 break;
