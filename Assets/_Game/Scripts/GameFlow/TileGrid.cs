@@ -21,30 +21,34 @@ public class TileGrid : MonoBehaviour
     private bool distanceChanged = false;
     
     public List<GameObject> cubes;
+    private List<GameObject> Lines;
     private GameObject[,] _neighbours;
 
     private void Awake()
     {
+        cubes = new List<GameObject>();
+        Lines = new List<GameObject>();
+        if (transform.childCount > 0)
+        {
+            depth = transform.childCount;
+            width = transform.GetChild(0).childCount;
+        }
+        _neighbours = new GameObject[width,depth];
         _oldWidth = width;
         _oldDepth = depth;
-        var awakeCounter = 0;
-        cubes = new List<GameObject>();
-        _neighbours = new GameObject[width,depth];
-        for (var i = 0; i < depth; i++)
-        {
-            for (var j = 0; j < width; j++)
-            {
-                cubes.Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
-                _neighbours[j, i] = cubes[awakeCounter];
-                cubes[awakeCounter].transform.SetParent(gameObject.transform);
-                cubes[awakeCounter].name = "Tile " + awakeCounter;
-                cubes[awakeCounter].transform.position = new Vector3(j * distanceBetweenPoints, 0, i * distanceBetweenPoints);
-                cubes[awakeCounter].transform.localScale = new Vector3(cubes[awakeCounter].transform.localScale.x, cubes[awakeCounter].transform.localScale.y / 4, cubes[awakeCounter].transform.localScale.z);
-                ++awakeCounter;
 
-            }
+        if (transform.childCount > 0)
+        {
+            ScanGrid();
         }
+        else
+        {
+            BuildGrid();
+        }
+
     }
+
+    
 
     private void Update()
     {
@@ -60,43 +64,8 @@ public class TileGrid : MonoBehaviour
 
             }
         }
-        var updateCounter1 = 0;
-        for (var i = 0; i < _oldDepth; ++i)
-        {
-            for (var j = 0; j < _oldWidth; ++j)
-            {
-                DestroyImmediate(cubes[updateCounter1]);
-                ++updateCounter1;
-
-            }
-        }
-        _oldDepth = depth;
-        _oldWidth = width;
-        _oldDistance = distanceBetweenPoints;
-
-        cubes.Clear();
-        _neighbours = null;
-        _neighbours = new GameObject[width, depth];
-        var updateCounter2 = 0;
-        for (var i = 0; i < depth; ++i)
-        {
-            for (var j = 0; j < width; ++j)
-            {
-                cubes.Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
-                _neighbours[j, i] = cubes[updateCounter2];
-                cubes[updateCounter2].transform.SetParent(gameObject.transform);
-                cubes[updateCounter2].name = "Tile " + updateCounter2;
-                cubes[updateCounter2].transform.position = new Vector3(j * distanceBetweenPoints, 0, i * distanceBetweenPoints);
-                cubes[updateCounter2].transform.localScale = new Vector3(cubes[updateCounter2].transform.localScale.x, cubes[updateCounter2].transform.localScale.y / 5, cubes[updateCounter2].transform.localScale.z);
-               /* if (distanceChanged)
-                {
-                    cubes[updateCounter2].transform.localScale = new Vector3(cubes[updateCounter2].transform.localScale.x *distanceBetweenPoints, cubes[updateCounter2].transform.localScale.y, cubes[updateCounter2].transform.localScale.z*distanceBetweenPoints); 
-                    distanceChanged = false;
-                } */
-                ++updateCounter2;
-
-            }
-        }
+        ClearGrid();
+        BuildGrid();
     }
 
     public GameObject[] GetNeighbours(GameObject start)
@@ -132,4 +101,62 @@ public class TileGrid : MonoBehaviour
         }
         return new[]{left, right, bot, top};
     }
+    
+    private void BuildGrid()
+    {
+        var buildCounter = 0;
+        for (var i = 0; i < depth; i++)
+        {
+            Lines.Add(new GameObject("Line" + (i + 1)));
+            Lines[i].transform.SetParent(gameObject.transform);
+            for (var j = 0; j < width; j++)
+            {
+                cubes.Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
+                _neighbours[j, i] = cubes[buildCounter];
+                cubes[buildCounter].transform.SetParent(Lines[i].transform);
+                cubes[buildCounter].name = "Tile " + buildCounter;
+                cubes[buildCounter].transform.position = new Vector3(j * distanceBetweenPoints, 0, i * distanceBetweenPoints);
+                cubes[buildCounter].transform.localScale = new Vector3(cubes[buildCounter].transform.localScale.x, cubes[buildCounter].transform.localScale.y / 4, cubes[buildCounter].transform.localScale.z);
+                ++buildCounter;
+
+            }
+        } 
+    }
+
+    private void ClearGrid()
+    {
+        var clearCounter = 0;
+        for (var i = 0; i < _oldDepth; ++i)
+        {
+            for (var j = 0; j < _oldWidth; ++j)
+            {
+                DestroyImmediate(cubes[clearCounter]);
+                DestroyImmediate(Lines[i]);
+                ++clearCounter;
+
+            }
+        }
+        _oldDepth = depth;
+        _oldWidth = width;
+        _oldDistance = distanceBetweenPoints;
+        cubes.Clear();
+        Lines.Clear();
+        _neighbours = null;
+        _neighbours = new GameObject[width, depth];
+    }
+    
+    private void ScanGrid()
+    {
+        for (var i = 0; i < depth; ++i)
+        {
+            Lines.Add(gameObject.transform.GetChild(i).gameObject);
+            for (var j = 0; j < width; ++j)
+            {
+                cubes.Add(Lines[i].transform.GetChild(j).gameObject);
+                _neighbours[j, i] = cubes[i+j];
+                
+            }
+        }
+    }
+
 }
