@@ -160,9 +160,16 @@ public class TileGrid : MonoBehaviour
             {
                 cubes.Add(Lines[i].transform.GetChild(j).gameObject);
                 _neighbours[j, i] = cubes[i+j];
+                var script = cubes[i + j].GetComponent<TileContainer>();
+                if (script != null)
+                {
+                    cubes[i + j].AddComponent<TileContainer>();
+                }
                 
             }
         }
+        
+
     }
 
 }
