@@ -18,7 +18,6 @@ public class TileGrid : MonoBehaviour
     private int _oldWidth;
     private int _oldDepth;
     private float _oldDistance;
-    private bool distanceChanged = false;
     
     public List<GameObject> cubes;
     private List<GameObject> Lines;
@@ -50,15 +49,17 @@ public class TileGrid : MonoBehaviour
 
     
 
+    //O(c <-> 2n^2+c)
     private void Update()
     {
         if (_oldWidth == width)
         {
             if (_oldDepth == depth)
             {
-                if (_oldDistance + 0.001f >= distanceBetweenPoints && _oldDistance - 0.001f <= distanceBetweenPoints)
+
+                if (_oldDistance + 0.01f >= distanceBetweenPoints && _oldDistance - 0.01f <= distanceBetweenPoints)
                 {
-                    distanceChanged = true;
+                    
                     return;
                 }
 
@@ -68,6 +69,7 @@ public class TileGrid : MonoBehaviour
         BuildGrid();
     }
 
+    //O(n^2 + c)
     public GameObject[] GetNeighbours(GameObject start)
     {
         if (!(cubes.Contains(start)))
@@ -102,6 +104,7 @@ public class TileGrid : MonoBehaviour
         return new[]{left, right, bot, top};
     }
     
+    //O(n^2 + c)
     private void BuildGrid()
     {
         var buildCounter = 0;
@@ -117,12 +120,14 @@ public class TileGrid : MonoBehaviour
                 cubes[buildCounter].name = "Tile " + buildCounter;
                 cubes[buildCounter].transform.position = new Vector3(j * distanceBetweenPoints, 0, i * distanceBetweenPoints);
                 cubes[buildCounter].transform.localScale = new Vector3(cubes[buildCounter].transform.localScale.x, cubes[buildCounter].transform.localScale.y / 4, cubes[buildCounter].transform.localScale.z);
+                cubes[buildCounter].AddComponent<TileContainer>();
                 ++buildCounter;
 
             }
         } 
     }
 
+    //O(n^2 + c)
     private void ClearGrid()
     {
         var clearCounter = 0;
@@ -145,6 +150,7 @@ public class TileGrid : MonoBehaviour
         _neighbours = new GameObject[width, depth];
     }
     
+    //O(n^2 + c)
     private void ScanGrid()
     {
         for (var i = 0; i < depth; ++i)
