@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Game.Scripts.GameFlow
@@ -16,7 +17,7 @@ namespace _Game.Scripts.GameFlow
         private int depth = 10;
         [SerializeField]
         private float distanceBetweenPoints = 1f;
-
+        
         private int _oldWidth;
         private int _oldDepth;
         private float _oldDistance;
@@ -75,18 +76,25 @@ namespace _Game.Scripts.GameFlow
 
        
         //O(n^2 + c)
-        /*
+
         public GameObject[] GetNeighbours(GameObject start)
         {
-            if (!(cubes.Contains(start)))
+            foreach (var list in cubes)
             {
-                return null;
+                if (!(list.Contains(start)))
+                {
+                    return null;
+                }
             }
 
             GameObject left = null;
             GameObject right = null;
             GameObject bot = null;
             GameObject top = null;
+            GameObject topLeft = null;
+            GameObject topRight = null;
+            GameObject bottomLeft = null;
+            GameObject bottomRight = null;
             var found = false;
             for(var i = 0; i < depth; ++i)
             {
@@ -97,6 +105,10 @@ namespace _Game.Scripts.GameFlow
                     bot = i-1 < 0 ? null : _neighbours[j, i-1];
                     right = j+1 > width ? null : _neighbours[j + 1, i];
                     top = i+1 > depth ? null : _neighbours[j, i+1];
+                    topLeft = left == null || top == null ? null : _neighbours[j - 1, i + 1];
+                    topRight = right == null || top == null ? null : _neighbours[j + 1, i + 1];
+                    bottomLeft = left == null || bot == null ? null : _neighbours[j - 1, i - 1];
+                    bottomRight = right == null || bot == null ? null : _neighbours[j + 1, i - 1];
                     //QuerNachbarn auch?
                     found = true;
                     break;
@@ -107,10 +119,9 @@ namespace _Game.Scripts.GameFlow
                     break;
                 }
             }
-            return new[]{left, right, bot, top};
+            return new[]{left, right, bot, top, topLeft, topRight, bottomLeft, bottomRight};
         }
         
-        */
     
         //O(n^2 + c)
         private void BuildGrid()
@@ -256,13 +267,11 @@ namespace _Game.Scripts.GameFlow
                 {
                     var local = cubes[i][j].transform;
                     var localScale = local.localScale;
+                    var anchor = local.parent.transform.parent.transform.position;
                     localScale = new Vector3(localScale.x / _oldDistance, localScale.y, localScale.z / _oldDistance);
                     localScale = new Vector3(localScale.x * distanceBetweenPoints, localScale.y, localScale.z* distanceBetweenPoints);
                     local.localScale = localScale;
-                    var localPosition = local.localPosition;
-                    var position = local.transform.position;
-                    position = new Vector3(localPosition.x / _oldDistance, 0, localPosition.z /_oldDistance);
-                    position = new Vector3(localPosition.x * distanceBetweenPoints, 0, localPosition.z * distanceBetweenPoints);
+                    var position = new Vector3(anchor.x + i*distanceBetweenPoints, 0, anchor.z +j*distanceBetweenPoints);
                     local.transform.position = position;
                 }
             }
@@ -272,12 +281,7 @@ namespace _Game.Scripts.GameFlow
         }
         
         private void UpdateNeighbours()
-        {
-            
-            Debug.Log("Update Grid");
-           
-            
-           
+        {  
             _neighbours = null;
             _neighbours = new GameObject[depth, width];
             for (var i = 0; i < cubes.Count; ++i)
