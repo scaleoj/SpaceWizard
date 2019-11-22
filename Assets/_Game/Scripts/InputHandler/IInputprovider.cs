@@ -19,4 +19,8 @@ public interface IInputprovider
     float Vertical();
 
     float Horizontal();
+
+    bool RotateLeft();
+
+    bool RotateRight();
 }

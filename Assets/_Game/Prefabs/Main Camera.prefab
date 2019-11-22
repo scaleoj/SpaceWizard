@@ -99,6 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb36a1e500b6bc142a62e1d976b4d7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deadButtonTime: 0
 --- !u!114 &9010099159844992303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -111,6 +112,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: baef3e06dec2f984587f72b6b50bc448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trueIsometricCam: 0
   cameraMaxXrange: 5
   cameraMaxZRange: 5
   cameraMaxZoomOut: 10
@@ -134,6 +136,7 @@ MonoBehaviour:
     type: 2}
   currentGameObjectChanged: {fileID: 11400000, guid: ceeca165deee9254a9f7954dfedd4a4c,
     type: 2}
+  stdselector: {fileID: 0}
 --- !u!114 &5608293321202328569
 MonoBehaviour:
   m_ObjectHideFlags: 0
