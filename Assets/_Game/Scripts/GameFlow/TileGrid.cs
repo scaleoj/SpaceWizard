@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace _Game.Scripts.GameFlow
@@ -16,7 +17,7 @@ namespace _Game.Scripts.GameFlow
         private int depth = 10;
         [SerializeField]
         private float distanceBetweenPoints = 1f;
-
+        
         private int _oldWidth;
         private int _oldDepth;
         private float _oldDistance;
@@ -24,13 +25,13 @@ namespace _Game.Scripts.GameFlow
         
     
         public List<List<GameObject>> cubes;
-        private List<GameObject> Lines;
+        private List<GameObject> _lines;
         private GameObject[,] _neighbours;
 
         private void Awake()
         {
             cubes = new List<List<GameObject>>();
-            Lines = new List<GameObject>();
+            _lines = new List<GameObject>();
             if (transform.childCount > 0)
             {
                 depth = transform.childCount;
@@ -75,18 +76,25 @@ namespace _Game.Scripts.GameFlow
 
        
         //O(n^2 + c)
-        /*
+
         public GameObject[] GetNeighbours(GameObject start)
         {
-            if (!(cubes.Contains(start)))
+            foreach (var list in cubes)
             {
-                return null;
+                if (!(list.Contains(start)))
+                {
+                    return null;
+                }
             }
 
             GameObject left = null;
             GameObject right = null;
             GameObject bot = null;
             GameObject top = null;
+            GameObject topLeft = null;
+            GameObject topRight = null;
+            GameObject bottomLeft = null;
+            GameObject bottomRight = null;
             var found = false;
             for(var i = 0; i < depth; ++i)
             {
@@ -97,7 +105,10 @@ namespace _Game.Scripts.GameFlow
                     bot = i-1 < 0 ? null : _neighbours[j, i-1];
                     right = j+1 > width ? null : _neighbours[j + 1, i];
                     top = i+1 > depth ? null : _neighbours[j, i+1];
-                    //QuerNachbarn auch?
+                    topLeft = left == null || top == null ? null : _neighbours[j - 1, i + 1];
+                    topRight = right == null || top == null ? null : _neighbours[j + 1, i + 1];
+                    bottomLeft = left == null || bot == null ? null : _neighbours[j - 1, i - 1];
+                    bottomRight = right == null || bot == null ? null : _neighbours[j + 1, i - 1];
                     found = true;
                     break;
                 }
@@ -107,24 +118,25 @@ namespace _Game.Scripts.GameFlow
                     break;
                 }
             }
-            return new[]{left, right, bot, top};
+            return new[]{left, right, top, bot, topLeft, topRight, bottomLeft, bottomRight};
         }
         
-        */
     
         //O(n^2 + c)
         private void BuildGrid()
         {
+            gameObject.transform.position= new Vector3(0,0,0);
             for (var i = 0; i < depth; i++)
             {
                 cubes.Add(new List<GameObject>());
-                Lines.Add(new GameObject("Line" + (i + 1)));
-                Lines[i].transform.SetParent(gameObject.transform);
+                _lines.Add(new GameObject("Line" + (i + 1)));
+                _lines[i].transform.SetParent(gameObject.transform);
+                _lines[i].transform.position = _lines[i].transform.parent.position;
                 for (var j = 0; j < width; j++)
                 {
                     cubes[i].Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
                     _neighbours[j, i] = cubes[i][j];
-                    cubes[i][j].transform.SetParent(Lines[i].transform);
+                    cubes[i][j].transform.SetParent(_lines[i].transform);
                     cubes[i][j].name = "Tile " + (i *(1 +j));
                     cubes[i][j].transform.position = new Vector3(j * distanceBetweenPoints, 0, i * distanceBetweenPoints);
                     cubes[i][j].transform.localScale = new Vector3(cubes[i][j].transform.localScale.x, cubes[i][j].transform.localScale.y / 4, cubes[i][j].transform.localScale.z);
@@ -132,47 +144,25 @@ namespace _Game.Scripts.GameFlow
                 }
             } 
         }
-
-        //O(n^2 + c)
-        private void ClearGrid()
-        {
-            for (var i = 0; i < _oldDepth; ++i)
-            {
-                for (var j = 0; j < _oldWidth; ++j)
-                {
-                    DestroyImmediate(cubes[i][j]);
-                    DestroyImmediate(Lines[i]);;
-
-                }
-            }
-            _oldDepth = depth;
-            _oldWidth = width;
-            _oldDistance = distanceBetweenPoints;
-            cubes.Clear();
-            Lines.Clear();
-
-        }
     
         //O(n^2 + c)
         private void ScanGrid()
         {
             for (var i = 0; i < depth; ++i)
             {
-                Lines.Add(gameObject.transform.GetChild(i).gameObject);
+                _lines.Add(gameObject.transform.GetChild(i).gameObject);
+                _lines[i].transform.position = _lines[i].transform.parent.position;
                 for (var j = 0; j < width; ++j)
                 {
-                    cubes[i].Add(Lines[i].transform.GetChild(j).gameObject);
+                    cubes[i].Add(_lines[i].transform.GetChild(j).gameObject);
                     _neighbours[j, i] = cubes[i][j];
                     var script = cubes[i][j].GetComponent<TileContainer>();
                     if (script != null)
                     {
                         cubes[i][j].AddComponent<TileContainer>();
-                    }
-                
+                    }   
                 }
             }
-        
-
         }
 
         private void UpdateWidth()
@@ -195,7 +185,7 @@ namespace _Game.Scripts.GameFlow
                     for (var j = _oldWidth; j < width; ++j)
                     {
                         cubes[i].Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
-                        cubes[i][j].transform.SetParent(Lines[i].transform);
+                        cubes[i][j].transform.SetParent(_lines[i].transform);
                         cubes[i][j].name = "Tile " + (j*(i+1));
                         cubes[i][j].transform.position = new Vector3(j * distanceBetweenPoints, 0, i * distanceBetweenPoints);
                         cubes[i][j].transform.localScale = new Vector3(cubes[i][j].transform.localScale.x, cubes[i][j].transform.localScale.y / 4, cubes[i][j].transform.localScale.z);
@@ -204,7 +194,6 @@ namespace _Game.Scripts.GameFlow
                 }
             }
             _oldWidth = width;
-
         }
 
         private void UpdateDepth()
@@ -213,36 +202,33 @@ namespace _Game.Scripts.GameFlow
                         {
                             for(var i = _oldDepth-1; i >= depth; --i)
                             {
-                                foreach (Transform item in Lines[i].transform)
+                                foreach (Transform item in _lines[i].transform)
                                 {
                                     cubes[i].Remove(item.gameObject);
                                 }
                                 cubes.Remove(cubes[i]);
-                                DestroyImmediate(Lines[i]);
-                                Lines.Remove(Lines[i]);
+                                DestroyImmediate(_lines[i]);
+                                _lines.Remove(_lines[i]);
                             }
                         }else if (depth > _oldDepth)
                         {
                             for (var i = _oldDepth; i < depth; ++i)
                             {
                                 cubes.Add(new List<GameObject>());
-                                Lines.Add(new GameObject("Line" + (i + 1)));
-                                Lines[i].transform.SetParent(gameObject.transform);
+                                _lines.Add(new GameObject("Line" + (i + 1)));
+                                _lines[i].transform.SetParent(gameObject.transform);
+                                _lines[i].transform.position = _lines[i].transform.parent.position;
                                 for (var j = 0; j < width; j++)
                                 {
                                     cubes[i].Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
-                                    cubes[i][j].transform.SetParent(Lines[i].transform);
+                                    cubes[i][j].transform.SetParent(_lines[i].transform);
                                     cubes[i][j].name = "Tile " + (j*(i+1));
                                     cubes[i][j].transform.position = new Vector3(j * distanceBetweenPoints, 0, i * distanceBetweenPoints);
                                     cubes[i][j].transform.localScale = new Vector3(cubes[i][j].transform.localScale.x, cubes[i][j].transform.localScale.y / 4, cubes[i][j].transform.localScale.z);
                                     cubes[i][j].AddComponent<TileContainer>();
-            
                                 }
-                                 
-                              
                             }
-                        }
-            
+                        }    
                         _oldDepth = depth;
         }
 
@@ -256,28 +242,20 @@ namespace _Game.Scripts.GameFlow
                 {
                     var local = cubes[i][j].transform;
                     var localScale = local.localScale;
+                    var anchor = local.parent.transform.parent.transform.position;
                     localScale = new Vector3(localScale.x / _oldDistance, localScale.y, localScale.z / _oldDistance);
                     localScale = new Vector3(localScale.x * distanceBetweenPoints, localScale.y, localScale.z* distanceBetweenPoints);
                     local.localScale = localScale;
-                    var localPosition = local.localPosition;
-                    var position = local.transform.position;
-                    position = new Vector3(localPosition.x / _oldDistance, 0, localPosition.z /_oldDistance);
-                    position = new Vector3(localPosition.x * distanceBetweenPoints, 0, localPosition.z * distanceBetweenPoints);
+                    var position = new Vector3(anchor.x + i*distanceBetweenPoints, 0, anchor.z +j*distanceBetweenPoints);
                     local.transform.position = position;
                 }
             }
-
             _oldDistance = distanceBetweenPoints;
 
         }
         
         private void UpdateNeighbours()
-        {
-            
-            Debug.Log("Update Grid");
-           
-            
-           
+        {  
             _neighbours = null;
             _neighbours = new GameObject[depth, width];
             for (var i = 0; i < cubes.Count; ++i)
@@ -287,11 +265,6 @@ namespace _Game.Scripts.GameFlow
                     _neighbours[i, j] = cubes[i][j];
                 }
             }
-
-
-
-
         }
-
     }
 }
