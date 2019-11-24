@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
 {
-    [SerializeField] private GameObject statTexts, ActionMenuContainer, WeaponOneButton, WeaponTwoButton;
+    [SerializeField] private GameObject statTexts, ActionMenuContainer, WeaponOneButton, WeaponTwoButton, background;
 
     [SerializeField] private GameObjectEvent currentGameObjectChanged;
 
@@ -26,9 +26,10 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
     public void OnEventRaised(GameObject item)
     {
         
-        if (item.GetComponent<Character>() != null)
+        if (item != null)
         {
             statTexts.SetActive(true);
+            background.SetActive(true);
             ActionMenuContainer.SetActive(true);
             if (item.GetComponent<Character>().CharStats.PrimaryWeapon.Name == "EMPTY")
             {
@@ -49,10 +50,11 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
                 WeaponTwoText.text = item.GetComponent<Character>().CharStats.SecondaryWeapon.Name;     
             }
             
-            textUpdater.UpdateText();
+            textUpdater.UpdateText(item);
         }
         else
         {
+            background.SetActive(false);
             statTexts.SetActive(false);
             ActionMenuContainer.SetActive(false);
         }
