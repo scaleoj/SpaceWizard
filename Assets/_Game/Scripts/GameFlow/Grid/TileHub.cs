@@ -51,11 +51,9 @@ namespace _Game.Scripts.GameFlow.Grid
         {
             if (prefab != null && !_prefabCheck)
             {
+                _grid.SetPrefab(prefab);
                 _grid.BuildGrid();
                 _prefabCheck = true;
-                _grid.SetPrefab(prefab);
-
-
             }
             if (_oldWidth != width && _prefabCheck)
             {
@@ -76,12 +74,12 @@ namespace _Game.Scripts.GameFlow.Grid
             _oldDistance = distanceBetweenPoints;
         }
 
-        public GameObject[] GetTilesInRange(GameObject start, int range)
+        public TileAttribute[] GetTilesInRange(GameObject start, int range)
         {
             return _grid.GetTilesInRange(start, range);
         }
 
-        public List<GameObject> FindPath(GameObject start, GameObject end)
+        public List<TileAttribute> FindPath(GameObject start, GameObject end)
         {
             return _pathfinder.FindPath(start, end);
         }

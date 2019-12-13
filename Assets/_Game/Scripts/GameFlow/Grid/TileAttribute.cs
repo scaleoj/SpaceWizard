@@ -1,11 +1,27 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace _Game.Scripts.GameFlow.Grid
 {
-   public class TileAttributes: MonoBehaviour
+   public class TileAttribute
    {
 
-      public TileAttributes Parent;
+      public TileAttribute()
+      {
+         
+      }
+
+      public TileAttribute(GameObject node, Boolean walkable, int x, int y)
+      {
+         Node = node;
+         Walkable = walkable;
+         GridX = x;
+         GridY = y;
+         G = 0;
+         H = 0;
+      }
+
+      public TileAttribute Parent;
 
       public GameObject node;
 

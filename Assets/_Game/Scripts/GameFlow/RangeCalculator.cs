@@ -7,7 +7,7 @@ public class RangeCalculator : MonoBehaviour
 {
     /*
      * GetNeighbours returns GameObject[] with: left, right, top, bot, topLeft, topRight, bottomLeft, bottomRight
-     */
+
     public static GameObject[] GetTilesInRange(int range, TileGrid tilegrid, GameObject anchor )
     {
         GameObject[] tilesInRange = new GameObject[range * range + (range + 1) * (range + 1) ];
@@ -67,4 +67,5 @@ public class RangeCalculator : MonoBehaviour
         
         return uniqueTiles;
     }
+         */
 }

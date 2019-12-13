@@ -14,21 +14,44 @@ namespace _Game.Scripts.GameFlow.Grid
         }
         
 
-        public List<GameObject> FindPath(GameObject start, GameObject end)
+        public List<TileAttribute> FindPath(GameObject start, GameObject end)
         {
             
             //Implementierung A*
+            var startX = 0;
+            var startY = 0;
+            var endX = 0;
+            var endY = 0;
 
-            var startScript = start.GetComponent<TileAttributes>();
-            var startX = startScript.gridX;
-            var startY = startScript.gridY;
+            var startBool = false;
+            var endBool = false;
 
-            var endScript = end.GetComponent<TileAttributes>();
-            var endX = endScript.gridX;
-            var endY = endScript.gridY;
+            
+            foreach (var t in _grid.Cubes)
+            {
+                if (t.Contains(start))
+                {
+                    startX = _grid.Cubes.IndexOf(t);
+                    startY = t.IndexOf(start);
+                    startBool = true;
+                }
 
-            var openList = new List<TileAttributes>();
-            var closedList = new HashSet<TileAttributes>();
+                if (t.Contains(end))
+                {
+                    endX = _grid.Cubes.IndexOf(t);
+                    endY = t.IndexOf(end);
+                    endBool = true;
+                }
+
+                if (startBool && endBool)
+                {
+                    break;
+                }             
+            }
+            
+
+            var openList = new List<TileAttribute>();
+            var closedList = new HashSet<TileAttribute>();
             
             openList.Add(_grid.Neighbours[startX, startY]);
             while (openList.Count > 0)
@@ -47,25 +70,25 @@ namespace _Game.Scripts.GameFlow.Grid
 
                 if (currentTile.Node == end)
                 {
-                    return GetFinalPath(start, end);
+                    return GetFinalPath(_grid.Neighbours[startX, startY], _grid.Neighbours[endX, endY]);
                 }
                 foreach (var tiles in _grid.GetNeighboursTiles(currentTile.Node))
                 {
-                    if (tiles.GetComponent<TileAttributes>().walkable || closedList.Contains(tiles.GetComponent<TileAttributes>()))
+                    if (tiles.walkable || closedList.Contains(tiles))
                     {
                         continue;
                     }
 
                     var moveCost = currentTile.G + GetManhattenDistance(currentTile, tiles);
 
-                    if (moveCost >= tiles.GetComponent<TileAttributes>().G &&
-                        openList.Contains(tiles.GetComponent<TileAttributes>())) continue;
-                    tiles.GetComponent<TileAttributes>().G = moveCost;
-                    tiles.GetComponent<TileAttributes>().H = GetManhattenDistance(tiles.GetComponent<TileAttributes>(), end);
-                    tiles.GetComponent<TileAttributes>().Parent = currentTile;
-                    if (!openList.Contains(tiles.GetComponent<TileAttributes>()))
+                    if (moveCost >= tiles.G &&
+                        openList.Contains(tiles)) continue;
+                    tiles.G = moveCost;
+                    tiles.H = GetManhattenDistance(tiles, _grid.Neighbours[endX, endY]);
+                    tiles.Parent = currentTile;
+                    if (!openList.Contains(tiles))
                     {
-                        openList.Add(tiles.GetComponent<TileAttributes>());
+                        openList.Add(tiles);
                     }
                 }
             }
@@ -75,24 +98,24 @@ namespace _Game.Scripts.GameFlow.Grid
             return null;
         }
 
-        private int GetManhattenDistance(TileAttributes currentTile, GameObject tiles)
+        private int GetManhattenDistance(TileAttribute currentTile, TileAttribute tiles)
         {
-            var ix = Mathf.Abs(currentTile.gridX -tiles.GetComponent<TileAttributes>().gridX);
-            var iy = Mathf.Abs(currentTile.gridY -tiles.GetComponent<TileAttributes>().gridY);
+            var ix = Mathf.Abs(currentTile.gridX -tiles.gridX);
+            var iy = Mathf.Abs(currentTile.gridY -tiles.gridY);
             return ix + iy;
         }
 
-        private List<GameObject> GetFinalPath(GameObject start, GameObject end)
+        private List<TileAttribute> GetFinalPath(TileAttribute start, TileAttribute end)
         {
         
             
-            var finalPath = new List<GameObject>();
-            var currentTile = end.GetComponent<TileAttributes>().Node;
+            var finalPath = new List<TileAttribute>();
+            var currentTile = end;
 
-            while (currentTile != start.GetComponent<TileAttributes>().Node)
+            while (currentTile != start)
             {
                 finalPath.Add(currentTile);
-                currentTile = currentTile.GetComponent<TileAttributes>().Parent.node;
+                currentTile = currentTile.Parent;
             }
             finalPath.Reverse();
 

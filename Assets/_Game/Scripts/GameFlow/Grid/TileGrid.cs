@@ -27,10 +27,10 @@ namespace _Game.Scripts.GameFlow.Grid
             _parent = par;
             Cubes = new List<List<GameObject>>();
             _lines = new List<GameObject>();
-            Neighbours = new TileAttributes[_depth, _width];
+            Neighbours = new TileAttribute[_depth, _width];
         }
 
-        public TileAttributes[,] Neighbours { get; private set; }
+        public TileAttribute[,] Neighbours { get; private set; }
         
         public List<List<GameObject>> Cubes { get; }
 
@@ -53,14 +53,8 @@ namespace _Game.Scripts.GameFlow.Grid
                 {
                     //cubes[i].Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
                     Cubes[i].Add(Object.Instantiate(_prefab));
-                    var script = Cubes[i][j].GetComponent<TileAttributes>();
-                    script.Node = Cubes[i][j];
-                    script.G = 0;
-                    script.H = 0;
-                    script.Walkable = true;
-                    script.gridX = j;
-                    script.gridY = i;
-                    Neighbours[j, i] = script;
+                    var tile = new TileAttribute(Cubes[i][j], true, i, j);
+                    Neighbours[j, i] = tile;
                     Cubes[i][j].transform.SetParent(_lines[i].transform);
                     Cubes[i][j].name = "Tile " + (j);
                     Cubes[i][j].transform.position = _parent.position + (new Vector3((j * _distanceBetweenPoints), 0, -(i * _distanceBetweenPoints)));
@@ -81,14 +75,8 @@ namespace _Game.Scripts.GameFlow.Grid
                 for (var j = 0; j < _width; ++j)
                 {
                     Cubes[i].Add(_lines[i].transform.GetChild(j).gameObject);
-                    var script = Cubes[i][j].GetComponent<TileAttributes>();
-                    script.Node = Cubes[i][j];
-                    script.G = 0;
-                    script.H = 0;
-                    script.Walkable = true;
-                    script.gridX = j;
-                    script.gridY = i;
-                    Neighbours[i, j] = script;
+                    var tile = new TileAttribute(Cubes[i][j], true, i, j);
+                    Neighbours[i, j] = tile;
                 }
             }
         }
@@ -114,13 +102,7 @@ namespace _Game.Scripts.GameFlow.Grid
                     {
                         //cubes[i].Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
                         Cubes[i].Add(Object.Instantiate(_prefab));
-                        var script = Cubes[i][j].GetComponent<TileAttributes>();
-                        script.Node = Cubes[i][j];
-                        script.G = 0;
-                        script.H = 0;
-                        script.Walkable = true;
-                        script.gridX = j;
-                        script.gridY = i;
+                        var tile = new TileAttribute(Cubes[i][j], true, i, j);
                         Cubes[i][j].transform.SetParent(_lines[i].transform);
                         Cubes[i][j].name = "Tile " + (j);
                         Cubes[i][j].transform.position = _parent.position + new Vector3(j * _distanceBetweenPoints, 0, -(i * _distanceBetweenPoints));
@@ -162,13 +144,7 @@ namespace _Game.Scripts.GameFlow.Grid
                     for (var j = 0; j < _width; j++)
                     {
                         Cubes[i].Add(Object.Instantiate(_prefab));
-                        var script = Cubes[i][j].GetComponent<TileAttributes>();
-                        script.Node = Cubes[i][j];
-                        script.G = 0;
-                        script.H = 0;
-                        script.Walkable = true;
-                        script.gridX = j;
-                        script.gridY = i;
+                        var tile = new TileAttribute(Cubes[i][j], true, i, j);
                         Cubes[i][j].transform.SetParent(_lines[i].transform);
                         Cubes[i][j].name = "Tile " + (j);
                         Cubes[i][j].transform.position = _parent.position + new Vector3(j * _distanceBetweenPoints, 0, -(i * _distanceBetweenPoints));
@@ -206,18 +182,13 @@ namespace _Game.Scripts.GameFlow.Grid
         public void UpdateNeighbours()
         {  
             Neighbours = null;
-            Neighbours = new TileAttributes[_depth, _width];
+            Neighbours = new TileAttribute[_depth, _width];
             for (var i = 0; i < Cubes.Count; ++i)
             {
                 for (var j = 0; j < Cubes[i].Count; ++j)
                 {
-                    var script = Cubes[i][j].GetComponent<TileAttributes>();
-                    script.G = 0;
-                    script.H = 0;
-                    script.Walkable = true;
-                    script.gridX = j;
-                    script.gridY = i;
-                    Neighbours[i, j] = script;
+                    var tile = new TileAttribute(Cubes[i][j], true, i, j);
+                    Neighbours[i, j] = tile;
                 }
             }
         }
@@ -235,27 +206,27 @@ namespace _Game.Scripts.GameFlow.Grid
             return false;
         }
         
-        public GameObject[] GetNeighboursTiles(GameObject start)
+        public TileAttribute[] GetNeighboursTiles(GameObject start)
         {
             if (!CubeContains(start))
             {
                 return null;
             }
 
-            GameObject left = null;
-            GameObject right = null;
-            GameObject bot = null;
-            GameObject top = null;
+            TileAttribute left = null;
+            TileAttribute right = null;
+            TileAttribute bot = null;
+            TileAttribute top = null;
             var found = false;
             for(var i = 0; i < _depth; ++i)
             {
                 for (var j = 0; j < _width; j++)
                 {
                     if (Cubes[j][i] != start) continue;
-                    left = j - 1 < 0 ? null : Cubes[j - 1][i];
-                    bot = i - 1 < 0 ? null : Cubes[j][i-1];
-                    right = j+1 >= _width ? null : Cubes[j + 1][i];
-                    top = i+1 >= _depth ? null : Cubes[j][i+1];  
+                    left = j - 1 < 0 ? null : Neighbours[j - 1,i];
+                    bot = i - 1 < 0 ? null : Neighbours[j,i-1];
+                    right = j+1 >= _width ? null : Neighbours[j + 1,i];
+                    top = i+1 >= _depth ? null : Neighbours[j,i+1];  
                     
                     found = true;
                     break;
@@ -269,7 +240,7 @@ namespace _Game.Scripts.GameFlow.Grid
             return new[]{left, right, top, bot};
         }
 
-        public GameObject[] GetTilesInRange(GameObject start, int range)
+        public TileAttribute[] GetTilesInRange(GameObject start, int range)
         {
             var tilesInRange = GetNeighboursTiles(start);
             tilesInRange = tilesInRange.Where(c => c != null).ToArray();
@@ -279,7 +250,7 @@ namespace _Game.Scripts.GameFlow.Grid
             {
                 foreach (var tile in tilesInRange)
                 {
-                    var tempTiles = GetTilesInRange(tile, range - 1);
+                    var tempTiles = GetTilesInRange(tile.Node, range - 1);
                     tempTiles = tempTiles.Where(c => c != null).ToArray();
                     foreach (var tile2 in tempTiles)
                     {
