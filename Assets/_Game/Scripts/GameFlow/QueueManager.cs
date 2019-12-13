@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-
-public class QueueManager : MonoBehaviour
+[CreateAssetMenu(menuName = "ScriptableObjects/GameFlow/QueueManager")]
+public class QueueManager : ScriptableObject
 {
     
     private Dictionary<GameObject, int> initSheet; //Sheet for the initiative
@@ -12,7 +12,7 @@ public class QueueManager : MonoBehaviour
     
     
     // Start is called before the first frame update
-    private void Start()
+    private void OnEnable()
     {
         initSheet = new Dictionary<GameObject, int>();
         List<KeyValuePair<GameObject, int>> queue = new List<KeyValuePair<GameObject, int>>();
@@ -102,9 +102,11 @@ public class QueueManager : MonoBehaviour
         queue.Sort((pair1, pair2) => pair1.Value.CompareTo(pair2.Value)
         );
     }
+    
+    
+    //---GET,SET---
+    public List<KeyValuePair<GameObject, int>> Queue => queue;
+    public Dictionary<GameObject, int> InitSheet => initSheet;
 
-    public GameObject getUnit()
-    {
-        return queue[activePosition].Key.gameObject;
-    }
+    public int ActivePosition => activePosition;
 }
