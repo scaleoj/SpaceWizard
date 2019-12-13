@@ -38,6 +38,11 @@ namespace _Game.Scripts.GameFlow.Grid
         {
             _prefab = pref;
         }
+
+        public GameObject getPrefab()
+        {
+            return _prefab;
+        }
     
         //O(n^2 + c)
         public void BuildGrid()
@@ -260,6 +265,22 @@ namespace _Game.Scripts.GameFlow.Grid
             }
             return tilesInRange;
         }
-        
+
+        public void UpdateGrid()
+        {
+            var components = _prefab.GetComponents<Component>();
+            foreach (var comp in components)
+            {
+                UnityEditorInternal.ComponentUtility.CopyComponent(comp); 
+            }  
+            foreach (var x in Cubes)
+            {
+                foreach (var y in x)
+                {
+                    
+                    UnityEditorInternal.ComponentUtility.PasteComponentAsNew(y);
+                }
+            }
+        }
     }
 }

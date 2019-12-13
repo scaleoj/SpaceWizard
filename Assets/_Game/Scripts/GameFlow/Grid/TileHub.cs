@@ -55,6 +55,12 @@ namespace _Game.Scripts.GameFlow.Grid
                 _grid.BuildGrid();
                 _prefabCheck = true;
             }
+
+            if (!prefab.Equals(_grid.getPrefab()))
+            {
+                _grid.SetPrefab(prefab);
+                _grid.UpdateGrid();
+            }
             if (_oldWidth != width && _prefabCheck)
             {
                 _grid.UpdateWidth(width);
