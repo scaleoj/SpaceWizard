@@ -12,30 +12,17 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>
     [SerializeField] private GameObjectEvent CurrentGameObjectChanged;
     [SerializeField] private GameObjectVariable selectedGameobject;
 
-    [SerializeField] private GameObject HP;
-    [SerializeField] private GameObject PA;
-    [SerializeField] private GameObject MS;
-    [SerializeField] private GameObject AP;
-
-    private TextMeshProUGUI HPText;
-    private TextMeshProUGUI PAText;
-    private TextMeshProUGUI MSText;
-    private TextMeshProUGUI APText;
-
-    //private TextMeshProUGUI guiText;
+    private TextMeshProUGUI guiText;
     // Start is called before the first frame update
     void Start()
     {
-        HPText = HP.GetComponent<TextMeshProUGUI>();
-        PAText = PA.GetComponent<TextMeshProUGUI>();
-        MSText = MS.GetComponent<TextMeshProUGUI>();
-        APText = AP.GetComponent<TextMeshProUGUI>();
+        guiText = GetComponent<TextMeshProUGUI>();
         CurrentGameObjectChanged.RegisterListener(this);
     }
 
     public void OnEventRaised(GameObject item)
     {
-        if(item != null) UpdateText(item);   
+        UpdateText(item);   
     }
     
     //OnEventRaised(CharacterStat item)
@@ -45,10 +32,9 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>
         try
         {
             CharacterStat stats = selectedGameobject.Value.GetComponent<Character>().CharStats;
-            HPText.text = stats.CurrentHealth + "/" + stats.MaxHealth;
-            PAText.text = stats.CurrentArmour + "/" + stats.MaxArmour;
-            MSText.text = stats.CurrentMS + "/" + stats.MaxMS;
-            APText.text = stats.CurrentAP.ToString();
+            guiText.text = "HP    " + stats.CurrentHealth + "/" +
+                           stats.MaxHealth + "\n" + "Armor " + stats.CurrentArmour + "/" + stats.MaxArmour + "\n" +
+                           "MS    " + stats.CurrentMS + "/" + stats.MaxMS + "\n" + "AP    " +  stats.CurrentAP;
         }
         catch (Exception e)
         {
@@ -61,10 +47,8 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>
         if (item.GetComponent<Character>() != null)
         {
             CharacterStat stats = item.GetComponent<Character>().CharStats;
-            HPText.text = stats.CurrentHealth + "/" + stats.MaxHealth;
-            PAText.text = stats.CurrentArmour + "/" + stats.MaxArmour;
-            MSText.text = stats.CurrentMS + "/" + stats.MaxMS;
-            APText.text = stats.CurrentAP.ToString();
+            guiText.text = "HP    " + stats.CurrentHealth + "/" +
+                           stats.MaxHealth + "\n" + "Armor " + stats.CurrentArmour + "/" + stats.MaxArmour + "\n" + "MS    " + stats.CurrentMS + "/" + stats.MaxMS + "\n" + "AP    " +  stats.CurrentAP;
         }
     }
 }

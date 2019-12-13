@@ -103,9 +103,8 @@ public class QueueManager : MonoBehaviour
         );
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject getUnit()
     {
-        
+        return queue[activePosition].Key.gameObject;
     }
 }

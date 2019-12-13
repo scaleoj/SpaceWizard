@@ -11,8 +11,6 @@ public class GOSelector : MonoBehaviour
     [SerializeField] private PlayerInputProvider m_input;
     [SerializeField] private GameObjectVariable mouseSelectedGameObject;
     [SerializeField] private GameObjectEvent currentGameObjectChanged;
-    [SerializeField] private GameObjectVariable currentCharacter;
-    [SerializeField] private GameObjectEvent currentCharacterChanged;
     [SerializeField] private GameObject stdselector;
     private Camera cam;
     
@@ -26,26 +24,15 @@ public class GOSelector : MonoBehaviour
         Ray rayfromMouse = cam.ScreenPointToRay(m_input.mousePos());
         if (Physics.Raycast(rayfromMouse.origin, rayfromMouse.direction, out hit, 50f))
         {
+            if (m_input.mouse0Down())
+            {
+                mouseSelectedGameObject.Value = hit.transform.gameObject;
+                currentGameObjectChanged.Raise(mouseSelectedGameObject.Value);
+            }
+
             if (hit.transform.gameObject.GetComponent<TileContainer>() != null)
             {
-                TileContainer tile = hit.transform.gameObject.GetComponent<TileContainer>();
-                if (m_input.mouse0Down())
-                {
-                    mouseSelectedGameObject.Value = hit.transform.gameObject;
-                    currentGameObjectChanged.Raise(mouseSelectedGameObject.Value);
-                    if (tile.OccupiedGameObject != null)
-                    {
-                        currentCharacter.Value = tile.OccupiedGameObject;
-                        currentCharacterChanged.Raise(tile.OccupiedGameObject);
-                    }
-                    else
-                    {
-                        currentCharacter.Value = null;
-                        currentCharacterChanged.Raise(null);
-                    }   
-                }
-                
-                if (tile.Walkable && tile.State == TileContainer.tileState.NORMAL)
+                if (hit.transform.gameObject.GetComponent<TileContainer>().Walkable && hit.transform.gameObject.GetComponent<TileContainer>().State == TileContainer.tileState.NORMAL)
                 {
                     stdselector.SetActive(true);
                     stdselector.transform.position = hit.transform.position;   
