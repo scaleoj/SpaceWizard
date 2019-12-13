@@ -29,4 +29,10 @@ public class TileContainer : MonoBehaviour
         get => state;
         set => state = value;
     }
+
+    public GameObject OccupiedGameObject
+    {
+        get => occupiedGameObject;
+        set => occupiedGameObject = value;
+    }
 }
