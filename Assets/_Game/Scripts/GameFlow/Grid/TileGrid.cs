@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEngine;
 
 namespace _Game.Scripts.GameFlow.Grid
@@ -57,7 +58,7 @@ namespace _Game.Scripts.GameFlow.Grid
                 for (var j = 0; j < _width; j++)
                 {
                     //cubes[i].Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
-                    Cubes[i].Add(Object.Instantiate(_prefab));
+                    Cubes[i].Add(PrefabUtility.InstantiatePrefab(_prefab) as GameObject);
                     var tile = new TileAttribute(Cubes[i][j], true, i, j);
                     Neighbours[j, i] = tile;
                     Cubes[i][j].transform.SetParent(_lines[i].transform);
@@ -106,7 +107,7 @@ namespace _Game.Scripts.GameFlow.Grid
                     for (var j = _width; j < newWidth; ++j)
                     {
                         //cubes[i].Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
-                        Cubes[i].Add(Object.Instantiate(_prefab));
+                        Cubes[i].Add(PrefabUtility.InstantiatePrefab(_prefab) as GameObject);
                         var tile = new TileAttribute(Cubes[i][j], true, i, j);
                         Cubes[i][j].transform.SetParent(_lines[i].transform);
                         Cubes[i][j].name = "Tile " + (j);
@@ -148,7 +149,7 @@ namespace _Game.Scripts.GameFlow.Grid
                     
                     for (var j = 0; j < _width; j++)
                     {
-                        Cubes[i].Add(Object.Instantiate(_prefab));
+                        Cubes[i].Add(PrefabUtility.InstantiatePrefab(_prefab) as GameObject);
                         var tile = new TileAttribute(Cubes[i][j], true, i, j);
                         Cubes[i][j].transform.SetParent(_lines[i].transform);
                         Cubes[i][j].name = "Tile " + (j);
