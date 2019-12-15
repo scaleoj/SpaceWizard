@@ -4,14 +4,19 @@ using TMPro;
 using UnityAtoms;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
 {
-    [SerializeField] private GameObject statTexts, ActionMenuContainer, WeaponOneButton, WeaponTwoButton, background, statbackground;
+    [SerializeField] private GameObject statTexts, ActionMenuContainer, WeaponOneButton, WeaponTwoButton;
+    [FormerlySerializedAs("background")] [SerializeField] private GameObject abilityBackground;
+    [SerializeField] private GameObject statbackground;
 
     [SerializeField] private GameObjectEvent currentGameObjectChanged;
 
     [SerializeField] private BoolVariable isOverUIObject;
+
+    [SerializeField] private QueueManager queue;
 
     private EventSystem _eventSystem;
 
@@ -41,39 +46,53 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
         }
     }
 
+    public void MoveUpdate()
+    {
+        OnEventRaised(null);
+    }
+
     public void OnEventRaised(GameObject item)
     {
         
         if (item != null)
         {
             statTexts.SetActive(true);
-            background.SetActive(true);
-            ActionMenuContainer.SetActive(true);
-            if (item.GetComponent<Character>().CharStats.PrimaryWeapon.Name == "EMPTY")
+            statbackground.SetActive(true);
+            if (item == queue.Queue[queue.ActivePosition].Key)
             {
-                WeaponOneButton.SetActive(false);
+                ActionMenuContainer.SetActive(true);
+                if (item.GetComponent<Character>().CharStats.PrimaryWeapon.Name == "EMPTY")
+                {
+                    WeaponOneButton.SetActive(false);
+                }
+                else
+                {
+                    WeaponOneButton.SetActive(true);
+                    WeaponOneText.text = item.GetComponent<Character>().CharStats.PrimaryWeapon.Name;     
+                }
+                if (item.GetComponent<Character>().CharStats.SecondaryWeapon.Name == "EMPTY")
+                {
+                    WeaponTwoButton.SetActive(false);
+                }
+                else
+                {
+                    WeaponTwoButton.SetActive(true);
+                    WeaponTwoText.text = item.GetComponent<Character>().CharStats.SecondaryWeapon.Name;     
+                }
             }
             else
             {
-                WeaponOneButton.SetActive(true);
-                WeaponOneText.text = item.GetComponent<Character>().CharStats.PrimaryWeapon.Name;     
-            }
-            if (item.GetComponent<Character>().CharStats.SecondaryWeapon.Name == "EMPTY")
-            {
-                WeaponTwoButton.SetActive(false);
-            }
-            else
-            {
-                WeaponTwoButton.SetActive(true);
-                WeaponTwoText.text = item.GetComponent<Character>().CharStats.SecondaryWeapon.Name;     
+                ActionMenuContainer.SetActive(false);
+                abilityBackground.SetActive(false);
             }
             
             textUpdater.UpdateText(item);
         }
         else
         {
-            background.SetActive(false);
+            abilityBackground.SetActive(false);
             statTexts.SetActive(false);
+            statbackground.SetActive(false);
             ActionMenuContainer.SetActive(false);
         }
     }

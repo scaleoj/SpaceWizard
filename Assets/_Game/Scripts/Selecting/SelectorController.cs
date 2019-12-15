@@ -18,13 +18,13 @@ public class SelectorController : MonoBehaviour, IAtomListener<GameObject>
 
     public void OnEventRaised(GameObject item)
     {
-        if (item.GetComponent<TileContainer>() != null && item.GetComponent<TileContainer>().Walkable)
+        if (item.GetComponent<TileContainer>() != null /*&& item.GetComponent<TileContainer>().Walkable*/)
         {
             if (lastClicked != null)
             {
                 lastClicked.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
             }
-            gameObject.transform.position = item.transform.position;
+            //gameObject.transform.position = item.transform.position;
             item.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
             lastClicked = item;
         }

@@ -1329,21 +1329,21 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 0.01
+    value: 0.006
   threshold:
-    overrideState: 1
-    value: 0.92
+    overrideState: 0
+    value: 4.15
   softKnee:
-    overrideState: 1
-    value: 0.5
+    overrideState: 0
+    value: 0.517
   clamp:
-    overrideState: 1
-    value: 65472
+    overrideState: 0
+    value: 50
   diffusion:
     overrideState: 1
-    value: 7
+    value: 6.9
   anamorphicRatio:
-    overrideState: 1
+    overrideState: 0
     value: 0
   color:
     overrideState: 0
@@ -1376,25 +1376,25 @@ MonoBehaviour:
     value: 1
   preset:
     overrideState: 1
-    value: 1
+    value: 7
   maximumIterationCount:
-    overrideState: 0
-    value: 16
+    overrideState: 1
+    value: 42
   resolution:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 1
   thickness:
-    overrideState: 0
-    value: 8
+    overrideState: 1
+    value: 64
   maximumMarchDistance:
     overrideState: 1
     value: 100
   distanceFade:
     overrideState: 1
-    value: 0.5
+    value: 0
   vignette:
     overrideState: 1
-    value: 0.5
+    value: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1480,13 +1480,13 @@ MonoBehaviour:
     value: 1
   focusDistance:
     overrideState: 1
-    value: 6.61
+    value: 0.8
   aperture:
-    overrideState: 0
-    value: 5.6
+    overrideState: 1
+    value: 17.5
   focalLength:
-    overrideState: 0
-    value: 20.5
+    overrideState: 1
+    value: 42
   kernelSize:
     overrideState: 1
     value: 0
