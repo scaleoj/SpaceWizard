@@ -46,9 +46,10 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
         }
     }
 
-    public void MoveUpdate()
+    public void WaitUpdate()
     {
-        OnEventRaised(null);
+        ActionMenuContainer.SetActive(false);
+        abilityBackground.SetActive(false);
     }
 
     public void OnEventRaised(GameObject item)
@@ -60,6 +61,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
             statbackground.SetActive(true);
             if (item == queue.Queue[queue.ActivePosition].Key)
             {
+                abilityBackground.SetActive(true);
                 ActionMenuContainer.SetActive(true);
                 if (item.GetComponent<Character>().CharStats.PrimaryWeapon.Name == "EMPTY")
                 {

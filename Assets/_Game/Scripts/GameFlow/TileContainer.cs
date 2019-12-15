@@ -13,18 +13,23 @@ public class TileContainer : MonoBehaviour
     {
         NORMAL, SELECTED, TARGET, IN_MOVE_RANGE
     }
-
+    [Header("Meshes and Materials")]
     [SerializeField] private Mesh selectedMesh;
     [SerializeField] private Material selectedMaterial;
     [SerializeField] private Mesh targetMesh;
     [SerializeField] private Material targetMaterial;
     [SerializeField] private Mesh inMoveRangeMesh;
     [SerializeField] private Material inMoveRangeMaterial;
-    [SerializeField] private bool walkable;
+
+    [Header("Highlighter")]
+    [SerializeField]private GameObject selectedHighlighter;
     private tileState state = tileState.NORMAL;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
+    
+    [Header("Other")]
     [SerializeField] private GameObject occupiedGameObject;
+    [SerializeField] private bool walkable;
 
     private void Awake()
     {
@@ -44,6 +49,7 @@ public class TileContainer : MonoBehaviour
         set
         {
             state = value;
+            selectedHighlighter.SetActive(false);
             switch (value)
             {
                 case tileState.NORMAL:
@@ -53,6 +59,7 @@ public class TileContainer : MonoBehaviour
                     meshRenderer.enabled = true;
                     meshFilter.mesh = selectedMesh;
                     meshRenderer.material = selectedMaterial;
+                    selectedHighlighter.SetActive(true);
                     break;
                 case tileState.TARGET:
                     meshRenderer.enabled = true;

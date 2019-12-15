@@ -108,5 +108,9 @@ public class QueueManager : ScriptableObject
     public List<KeyValuePair<GameObject, int>> Queue => queue;
     public Dictionary<GameObject, int> InitSheet => initSheet;
 
-    public int ActivePosition => activePosition;
+    public int ActivePosition
+    {
+        get => activePosition;
+        set => activePosition = value;
+    }
 }

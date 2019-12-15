@@ -697,7 +697,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &313407288
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1840,7 +1840,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1400768783
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2939,7 +2939,7 @@ PrefabInstance:
     - target: {fileID: 5907155527237020965, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: MoveUpdate
+      value: WaitUpdate
       objectReference: {fileID: 0}
     - target: {fileID: 5907155527237020965, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
@@ -3231,7 +3231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1990849477
 RectTransform:
   m_ObjectHideFlags: 0

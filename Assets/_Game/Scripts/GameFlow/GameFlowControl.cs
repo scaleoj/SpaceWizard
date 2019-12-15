@@ -10,6 +10,12 @@ public class GameFlowControl : MonoBehaviour
 
     void Awake()
     {
+        for (int i = 0; i < units.Length; i++)
+        {
+            queue.KillUnit(units[i]);            
+        }
+        queue.ActivePosition = 0;
+        
         addUnitsToQueue(units); //Remove this when wanting to be able to manually place units
     }
 
@@ -19,10 +25,5 @@ public class GameFlowControl : MonoBehaviour
         {
             queue.SpawnUnit(unitArr[i]);            
         }
-    }
-
-    void OnDestroy()
-    {
-        queue.Queue.Clear();
     }
 }
