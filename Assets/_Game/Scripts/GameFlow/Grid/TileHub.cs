@@ -20,7 +20,7 @@ namespace _Game.Scripts.GameFlow.Grid
         [Header("TilePrefab")] [SerializeField]
         private GameObject prefab;
 
-        [Header("LayerMask of nonWalkables")] 
+        [Header("Walkable Layer")] 
         [SerializeField]
         private LayerMask walkableMask;
         

@@ -249,7 +249,9 @@ namespace _Game.Scripts.GameFlow.Grid
         {
             var tilesInRange = GetNeighboursTiles(start).ToList();
             tilesInRange = tilesInRange.Where(c => c != null).ToList();
-            tilesInRange = tilesInRange.Where(d => d.node.layer == mask).ToList();
+            Debug.Log(mask.value);
+            tilesInRange = tilesInRange.Where(d => 1<<d.node.layer == mask).ToList();
+
 
 
             if (range <= 1) return tilesInRange.ToArray();
@@ -258,7 +260,7 @@ namespace _Game.Scripts.GameFlow.Grid
             {
                 var tempTiles = GetTilesInRange(tile.Node, range - 1, mask);
                 tempTiles = tempTiles.Where(e => e != null).ToArray();
-                tempTiles = tempTiles.Where(f => f.node.layer == mask).ToArray();
+                tempTiles = tempTiles.Where(f => 1<<f.node.layer == mask).ToArray();
                 tilesInRange.AddRange(tempTiles);
             }
 
