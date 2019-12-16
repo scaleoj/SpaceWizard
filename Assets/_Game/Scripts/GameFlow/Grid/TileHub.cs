@@ -49,13 +49,13 @@ namespace _Game.Scripts.GameFlow.Grid
         
         private void Update()
         {
+            
             if (prefab != null && !_prefabCheck)
             {
                 _grid.SetPrefab(prefab);
                 _grid.BuildGrid();
                 _prefabCheck = true;
             }
-
             if (prefab == null)
             {
                 _prefabCheck = false;
