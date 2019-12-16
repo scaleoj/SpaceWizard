@@ -60,6 +60,7 @@ public class TileContainer : MonoBehaviour
                     meshFilter.mesh = selectedMesh;
                     meshRenderer.material = selectedMaterial;
                     selectedHighlighter.SetActive(true);
+                    selectedHighlighter.GetComponent<Light>().color = Color.cyan;
                     break;
                 case tileState.TARGET:
                     meshRenderer.enabled = true;
@@ -70,6 +71,9 @@ public class TileContainer : MonoBehaviour
                     meshRenderer.enabled = true;
                     meshFilter.mesh = inMoveRangeMesh;
                     meshRenderer.material = inMoveRangeMaterial;
+                    selectedHighlighter.SetActive(true);
+                    
+                    selectedHighlighter.GetComponent<Light>().color = Color.blue;
                     break;
                 default:
                     meshRenderer.enabled = false;

@@ -9,6 +9,8 @@ public class SelectorController : MonoBehaviour, IAtomListener<GameObject>
     [SerializeField] private GameObjectEvent currentGameObjectChanged;
 
     private GameObject lastClicked;
+
+    private TileContainer.tileState saveTileState;
     // Start is called before the first frame update
     void Start()
     {
@@ -22,11 +24,12 @@ public class SelectorController : MonoBehaviour, IAtomListener<GameObject>
         {
             if (lastClicked != null)
             {
-                lastClicked.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
+                lastClicked.GetComponent<TileContainer>().State = saveTileState;
             }
-            //gameObject.transform.position = item.transform.position;
-            item.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
+            saveTileState = item.GetComponent<TileContainer>().State;
             lastClicked = item;
+            item.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
+            
         }
         else
         {

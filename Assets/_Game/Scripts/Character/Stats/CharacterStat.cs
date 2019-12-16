@@ -32,6 +32,8 @@ public class CharacterStat : ScriptableObject
    [Header("Action Points")]
    [SerializeField] private int currentAP;
 
+   [Header("Other")] [SerializeField] private int moveRange;
+   
    [Header("Weapons")] 
    [SerializeField] private Weapon primaryWeapon;
    [SerializeField] private Weapon secondaryWeapon;
@@ -126,5 +128,11 @@ public class CharacterStat : ScriptableObject
    {
        get => team;
        set => team = value < 0 ? 0 : value;
+   }
+
+   public int MoveRange
+   {
+       get => moveRange;
+       set => moveRange = value;
    }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityAtoms;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "HUDState", menuName = "ScriptableObjects/GameFlow/HUDState", order = 1)]
@@ -8,7 +9,6 @@ public class State : ScriptableObject
     public enum currentAction{IDLE,MOVE,ATTACK1,ATTACK2,WAIT}
     [Tooltip("Selected Action from the HUD. Can be accessed also as an Index.")]
     [SerializeField]private currentAction selectedAction = currentAction.IDLE;
-
     public currentAction SelectedAction
     {
         get => selectedAction;

@@ -6,6 +6,8 @@ public class Character : MonoBehaviour, IResettable
 {
 
     [SerializeField] private CharacterStat charStats;
+
+    [SerializeField] private GameObject occupiedTile;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,5 +38,11 @@ public class Character : MonoBehaviour, IResettable
     {
         get => charStats;
         set => charStats = value;
+    }
+
+    public GameObject OccupiedTile
+    {
+        get => occupiedTile;
+        set => occupiedTile = value;
     }
 }

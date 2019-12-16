@@ -1823,6 +1823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentActionState: {fileID: 11400000, guid: 8eeb5112d4387a543a3ff8c9eb02ef8e, type: 2}
+  actionChanged: {fileID: 11400000, guid: abe0b8fe3e1b5f04caf5f0962170e270, type: 2}
 --- !u!1 &1400768782
 GameObject:
   m_ObjectHideFlags: 0
@@ -2944,6 +2945,32 @@ PrefabInstance:
     - target: {fileID: 5907155527237020965, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907155527237020965, guid: 2c0b09f71441b5047be3c5e9045470dd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Mode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907155527237020965, guid: 2c0b09f71441b5047be3c5e9045470dd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907155527237020965, guid: 2c0b09f71441b5047be3c5e9045470dd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Target
+      value: 
+      objectReference: {fileID: 11400000, guid: abe0b8fe3e1b5f04caf5f0962170e270,
+        type: 2}
+    - target: {fileID: 5907155527237020965, guid: 2c0b09f71441b5047be3c5e9045470dd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_MethodName
+      value: Raise
+      objectReference: {fileID: 0}
+    - target: {fileID: 5907155527237020965, guid: 2c0b09f71441b5047be3c5e9045470dd,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[3].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 2025922194747590819, guid: 2c0b09f71441b5047be3c5e9045470dd,
