@@ -263,25 +263,7 @@ namespace _Game.Scripts.GameFlow.Grid
                 tempTiles = tempTiles.Where(f => 1<<f.node.layer == mask).ToArray();
                 tilesInRange.AddRange(tempTiles);
             }
-
-            return tilesInRange.ToArray();
-        }
-
-        public void UpdateGrid()
-        {
-            var components = _prefab.GetComponents<Component>();
-            foreach (var comp in components)
-            {
-                UnityEditorInternal.ComponentUtility.CopyComponent(comp); 
-            }  
-            foreach (var x in Cubes)
-            {
-                foreach (var y in x)
-                {
-                    
-                    UnityEditorInternal.ComponentUtility.PasteComponentAsNew(y);
-                }
-            }
+            return tilesInRange.Distinct().ToArray();
         }
     }
 }
