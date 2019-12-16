@@ -248,23 +248,20 @@ namespace _Game.Scripts.GameFlow.Grid
 
         public TileAttribute[] GetTilesInRange(GameObject start, int range)
         {
-            var tilesInRange = GetNeighboursTiles(start);
-            tilesInRange = tilesInRange.Where(c => c != null).ToArray();
+            var tilesInRange = GetNeighboursTiles(start).ToList();
+            tilesInRange = tilesInRange.Where(c => c != null).ToList();
 
 
-            if (range <= 1) return tilesInRange;
+            if (range <= 1) return tilesInRange.ToArray();
+            var countTiles = tilesInRange.ToArray();
+            foreach (var tile in countTiles)
             {
-                foreach (var tile in tilesInRange)
-                {
-                    var tempTiles = GetTilesInRange(tile.Node, range - 1);
-                    tempTiles = tempTiles.Where(c => c != null).ToArray();
-                    foreach (var tile2 in tempTiles)
-                    {
-                        tilesInRange.Append(tile2);
-                    }
-                }
+                var tempTiles = GetTilesInRange(tile.Node, range - 1);
+                tempTiles = tempTiles.Where(d => d != null).ToArray();
+                tilesInRange.AddRange(tempTiles);
             }
-            return tilesInRange;
+
+            return tilesInRange.ToArray();
         }
 
         public void UpdateGrid()
