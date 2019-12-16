@@ -11,10 +11,9 @@ namespace _Game.Scripts.GameFlow.Grid
          
       }
 
-      public TileAttribute(GameObject node, Boolean walkable, int x, int y)
+      public TileAttribute(GameObject node, int x, int y)
       {
          Node = node;
-         Walkable = walkable;
          GridX = x;
          GridY = y;
          G = 0;
@@ -30,17 +29,6 @@ namespace _Game.Scripts.GameFlow.Grid
          get => node;
          set => node = value;
       }
-      
-      [Header("Walkable State")] [SerializeField]
-      public bool walkable;
-   
-      public bool Walkable
-      {
-         get => walkable;
-         set => walkable = value;
-      }
-
-      [Header("A* Variables")]
 
       public int f;
    
@@ -48,26 +36,13 @@ namespace _Game.Scripts.GameFlow.Grid
 
 
       //how far away from Start Position
-      [SerializeField] public int g;
-   
-      public int G
-      {
-         get => g;
-         set => g = value;
-      }
+      public int G { get; set; }
 
-   
+
       //how far away from End Position
-      [SerializeField] public int h;
-   
-      public int H
-      {
-         get => h;
-         set => h = value;
-      }
+      public int H { get; set; }
 
-      [Header("Grid Coordinates")]
-      [SerializeField] public int gridX;
+      public int gridX;
    
       public int GridX
       {
@@ -75,7 +50,7 @@ namespace _Game.Scripts.GameFlow.Grid
          set => gridX = value;
       }
 
-      [SerializeField] public int gridY;
+      public int gridY;
    
       public int GridY
       {

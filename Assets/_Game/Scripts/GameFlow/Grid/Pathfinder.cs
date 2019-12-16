@@ -74,7 +74,7 @@ namespace _Game.Scripts.GameFlow.Grid
                 }
                 foreach (var tiles in _grid.GetNeighboursTiles(currentTile.Node))
                 {
-                    if (tiles.walkable || closedList.Contains(tiles))
+                    if (tiles.node.layer == LayerMask.GetMask("Walkable") || closedList.Contains(tiles))
                     {
                         continue;
                     }

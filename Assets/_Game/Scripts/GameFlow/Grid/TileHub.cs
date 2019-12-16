@@ -14,11 +14,16 @@ namespace _Game.Scripts.GameFlow.Grid
         [Range(0,50)]
         [SerializeField]
         private int depth = 10;
+        [Header("The Distance between TileCentres")]
         [SerializeField]
         private float distanceBetweenPoints = 1f;
-
         [Header("TilePrefab")] [SerializeField]
         private GameObject prefab;
+
+        [Header("LayerMask of nonWalkables")] 
+        [SerializeField]
+        private LayerMask walkableMask;
+        
         
         private int _oldWidth;
         private int _oldDepth;
@@ -81,7 +86,7 @@ namespace _Game.Scripts.GameFlow.Grid
 
         public TileAttribute[] GetTilesInRange(GameObject start, int range)
         {
-            return _grid.GetTilesInRange(start, range);
+            return _grid.GetTilesInRange(start, range, walkableMask);
         }
 
         public List<TileAttribute> FindPath(GameObject start, GameObject end)

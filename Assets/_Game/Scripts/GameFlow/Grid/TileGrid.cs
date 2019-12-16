@@ -57,9 +57,8 @@ namespace _Game.Scripts.GameFlow.Grid
                 _lines[i].transform.position = _lines[i].transform.parent.position;
                 for (var j = 0; j < _width; j++)
                 {
-                    //cubes[i].Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
                     Cubes[i].Add(PrefabUtility.InstantiatePrefab(_prefab) as GameObject);
-                    var tile = new TileAttribute(Cubes[i][j], true, i, j);
+                    var tile = new TileAttribute(Cubes[i][j], i, j) {node = {layer = 9}};
                     Neighbours[j, i] = tile;
                     Cubes[i][j].transform.SetParent(_lines[i].transform);
                     Cubes[i][j].name = "Tile " + (j);
@@ -81,7 +80,7 @@ namespace _Game.Scripts.GameFlow.Grid
                 for (var j = 0; j < _width; ++j)
                 {
                     Cubes[i].Add(_lines[i].transform.GetChild(j).gameObject);
-                    var tile = new TileAttribute(Cubes[i][j], true, i, j);
+                    var tile = new TileAttribute(Cubes[i][j], i, j);
                     Neighbours[i, j] = tile;
                 }
             }
@@ -108,7 +107,7 @@ namespace _Game.Scripts.GameFlow.Grid
                     {
                         //cubes[i].Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
                         Cubes[i].Add(PrefabUtility.InstantiatePrefab(_prefab) as GameObject);
-                        var tile = new TileAttribute(Cubes[i][j], true, i, j);
+                        var tile = new TileAttribute(Cubes[i][j], i, j);
                         Cubes[i][j].transform.SetParent(_lines[i].transform);
                         Cubes[i][j].name = "Tile " + (j);
                         Cubes[i][j].transform.position = _parent.position + new Vector3(j * _distanceBetweenPoints, 0, -(i * _distanceBetweenPoints));
@@ -150,7 +149,7 @@ namespace _Game.Scripts.GameFlow.Grid
                     for (var j = 0; j < _width; j++)
                     {
                         Cubes[i].Add(PrefabUtility.InstantiatePrefab(_prefab) as GameObject);
-                        var tile = new TileAttribute(Cubes[i][j], true, i, j);
+                        var tile = new TileAttribute(Cubes[i][j], i, j);
                         Cubes[i][j].transform.SetParent(_lines[i].transform);
                         Cubes[i][j].name = "Tile " + (j);
                         Cubes[i][j].transform.position = _parent.position + new Vector3(j * _distanceBetweenPoints, 0, -(i * _distanceBetweenPoints));
@@ -193,7 +192,7 @@ namespace _Game.Scripts.GameFlow.Grid
             {
                 for (var j = 0; j < Cubes[i].Count; ++j)
                 {
-                    var tile = new TileAttribute(Cubes[i][j], true, i, j);
+                    var tile = new TileAttribute(Cubes[i][j], i, j);
                     Neighbours[i, j] = tile;
                 }
             }
@@ -212,7 +211,7 @@ namespace _Game.Scripts.GameFlow.Grid
             return false;
         }
         
-        public TileAttribute[] GetNeighboursTiles(GameObject start)
+        public IEnumerable<TileAttribute> GetNeighboursTiles(GameObject start)
         {
             if (!CubeContains(start))
             {
@@ -246,18 +245,20 @@ namespace _Game.Scripts.GameFlow.Grid
             return new[]{left, right, top, bot};
         }
 
-        public TileAttribute[] GetTilesInRange(GameObject start, int range)
+        public TileAttribute[] GetTilesInRange(GameObject start, int range, LayerMask mask)
         {
             var tilesInRange = GetNeighboursTiles(start).ToList();
             tilesInRange = tilesInRange.Where(c => c != null).ToList();
+            tilesInRange = tilesInRange.Where(d => d.node.layer == mask).ToList();
 
 
             if (range <= 1) return tilesInRange.ToArray();
             var countTiles = tilesInRange.ToArray();
             foreach (var tile in countTiles)
             {
-                var tempTiles = GetTilesInRange(tile.Node, range - 1);
-                tempTiles = tempTiles.Where(d => d != null).ToArray();
+                var tempTiles = GetTilesInRange(tile.Node, range - 1, mask);
+                tempTiles = tempTiles.Where(e => e != null).ToArray();
+                tempTiles = tempTiles.Where(f => f.node.layer == mask).ToArray();
                 tilesInRange.AddRange(tempTiles);
             }
 
