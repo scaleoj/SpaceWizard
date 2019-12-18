@@ -5,12 +5,6 @@ namespace _Game.Scripts.GameFlow.Grid
 {
    public class TileAttribute
    {
-
-      public TileAttribute()
-      {
-         
-      }
-
       public TileAttribute(GameObject node, int x, int y)
       {
          Node = node;
