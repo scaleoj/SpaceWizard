@@ -93,5 +93,10 @@ namespace _Game.Scripts.GameFlow.Grid
         {
             return _pathfinder.FindPath(start, end);
         }
+
+        public int GetRange(GameObject start, GameObject end)
+        {
+            return FindPath(start, end).Count;
+        }
     }
 }

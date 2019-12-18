@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityAtoms;
 using UnityEngine;
+using _Game.Scripts.Character.Stats;
+using _Game.Scripts.GameFlow;
 using _Game.Scripts.GameFlow.Grid;
 
 public class GameFlowControl : MonoBehaviour, IAtomListener<int>

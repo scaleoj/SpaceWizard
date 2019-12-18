@@ -5,6 +5,7 @@ using TMPro;
 using UnityAtoms;
 using UnityEngine;
 using UnityEngine.UI;
+using _Game.Scripts.Character.Stats;
 
 public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>
 {

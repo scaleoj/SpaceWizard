@@ -5,6 +5,8 @@ using UnityAtoms;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
+using _Game.Scripts.Character.Stats;
+using _Game.Scripts.GameFlow;
 
 public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
 {

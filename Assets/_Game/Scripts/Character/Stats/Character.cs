@@ -1,48 +1,39 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class Character : MonoBehaviour, IResettable
+namespace _Game.Scripts.Character.Stats
 {
-
-    [SerializeField] private CharacterStat charStats;
-
-    [SerializeField] private GameObject occupiedTile;
-    // Start is called before the first frame update
-    void Start()
+    public class Character : MonoBehaviour, IResettable
     {
+        // Start is called before the first frame update
+        void Start()
+        {
         
-    }
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
         
-    }
+        }
 
-    public void ResetOnMatchEnd()
-    {
-        ResetStats();
-    }
+        public void ResetOnMatchEnd()
+        {
+            ResetStats();
+        }
 
-    public void ResetStats()
-    {
-        charStats.CurrentArmour = charStats.MaxArmour;
-        charStats.CurrentHealth = charStats.MaxHealth;
-        charStats.CurrentAP = 0;
-        charStats.CurrentMP = charStats.MaxMP;
-        charStats.CurrentMS = charStats.MaxMS;
-    }
+        public void ResetStats()
+        {
+            CharStats.CurrentArmour = CharStats.MaxArmour;
+            CharStats.CurrentHealth = CharStats.MaxHealth;
+            CharStats.CurrentAP = 0;
+            CharStats.CurrentMP = CharStats.MaxMP;
+            CharStats.CurrentMS = CharStats.MaxMS;
+        }
 
-    public CharacterStat CharStats
-    {
-        get => charStats;
-        set => charStats = value;
-    }
+        [field: SerializeField]
+        public CharacterStat CharStats { get; set; }
 
-    public GameObject OccupiedTile
-    {
-        get => occupiedTile;
-        set => occupiedTile = value;
+        [field: SerializeField]
+        public GameObject OccupiedTile { get; set; }
     }
 }
