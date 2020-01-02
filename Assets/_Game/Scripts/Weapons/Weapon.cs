@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Weapon")]
 public class Weapon : ScriptableObject
 {
+    //TODO GET
     [SerializeField] private string name;
     [SerializeField] private int minPhysicalDmg;
     [SerializeField] private int maxPhysicalDmg;

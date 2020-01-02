@@ -16,6 +16,7 @@ using UnityEngine.Serialization;
 public class CharacterStat : ScriptableObject
 {
 
+   public enum charType {BASE, MELEE, SUPPORT, TANK, SNIPER}
    [Header("Health")]
    [SerializeField] private int currentHealth;
    [SerializeField] private int maxHealth;
@@ -32,7 +33,9 @@ public class CharacterStat : ScriptableObject
    [Header("Action Points")]
    [SerializeField] private int currentAP;
 
-   [Header("Other")] [SerializeField] private int moveRange;
+   private int moveRange; //Move Range gets controlled by the AP count, look into the "GDD Tabelle" for the details.
+
+   [Header("Other")] [SerializeField] private charType m_chartype;
    
    [Header("Weapons")] 
    [SerializeField] private Weapon primaryWeapon;
@@ -47,8 +50,24 @@ public class CharacterStat : ScriptableObject
    [SerializeField]
    [Range(0,1)]
    private int team;//Teamcodes have to be decided, Option for several Teams at the same time
-   
-   
+
+   private void OnEnable()
+   {
+       switch (m_chartype)
+       {
+           case charType.BASE: MoveRange = CurrentAP;
+               break;
+           case charType.MELEE: MoveRange = CurrentAP * 3;
+               break;
+           case charType.SUPPORT: MoveRange = CurrentAP * 2;
+               break;
+           case charType.TANK: MoveRange = CurrentAP;
+               break;
+           case charType.SNIPER: MoveRange = CurrentAP;
+               break;
+       }
+   }
+
    //Getter, Setter
    public int MaxHealth
    {
@@ -77,7 +96,23 @@ public class CharacterStat : ScriptableObject
    public int CurrentAP
    {
        get => currentAP;
-       set => currentAP = value < 0 ? 0 : value;
+       set
+       {
+           currentAP = value < 0 ? 0 : value;
+           switch (m_chartype)
+           {
+               case charType.BASE: MoveRange = CurrentAP;
+                   break;
+               case charType.MELEE: MoveRange = CurrentAP * 3;
+                   break;
+               case charType.SUPPORT: MoveRange = CurrentAP * 2;
+                   break;
+               case charType.TANK: MoveRange = CurrentAP;
+                   break;
+               case charType.SNIPER: MoveRange = CurrentAP;
+                   break;
+           }
+       }
    }
 
    public int CurrentHealth

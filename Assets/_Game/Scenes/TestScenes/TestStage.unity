@@ -4650,6 +4650,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dc3b35e7fa2fc7499756e6fdcbe67f0, type: 3}
+--- !u!1 &442785055 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4486421839476658966, guid: 0dc3b35e7fa2fc7499756e6fdcbe67f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 761581366}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &462376837
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6298,6 +6304,9 @@ MonoBehaviour:
   depth: 12
   distanceBetweenPoints: 1.6
   prefab: {fileID: 4486421839476658966, guid: 0dc3b35e7fa2fc7499756e6fdcbe67f0, type: 3}
+  walkableMask:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &563496734
 Transform:
   m_ObjectHideFlags: 0
@@ -7801,6 +7810,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.6
       objectReference: {fileID: 0}
+    - target: {fileID: 4486421839476658964, guid: 0dc3b35e7fa2fc7499756e6fdcbe67f0,
+        type: 3}
+      propertyPath: occupiedGameObject
+      value: 
+      objectReference: {fileID: 1072964357}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dc3b35e7fa2fc7499756e6fdcbe67f0, type: 3}
 --- !u!1001 &763339183
@@ -20784,6 +20798,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 7ee121f9a85da2b4883fcd8385017fae,
         type: 2}
+    - target: {fileID: 5999178283914831553, guid: 707141300f5c9374cb75ca3ca942b524,
+        type: 3}
+      propertyPath: occupiedTile
+      value: 
+      objectReference: {fileID: 442785055}
     - target: {fileID: 8352870207016690721, guid: 707141300f5c9374cb75ca3ca942b524,
         type: 3}
       propertyPath: m_DrawHalo
@@ -21479,6 +21498,12 @@ PrefabInstance:
       propertyPath: occupiedTile
       value: 
       objectReference: {fileID: 1951250552}
+    - target: {fileID: 5999178283914831553, guid: 707141300f5c9374cb75ca3ca942b524,
+        type: 3}
+      propertyPath: charStats
+      value: 
+      objectReference: {fileID: 11400000, guid: ecdf7cf936e8ed446908ee5fed3e59c2,
+        type: 2}
     - target: {fileID: 8352870207016690721, guid: 707141300f5c9374cb75ca3ca942b524,
         type: 3}
       propertyPath: m_DrawHalo

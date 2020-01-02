@@ -15,7 +15,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>
     [SerializeField] private GameObject[] units;
     [SerializeField] private IntEvent hudStateChanged;
     [SerializeField] private GameObject testTile;
-    
+    private TileAttribute[] tileAttributes;
 
     void Awake()
     {
@@ -26,31 +26,34 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>
         }*/
         queue.ActivePosition = 0;
         
-        addUnitsToQueue(units); //Remove this when wanting to be able to manually place units
+        addUnitsToQueue(units); //Remove this when wanting to be able to manually place unity
     }
 
     public void addUnitsToQueue(GameObject[] unitArr)
     {
         for (int i = 0; i < unitArr.Length; i++)
         {
-            queue.SpawnUnit(unitArr[i]);            
+            queue.SpawnUnit(unitArr[i]);           
         }
     }
 
     public void OnEventRaised(int item)
     {
         Debug.Log(item);
+        tileAttributes = null;
         switch (item)
         {
            case 0: break; //IDLE
            case 1:
                 //-----MOVE-----
                 Character currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
-                TileAttribute[] tileAttributes;
                
                 tileAttributes = grid.GetTilesInRange(currentChar.OccupiedTile,
                     currentChar.CharStats.MoveRange);
+                Debug.Log(currentChar.OccupiedTile);
+                Debug.Log("MoveRange :" + currentChar.CharStats.MoveRange);
 
+                Debug.Log("Length: " + tileAttributes.Length);
                 for (int i = 0; i < tileAttributes.Length; i++)
                 {
                     tileAttributes[i].node.GetComponent<TileContainer>().State = TileContainer.tileState.IN_MOVE_RANGE;

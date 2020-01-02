@@ -4,6 +4,10 @@ namespace _Game.Scripts.Character.Stats
 {
     public class Character : MonoBehaviour, IResettable
     {
+        [SerializeField] private CharacterStat charStats;
+
+        [SerializeField] private GameObject occupiedTile;
+
         // Start is called before the first frame update
         void Start()
         {
@@ -30,10 +34,16 @@ namespace _Game.Scripts.Character.Stats
             CharStats.CurrentMS = CharStats.MaxMS;
         }
 
-        [field: SerializeField]
-        public CharacterStat CharStats { get; set; }
+        public CharacterStat CharStats
+        {
+            get => charStats;
+            set => charStats = value;
+        }
 
-        [field: SerializeField]
-        public GameObject OccupiedTile { get; set; }
+        public GameObject OccupiedTile
+        {
+            get => occupiedTile;
+            set => occupiedTile = value;
+        }
     }
 }
