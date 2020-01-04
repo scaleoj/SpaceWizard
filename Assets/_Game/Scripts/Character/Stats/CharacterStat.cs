@@ -17,6 +17,9 @@ public class CharacterStat : ScriptableObject
 {
 
    public enum charType {BASE, MELEE, SUPPORT, TANK, SNIPER}
+   public enum damageType{PHYSICAL, MAGIC}
+   
+   
    [Header("Health")]
    [SerializeField] private int currentHealth;
    [SerializeField] private int maxHealth;
@@ -68,6 +71,36 @@ public class CharacterStat : ScriptableObject
        }
    }
 
+   public void takeDamage(int phyAmount, int magicAmount)
+   {
+       int save;
+       
+       //Physical
+       save = CurrentArmor - phyAmount;
+       if (save < 0)
+       {
+            CurrentHealth += save; //Working?
+            CurrentArmor = 0;
+       }
+       else
+       {
+            CurrentArmor -= phyAmount;
+       }
+
+       //Magic
+       save = CurrentMS - magicAmount;
+       if (save < 0)
+       {
+            CurrentHealth += save; //Working?
+            CurrentMS = 0;
+       }
+       else
+       {
+            CurrentMS -= magicAmount;
+       }       
+      
+   }
+
    //Getter, Setter
    public int MaxHealth
    {
@@ -81,7 +114,7 @@ public class CharacterStat : ScriptableObject
        set => maxMP = value < 0 ? 0 : value;
    }
 
-   public int MaxArmour
+   public int MaxArmor
    {
        get => maxArmor;
        set => maxArmor = value < 0 ? 0 : value;
@@ -127,7 +160,7 @@ public class CharacterStat : ScriptableObject
        set => currentMP = Mathf.Clamp(currentMP, 0, maxMP);
    }
 
-   public int CurrentArmour
+   public int CurrentArmor
    {
        get => currentArmor;
        set => currentArmor =  Mathf.Clamp(currentArmor, 0, maxArmor);

@@ -18,3 +18,8 @@ MonoBehaviour:
   minMagicDmg: 0
   maxMagicDmg: 0
   range: 4
+  missChance: 0.07
+  critMultiplier: 1.5
+  APCost: 2
+  abilities:
+  - {fileID: 11400000, guid: 12067bfea7e86c541b3de3316385e52a, type: 2}

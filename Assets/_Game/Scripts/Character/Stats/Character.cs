@@ -27,7 +27,7 @@ namespace _Game.Scripts.Character.Stats
 
         public void ResetStats()
         {
-            CharStats.CurrentArmour = CharStats.MaxArmour;
+            CharStats.CurrentArmor = CharStats.MaxArmor;
             CharStats.CurrentHealth = CharStats.MaxHealth;
             CharStats.CurrentAP = 0;
             CharStats.CurrentMP = CharStats.MaxMP;

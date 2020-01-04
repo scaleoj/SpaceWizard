@@ -47,7 +47,7 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>
         {
             CharacterStat stats = selectedGameobject.Value.GetComponent<Character>().CharStats;
             HPText.text = stats.CurrentHealth + "/" + stats.MaxHealth;
-            PAText.text = stats.CurrentArmour + "/" + stats.MaxArmour;
+            PAText.text = stats.CurrentArmor + "/" + stats.MaxArmor;
             MSText.text = stats.CurrentMS + "/" + stats.MaxMS;
             APText.text = stats.CurrentAP.ToString();
         }
@@ -63,7 +63,7 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>
         {
             CharacterStat stats = item.GetComponent<Character>().CharStats;
             HPText.text = stats.CurrentHealth + "/" + stats.MaxHealth;
-            PAText.text = stats.CurrentArmour + "/" + stats.MaxArmour;
+            PAText.text = stats.CurrentArmor + "/" + stats.MaxArmor;
             MSText.text = stats.CurrentMS + "/" + stats.MaxMS;
             APText.text = stats.CurrentAP.ToString();
         }
