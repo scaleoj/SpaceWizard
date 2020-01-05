@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537e5452d4361254280c6729caab9066, type: 3}
   m_Name: Handcannon
   m_EditorClassIdentifier: 
-  name: The Old Fashioned
+  name: Handcannon(TOF)
   minPhysicalDmg: 1
   maxPhysicalDmg: 2
   minMagicDmg: 0

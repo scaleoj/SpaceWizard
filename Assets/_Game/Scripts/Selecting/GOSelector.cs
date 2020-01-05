@@ -43,18 +43,20 @@ public class GOSelector : MonoBehaviour
                     {
                         currentCharacter.Value = null;
                         currentCharacterChanged.Raise(null);
-                    }   
+                    }
+                    
+                    if (tile.gameObject.layer == 9 && tile.State == TileContainer.tileState.NORMAL)
+                    {
+                        stdselector.SetActive(true);
+                        stdselector.transform.position = hit.transform.position;   
+                    }
+                    else
+                    {
+                        stdselector.SetActive(false);
+                    }
                 }
                 
-                if (tile.Walkable && tile.State == TileContainer.tileState.NORMAL)
-                {
-                    stdselector.SetActive(true);
-                    stdselector.transform.position = hit.transform.position;   
-                }
-                else
-                {
-                    stdselector.SetActive(false);
-                }
+                
             }
             else
             {

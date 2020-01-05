@@ -117,7 +117,7 @@ MonoBehaviour:
   inMoveRangeMaterial: {fileID: 2100000, guid: a5749450c52898a478ee3db162357b70, type: 2}
   selectedHighlighter: {fileID: 8194197111200728428}
   occupiedGameObject: {fileID: 0}
-  walkable: 1
+  walkable: 0
 --- !u!1 &8194197111200728428
 GameObject:
   m_ObjectHideFlags: 0

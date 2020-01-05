@@ -20,7 +20,7 @@ public class SelectorController : MonoBehaviour, IAtomListener<GameObject>
 
     public void OnEventRaised(GameObject item)
     {
-        if (item.GetComponent<TileContainer>() != null /*&& item.GetComponent<TileContainer>().Walkable*/)
+        if (item.GetComponent<TileContainer>() != null && item.layer == 9)
         {
             if (lastClicked != null)
             {

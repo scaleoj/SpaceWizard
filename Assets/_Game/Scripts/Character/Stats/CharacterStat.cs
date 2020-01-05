@@ -203,4 +203,21 @@ public class CharacterStat : ScriptableObject
        get => moveRange;
        set => moveRange = value;
    }
+
+   public void moveReduceAp(int distance)
+   {
+       switch (m_chartype)
+       {
+           case charType.BASE: CurrentAP -= distance;
+               break;
+           case charType.MELEE: CurrentAP -= distance / 3;
+               break;
+           case charType.SUPPORT: CurrentAP -= distance / 2;
+               break;
+           case charType.TANK: CurrentAP -= distance;
+               break;
+           case charType.SNIPER: CurrentAP -= distance;
+               break;
+       }
+   }
 }

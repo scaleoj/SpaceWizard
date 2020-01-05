@@ -43,7 +43,11 @@ namespace _Game.Scripts.Character.Stats
         public GameObject OccupiedTile
         {
             get => occupiedTile;
-            set => occupiedTile = value;
+            set
+            {
+                gameObject.transform.position = new Vector3(value.transform.position.x,1f,value.transform.position.z);
+                occupiedTile = value;
+            }
         }
     }
 }
