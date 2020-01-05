@@ -50,10 +50,10 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>
                
                 tileAttributes = grid.GetTilesInRange(currentChar.OccupiedTile,
                     currentChar.CharStats.MoveRange);
-                Debug.Log(currentChar.OccupiedTile);
-                Debug.Log("MoveRange :" + currentChar.CharStats.MoveRange);
+                //Debug.Log(currentChar.OccupiedTile);
+                //Debug.Log("MoveRange :" + currentChar.CharStats.MoveRange);
 
-                Debug.Log("Length: " + tileAttributes.Length);
+                //Debug.Log("Length: " + tileAttributes.Length);
                 for (int i = 0; i < tileAttributes.Length; i++)
                 {
                     tileAttributes[i].node.GetComponent<TileContainer>().State = TileContainer.tileState.IN_MOVE_RANGE;

@@ -86,7 +86,8 @@ namespace _Game.Scripts.GameFlow.Grid
 
         public TileAttribute[] GetTilesInRange(GameObject start, int range)
         {
-            return _grid.GetTilesInRange(start, range, walkableMask);
+           
+            return _grid.GetTilesInRange(start, null, range, walkableMask);
         }
 
         public List<TileAttribute> FindPath(GameObject start, GameObject end)
