@@ -47,7 +47,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>
            case 1:
                 //-----MOVE-----
                 Character currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
-               
+                Debug.Log(currentChar);
                 tileAttributes = grid.GetTilesInRange(currentChar.OccupiedTile,
                     currentChar.CharStats.MoveRange);
                 Debug.Log(currentChar.OccupiedTile);

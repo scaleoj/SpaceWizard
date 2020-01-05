@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4486421839476658962}
   - component: {fileID: 4486421839476658963}
   - component: {fileID: 4486421839476658964}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Tile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ MonoBehaviour:
   inMoveRangeMaterial: {fileID: 2100000, guid: a5749450c52898a478ee3db162357b70, type: 2}
   selectedHighlighter: {fileID: 8194197111200728428}
   occupiedGameObject: {fileID: 0}
-  walkable: 0
+  walkable: 1
 --- !u!1 &8194197111200728428
 GameObject:
   m_ObjectHideFlags: 0
@@ -128,7 +128,7 @@ GameObject:
   m_Component:
   - component: {fileID: 100940241585013723}
   - component: {fileID: 2835672494956964158}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Highlighter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
