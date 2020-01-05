@@ -245,24 +245,31 @@ namespace _Game.Scripts.GameFlow.Grid
             return new[]{left, right, top, bot};
         }
 
-        public TileAttribute[] GetTilesInRange(GameObject start, int range, LayerMask mask)
+        public TileAttribute[] GetTilesInRange(GameObject start, GameObject prior, int range, LayerMask mask)
         {
+            Debug.Log(range);
             var tilesInRange = GetNeighboursTiles(start).ToList();
+
             tilesInRange = tilesInRange.Where(c => c != null).ToList();
-            Debug.Log(mask.value);
+
+            if (prior != null)
+            {
+                tilesInRange = tilesInRange.Where(c => c.node != prior).ToList(); 
+
+            }
+
             tilesInRange = tilesInRange.Where(d => 1<<d.node.layer == mask).ToList();
-
-
 
             if (range <= 1) return tilesInRange.ToArray();
             var countTiles = tilesInRange.ToArray();
             foreach (var tile in countTiles)
             {
-                var tempTiles = GetTilesInRange(tile.Node, range - 1, mask);
+                var tempTiles = GetTilesInRange(tile.Node, start, range - 1, mask);
                 tempTiles = tempTiles.Where(e => e != null).ToArray();
                 tempTiles = tempTiles.Where(f => 1<<f.node.layer == mask).ToArray();
                 tilesInRange.AddRange(tempTiles);
             }
+
             return tilesInRange.Distinct().ToArray();
         }
     }
