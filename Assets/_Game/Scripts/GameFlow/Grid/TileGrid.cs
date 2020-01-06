@@ -247,7 +247,7 @@ namespace _Game.Scripts.GameFlow.Grid
 
         public TileAttribute[] GetTilesInRange(GameObject start, GameObject prior, int range, LayerMask mask)
         {
-            Debug.Log(range);
+            //Debug.Log(range);
             var tilesInRange = GetNeighboursTiles(start).ToList();
 
             tilesInRange = tilesInRange.Where(c => c != null).ToList();

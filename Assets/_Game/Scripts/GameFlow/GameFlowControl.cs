@@ -19,10 +19,9 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     //[SerializeField] private GameObjectVariable currentSelectedGameObject;
     //[SerializeField] private GameObject testTile;
     private TileAttribute[] tileAttributes;
-    
-    
 
-    void Awake()
+
+    private void Awake()
     {
         hudStateChanged.RegisterListener(this);
         gameobjectChanged.RegisterListener(this);
@@ -39,28 +38,28 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
 
     public void addUnitsToQueue(GameObject[] unitArr)
     {
-        for (int i = 0; i < unitArr.Length; i++)
+        foreach (var t in unitArr)
         {
-            queue.SpawnUnit(unitArr[i]);           
+            queue.SpawnUnit(t);
         }
     }
 
     public void OnEventRaised(int item)
     {
-        Debug.Log(item);
+        //Debug.Log(item);
         ResetTiles(tileAttributes);
         switch (item)
         {
            case 0: break; //IDLE
            case 1:
                 //-----MOVE-----
-                Character currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
+                var currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
                 
                 tileAttributes = grid.GetTilesInRange(currentChar.OccupiedTile,
                     currentChar.CharStats.MoveRange);
 
-                Debug.Log("Length: " + tileAttributes.Length);
-                for (int i = 0; i < tileAttributes.Length; i++)
+                //Debug.Log("Length: " + tileAttributes.Length);
+                for (var i = 0; i < tileAttributes.Length; i++)
                 {
                     if (tileAttributes[i].node.GetComponent<TileContainer>().OccupiedGameObject == null)
                     {
@@ -82,14 +81,14 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     
     public void OnEventRaised(GameObject item)
     {
-        Character currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
+        var currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
         if (item.layer == 9 && item.GetComponent<TileContainer>().State == TileContainer.tileState.IN_MOVE_RANGE)
         {
             item.GetComponent<TileContainer>().OccupiedGameObject = queue.Queue[queue.ActivePosition].Key;
             HUDstate.SelectedAction = State.currentAction.IDLE;
-           /* int distance = grid.GetRange(currentChar.OccupiedTile, item);
-            Debug.Log("Distance moved:" +  distance);
-            currentChar.CharStats.moveReduceAp(distance);*/
+            var distance = grid.GetRange(currentChar.OccupiedTile, item);
+            //Debug.Log("Distance moved:" +  distance);
+            currentChar.CharStats.moveReduceAp(distance);
             currentChar.OccupiedTile = item;
             ResetTiles(tileAttributes);
         }
@@ -106,11 +105,11 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
             return;
         }
         
-        for (int i = 0; i < tiles.Length; i++)
+        foreach (var t in tiles)
         {
-            if (tiles[i] != null)
+            if (t != null)
             {
-                tiles[i].node.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;                
+                t.node.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;                
             }
         }
 

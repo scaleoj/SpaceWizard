@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.WSA;
 
@@ -16,7 +17,6 @@ namespace _Game.Scripts.GameFlow.Grid
 
         public List<TileAttribute> FindPath(GameObject start, GameObject end)
         {
-            
             //Implementierung A*
             var startX = 0;
             var startY = 0;
@@ -26,7 +26,6 @@ namespace _Game.Scripts.GameFlow.Grid
             var startBool = false;
             var endBool = false;
 
-            
             foreach (var t in _grid.Cubes)
             {
                 if (t.Contains(start))
@@ -72,7 +71,11 @@ namespace _Game.Scripts.GameFlow.Grid
                 {
                     return GetFinalPath(_grid.Neighbours[startX, startY], _grid.Neighbours[endX, endY]);
                 }
-                foreach (var tiles in _grid.GetNeighboursTiles(currentTile.Node))
+
+                var tilesInRange = _grid.GetNeighboursTiles(currentTile.Node);
+                tilesInRange = tilesInRange.Where(c => c != null);
+                
+                foreach (var tiles in tilesInRange)
                 {
                     if (tiles.node.layer == LayerMask.GetMask("Walkable") || closedList.Contains(tiles))
                     {
