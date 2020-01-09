@@ -38,7 +38,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
 
     public void addUnitsToQueue(GameObject[] unitArr)
     {
-        foreach (var t in unitArr)
+        foreach (GameObject t in unitArr)
         {
             queue.SpawnUnit(t);
         }
@@ -48,18 +48,24 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     {
         //Debug.Log(item);
         ResetTiles(tileAttributes);
+        Character currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
+
+        if (currentChar.CharStats.CurrentAP == 0)
+        {
+            return;
+        }
         switch (item)
         {
            case 0: break; //IDLE
            case 1:
                 //-----MOVE-----
-                var currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
+               
                 
                 tileAttributes = grid.GetTilesInRange(currentChar.OccupiedTile,
                     currentChar.CharStats.MoveRange);
 
                 //Debug.Log("Length: " + tileAttributes.Length);
-                for (var i = 0; i < tileAttributes.Length; i++)
+                for (int i = 0; i < tileAttributes.Length; i++)
                 {
                     if (tileAttributes[i].node.GetComponent<TileContainer>().OccupiedGameObject == null)
                     {
@@ -81,12 +87,12 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     
     public void OnEventRaised(GameObject item)
     {
-        var currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
+        Character currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
         if (item.layer == 9 && item.GetComponent<TileContainer>().State == TileContainer.tileState.IN_MOVE_RANGE)
         {
             item.GetComponent<TileContainer>().OccupiedGameObject = queue.Queue[queue.ActivePosition].Key;
             HUDstate.SelectedAction = State.currentAction.IDLE;
-            var distance = grid.GetRange(currentChar.OccupiedTile, item);
+            int distance = grid.GetRange(currentChar.OccupiedTile, item);
             //Debug.Log("Distance moved:" +  distance);
             currentChar.CharStats.moveReduceAp(distance);
             currentChar.OccupiedTile = item;
@@ -105,7 +111,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
             return;
         }
         
-        foreach (var t in tiles)
+        foreach (TileAttribute t in tiles)
         {
             if (t != null)
             {

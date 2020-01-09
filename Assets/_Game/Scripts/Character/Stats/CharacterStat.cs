@@ -4,6 +4,7 @@ using UnityAtoms;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
+using _Game.Scripts.GameFlow;
 
 /*
  *    Container for all Stat of a Character. If a value Changes an Event will be called.
@@ -39,6 +40,7 @@ public class CharacterStat : ScriptableObject
    private int moveRange; //Move Range gets controlled by the AP count, look into the "GDD Tabelle" for the details.
 
    [Header("Other")] [SerializeField] private charType m_chartype;
+   [SerializeField] private QueueManager queue;
    
    [Header("Weapons")] 
    [SerializeField] private Weapon primaryWeapon;
@@ -131,7 +133,15 @@ public class CharacterStat : ScriptableObject
        get => currentAP;
        set
        {
-           currentAP = value < 0 ? 0 : value;
+           if (value < 0)
+           {
+               currentAP = 0;
+               //queue.Next();
+           }
+           else
+           {
+               currentAP = value;
+           }
            switch (m_chartype)
            {
                case charType.BASE: MoveRange = CurrentAP;

@@ -22,6 +22,7 @@ MonoBehaviour:
   maxMS: 8
   currentAP: 8
   m_chartype: 4
+  queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
   primaryWeapon: {fileID: 11400000, guid: b065b6e1f2d7836419ebd844f9cd751d, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: 7b7593d83253a904d9f5ecdf8ed0f8a7, type: 2}
   initiative: 2
