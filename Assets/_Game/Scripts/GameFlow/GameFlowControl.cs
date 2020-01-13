@@ -58,7 +58,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         {
            case 0: break; //IDLE
            case 1:
-                //-----MOVE-----
+                //-----MOVE HIGHLIGHT-----
                
                 
                 tileAttributes = grid.GetTilesInRange(currentChar.OccupiedTile,
@@ -85,6 +85,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         }
     }
     
+    //Moving logic
     public void OnEventRaised(GameObject item)
     {
         Character currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
@@ -95,7 +96,9 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
             int distance = grid.GetRange(currentChar.OccupiedTile, item);
             //Debug.Log("Distance moved:" +  distance);
             currentChar.CharStats.moveReduceAp(distance);
+            currentChar.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
             currentChar.OccupiedTile = item;
+            currentChar.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = currentChar.gameObject;
             ResetTiles(tileAttributes);
         }
         else
