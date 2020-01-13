@@ -23,7 +23,7 @@ namespace _Game.Scripts.GameFlow
         public void SpawnUnit(GameObject c)
         {
             var link = c.GetComponent<global::_Game.Scripts.Character.Stats.Character>();
-            var link2 = c.GetComponent<_Game.Scripts.Character.AI.AiHub>();
+            var link2 = c.GetComponent<_Game.Scripts.Character.AI.AIHub>();
         
             if (!_initSheet.ContainsKey(c))
             {
@@ -60,7 +60,7 @@ namespace _Game.Scripts.GameFlow
                 ++_activePosition;
                 link = _queue[_activePosition].Key.GetComponent<global::_Game.Scripts.Character.Stats.Character>();
                 link.CharStats.Active = true;
-                var link2 = _queue[_activePosition].Key.GetComponent<_Game.Scripts.Character.AI.AiHub>();
+                var link2 = _queue[_activePosition].Key.GetComponent<_Game.Scripts.Character.AI.AIHub>();
                 link2.PositionUpdate();
             }
             else
@@ -70,7 +70,7 @@ namespace _Game.Scripts.GameFlow
                 _activePosition = 0;
                 link = _queue[_activePosition].Key.GetComponent<global::_Game.Scripts.Character.Stats.Character>();
                 link.CharStats.Active = true;
-                var link2 = _queue[_activePosition].Key.GetComponent<_Game.Scripts.Character.AI.AiHub>();
+                var link2 = _queue[_activePosition].Key.GetComponent<_Game.Scripts.Character.AI.AIHub>();
                 link2.PositionUpdate();
             }
         }

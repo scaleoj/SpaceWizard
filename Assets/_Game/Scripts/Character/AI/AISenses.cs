@@ -34,6 +34,26 @@ namespace _Game.Scripts.Character.AI
 
             _otherCharacterRange = list;
         }
+
+        public List<KeyValuePair<GameObject, int>> GetRanges()
+        {
+            var copy = _otherCharacterRange;
+            copy.Sort((x, y) => y.Value.CompareTo(x.Value));
+            return copy;
+        }
+
+        public void MoveToOptimalPosition()
+        {
+            //git gud
+        }
+        
+        public void Move(GameObject end)
+        {
+            _character.OccupiedTile = end;
+            UpdateRanges();
+        }
+        
+        
     }
     
     //Gather Infos
