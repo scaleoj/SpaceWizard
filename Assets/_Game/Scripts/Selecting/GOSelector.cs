@@ -13,6 +13,8 @@ public class GOSelector : MonoBehaviour
     [SerializeField] private GameObjectEvent currentGameObjectChanged;
     [SerializeField] private GameObjectVariable currentCharacter;
     [SerializeField] private GameObjectEvent currentCharacterChanged;
+    [SerializeField] private GameObjectVariable hoverGO;
+    [SerializeField] private GameObjectEvent hoverGOChanged;
     [SerializeField] private GameObject stdselector;
     [SerializeField] private BoolVariable mouseOverUI;
     private Camera cam;
@@ -47,25 +49,30 @@ public class GOSelector : MonoBehaviour
                     
                     if (tile.gameObject.layer == 9 && tile.State == TileContainer.tileState.NORMAL)
                     {
-                        stdselector.SetActive(true);
-                        stdselector.transform.position = hit.transform.position;   
+                       // stdselector.SetActive(true);
+                       // stdselector.transform.position = hit.transform.position;   
                     }
                     else
                     {
-                        stdselector.SetActive(false);
+                       // stdselector.SetActive(false);
                     }
                 }
-                
+
+                if (tile.gameObject.layer == 9 && tile.State == TileContainer.tileState.NORMAL && !mouseOverUI.Value)
+                {
+                    hoverGO.Value = hit.transform.gameObject;
+                    hoverGOChanged.Raise(hit.transform.gameObject);
+                }
                 
             }
             else
             {
-                stdselector.SetActive(false);
+                //stdselector.SetActive(false);
             }    
         }
         else
         {
-            stdselector.SetActive(false);  
+            //stdselector.SetActive(false);  
         }
     }
 }

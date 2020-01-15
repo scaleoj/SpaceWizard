@@ -1,0 +1,83 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3058552619920812989
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3058552619920812986}
+  - component: {fileID: 3058552619920812987}
+  - component: {fileID: 3058552619920812984}
+  - component: {fileID: 3917794257919911837}
+  m_Layer: 0
+  m_Name: GameController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3058552619920812986
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3058552619920812989}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 12.882621, y: -22.958063, z: 8.9264145}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3058552619920812987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3058552619920812989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5b91efee1c6030409f7b6dfb336ce22, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentGameObjectChanged: {fileID: 11400000, guid: ceeca165deee9254a9f7954dfedd4a4c,
+    type: 2}
+--- !u!114 &3058552619920812984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3058552619920812989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0bf92ccb47b8b814299a081842f5eb38, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
+  grid: {fileID: 0}
+  units:
+  - {fileID: 0}
+  - {fileID: 0}
+  hudStateChanged: {fileID: 11400000, guid: abe0b8fe3e1b5f04caf5f0962170e270, type: 2}
+  HUDstate: {fileID: 11400000, guid: 8eeb5112d4387a543a3ff8c9eb02ef8e, type: 2}
+  gameobjectChanged: {fileID: 11400000, guid: ceeca165deee9254a9f7954dfedd4a4c, type: 2}
+--- !u!114 &3917794257919911837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3058552619920812989}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b44231bded7ad3c4284def48383d1dc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hoverGOChanged: {fileID: 11400000, guid: c93762a5a0205df4fa0ff222e37b3708, type: 2}
+  clickedGameObject: {fileID: 11400000, guid: b9758d4b72caed64eb62b1ed1485e4e1, type: 2}

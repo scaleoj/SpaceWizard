@@ -24,12 +24,18 @@ public class SelectorController : MonoBehaviour, IAtomListener<GameObject>
         {
             if (lastClicked != null)
             {
-                lastClicked.GetComponent<TileContainer>().State = saveTileState;
+                if (lastClicked.GetComponent<TileContainer>().State != TileContainer.tileState.HOVERING)
+                {
+                    lastClicked.GetComponent<TileContainer>().State = saveTileState;
+                }
             }
-            saveTileState = item.GetComponent<TileContainer>().State;
+
+            if (item.GetComponent<TileContainer>().State != TileContainer.tileState.HOVERING)
+            {
+                saveTileState = item.GetComponent<TileContainer>().State;
+            }
             lastClicked = item;
             item.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
-            
         }
         else
         {

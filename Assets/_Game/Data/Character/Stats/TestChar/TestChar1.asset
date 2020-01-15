@@ -20,7 +20,7 @@ MonoBehaviour:
   maxArmor: 10
   currentMS: 10
   maxMS: 10
-  currentAP: 0
+  currentAP: 2
   m_chartype: 1
   queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
   primaryWeapon: {fileID: 11400000, guid: b065b6e1f2d7836419ebd844f9cd751d, type: 2}

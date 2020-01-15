@@ -17,6 +17,6 @@ MonoBehaviour:
     object.'
   _value: 0
   _initialValue: 0
-  _oldValue: 0
+  _oldValue: 1
   Changed: {fileID: 0}
   ChangedWithHistory: {fileID: 0}
