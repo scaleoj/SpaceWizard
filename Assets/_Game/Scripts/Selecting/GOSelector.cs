@@ -23,6 +23,7 @@ public class GOSelector : MonoBehaviour
     {
         cam = GetComponent<Camera>();
     }
+
     private void Update()
     {
         RaycastHit hit;

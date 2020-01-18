@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityAtoms;
 using UnityEngine;
@@ -20,6 +21,8 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     //[SerializeField] private GameObject testTile;
     private TileAttribute[] tileAttributes;
 
+    private CharacterStat[] savedStats;
+
 
     private void Awake()
     {
@@ -31,9 +34,46 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         }*/
         queue.ActivePosition = 0;
         
-        addUnitsToQueue(units); //Remove this when wanting to be able to manually place unity
+        addUnitsToQueue(units); //Remove this when wanting to be able to manually place in unity
+        savedStats = new CharacterStat[units.Length];
+        for (int i = 0; i < units.Length; i++)
+        {
+            savedStats[i] = new CharacterStat();
+            CharacterStat stats = units[i].GetComponent<Character>().CharStats;
+            Debug.Log(savedStats[i]);
+            savedStats[i].Initiative = stats.Initiative;
+            savedStats[i].CurrentAp = stats.CurrentAp;
+            savedStats[i].CurrentArmor = stats.CurrentArmor;
+            savedStats[i].CurrentHealth = stats.CurrentHealth;
+            savedStats[i].CurrentMp = stats.CurrentMp;
+            savedStats[i].CurrentMs = stats.CurrentMs;
+
+            savedStats[i].MaxArmor = stats.MaxArmor;
+            savedStats[i].MaxHealth = stats.MaxHealth;
+            savedStats[i].MaxMp = stats.MaxMp;
+            savedStats[i].MaxMs = stats.MaxMs;
+        }
 
         HUDstate.SelectedAction = State.currentAction.IDLE;
+    }
+
+    private void OnApplicationQuit()
+    {
+        for (int i = 0; i < units.Length; i++)
+        {
+            CharacterStat stats = units[i].GetComponent<Character>().CharStats;
+            stats.Initiative = savedStats[i].Initiative;
+            stats.CurrentAp = savedStats[i].CurrentAp;
+            stats.CurrentArmor = savedStats[i].CurrentArmor;
+            stats.CurrentHealth = savedStats[i].CurrentHealth;
+            stats.CurrentMp = savedStats[i].CurrentMp;
+            stats.CurrentMs = savedStats[i].CurrentMs;
+
+            stats.MaxArmor = savedStats[i].MaxArmor;
+            stats.MaxHealth = savedStats[i].MaxHealth;
+            stats.MaxMp = savedStats[i].MaxMp;
+            stats.MaxMs = savedStats[i].MaxMs;
+        }
     }
 
     public void addUnitsToQueue(GameObject[] unitArr)
@@ -41,6 +81,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         foreach (GameObject t in unitArr)
         {
             queue.SpawnUnit(t);
+            
         }
     }
 
@@ -54,6 +95,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         {
             return;
         }
+        
         switch (item)
         {
            case 0: break; //IDLE
@@ -88,8 +130,28 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     //Moving logic
     public void OnEventRaised(GameObject item)
     {
+        if (tileAttributes == null)
+        {
+            return;
+        }
+        
         Character currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
-        if (item.layer == 9 && item.GetComponent<TileContainer>().State == TileContainer.tileState.IN_MOVE_RANGE)
+        //Debug.Log("ItemLayer: " + item.layer + ",TileState: " + item.GetComponent<TileContainer>().State);
+        bool tileInRange = false;
+        for (int i = 0; i < tileAttributes.Length; i++)
+        {
+            if (tileAttributes[i] == null)
+            {
+                continue;
+            }
+            
+            if (item == tileAttributes[i].node)
+            {
+                tileInRange = true;
+            }
+        }
+        
+        if (item.layer == 9 && tileInRange)
         {
             item.GetComponent<TileContainer>().OccupiedGameObject = queue.Queue[queue.ActivePosition].Key;
             HUDstate.SelectedAction = State.currentAction.IDLE;
@@ -100,6 +162,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
             currentChar.OccupiedTile = item;
             currentChar.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = currentChar.gameObject;
             ResetTiles(tileAttributes);
+            tileInRange = false;
         }
         else
         {
@@ -122,6 +185,9 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
             }
         }
 
-        tiles = null;
+        for (int i = 0; i < tiles.Length; i++)
+        {
+            tiles[i] = null;
+        }
     }
 }

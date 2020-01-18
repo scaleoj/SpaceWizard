@@ -1,4 +1,6 @@
-﻿using _Game.Scripts.GameFlow.Grid;
+﻿using System.Collections.Generic;
+using System.Linq;
+using _Game.Scripts.GameFlow.Grid;
 using UnityEngine;
 
 namespace _Game.Scripts.Character.Stats
@@ -51,14 +53,43 @@ namespace _Game.Scripts.Character.Stats
             }
         }
 
-        public void AImove(TileHub grid,GameObject destination)
+        public bool AImove(TileHub grid, List<TileAttribute> path)
         {
-            int distance = grid.GetRange(OccupiedTile, destination);
-            Debug.Log("AI moved distance: " +  distance);
-            CharStats.MoveReduceAp(distance);
-            OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
-            OccupiedTile = destination;
-            OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = gameObject;
+            //0 in Path list is the tile the Character is standing on
+            //Last one is the Destination, try to go as far as possible
+            for (int i = 1; i < path.Count; i++)
+            {
+                if (getAPMoveCosts(i, charStats.MChartype) > charStats.CurrentAp)
+                {
+                    //int distance = grid.GetRange(OccupiedTile, path[i - 1].node);
+                    //Debug.Log("AI moved distance: " +  distance);
+                    
+                    CharStats.MoveReduceAp(i - 1);
+                    OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
+                    OccupiedTile = path[i - 1].node;
+                    OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = gameObject;
+                    return true;
+                }
+            }
+            
+            return false;
+        }
+
+        public int getAPMoveCosts(int distance, CharacterStat.CharType type)
+        {
+            switch (type)
+            {
+                case CharacterStat.CharType.Base: return distance;
+                    break;
+                case CharacterStat.CharType.Melee: return  distance / 3 + 1;
+                    break;
+                case CharacterStat.CharType.Support: return distance / 2 + 1;
+                    break;
+                case CharacterStat.CharType.Tank: return distance;
+                    break;
+                case CharacterStat.CharType.Sniper: return  distance;
+                    break;
+            }
         }
     }
 }

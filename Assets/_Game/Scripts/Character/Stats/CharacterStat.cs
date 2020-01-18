@@ -136,10 +136,10 @@ public class CharacterStat : ScriptableObject
        get => currentAp;
        set
        {
-           if (value < 0)
+           if (value <= 0)
            {
                currentAp = 0;
-               //queue.Next();
+               queue.Next();
            }
            else
            {
