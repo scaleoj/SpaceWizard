@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,8 +15,25 @@ public class Weapon : ScriptableObject
     [SerializeField] private int range;
     [SerializeField] [Range(0f,1f)] private float missChance;
     [SerializeField] private float critMultiplier;
+    [Header("ORDER ABILITIES FROM HIGHEST TO LOWEST AP-COST, MAX 3 ABILITIES")]
     [SerializeField] private Ability[] abilities;
-    
+
+    private CharacterStat motherChar;
+
+    private void OnEnable()
+    {
+        for (int i = 0; i < abilities.Length; i++)
+        {
+            abilities[i].MotherWeapon = this;
+        }
+    }
+
+    public CharacterStat MotherChar
+    {
+        get => motherChar;
+        set => motherChar = value;
+    }
+
     public string Name
     {
         get => name;
