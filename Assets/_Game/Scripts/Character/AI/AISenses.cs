@@ -1,6 +1,7 @@
 ﻿
 
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using _Game.Scripts.GameFlow;
 using _Game.Scripts.GameFlow.Grid;
@@ -42,14 +43,16 @@ namespace _Game.Scripts.Character.AI
             return copy;
         }
 
-        public void MoveToOptimalPosition()
+        public void Retreat()
         {
-            
+            var tempPath = _hub.FindPath(_character.OccupiedTile, _hub.Retreat);
+            _character.AImove(_hub, tempPath.Count <= 3 ? tempPath.Last().node : tempPath[2].node);
         }
         
-        public void Move(GameObject end)
+        public void Move()
         {
-            _character.AImove(_hub, end);
+            var tempPath = _hub.FindPath(_character.OccupiedTile, GetRanges().Last().Key);
+            _character.AImove(_hub, tempPath.Last().node);
             UpdateRanges();
         }
         

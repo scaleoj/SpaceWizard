@@ -17,7 +17,7 @@ namespace _Game.Scripts.GameFlow
         private void OnEnable()
         {
             _initSheet = new Dictionary<GameObject, int>();
-            List<KeyValuePair<GameObject, int>> queue = new List<KeyValuePair<GameObject, int>>();
+            var queue = new List<KeyValuePair<GameObject, int>>();
         }
 
         public void SpawnUnit(GameObject c)

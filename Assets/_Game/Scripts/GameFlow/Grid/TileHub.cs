@@ -100,5 +100,7 @@ namespace _Game.Scripts.GameFlow.Grid
         {
             return FindPath(start, end).Count;
         }
+
+        public GameObject Retreat => retreat;
     }
 }

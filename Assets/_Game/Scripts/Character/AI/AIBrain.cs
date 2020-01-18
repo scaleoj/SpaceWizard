@@ -1,5 +1,6 @@
 ﻿
 
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using _Game.Scripts.GameFlow.Grid;
 
@@ -15,7 +16,6 @@ namespace _Game.Scripts.Character.AI
         private AiSenses _senses;
         private int _team;
         private int _range;
-        private TileHub _hub;
 
         public AiBrain(AiSenses senses, TileHub hub, Stats.Character character)
         {
@@ -42,8 +42,6 @@ namespace _Game.Scripts.Character.AI
                     _range = Melee;
                     break;   
             }
-
-            _hub = hub;
         }
         
         //DecisionMaking
@@ -52,14 +50,14 @@ namespace _Game.Scripts.Character.AI
             var actionsleft = true;
             while (actionsleft)
             {
-                if (_senses.GetRanges()[0].Value != _range)
+                if (_senses.GetRanges()[0].Value < _range)
                 {
-                    MoveToOptimalPosition();
+                    Retreat();
                     
                 }
-                else
+                else if(_senses.GetRanges()[0].Value >= _range)
                 {
-                    //check cooldowns
+                    Move();
                 }
             }
             
@@ -69,9 +67,14 @@ namespace _Game.Scripts.Character.AI
             
         }
 
-        private void MoveToOptimalPosition()
+        private void Retreat()
         {
-           _senses.MoveToOptimalPosition();
+           _senses.Retreat();
+        }
+
+        private void Move()
+        {
+            _senses.Move();
         }
         
 
