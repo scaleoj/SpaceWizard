@@ -59,8 +59,17 @@ namespace _Game.Scripts.Character.AI
             _character.AImove(_hub, tempPath);
             UpdateRanges();
         }
-        
-        
+
+        public int ApCount()
+        {
+            return _character.CharStats.CurrentAp;
+        }
+
+
+        public void Next()
+        {
+            _queueManager.Next();
+        }
     }
     
     //Gather Infos

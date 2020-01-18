@@ -1,5 +1,6 @@
 ﻿
 
+using TMPro;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using _Game.Scripts.GameFlow.Grid;
@@ -16,10 +17,12 @@ namespace _Game.Scripts.Character.AI
         private AiSenses _senses;
         private int _team;
         private int _range;
+        private Stats.Character _character;
 
         public AiBrain(AiSenses senses, TileHub hub, Stats.Character character)
         {
             _senses = senses;
+            _character = character;
             _team = character.CharStats.Team;
             switch (character.CharStats.MChartype)
             {
@@ -47,24 +50,43 @@ namespace _Game.Scripts.Character.AI
         //DecisionMaking
         public void MakeDecision()
         {
-            var actionsleft = true;
-            while (actionsleft)
+            var range = _senses.GetRanges()[0].Value;
+            
+            while (_senses.ApCount() > 0)
             {
-                if (_senses.GetRanges()[0].Value < _range)
+                if (range < _range-2)
                 {
                     Retreat();
-                    
+                    break;
+
                 }
-                else if(_senses.GetRanges()[0].Value >= _range)
+                else if(range > _range)
                 {
                     Move();
                 }
-            }
-            
 
-            
-            //endTurn einbauen
-            
+                for (var i = 0; i < _character.CharStats.PrimaryWeapon.Abilities.Length-1; i=i)
+                {
+                    if (_senses.ApCount() >= _character.CharStats.PrimaryWeapon.Abilities[i].ApCost)
+                    {
+                        if (_character.CharStats.PrimaryWeapon.Range <= _senses.GetRanges()[0].Value)
+                        {
+                            _character.CharStats.PrimaryWeapon.Abilities[i].Attack(_senses.GetRanges()[0].Key, _senses.GetRanges()[0].Value);
+                        }
+                        else
+                        {
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        i++;
+                    }
+                }
+               
+            }
+            _senses.Next();
+
         }
 
         private void Retreat()
