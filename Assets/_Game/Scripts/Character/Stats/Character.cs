@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Game.Scripts.GameFlow.Grid;
+using UnityEngine;
 
 namespace _Game.Scripts.Character.Stats
 {
@@ -48,6 +49,16 @@ namespace _Game.Scripts.Character.Stats
                 gameObject.transform.position = new Vector3(value.transform.position.x,1f,value.transform.position.z);
                 occupiedTile = value;
             }
+        }
+
+        public void AImove(TileHub grid,GameObject destination)
+        {
+            int distance = grid.GetRange(OccupiedTile, destination);
+            Debug.Log("AI moved distance: " +  distance);
+            CharStats.moveReduceAp(distance);
+            OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
+            OccupiedTile = destination;
+            OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = gameObject;
         }
     }
 }

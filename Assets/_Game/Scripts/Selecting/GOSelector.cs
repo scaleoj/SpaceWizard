@@ -58,7 +58,7 @@ public class GOSelector : MonoBehaviour
                     }
                 }
 
-                if (tile.gameObject.layer == 9 && tile.State == TileContainer.tileState.NORMAL && !mouseOverUI.Value)
+                if (tile.gameObject.layer == 9 && (tile.State == TileContainer.tileState.NORMAL || tile.State == TileContainer.tileState.IN_MOVE_RANGE) && !mouseOverUI.Value)
                 {
                     hoverGO.Value = hit.transform.gameObject;
                     hoverGOChanged.Raise(hit.transform.gameObject);

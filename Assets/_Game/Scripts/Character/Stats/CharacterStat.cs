@@ -220,9 +220,9 @@ public class CharacterStat : ScriptableObject
        {
            case charType.BASE: CurrentAP -= distance;
                break;
-           case charType.MELEE: CurrentAP -= distance / 3;
+           case charType.MELEE: CurrentAP -= distance / 3 + 1;
                break;
-           case charType.SUPPORT: CurrentAP -= distance / 2;
+           case charType.SUPPORT: CurrentAP -= distance / 2 + 1;
                break;
            case charType.TANK: CurrentAP -= distance;
                break;
