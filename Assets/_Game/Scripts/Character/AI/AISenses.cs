@@ -49,7 +49,7 @@ namespace _Game.Scripts.Character.AI
         
         public void Move(GameObject end)
         {
-            _character.OccupiedTile = end;
+            
             UpdateRanges();
         }
         

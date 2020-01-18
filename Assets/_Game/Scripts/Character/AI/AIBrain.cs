@@ -8,9 +8,9 @@ namespace _Game.Scripts.Character.AI
     public class AiBrain
     {
 
-        private const int MELEE = 1;
-        private const int RANGED = 3;
-        private const int SNIPER = 5;
+        private const int Melee = 1;
+        private const int Ranged = 3;
+        private const int Sniper = 5;
 
         private AiSenses _senses;
         private AIHub.Team _team;
@@ -24,16 +24,16 @@ namespace _Game.Scripts.Character.AI
             switch (range)
             {
                 case AIHub.Range.Ranged:
-                    _range = RANGED;
+                    _range = Ranged;
                     break;
                 case AIHub.Range.Sniper:
-                    _range = SNIPER;
+                    _range = Sniper;
                     break;
                 case AIHub.Range.Melee:
-                    _range = MELEE;
+                    _range = Melee;
                     break;
                 default:
-                    _range = MELEE;
+                    _range = Melee;
                     break;   
             }
 
@@ -43,14 +43,23 @@ namespace _Game.Scripts.Character.AI
         //DecisionMaking
         public void MakeDecision()
         {
-            if (_senses.GetRanges()[0].Value != _range)
+            var actionsleft = true;
+            while (actionsleft)
             {
-                MoveToOptimalPosition();
+                if (_senses.GetRanges()[0].Value != _range)
+                {
+                    MoveToOptimalPosition();
+                    
+                }
+                else
+                {
+                    //check cooldowns
+                }
             }
-            else
-            {
-                //check cooldowns
-            }
+            
+
+            
+            //endTurn einbauen
             
         }
 
