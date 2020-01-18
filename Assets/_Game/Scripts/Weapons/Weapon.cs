@@ -14,7 +14,6 @@ public class Weapon : ScriptableObject
     [SerializeField] private int range;
     [SerializeField] [Range(0f,1f)] private float missChance;
     [SerializeField] private float critMultiplier;
-    [SerializeField] private int APCost;
     [SerializeField] private Ability[] abilities;
     
     public string Name
@@ -57,11 +56,5 @@ public class Weapon : ScriptableObject
     {
         get => critMultiplier;
         set => critMultiplier = value;
-    }
-
-    public int ApCost
-    {
-        get => APCost;
-        set => APCost = value;
     }
 }

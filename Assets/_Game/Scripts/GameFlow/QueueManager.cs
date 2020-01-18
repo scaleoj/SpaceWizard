@@ -53,6 +53,8 @@ namespace _Game.Scripts.GameFlow
 
         public void Next()
         {
+            
+            
             if (_activePosition < _queue.Count - 1)
             {
                 var link = _queue[_activePosition].Key.GetComponent<global::_Game.Scripts.Character.Stats.Character>();

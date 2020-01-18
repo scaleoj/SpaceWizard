@@ -38,6 +38,8 @@ public class CharacterStat : ScriptableObject
    [Header("Action Points")]
    [SerializeField] private int currentAp;
 
+   [SerializeField] private int apgain;
+
    private int _moveRange; //Move Range gets controlled by the AP count, look into the "GDD Tabelle" for the details.
 
    [Header("Other")] [SerializeField] private CharType mChartype;
@@ -215,6 +217,12 @@ public class CharacterStat : ScriptableObject
    {
        get => _moveRange;
        set => _moveRange = value;
+   }
+
+   public int Apgain
+   {
+       get => apgain;
+       set => apgain = value;
    }
 
    public void MoveReduceAp(int distance)

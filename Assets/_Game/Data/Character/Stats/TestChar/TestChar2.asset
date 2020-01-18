@@ -18,9 +18,9 @@ MonoBehaviour:
   maxMp: 0
   currentArmor: 8
   maxArmor: 8
-  currentMs: 0
-  maxMs: 0
-  currentAp: 0
+  currentMs: 3
+  maxMs: 3
+  currentAp: 3
   mChartype: 0
   queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
   primaryWeapon: {fileID: 11400000, guid: b065b6e1f2d7836419ebd844f9cd751d, type: 2}
