@@ -7,13 +7,13 @@ using _Game.Scripts.Character.Stats;
 //Handcannon Base Attacks
 public class HCBaseATK : Ability 
 {
-   public override void Attack( GameObject[] target, int distance)
+   public override void Attack( GameObject target, int distance)
    {
       float randomNumber = UnityEngine.Random.Range(0f,1f);
       if (randomNumber >= (distance * MotherWeapon.MissChance))
       {
          float crit = UnityEngine.Random.Range(0f, 1f) >= 0.05f ? MotherWeapon.CritMultiplier : 1.0f;
-         target[0].GetComponent<Character>().CharStats.TakeDamage( (int) (UnityEngine.Random.Range(MotherWeapon.MinPhysicalDmg, MotherWeapon.MaxPhysicalDmg) * crit), (int) (UnityEngine.Random.Range(MotherWeapon.MinMagicDmg, MotherWeapon.MaxMagicDmg) * crit));
+         target.GetComponent<Character>().CharStats.TakeDamage( (int) (UnityEngine.Random.Range(MotherWeapon.MinPhysicalDmg, MotherWeapon.MaxPhysicalDmg) * crit), (int) (UnityEngine.Random.Range(MotherWeapon.MinMagicDmg, MotherWeapon.MaxMagicDmg) * crit));
          
          Debug.Log("Hit"); //TODO Visual implementation of a HIT / raising an event for that
       }

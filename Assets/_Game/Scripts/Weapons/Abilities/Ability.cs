@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Ability : ScriptableObject
 {
-    public virtual void Attack(GameObject[] target, int distance) {}
+    public virtual void Attack(GameObject target, int distance) {}
     
     [SerializeField] private int APCost;
     [SerializeField] private string name;
