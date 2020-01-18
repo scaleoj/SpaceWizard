@@ -38,17 +38,41 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         savedStats = new CharacterStat[units.Length];
         for (int i = 0; i < units.Length; i++)
         {
-            savedStats[i] = units[i].GetComponent<Character>().CharStats;
+            savedStats[i] = new CharacterStat();
+            CharacterStat stats = units[i].GetComponent<Character>().CharStats;
+            Debug.Log(savedStats[i]);
+            savedStats[i].Initiative = stats.Initiative;
+            savedStats[i].CurrentAp = stats.CurrentAp;
+            savedStats[i].CurrentArmor = stats.CurrentArmor;
+            savedStats[i].CurrentHealth = stats.CurrentHealth;
+            savedStats[i].CurrentMp = stats.CurrentMp;
+            savedStats[i].CurrentMs = stats.CurrentMs;
+
+            savedStats[i].MaxArmor = stats.MaxArmor;
+            savedStats[i].MaxHealth = stats.MaxHealth;
+            savedStats[i].MaxMp = stats.MaxMp;
+            savedStats[i].MaxMs = stats.MaxMs;
         }
 
         HUDstate.SelectedAction = State.currentAction.IDLE;
     }
 
-    private void OnDestroy()
+    private void OnApplicationQuit()
     {
         for (int i = 0; i < units.Length; i++)
         {
-            units[i].GetComponent<Character>().CharStats = savedStats[i]; //Doesnt Work
+            CharacterStat stats = units[i].GetComponent<Character>().CharStats;
+            stats.Initiative = savedStats[i].Initiative;
+            stats.CurrentAp = savedStats[i].CurrentAp;
+            stats.CurrentArmor = savedStats[i].CurrentArmor;
+            stats.CurrentHealth = savedStats[i].CurrentHealth;
+            stats.CurrentMp = savedStats[i].CurrentMp;
+            stats.CurrentMs = savedStats[i].CurrentMs;
+
+            stats.MaxArmor = savedStats[i].MaxArmor;
+            stats.MaxHealth = savedStats[i].MaxHealth;
+            stats.MaxMp = savedStats[i].MaxMp;
+            stats.MaxMs = savedStats[i].MaxMs;
         }
     }
 

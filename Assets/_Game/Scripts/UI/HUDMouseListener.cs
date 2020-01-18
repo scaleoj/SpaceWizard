@@ -61,7 +61,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
         {
             statTexts.SetActive(true);
             statbackground.SetActive(true);
-            if (item == queue.Queue[queue.ActivePosition].Key)
+            if (item == queue.Queue[queue.ActivePosition].Key && item.GetComponent<Character>().CharStats.Team == 0)
             {
                 abilityBackground.SetActive(true);
                 ActionMenuContainer.SetActive(true);
