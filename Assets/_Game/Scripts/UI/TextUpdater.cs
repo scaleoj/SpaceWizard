@@ -6,10 +6,12 @@ using UnityAtoms;
 using UnityEngine;
 using UnityEngine.UI;
 using _Game.Scripts.Character.Stats;
+using Void = UnityAtoms.Void;
 
-public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>
+public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>, IAtomListener<Void>
 {
-
+    [SerializeField] private VoidEvent charStatChange;
+    
     [SerializeField] private GameObjectEvent CurrentGameObjectChanged;
     [SerializeField] private GameObjectVariable selectedGameobject;
 
@@ -17,6 +19,7 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>
     [SerializeField] private GameObject PA;
     [SerializeField] private GameObject MS;
     [SerializeField] private GameObject AP;
+    
 
     private TextMeshProUGUI HPText;
     private TextMeshProUGUI PAText;
@@ -32,6 +35,7 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>
         MSText = MS.GetComponent<TextMeshProUGUI>();
         APText = AP.GetComponent<TextMeshProUGUI>();
         CurrentGameObjectChanged.RegisterListener(this);
+        charStatChange.RegisterListener(this);
     }
 
     public void OnEventRaised(GameObject item)
@@ -67,5 +71,10 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>
             MSText.text = stats.CurrentMs + "/" + stats.MaxMs;
             APText.text = stats.CurrentAp.ToString();
         }
+    }
+
+    public void OnEventRaised(Void item)
+    {
+        UpdateText();
     }
 }

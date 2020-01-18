@@ -44,6 +44,7 @@ public class CharacterStat : ScriptableObject
 
    [Header("Other")] [SerializeField] private CharType mChartype;
    [SerializeField] private QueueManager queue;
+   [SerializeField] private VoidEvent updateHUD;
    
    [Header("Weapons")] 
    [SerializeField] private Weapon primaryWeapon;
@@ -76,7 +77,7 @@ public class CharacterStat : ScriptableObject
            case CharType.Sniper: MoveRange = CurrentAp;
                break;
        }
-
+       
        //PrimaryWeapon.MotherChar = this;
        //SecondaryWeapon.MotherChar = this;
    }
@@ -115,25 +116,41 @@ public class CharacterStat : ScriptableObject
    public int MaxHealth
    {
        get => maxHealth;
-       set => maxHealth = value < 0 ? 0 : value;
+       set
+       {
+           maxHealth = value < 0 ? 0 : value;
+           updateHUD.Raise();
+       }
    }
 
    public int MaxMp
    {
        get => maxMp;
-       set => maxMp = value < 0 ? 0 : value;
+       set
+       {
+           maxMp = value < 0 ? 0 : value;
+           updateHUD.Raise();
+       }
    }
 
    public int MaxArmor
    {
        get => maxArmor;
-       set => maxArmor = value < 0 ? 0 : value;
+       set
+       {
+           maxArmor = value < 0 ? 0 : value;
+           updateHUD.Raise();
+       }
    }
 
    public int MaxMs
    {
        get => maxMs;
-       set => maxMs = value < 0 ? 0 : value;
+       set
+       {
+           maxMs = value < 0 ? 0 : value;
+           updateHUD.Raise();
+       }
    }
 
    public int CurrentAp
@@ -163,49 +180,80 @@ public class CharacterStat : ScriptableObject
                case CharType.Sniper: MoveRange = CurrentAp;
                    break;
            }
+           
+           updateHUD.Raise();
        }
    }
 
    public int CurrentHealth
    {
        get => currentHealth;
-       set => currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+       set
+       {
+           currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
+           updateHUD.Raise();
+       } 
    }
 
    public int CurrentMp
    {
        get => currentMp;
-       set => currentMp = Mathf.Clamp(currentMp, 0, maxMp);
+       set
+       {
+           currentMp = Mathf.Clamp(currentMp, 0, maxMp);
+           updateHUD.Raise();
+       }
    }
 
    public int CurrentArmor
    {
        get => currentArmor;
-       set => currentArmor =  Mathf.Clamp(currentArmor, 0, maxArmor);
+       set
+       {
+           currentArmor = Mathf.Clamp(currentArmor, 0, maxArmor);
+           updateHUD.Raise();
+
+       }
    }
 
    public int CurrentMs
    {
        get => currentMs;
-       set => currentMs = Mathf.Clamp(currentMs, 0, maxMs);
+       set
+       {
+           currentMs = Mathf.Clamp(currentMs, 0, maxMs);
+           updateHUD.Raise();
+       }
    }
 
    public int Initiative
    {
        get => initiative;
-       set => initiative = value < 0 ? 0 : value;
+       set
+       {
+           initiative = value < 0 ? 0 : value;
+           //updateHUD.Raise();
+       } 
    }
 
    public Weapon PrimaryWeapon
    {
        get => primaryWeapon;
-       set => primaryWeapon = value;
+       set
+       {
+           primaryWeapon = value;
+           updateHUD.Raise();
+       }
    }
 
    public Weapon SecondaryWeapon
    {
        get => secondaryWeapon;
-       set => secondaryWeapon = value;
+       set
+       {
+           secondaryWeapon = value;
+           updateHUD.Raise();
+       }
    }
 
    public bool Active { get; set; }

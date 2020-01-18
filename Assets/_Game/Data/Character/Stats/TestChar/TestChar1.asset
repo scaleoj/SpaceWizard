@@ -15,15 +15,16 @@ MonoBehaviour:
   currentHealth: 10
   maxHealth: 10
   currentMp: 0
-  maxMp: 0
+  maxMp: 10
   currentArmor: 10
   maxArmor: 10
   currentMs: 3
   maxMs: 3
-  currentAp: 1
+  currentAp: 0
   apgain: 3
   mChartype: 0
   queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
+  updateHUD: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}
   primaryWeapon: {fileID: 11400000, guid: b065b6e1f2d7836419ebd844f9cd751d, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: a6b9824dd177edb4692aba0574dd96fc, type: 2}
   initiative: 3

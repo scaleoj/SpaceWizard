@@ -53,7 +53,8 @@ namespace _Game.Scripts.GameFlow
 
         public void Next()
         {
-            
+            CharacterStat stat = _queue[_activePosition].Key.GetComponent<Character.Stats.Character>().CharStats;
+            stat.CurrentAp += stat.Apgain;
             
             if (_activePosition < _queue.Count - 1)
             {

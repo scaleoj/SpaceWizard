@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using _Game.Scripts.GameFlow.Grid;
+using UnityAtoms;
 using UnityEngine;
 
 namespace _Game.Scripts.Character.Stats
@@ -10,6 +11,8 @@ namespace _Game.Scripts.Character.Stats
         [SerializeField] private CharacterStat charStats;
 
         [SerializeField] private GameObject occupiedTile;
+
+        [SerializeField] private VoidEvent updateHUD;
 
         // Start is called before the first frame update
         void Start()
