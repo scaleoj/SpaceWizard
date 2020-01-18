@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Handcannon Base Attack
   m_EditorClassIdentifier: 
   APCost: 2
-  name: Attack
+  abilityName: Shoot
   aoeRange: 0

@@ -111,4 +111,27 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
             ActionMenuContainer.SetActive(false);
         }
     }
+    
+    //Control methods for the UI
+    public void ShowWeaponOneAbilities()
+    {
+        Ability[] abilitiesDummy = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>().CharStats
+            .PrimaryWeapon.Abilities;
+        for (int i = 0; i < abilitiesDummy.Length; i++)
+        {
+            Weapon1AbilityButtons[i].SetActive(true);
+            Weapon1AbilityButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = abilitiesDummy[i].AbilityName;
+        }
+    }
+
+    public void ShowWeaponTwoAbilities()
+    {
+        Ability[] abilitiesDummy = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>().CharStats
+            .SecondaryWeapon.Abilities;
+        for (int i = 0; i < abilitiesDummy.Length; i++)
+        {
+            Weapon2AbilityButtons[i].SetActive(true);
+            Weapon2AbilityButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = abilitiesDummy[i].AbilityName;
+        }
+    }
 }
