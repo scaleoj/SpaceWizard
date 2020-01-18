@@ -120,6 +120,12 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &7177857 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7511244311189652134, guid: 2c0b09f71441b5047be3c5e9045470dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 134914159}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &83826692
 GameObject:
   m_ObjectHideFlags: 0
@@ -173,7 +179,7 @@ PrefabInstance:
     - target: {fileID: 7511244311189652134, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2277777123976895200, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
@@ -635,7 +641,7 @@ PrefabInstance:
     - target: {fileID: 7511244311189652134, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2277777123976895200, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
@@ -912,7 +918,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &286418326
 RectTransform:
   m_ObjectHideFlags: 0
@@ -981,6 +987,12 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 313407287}
   m_CullTransparentMesh: 0
+--- !u!1 &690235592 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7511244311189652134, guid: 2c0b09f71441b5047be3c5e9045470dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 1278060307}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &723460594
 GameObject:
   m_ObjectHideFlags: 0
@@ -1034,7 +1046,7 @@ PrefabInstance:
     - target: {fileID: 7511244311189652134, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2277777123976895200, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
@@ -1939,11 +1951,23 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1796530746}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &987514890 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7511244311189652134, guid: 2c0b09f71441b5047be3c5e9045470dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2047824353}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1023261024 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2277777123976895200, guid: 2c0b09f71441b5047be3c5e9045470dd,
     type: 3}
   m_PrefabInstance: {fileID: 1796530746}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1028422584 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7511244311189652134, guid: 2c0b09f71441b5047be3c5e9045470dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 734066042}
   m_PrefabAsset: {fileID: 0}
 --- !u!224 &1067105775 stripped
 RectTransform:
@@ -1966,7 +1990,7 @@ PrefabInstance:
     - target: {fileID: 7511244311189652134, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2277777123976895200, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
@@ -2314,6 +2338,16 @@ MonoBehaviour:
   WeaponTwoButton: {fileID: 891872264}
   abilityBackground: {fileID: 1990849476}
   statbackground: {fileID: 1400768782}
+  W1AC: {fileID: 723460594}
+  W2AC: {fileID: 83826692}
+  Weapon1AbilityButtons:
+  - {fileID: 7177857}
+  - {fileID: 1028422584}
+  - {fileID: 987514890}
+  Weapon2AbilityButtons:
+  - {fileID: 2106107671}
+  - {fileID: 2109460480}
+  - {fileID: 690235592}
   currentGameObjectChanged: {fileID: 11400000, guid: 2b22fd178ff8a294881b4770ddb37a5b,
     type: 2}
   isOverUIObject: {fileID: 11400000, guid: d6d4d362e81def04297319010ed5b464, type: 2}
@@ -3672,7 +3706,7 @@ PrefabInstance:
     - target: {fileID: 7511244311189652134, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2277777123976895200, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
@@ -3955,7 +3989,7 @@ PrefabInstance:
     - target: {fileID: 7511244311189652134, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2277777123976895200, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
@@ -4291,6 +4325,18 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2277777123976895200, guid: 2c0b09f71441b5047be3c5e9045470dd,
     type: 3}
   m_PrefabInstance: {fileID: 2075187998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2106107671 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7511244311189652134, guid: 2c0b09f71441b5047be3c5e9045470dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 2075187998}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2109460480 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7511244311189652134, guid: 2c0b09f71441b5047be3c5e9045470dd,
+    type: 3}
+  m_PrefabInstance: {fileID: 234254265}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5068407505695052130
 PrefabInstance:

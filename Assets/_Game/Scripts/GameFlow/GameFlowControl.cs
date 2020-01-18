@@ -38,7 +38,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         savedStats = new CharacterStat[units.Length];
         for (int i = 0; i < units.Length; i++)
         {
-            savedStats[i] = new CharacterStat();
+            savedStats[i] = ScriptableObject.CreateInstance<CharacterStat>();
             CharacterStat stats = units[i].GetComponent<Character>().CharStats;
             Debug.Log(savedStats[i]);
             savedStats[i].Initiative = stats.Initiative;

@@ -76,8 +76,9 @@ public class CharacterStat : ScriptableObject
            case CharType.Sniper: MoveRange = CurrentAp;
                break;
        }
-       primaryWeapon.MotherChar = this;
-       SecondaryWeapon.MotherChar = this;
+
+       //PrimaryWeapon.MotherChar = this;
+       //SecondaryWeapon.MotherChar = this;
    }
 
    public void TakeDamage(int phyAmount, int magicAmount)

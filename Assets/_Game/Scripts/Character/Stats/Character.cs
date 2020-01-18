@@ -14,7 +14,8 @@ namespace _Game.Scripts.Character.Stats
         // Start is called before the first frame update
         void Start()
         {
-        
+            CharStats.PrimaryWeapon.MotherChar = CharStats;
+            CharStats.SecondaryWeapon.MotherChar = CharStats;
         }
 
         // Update is called once per frame
