@@ -2353,6 +2353,7 @@ MonoBehaviour:
     type: 2}
   isOverUIObject: {fileID: 11400000, guid: d6d4d362e81def04297319010ed5b464, type: 2}
   queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
+  updateHUD: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}
 --- !u!114 &1303393684
 MonoBehaviour:
   m_ObjectHideFlags: 0
