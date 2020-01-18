@@ -61,7 +61,11 @@ namespace _Game.Scripts.GameFlow
                 link = _queue[_activePosition].Key.GetComponent<global::_Game.Scripts.Character.Stats.Character>();
                 link.CharStats.Active = true;
                 var link2 = _queue[_activePosition].Key.GetComponent<_Game.Scripts.Character.AI.AIHub>();
-                link2.PositionUpdate();
+                if (link2 != null)
+                {
+                    link2.PositionUpdate(); 
+                }
+
             }
             else
             {
@@ -71,7 +75,11 @@ namespace _Game.Scripts.GameFlow
                 link = _queue[_activePosition].Key.GetComponent<global::_Game.Scripts.Character.Stats.Character>();
                 link.CharStats.Active = true;
                 var link2 = _queue[_activePosition].Key.GetComponent<_Game.Scripts.Character.AI.AIHub>();
-                link2.PositionUpdate();
+                if (link2 != null)
+                {
+                    link2.PositionUpdate(); 
+                }
+                
             }
         }
 
