@@ -93,6 +93,8 @@ namespace _Game.Scripts.GameFlow.Grid
 
         public List<TileAttribute> FindPath(GameObject start, GameObject end)
         {
+            Debug.Log(start);
+            Debug.Log(end);
             return _pathfinder.FindPath(start, end);
         }
 

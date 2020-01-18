@@ -13284,6 +13284,20 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 2092071262}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1072964364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1072964357}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87b12b9b47ed3984ab055169f6cf9a3c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hub: {fileID: 563496733}
+  queueManager: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
 --- !u!1 &1077232844
 GameObject:
   m_ObjectHideFlags: 0
@@ -21526,7 +21540,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1895550259
 Transform:
   m_ObjectHideFlags: 0
@@ -23532,22 +23546,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524,
-        type: 3}
-      propertyPath: hub
-      value: 
-      objectReference: {fileID: 563496733}
-    - target: {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524,
-        type: 3}
-      propertyPath: queueManager
-      value: 
-      objectReference: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9,
-        type: 2}
-    - target: {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: width
       value: 0
@@ -23687,6 +23685,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -1801643357559382559, guid: 707141300f5c9374cb75ca3ca942b524,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524,
+        type: 3}
+      propertyPath: hub
+      value: 
+      objectReference: {fileID: 563496733}
+    - target: {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524,
+        type: 3}
+      propertyPath: queueManager
+      value: 
+      objectReference: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9,
+        type: 2}
+    - target: {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524,
         type: 3}
       propertyPath: m_Enabled
       value: 0
@@ -29939,17 +29953,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524,
-        type: 3}
-      propertyPath: hub
-      value: 
-      objectReference: {fileID: 563496733}
-    - target: {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524,
-        type: 3}
-      propertyPath: queueManager
-      value: 
-      objectReference: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9,
-        type: 2}
     - target: {fileID: 0}
       propertyPath: width
       value: 0
@@ -30118,7 +30121,24 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524,
+        type: 3}
+      propertyPath: hub
+      value: 
+      objectReference: {fileID: 563496733}
+    - target: {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524,
+        type: 3}
+      propertyPath: queueManager
+      value: 
+      objectReference: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9,
+        type: 2}
+    - target: {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 707141300f5c9374cb75ca3ca942b524, type: 3}
 --- !u!23 &6554097556669769546
 MeshRenderer:
