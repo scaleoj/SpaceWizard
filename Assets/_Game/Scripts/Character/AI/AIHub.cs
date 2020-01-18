@@ -43,12 +43,16 @@ namespace _Game.Scripts.Character.AI
             }
             _senses = new AiSenses(hub, queueManager, _character);
             _brain = new AiBrain(_senses, hub, _character);
-
         }
 
         public void PositionUpdate()
         {
             _senses.UpdateRanges();
+        }
+
+        public void BeActive()
+        {
+            _brain.MakeDecision();
         }
 
     }
