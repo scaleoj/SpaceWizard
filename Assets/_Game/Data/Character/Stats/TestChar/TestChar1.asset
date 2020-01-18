@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31db0d5231939e848a7c0038dae9eecc, type: 3}
   m_Name: TestChar1
   m_EditorClassIdentifier: 
-  currentHealth: 0
-  maxHealth: 0
-  currentMp: 0
-  maxMp: 0
-  currentArmor: 0
-  maxArmor: 0
-  currentMs: 0
-  maxMs: 0
+  currentHealth: 10
+  maxHealth: 10
+  currentMp: 10
+  maxMp: 10
+  currentArmor: 10
+  maxArmor: 10
+  currentMs: 10
+  maxMs: 10
   currentAp: 2
   apgain: 3
   mChartype: 0
