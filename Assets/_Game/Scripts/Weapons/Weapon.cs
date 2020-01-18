@@ -57,4 +57,10 @@ public class Weapon : ScriptableObject
         get => critMultiplier;
         set => critMultiplier = value;
     }
+
+    public Ability[] Abilities
+    {
+        get => abilities;
+        set => abilities = value;
+    }
 }
