@@ -89,6 +89,7 @@ namespace _Game.Scripts.Character.Stats
                     break;
                 case CharacterStat.CharType.Sniper: return  distance;
                     break;
+                default: return 0;
             }
         }
     }
