@@ -13,7 +13,7 @@ public class HCBaseATK : Ability
       if (randomNumber >= (distance * weapon.MissChance))
       {
          float crit = UnityEngine.Random.Range(0f, 1f) >= 0.05f ? weapon.CritMultiplier : 1.0f;
-         target[0].GetComponent<Character>().CharStats.takeDamage( (int) (UnityEngine.Random.Range(weapon.MinPhysicalDmg, weapon.MaxPhysicalDmg) * crit), (int) (UnityEngine.Random.Range(weapon.MinMagicDmg, weapon.MaxMagicDmg) * crit));
+         target[0].GetComponent<Character>().CharStats.TakeDamage( (int) (UnityEngine.Random.Range(weapon.MinPhysicalDmg, weapon.MaxPhysicalDmg) * crit), (int) (UnityEngine.Random.Range(weapon.MinMagicDmg, weapon.MaxMagicDmg) * crit));
          
          Debug.Log("Hit"); //TODO Visual implementation of a HIT / raising an event for that
       }

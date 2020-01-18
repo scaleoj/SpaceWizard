@@ -67,7 +67,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         ResetTiles(tileAttributes);
         Character currentChar = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>();
 
-        if (currentChar.CharStats.CurrentAP == 0)
+        if (currentChar.CharStats.CurrentAp == 0)
         {
             return;
         }
@@ -133,7 +133,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
             HUDstate.SelectedAction = State.currentAction.IDLE;
             int distance = grid.GetRange(currentChar.OccupiedTile, item);
             //Debug.Log("Distance moved:" +  distance);
-            currentChar.CharStats.moveReduceAp(distance);
+            currentChar.CharStats.MoveReduceAp(distance);
             currentChar.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
             currentChar.OccupiedTile = item;
             currentChar.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = currentChar.gameObject;

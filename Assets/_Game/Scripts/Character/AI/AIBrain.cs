@@ -13,23 +13,23 @@ namespace _Game.Scripts.Character.AI
         private const int Sniper = 5;
 
         private AiSenses _senses;
-        private AIHub.Team _team;
+        private int _team;
         private int _range;
         private TileHub _hub;
 
-        public AiBrain(AiSenses senses, TileHub hub, AIHub.Team team, AIHub.Range range)
+        public AiBrain(AiSenses senses, TileHub hub, int team, CharacterStat.CharType range)
         {
             _senses = senses;
             _team = team;
             switch (range)
             {
-                case AIHub.Range.Ranged:
+                case CharacterStat.CharType.Base:
                     _range = Ranged;
                     break;
-                case AIHub.Range.Sniper:
+                case CharacterStat.CharType.Sniper:
                     _range = Sniper;
                     break;
-                case AIHub.Range.Melee:
+                case CharacterStat.CharType.Melee:
                     _range = Melee;
                     break;
                 default:
