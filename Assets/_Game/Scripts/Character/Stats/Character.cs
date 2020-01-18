@@ -30,9 +30,9 @@ namespace _Game.Scripts.Character.Stats
         {
             CharStats.CurrentArmor = CharStats.MaxArmor;
             CharStats.CurrentHealth = CharStats.MaxHealth;
-            CharStats.CurrentAP = 0;
-            CharStats.CurrentMP = CharStats.MaxMP;
-            CharStats.CurrentMS = CharStats.MaxMS;
+            CharStats.CurrentAp = 0;
+            CharStats.CurrentMp = CharStats.MaxMp;
+            CharStats.CurrentMs = CharStats.MaxMs;
         }
 
         public CharacterStat CharStats
@@ -55,7 +55,7 @@ namespace _Game.Scripts.Character.Stats
         {
             int distance = grid.GetRange(OccupiedTile, destination);
             Debug.Log("AI moved distance: " +  distance);
-            CharStats.moveReduceAp(distance);
+            CharStats.MoveReduceAp(distance);
             OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
             OccupiedTile = destination;
             OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = gameObject;

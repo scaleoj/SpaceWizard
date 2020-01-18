@@ -44,12 +44,12 @@ namespace _Game.Scripts.Character.AI
 
         public void MoveToOptimalPosition()
         {
-            //git gud
+            
         }
         
         public void Move(GameObject end)
         {
-            
+            _character.AImove(_hub, end);
             UpdateRanges();
         }
         

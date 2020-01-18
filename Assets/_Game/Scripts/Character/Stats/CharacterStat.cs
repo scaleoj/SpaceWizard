@@ -17,29 +17,30 @@ using _Game.Scripts.GameFlow;
 public class CharacterStat : ScriptableObject
 {
 
-   public enum charType {BASE, MELEE, SUPPORT, TANK, SNIPER}
-   public enum damageType{PHYSICAL, MAGIC}
+   public enum CharType {Base, Melee, Support, Tank, Sniper}
+
+   public enum DamageType{Physical, Magic}
    
    
    [Header("Health")]
    [SerializeField] private int currentHealth;
    [SerializeField] private int maxHealth;
    [Header("Magic Points")]
-   [SerializeField] private int currentMP;
-   [SerializeField] private int maxMP;
+   [SerializeField] private int currentMp;
+   [SerializeField] private int maxMp;
    [FormerlySerializedAs("currentArmour")]
    [Header("Armour")]
    [SerializeField] private int currentArmor;
    [FormerlySerializedAs("maxArmour")] [SerializeField] private int maxArmor;
    [Header("Magic Shield")]
-   [SerializeField] private int currentMS;
-   [SerializeField] private int maxMS;
+   [SerializeField] private int currentMs;
+   [SerializeField] private int maxMs;
    [Header("Action Points")]
-   [SerializeField] private int currentAP;
+   [SerializeField] private int currentAp;
 
-   private int moveRange; //Move Range gets controlled by the AP count, look into the "GDD Tabelle" for the details.
+   private int _moveRange; //Move Range gets controlled by the AP count, look into the "GDD Tabelle" for the details.
 
-   [Header("Other")] [SerializeField] private charType m_chartype;
+   [Header("Other")] [SerializeField] private CharType mChartype;
    [SerializeField] private QueueManager queue;
    
    [Header("Weapons")] 
@@ -49,31 +50,33 @@ public class CharacterStat : ScriptableObject
    [Header("Initiative")] [Range(1, 10)] [SerializeField]
    private int initiative;
 
-   private bool active; //ShowinInspector missing
+   private bool _active; //ShowinInspector missing
 
    [Header("Team des Characters")]
    [SerializeField]
    [Range(0,1)]
    private int team;//Teamcodes have to be decided, Option for several Teams at the same time
 
+   public CharType MChartype => mChartype;
+
    private void OnEnable()
    {
-       switch (m_chartype)
+       switch (mChartype)
        {
-           case charType.BASE: MoveRange = CurrentAP;
+           case CharType.Base: MoveRange = CurrentAp;
                break;
-           case charType.MELEE: MoveRange = CurrentAP * 3;
+           case CharType.Melee: MoveRange = CurrentAp * 3;
                break;
-           case charType.SUPPORT: MoveRange = CurrentAP * 2;
+           case CharType.Support: MoveRange = CurrentAp * 2;
                break;
-           case charType.TANK: MoveRange = CurrentAP;
+           case CharType.Tank: MoveRange = CurrentAp;
                break;
-           case charType.SNIPER: MoveRange = CurrentAP;
+           case CharType.Sniper: MoveRange = CurrentAp;
                break;
        }
    }
 
-   public void takeDamage(int phyAmount, int magicAmount)
+   public void TakeDamage(int phyAmount, int magicAmount)
    {
        int save;
        
@@ -90,15 +93,15 @@ public class CharacterStat : ScriptableObject
        }
 
        //Magic
-       save = CurrentMS - magicAmount;
+       save = CurrentMs - magicAmount;
        if (save < 0)
        {
             CurrentHealth += save; //Working?
-            CurrentMS = 0;
+            CurrentMs = 0;
        }
        else
        {
-            CurrentMS -= magicAmount;
+            CurrentMs -= magicAmount;
        }       
       
    }
@@ -110,10 +113,10 @@ public class CharacterStat : ScriptableObject
        set => maxHealth = value < 0 ? 0 : value;
    }
 
-   public int MaxMP
+   public int MaxMp
    {
-       get => maxMP;
-       set => maxMP = value < 0 ? 0 : value;
+       get => maxMp;
+       set => maxMp = value < 0 ? 0 : value;
    }
 
    public int MaxArmor
@@ -122,37 +125,37 @@ public class CharacterStat : ScriptableObject
        set => maxArmor = value < 0 ? 0 : value;
    }
 
-   public int MaxMS
+   public int MaxMs
    {
-       get => maxMS;
-       set => maxMS = value < 0 ? 0 : value;
+       get => maxMs;
+       set => maxMs = value < 0 ? 0 : value;
    }
 
-   public int CurrentAP
+   public int CurrentAp
    {
-       get => currentAP;
+       get => currentAp;
        set
        {
            if (value < 0)
            {
-               currentAP = 0;
+               currentAp = 0;
                //queue.Next();
            }
            else
            {
-               currentAP = value;
+               currentAp = value;
            }
-           switch (m_chartype)
+           switch (mChartype)
            {
-               case charType.BASE: MoveRange = CurrentAP;
+               case CharType.Base: MoveRange = CurrentAp;
                    break;
-               case charType.MELEE: MoveRange = CurrentAP * 3;
+               case CharType.Melee: MoveRange = CurrentAp * 3;
                    break;
-               case charType.SUPPORT: MoveRange = CurrentAP * 2;
+               case CharType.Support: MoveRange = CurrentAp * 2;
                    break;
-               case charType.TANK: MoveRange = CurrentAP;
+               case CharType.Tank: MoveRange = CurrentAp;
                    break;
-               case charType.SNIPER: MoveRange = CurrentAP;
+               case CharType.Sniper: MoveRange = CurrentAp;
                    break;
            }
        }
@@ -164,10 +167,10 @@ public class CharacterStat : ScriptableObject
        set => currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
    }
 
-   public int CurrentMP
+   public int CurrentMp
    {
-       get => currentMP;
-       set => currentMP = Mathf.Clamp(currentMP, 0, maxMP);
+       get => currentMp;
+       set => currentMp = Mathf.Clamp(currentMp, 0, maxMp);
    }
 
    public int CurrentArmor
@@ -176,10 +179,10 @@ public class CharacterStat : ScriptableObject
        set => currentArmor =  Mathf.Clamp(currentArmor, 0, maxArmor);
    }
 
-   public int CurrentMS
+   public int CurrentMs
    {
-       get => currentMS;
-       set => currentMS = Mathf.Clamp(currentMS, 0, maxMS);
+       get => currentMs;
+       set => currentMs = Mathf.Clamp(currentMs, 0, maxMs);
    }
 
    public int Initiative
@@ -210,23 +213,23 @@ public class CharacterStat : ScriptableObject
 
    public int MoveRange
    {
-       get => moveRange;
-       set => moveRange = value;
+       get => _moveRange;
+       set => _moveRange = value;
    }
 
-   public void moveReduceAp(int distance)
+   public void MoveReduceAp(int distance)
    {
-       switch (m_chartype)
+       switch (mChartype)
        {
-           case charType.BASE: CurrentAP -= distance;
+           case CharType.Base: CurrentAp -= distance;
                break;
-           case charType.MELEE: CurrentAP -= distance / 3 + 1;
+           case CharType.Melee: CurrentAp -= distance / 3 + 1;
                break;
-           case charType.SUPPORT: CurrentAP -= distance / 2 + 1;
+           case CharType.Support: CurrentAp -= distance / 2 + 1;
                break;
-           case charType.TANK: CurrentAP -= distance;
+           case CharType.Tank: CurrentAp -= distance;
                break;
-           case charType.SNIPER: CurrentAP -= distance;
+           case CharType.Sniper: CurrentAp -= distance;
                break;
        }
    }

@@ -6,19 +6,20 @@ namespace _Game.Scripts.GameFlow.Grid
     [ExecuteAlways]
     public class TileHub : MonoBehaviour
     {
-        [Header("The width of the Grid")]
-        [Range(0,50)]
-        [SerializeField]
+        [Header("The width of the Grid")] [Range(0,50)] [SerializeField]
         private int width = 10;
-        [Header("The Depth of the Grid")]
-        [Range(0,50)]
-        [SerializeField]
+        
+        [Header("The Depth of the Grid")] [Range(0,50)] [SerializeField]
         private int depth = 10;
-        [Header("The Distance between TileCentres")]
-        [SerializeField]
+        
+        [Header("The Distance between TileCentres")] [SerializeField]
         private float distanceBetweenPoints = 1f;
+        
         [Header("TilePrefab")] [SerializeField]
         private GameObject prefab;
+
+        [Header("RetreatTile")] [SerializeField]
+        private GameObject retreat;
 
         [Header("Walkable Layer")] 
         [SerializeField]
