@@ -45,6 +45,7 @@ public class CharacterStat : ScriptableObject
    [Header("Other")] [SerializeField] private CharType mChartype;
    [SerializeField] private QueueManager queue;
    [SerializeField] private VoidEvent updateHUD;
+   [SerializeField] private BoolVariable gameUpdates;
    
    [Header("Weapons")] 
    [SerializeField] private Weapon primaryWeapon;
@@ -118,8 +119,8 @@ public class CharacterStat : ScriptableObject
        get => maxHealth;
        set
        {
-           maxHealth = value < 0 ? 0 : value;
-           updateHUD.Raise();
+           maxHealth = value < 0 ? 0 : value; 
+           if(gameUpdates.Value) updateHUD.Raise();
        }
    }
 
@@ -129,7 +130,7 @@ public class CharacterStat : ScriptableObject
        set
        {
            maxMp = value < 0 ? 0 : value;
-           updateHUD.Raise();
+           if(gameUpdates.Value) updateHUD.Raise();
        }
    }
 
@@ -139,7 +140,7 @@ public class CharacterStat : ScriptableObject
        set
        {
            maxArmor = value < 0 ? 0 : value;
-           updateHUD.Raise();
+           if(gameUpdates.Value) updateHUD.Raise();
        }
    }
 
@@ -149,7 +150,7 @@ public class CharacterStat : ScriptableObject
        set
        {
            maxMs = value < 0 ? 0 : value;
-           updateHUD.Raise();
+           if(gameUpdates.Value) updateHUD.Raise();
        }
    }
 
@@ -161,7 +162,7 @@ public class CharacterStat : ScriptableObject
            if (value <= 0)
            {
                currentAp = 0;
-               queue.Next();
+               if(gameUpdates.Value) queue.Next();
            }
            else
            {
@@ -181,7 +182,7 @@ public class CharacterStat : ScriptableObject
                    break;
            }
            
-           updateHUD.Raise();
+           if(gameUpdates.Value) updateHUD.Raise();
        }
    }
 
@@ -191,7 +192,7 @@ public class CharacterStat : ScriptableObject
        set
        {
            currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);
-           updateHUD.Raise();
+           if(gameUpdates.Value) updateHUD.Raise();
        } 
    }
 
@@ -201,7 +202,7 @@ public class CharacterStat : ScriptableObject
        set
        {
            currentMp = Mathf.Clamp(currentMp, 0, maxMp);
-           updateHUD.Raise();
+           if(gameUpdates.Value) updateHUD.Raise();
        }
    }
 
@@ -211,7 +212,7 @@ public class CharacterStat : ScriptableObject
        set
        {
            currentArmor = Mathf.Clamp(currentArmor, 0, maxArmor);
-           updateHUD.Raise();
+           if(gameUpdates.Value) updateHUD.Raise();
 
        }
    }
@@ -222,7 +223,7 @@ public class CharacterStat : ScriptableObject
        set
        {
            currentMs = Mathf.Clamp(currentMs, 0, maxMs);
-           updateHUD.Raise();
+           if(gameUpdates.Value)  updateHUD.Raise();
        }
    }
 
@@ -242,7 +243,7 @@ public class CharacterStat : ScriptableObject
        set
        {
            primaryWeapon = value;
-           updateHUD.Raise();
+           if(gameUpdates.Value) updateHUD.Raise();
        }
    }
 
@@ -252,7 +253,7 @@ public class CharacterStat : ScriptableObject
        set
        {
            secondaryWeapon = value;
-           updateHUD.Raise();
+           if(gameUpdates.Value) updateHUD.Raise();
        }
    }
 

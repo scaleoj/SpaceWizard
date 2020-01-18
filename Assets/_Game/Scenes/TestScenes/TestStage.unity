@@ -26946,6 +26946,12 @@ PrefabInstance:
       propertyPath: units.Array.data[1]
       value: 
       objectReference: {fileID: 1072964357}
+    - target: {fileID: 3058552619920812984, guid: dfd5396492ed5d847a547a806f8e0e06,
+        type: 3}
+      propertyPath: gameUpdates
+      value: 
+      objectReference: {fileID: 11400000, guid: fa61081840812504fb9d6e6e088cfaae,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfd5396492ed5d847a547a806f8e0e06, type: 3}
 --- !u!1 &3059369236629110205

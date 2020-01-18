@@ -25,6 +25,8 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
 
     [SerializeField] private QueueManager queue;
 
+    [SerializeField] private VoidEvent updateHUD;
+
     private EventSystem _eventSystem;
 
     private TextUpdater textUpdater;
@@ -98,7 +100,8 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
                 abilityBackground.SetActive(false);
             }
             
-            textUpdater.UpdateText(item);
+            updateHUD.Raise();
+            //textUpdater.UpdateText(item);
         }
         else
         {

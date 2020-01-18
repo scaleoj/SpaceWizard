@@ -14,6 +14,8 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     [SerializeField] private IntEvent hudStateChanged;
     [SerializeField] private State HUDstate;
     [SerializeField] private GameObjectEvent gameobjectChanged;
+
+    [SerializeField] private BoolVariable gameUpdates;
     //[SerializeField] private GameObjectVariable currentSelectedGameObject;
     //[SerializeField] private GameObject testTile;
     private TileAttribute[] tileAttributes;
@@ -50,12 +52,15 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
             savedStats[i].MaxMp = stats.MaxMp;
             savedStats[i].MaxMs = stats.MaxMs;
         }
-
+        
         HUDstate.SelectedAction = State.currentAction.IDLE;
+        
+        gameUpdates.Value = true;
     }
 
     private void OnApplicationQuit()
     {
+        gameUpdates.Value = false;
         for (int i = 0; i < units.Length; i++)
         {
             CharacterStat stats = units[i].GetComponent<Character>().CharStats;
