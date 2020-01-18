@@ -161,7 +161,6 @@ public class CharacterStat : ScriptableObject
            if (value <= 0)
            {
                currentAp = 0;
-               queue.Next();
            }
            else
            {
