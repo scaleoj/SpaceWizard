@@ -202,6 +202,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   charStats: {fileID: 11400000, guid: ecdf7cf936e8ed446908ee5fed3e59c2, type: 2}
   occupiedTile: {fileID: 0}
+  updateHUD: {fileID: 0}
 --- !u!114 &-1801643357559382559
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,6 +231,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hub: {fileID: 0}
-  team: 0
   queueManager: {fileID: 0}
-  range: 0
