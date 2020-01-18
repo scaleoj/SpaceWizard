@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityAtoms;
+﻿using UnityAtoms;
 using UnityEngine;
 using _Game.Scripts.Character.Stats;
 using _Game.Scripts.GameFlow;
