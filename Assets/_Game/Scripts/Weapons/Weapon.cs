@@ -81,4 +81,10 @@ public class Weapon : ScriptableObject
         get => abilities;
         set => abilities = value;
     }
+
+    public int Range
+    {
+        get => range;
+        set => range = value;
+    }
 }
