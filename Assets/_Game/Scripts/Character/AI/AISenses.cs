@@ -55,7 +55,8 @@ namespace _Game.Scripts.Character.AI
         
         public void Move()
         {
-            var tempPath = _hub.FindPath(_character.OccupiedTile, GetRanges().Last().Key);
+            var tempPath = _hub.FindPath(_character.OccupiedTile, GetRanges().Last().Key.GetComponent<Stats.Character>().OccupiedTile); //falsches gameobject?;
+            Debug.Log(tempPath);
             _character.AImove(_hub, tempPath);
             UpdateRanges();
         }
