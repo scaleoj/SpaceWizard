@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHealth: 12
   maxHealth: 12
-  currentMP: 8
-  maxMP: 8
+  currentMp: 0
+  maxMp: 0
   currentArmor: 8
   maxArmor: 8
-  currentMS: 8
-  maxMS: 8
-  currentAP: 0
-  m_chartype: 4
+  currentMs: 0
+  maxMs: 0
+  currentAp: 0
+  mChartype: 0
   queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
   primaryWeapon: {fileID: 11400000, guid: b065b6e1f2d7836419ebd844f9cd751d, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: 7b7593d83253a904d9f5ecdf8ed0f8a7, type: 2}
