@@ -1,8 +1,4 @@
 ﻿
-
-using TMPro;
-using UnityEditor.Tilemaps;
-using UnityEngine;
 using _Game.Scripts.GameFlow.Grid;
 
 namespace _Game.Scripts.Character.AI
@@ -50,7 +46,13 @@ namespace _Game.Scripts.Character.AI
         //DecisionMaking
         public void MakeDecision()
         {
-            var range = _senses.GetRanges()[0].Value;
+            var range = 0; 
+            foreach (var ch in _senses.GetRanges())
+            {
+                if (ch.Key.GetComponent<Stats.Character>().CharStats.Team == _team) continue;
+                range = ch.Value;
+                break;
+            }
             
             while (_senses.ApCount() > 0)
             {
