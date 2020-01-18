@@ -1,4 +1,5 @@
-﻿using _Game.Scripts.GameFlow.Grid;
+﻿using System.Collections.Generic;
+using _Game.Scripts.GameFlow.Grid;
 using UnityEngine;
 
 namespace _Game.Scripts.Character.Stats
@@ -51,7 +52,7 @@ namespace _Game.Scripts.Character.Stats
             }
         }
 
-        public void AImove(TileHub grid,GameObject destination)
+        public bool AImove(TileHub grid,GameObject destination, List<TileAttribute> path)
         {
             int distance = grid.GetRange(OccupiedTile, destination);
             Debug.Log("AI moved distance: " +  distance);
@@ -59,6 +60,9 @@ namespace _Game.Scripts.Character.Stats
             OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
             OccupiedTile = destination;
             OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = gameObject;
+            return true;
         }
+        
+        
     }
 }
