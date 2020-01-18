@@ -46,13 +46,17 @@ namespace _Game.Scripts.Character.AI
         public void Retreat()
         {
             var tempPath = _hub.FindPath(_character.OccupiedTile, _hub.Retreat);
-            _character.AImove(_hub, tempPath.Count <= 3 ? tempPath.Last().node : tempPath[2].node);
+            if (tempPath.Count > 3)
+            {
+                tempPath = tempPath.Take(4).ToList();
+            }
+            _character.AImove(_hub, tempPath);
         }
         
         public void Move()
         {
             var tempPath = _hub.FindPath(_character.OccupiedTile, GetRanges().Last().Key);
-            _character.AImove(_hub, tempPath.Last().node);
+            _character.AImove(_hub, tempPath);
             UpdateRanges();
         }
         
