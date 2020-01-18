@@ -17,11 +17,11 @@ namespace _Game.Scripts.Character.AI
         private int _range;
         private TileHub _hub;
 
-        public AiBrain(AiSenses senses, TileHub hub, int team, CharacterStat.CharType range)
+        public AiBrain(AiSenses senses, TileHub hub, Stats.Character character)
         {
             _senses = senses;
-            _team = team;
-            switch (range)
+            _team = character.CharStats.Team;
+            switch (character.CharStats.MChartype)
             {
                 case CharacterStat.CharType.Base:
                     _range = Ranged;
@@ -30,6 +30,12 @@ namespace _Game.Scripts.Character.AI
                     _range = Sniper;
                     break;
                 case CharacterStat.CharType.Melee:
+                    _range = Melee;
+                    break;
+                case CharacterStat.CharType.Support:
+                    _range = Ranged;
+                    break;
+                case CharacterStat.CharType.Tank:
                     _range = Melee;
                     break;
                 default:

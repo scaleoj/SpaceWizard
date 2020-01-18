@@ -42,7 +42,7 @@ namespace _Game.Scripts.Character.AI
                 Debug.Log(gameObject.name + ": No TileHub found!");
             }
             _senses = new AiSenses(hub, queueManager, _character);
-            _brain = new AiBrain(_senses, hub, _character.CharStats.Team, _character.CharStats.MChartype);
+            _brain = new AiBrain(_senses, hub, _character);
 
         }
 
