@@ -65,6 +65,14 @@ public class GOSelector : MonoBehaviour
                     hoverGOChanged.Raise(hit.transform.gameObject);
                 }
                 
+                
+
+                if (mouseOverUI.Value || tile.State == TileContainer.tileState.SELECTED)
+                {
+                    hoverGO.Value = null;
+                    hoverGOChanged.Raise(null);
+                }
+                
             }
             else
             {

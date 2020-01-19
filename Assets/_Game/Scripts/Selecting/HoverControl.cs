@@ -65,6 +65,7 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
            if (lastHovered != null)
            {
                lastHovered.GetComponent<TileContainer>().State = saveTileState;
+               lastHovered = null;
            }
        }
     }

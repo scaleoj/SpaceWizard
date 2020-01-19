@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using _Game.Scripts.GameFlow;
 using _Game.Scripts.GameFlow.Grid;
@@ -17,11 +18,30 @@ namespace _Game.Scripts.Character.Stats
 
         [SerializeField] private QueueManager _queueManager;
 
+        private TileContainer CTContainer;
+
         // Start is called before the first frame update
         void Start()
         {
             CharStats.PrimaryWeapon.MotherChar = CharStats;
             CharStats.SecondaryWeapon.MotherChar = CharStats;
+            CTContainer = occupiedTile.GetComponent<TileContainer>();
+        }
+
+        private void Update()
+        {
+            if (CTContainer != null)
+            {
+                if (_queueManager.Queue[_queueManager.ActivePosition].Key == gameObject)
+                {
+                    CTContainer.State = TileContainer.tileState.SELECTED;
+                }
+                else
+                {
+                    CTContainer.State = TileContainer.tileState.NORMAL;
+                }
+            }
+            
         }
 
         public void ResetOnMatchEnd()
@@ -56,14 +76,17 @@ namespace _Game.Scripts.Character.Stats
                         occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
                         occupiedTile = value;
                         occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
+                        Debug.Log("Shoudl be good now");
                     }
                     occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
                     gameObject.transform.position = new Vector3(value.transform.position.x,1f,value.transform.position.z);
+                    CTContainer = occupiedTile.GetComponent<TileContainer>();
                 }
                 else
                 {
                     occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
                     occupiedTile = value;
+                    CTContainer = null;
                 }
             }
         }

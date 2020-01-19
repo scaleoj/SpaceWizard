@@ -57,8 +57,8 @@ namespace _Game.Scripts.GameFlow
             CharacterStat stat = _queue[_activePosition].Key.GetComponent<Character.Stats.Character>().CharStats;
             stat.CurrentAp += stat.Apgain;
             
-            _queue[_activePosition].Key.GetComponent<Character.Stats.Character>().OccupiedTile
-                .GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
+           // _queue[_activePosition].Key.GetComponent<Character.Stats.Character>().OccupiedTile
+                //.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
 
             if (_activePosition < _queue.Count - 1)
             {
@@ -87,8 +87,8 @@ namespace _Game.Scripts.GameFlow
 
             }
             
-            _queue[_activePosition].Key.GetComponent<Character.Stats.Character>().OccupiedTile
-                .GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
+            //_queue[_activePosition].Key.GetComponent<Character.Stats.Character>().OccupiedTile
+                //.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
             
             nextGameObjectInQueue.Raise(_queue[_activePosition ].Key);
             

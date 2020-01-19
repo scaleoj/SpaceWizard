@@ -203,8 +203,11 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
                 tileInRange = true;
             }
         }
+        int remainingAP = currentChar.CharStats.CurrentAp -
+            currentChar.CharStats.PrimaryWeapon.Abilities[selectedAbility.Value].ApCost;
 
-        if (item.layer == 9 && tileInRange)
+
+        if (item.layer == 9 && tileInRange && remainingAP >= 0 )
         {
             currentChar.CharStats.PrimaryWeapon.Abilities[selectedAbility.Value].Attack(item.GetComponent<TileContainer>().OccupiedGameObject, grid.GetRange(currentChar.OccupiedTile, item));
             currentChar.CharStats.CurrentAp -=
