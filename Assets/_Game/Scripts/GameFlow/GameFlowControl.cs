@@ -40,7 +40,6 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         {
             savedStats[i] = ScriptableObject.CreateInstance<CharacterStat>();
             CharacterStat stats = units[i].GetComponent<Character>().CharStats;
-            Debug.Log(savedStats[i]);
             savedStats[i].Initiative = stats.Initiative;
             savedStats[i].CurrentAp = stats.CurrentAp;
             savedStats[i].CurrentArmor = stats.CurrentArmor;

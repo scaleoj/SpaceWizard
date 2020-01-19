@@ -1,4 +1,5 @@
 ﻿
+using UnityEngine;
 using _Game.Scripts.GameFlow.Grid;
 
 namespace _Game.Scripts.Character.AI
@@ -46,48 +47,60 @@ namespace _Game.Scripts.Character.AI
         //DecisionMaking
         public void MakeDecision()
         {
-            var range = 0; 
-            /*
+            var range = 0;
+            Stats.Character target = null;
+            
             foreach (var ch in _senses.GetRanges())
             {
                 if (ch.Key.GetComponent<Stats.Character>().CharStats.Team == _team) continue;
+                target = ch.Key.GetComponent<Stats.Character>();
                 range = ch.Value;
                 break;
             }
-            
+            Debug.Log("Range to other Char: " + range);
+            Debug.Log("optimal range: "+ _range);
+            Debug.Log(range<_range-2);
             while (_senses.ApCount() > 0)
             {
-                if (range < _range-2)
-                {
-                    Retreat();
-                    break;
+                
+                                   if (range < _range)
+                                   {
+                                       
+                                       Debug.Log("zu nah");
+                                       Retreat();
+                                       break;
+                                        
+                                   }                    
+                                  else if(range > _range)
+                                  {
+                                      Move(target);
+                                  }
+                                   /* 
+                                   
+                                   for (var i = 0; i < _character.CharStats.PrimaryWeapon.Abilities.Length-1; i=i)
+                                   {
+                                   if (_senses.ApCount() >= _character.CharStats.PrimaryWeapon.Abilities[i].ApCost)
+                                   {
+                                   if (_character.CharStats.PrimaryWeapon.Range <= _senses.GetRanges()[0].Value)
+                                   {
+                                   _character.CharStats.PrimaryWeapon.Abilities[i].Attack(_senses.GetRanges()[0].Key, _senses.GetRanges()[0].Value);
+                                   }
+                                   else
+                                   {
+                                   i++;
+                                   }
+                                   }
+                                   else
+                                   {
+                                   i++;
+                                   }
+                                   }*/
 
-                }
-                else if(range > _range)
-                {
-                    Move();
-                }
-
-                for (var i = 0; i < _character.CharStats.PrimaryWeapon.Abilities.Length-1; i=i)
-                {
-                    if (_senses.ApCount() >= _character.CharStats.PrimaryWeapon.Abilities[i].ApCost)
-                    {
-                        if (_character.CharStats.PrimaryWeapon.Range <= _senses.GetRanges()[0].Value)
-                        {
-                            _character.CharStats.PrimaryWeapon.Abilities[i].Attack(_senses.GetRanges()[0].Key, _senses.GetRanges()[0].Value);
-                        }
-                        else
-                        {
-                            i++;
-                        }
-                    }
-                    else
-                    {
-                        i++;
-                    }
-                }
-               
-            }*/
+                _senses.DecreaseAP();
+                
+            }
+                   
+                
             _senses.Next();
 
         }
@@ -97,9 +110,9 @@ namespace _Game.Scripts.Character.AI
            _senses.Retreat();
         }
 
-        private void Move()
+        private void Move(Stats.Character target)
         {
-            _senses.Move();
+            _senses.Move(target);
         }
         
 
