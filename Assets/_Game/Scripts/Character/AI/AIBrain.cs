@@ -67,11 +67,13 @@ namespace _Game.Scripts.Character.AI
                                        Retreat();
                                        break;
                                         
-                                   }                    
-                                  else if(range > _range)
-                                  {
-                                      Move(target);
-                                  }
+                                   }
+
+                                   if(range > _range)
+                                   {
+                                       Move(target);
+                                   }
+
                                    /* 
                                    
                                    for (var i = 0; i < _character.CharStats.PrimaryWeapon.Abilities.Length-1; i=i)
