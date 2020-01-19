@@ -47,6 +47,7 @@ namespace _Game.Scripts.Character.AI
         public void MakeDecision()
         {
             var range = 0; 
+            /*
             foreach (var ch in _senses.GetRanges())
             {
                 if (ch.Key.GetComponent<Stats.Character>().CharStats.Team == _team) continue;
@@ -86,7 +87,7 @@ namespace _Game.Scripts.Character.AI
                     }
                 }
                
-            }
+            }*/
             _senses.Next();
 
         }
