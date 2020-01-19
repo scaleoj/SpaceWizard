@@ -30,7 +30,6 @@ namespace _Game.Scripts.Character.Stats
 
         private void Update()
         {
-            Debug.Log("Current Char" + _queueManager.Queue[_queueManager.ActivePosition].Key);
             if (CTContainer != null)
             {
                 if (_queueManager.Queue[_queueManager.ActivePosition].Key == gameObject)
