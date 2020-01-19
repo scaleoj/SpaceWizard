@@ -201,6 +201,8 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         if (item.layer == 9 && tileInRange)
         {
             currentChar.CharStats.PrimaryWeapon.Abilities[selectedAbility.Value].Attack(item.GetComponent<TileContainer>().OccupiedGameObject, grid.GetRange(currentChar.OccupiedTile, item));
+            currentChar.CharStats.CurrentAp -=
+                currentChar.CharStats.PrimaryWeapon.Abilities[selectedAbility.Value].ApCost;
             ResetTiles(tileAttributes);
         }
     }
@@ -226,6 +228,8 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         if (item.layer == 9 && tileInRange)
         {
             currentChar.CharStats.SecondaryWeapon.Abilities[selectedAbility.Value].Attack(item.GetComponent<TileContainer>().OccupiedGameObject, grid.GetRange(currentChar.OccupiedTile, item));
+            currentChar.CharStats.CurrentAp -=
+                currentChar.CharStats.SecondaryWeapon.Abilities[selectedAbility.Value].ApCost;
             ResetTiles(tileAttributes);
         }
     }
