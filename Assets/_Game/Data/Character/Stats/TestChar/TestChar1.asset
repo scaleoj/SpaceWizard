@@ -21,7 +21,7 @@ MonoBehaviour:
   currentMs: 10
   maxMs: 10
   currentAp: 10
-  apgain: 3
+  apgain: 2
   mChartype: 0
   queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
   updateHUD: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}

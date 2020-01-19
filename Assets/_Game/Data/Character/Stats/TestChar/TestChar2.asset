@@ -21,13 +21,13 @@ MonoBehaviour:
   currentMs: 3
   maxMs: 3
   currentAp: 3
-  apgain: 3
+  apgain: 2
   mChartype: 0
   queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
   updateHUD: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}
   runUpdates: {fileID: 11400000, guid: fa61081840812504fb9d6e6e088cfaae, type: 2}
   killChar: {fileID: 11400000, guid: 8975ce3e2a91efe48a38aa8f9229806c, type: 2}
   primaryWeapon: {fileID: 11400000, guid: 76c4dea9d4b756b45a604434c768adf6, type: 2}
-  secondaryWeapon: {fileID: 11400000, guid: 7b7593d83253a904d9f5ecdf8ed0f8a7, type: 2}
+  secondaryWeapon: {fileID: 11400000, guid: 05c6b6e1e6990024686dc972088593b1, type: 2}
   initiative: 2
   team: 1
