@@ -67,6 +67,7 @@ namespace _Game.Scripts.GameFlow
                 ++_activePosition;
                 link = _queue[_activePosition].Key.GetComponent<global::_Game.Scripts.Character.Stats.Character>();
                 link.CharStats.Active = true;
+                nextGameObjectInQueue.Raise(_queue[_activePosition ].Key);
                 var link2 = _queue[_activePosition].Key.GetComponent<Character.AI.AIHub>();
                 if (link2 == null) return;
                 link2.PositionUpdate(); 
@@ -80,6 +81,7 @@ namespace _Game.Scripts.GameFlow
                 _activePosition = 0;
                 link = _queue[_activePosition].Key.GetComponent<global::_Game.Scripts.Character.Stats.Character>();
                 link.CharStats.Active = true;
+                nextGameObjectInQueue.Raise(_queue[_activePosition ].Key);
                 var link2 = _queue[_activePosition].Key.GetComponent<Character.AI.AIHub>();
                 if (link2 == null) return;
                 link2.PositionUpdate();
@@ -90,9 +92,8 @@ namespace _Game.Scripts.GameFlow
             //_queue[_activePosition].Key.GetComponent<Character.Stats.Character>().OccupiedTile
                 //.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
             
-            nextGameObjectInQueue.Raise(_queue[_activePosition ].Key);
             
-            Debug.Log("NEXT!  - " + _queue[_activePosition].Key);
+            
         }
 
         private bool CheckEnd()
