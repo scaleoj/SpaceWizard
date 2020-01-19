@@ -57,9 +57,6 @@ namespace _Game.Scripts.Character.AI
                 range = ch.Value;
                 break;
             }
-            Debug.Log("Range to other Char: " + range);
-            Debug.Log("optimal range: "+ _range);
-            Debug.Log(range<_range-2);
             while (_senses.ApCount() > 0)
             {
                 

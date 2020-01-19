@@ -30,7 +30,6 @@ namespace _Game.Scripts.Character.Stats
 
         private void Update()
         {
-            Debug.Log("Current Char" + _queueManager.Queue[_queueManager.ActivePosition].Key);
             if (CTContainer != null)
             {
                 if (_queueManager.Queue[_queueManager.ActivePosition].Key == gameObject)
@@ -94,11 +93,17 @@ namespace _Game.Scripts.Character.Stats
 
         public bool AImove(TileHub grid, List<TileAttribute> path)
         {
+            foreach (var VARIABLE in path)
+            {
+                Debug.Log(VARIABLE.gridX+"-"+ VARIABLE.gridY);
+            }
+
+            ;
             //0 in Path list is the tile the Character is standing on
             //Last one is the Destination, try to go as far as possible
             for (int i = 1; i < path.Count; i++)
             {
-                if (getAPMoveCosts(i, charStats.MChartype) > charStats.CurrentAp)
+                if (getAPMoveCosts(i, charStats.MChartype) < charStats.CurrentAp)
                 {
                     //int distance = grid.GetRange(OccupiedTile, path[i - 1].node);
                     //Debug.Log("AI moved distance: " +  distance);
@@ -108,6 +113,10 @@ namespace _Game.Scripts.Character.Stats
                     OccupiedTile = path[i - 1].node;
                     OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = gameObject;
                     return true;
+                }
+                else
+                {
+                    Debug.Log("Cant move hi");
                 }
             }
             
