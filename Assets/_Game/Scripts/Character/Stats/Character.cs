@@ -38,7 +38,10 @@ namespace _Game.Scripts.Character.Stats
                 }
                 else
                 {
-                    CTContainer.State = TileContainer.tileState.NORMAL;
+                    if (CTContainer.State != TileContainer.tileState.TARGET && CTContainer.State != TileContainer.tileState.HOVERING)
+                    {
+                        CTContainer.State = TileContainer.tileState.NORMAL;
+                    }
                 }
             }
             

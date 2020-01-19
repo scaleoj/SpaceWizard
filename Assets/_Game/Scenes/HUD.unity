@@ -3443,7 +3443,7 @@ PrefabInstance:
     - target: {fileID: 5907155527237020965, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
-      value: WaitUpdate
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5907155527237020965, guid: 2c0b09f71441b5047be3c5e9045470dd,
         type: 3}
