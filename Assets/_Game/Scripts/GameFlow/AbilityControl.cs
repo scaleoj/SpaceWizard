@@ -10,6 +10,8 @@ public class AbilityControl : MonoBehaviour, IAtomListener<int>
 
     [SerializeField] private IntEvent abilitySelectChanged;
 
+    [SerializeField] private State hudstate;
+
     void Awake()
     {
         abilitySelectChanged.RegisterListener(this);
@@ -17,6 +19,6 @@ public class AbilityControl : MonoBehaviour, IAtomListener<int>
 
     public void OnEventRaised(int item)
     {
-        gameflowControl.OnEventRaised(item);
+        gameflowControl.OnEventRaised(hudstate.getSelectedActionByIndex());
     }
 }

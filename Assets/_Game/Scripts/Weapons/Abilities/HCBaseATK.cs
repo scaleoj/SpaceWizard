@@ -9,13 +9,22 @@ public class HCBaseATK : Ability
 {
    public override void Attack( GameObject target, int distance)
    {
+      if (target == null)
+      {
+         Debug.Log("MISS");
+         return;
+      }
+      
       float randomNumber = UnityEngine.Random.Range(0f,1f);
       if (randomNumber >= (distance * MotherWeapon.MissChance))
       {
          float crit = UnityEngine.Random.Range(0f, 1f) >= 0.05f ? MotherWeapon.CritMultiplier : 1.0f;
-         target.GetComponent<Character>().CharStats.TakeDamage( (int) (UnityEngine.Random.Range(MotherWeapon.MinPhysicalDmg, MotherWeapon.MaxPhysicalDmg) * crit), (int) (UnityEngine.Random.Range(MotherWeapon.MinMagicDmg, MotherWeapon.MaxMagicDmg) * crit));
+         int magicdmg = (int) (UnityEngine.Random.Range(MotherWeapon.MinMagicDmg, MotherWeapon.MaxMagicDmg) * crit);
+         int physdmg = (int) (UnityEngine.Random.Range(MotherWeapon.MinPhysicalDmg, MotherWeapon.MaxPhysicalDmg) *
+                              crit); 
+         target.GetComponent<Character>().CharStats.TakeDamage( physdmg,magicdmg );
          
-         Debug.Log("Hit"); //TODO Visual implementation of a HIT / raising an event for that
+         Debug.Log("Hit, Character took " + magicdmg + " MagicDamage and " + physdmg + " PhysicalDamage"); //TODO Visual implementation of a HIT / raising an event for that
       }
       else
       {
