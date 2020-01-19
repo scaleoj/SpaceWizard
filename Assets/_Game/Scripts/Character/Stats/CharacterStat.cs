@@ -160,14 +160,7 @@ public class CharacterStat : ScriptableObject
        get => currentAp;
        set
        {
-           if (value <= 0)
-           {
-               currentAp = 0;
-           }
-           else
-           {
-               currentAp = value;
-           }
+           currentAp = Mathf.Clamp(currentAp, 0, 9);
            switch (mChartype)
            {
                case CharType.Base: MoveRange = CurrentAp;
