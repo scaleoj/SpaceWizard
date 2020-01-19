@@ -21,12 +21,6 @@ namespace _Game.Scripts.Character.Stats
             CharStats.SecondaryWeapon.MotherChar = CharStats;
         }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
-
         public void ResetOnMatchEnd()
         {
             ResetStats();
