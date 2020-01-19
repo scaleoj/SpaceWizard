@@ -46,6 +46,7 @@ public class CharacterStat : ScriptableObject
    [SerializeField] private QueueManager queue;
    [SerializeField] private VoidEvent updateHUD;
    [SerializeField] private BoolVariable runUpdates;
+   [SerializeField] private GameObjectEvent killChar;
    
    [Header("Weapons")] 
    [SerializeField] private Weapon primaryWeapon;
@@ -83,7 +84,7 @@ public class CharacterStat : ScriptableObject
        //SecondaryWeapon.MotherChar = this;
    }
 
-   public void TakeDamage(int phyAmount, int magicAmount)
+   public void TakeDamage(int phyAmount, int magicAmount, GameObject target)
    {
        int save;
        
@@ -91,7 +92,7 @@ public class CharacterStat : ScriptableObject
        save = CurrentArmor - phyAmount;
        if (save < 0)
        {
-            CurrentHealth += save; //Working?
+            reduceHealth_Deathcheck(-save, target); //Working?
             CurrentArmor = 0;
        }
        else
@@ -103,8 +104,8 @@ public class CharacterStat : ScriptableObject
        save = CurrentMs - magicAmount;
        if (save < 0)
        {
-            CurrentHealth += save; //Working?
-            CurrentMs = 0;
+           reduceHealth_Deathcheck(-save, target); //Working?
+           CurrentMs = 0;
        }
        else
        {
@@ -193,6 +194,19 @@ public class CharacterStat : ScriptableObject
            currentHealth = Mathf.Clamp(value, 0, maxHealth);
            if(runUpdates != null && runUpdates.Value)updateHUD.Raise();
        } 
+   }
+
+   public void reduceHealth_Deathcheck(int value ,GameObject target)
+   {
+       if (currentHealth - value <= 0)
+       {
+           CurrentHealth -= value;
+           killChar.Raise(target);
+       }
+       else
+       {
+           CurrentHealth -= value;
+       }
    }
 
    public int CurrentMp

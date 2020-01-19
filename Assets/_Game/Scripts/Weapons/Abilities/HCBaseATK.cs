@@ -22,7 +22,7 @@ public class HCBaseATK : Ability
          int magicdmg = (int) (UnityEngine.Random.Range(MotherWeapon.MinMagicDmg, MotherWeapon.MaxMagicDmg) * crit);
          int physdmg = (int) (UnityEngine.Random.Range(MotherWeapon.MinPhysicalDmg, MotherWeapon.MaxPhysicalDmg) *
                               crit); 
-         target.GetComponent<Character>().CharStats.TakeDamage( physdmg,magicdmg );
+         target.GetComponent<Character>().CharStats.TakeDamage( physdmg,magicdmg, target);
          
          Debug.Log("Hit, Character took " + magicdmg + " MagicDamage and " + physdmg + " PhysicalDamage"); //TODO Visual implementation of a HIT / raising an event for that
       }

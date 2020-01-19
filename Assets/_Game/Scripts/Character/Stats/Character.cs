@@ -46,7 +46,10 @@ namespace _Game.Scripts.Character.Stats
             get => occupiedTile;
             set
             {
-                gameObject.transform.position = new Vector3(value.transform.position.x,1f,value.transform.position.z);
+                if (value != null)
+                {
+                    gameObject.transform.position = new Vector3(value.transform.position.x,1f,value.transform.position.z);
+                }
                 occupiedTile = value;
             }
         }
