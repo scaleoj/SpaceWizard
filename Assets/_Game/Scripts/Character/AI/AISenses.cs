@@ -47,6 +47,7 @@ namespace _Game.Scripts.Character.AI
         public void Retreat()
         {
             var tempPath = _hub.FindPath(_character.OccupiedTile, _hub.Retreat);
+            
             if (tempPath.Count > 3)
             {
                 tempPath = tempPath.Take(4).ToList();
