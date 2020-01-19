@@ -86,14 +86,16 @@ public class CharacterStat : ScriptableObject
 
    public void TakeDamage(int phyAmount, int magicAmount, GameObject target)
    {
-       int save;
+       int healthdmgtotal = 0;
+       int savePhysDMG;
        
        //Physical
-       save = CurrentArmor - phyAmount;
-       if (save < 0)
+       savePhysDMG = CurrentArmor - phyAmount;
+       if (savePhysDMG < 0)
        {
-            reduceHealth_Deathcheck(-save, target); //Working?
+            reduceHealth_Deathcheck(-savePhysDMG, target); //Working?
             CurrentArmor = 0;
+            healthdmgtotal = healthdmgtotal + (-savePhysDMG);
        }
        else
        {
@@ -101,16 +103,28 @@ public class CharacterStat : ScriptableObject
        }
 
        //Magic
-       save = CurrentMs - magicAmount;
-       if (save < 0)
+       int saveMagicDMG = CurrentMs - magicAmount;
+       if (saveMagicDMG < 0)
        {
-           reduceHealth_Deathcheck(-save, target); //Working?
+           reduceHealth_Deathcheck(-saveMagicDMG, target); //Working?
            CurrentMs = 0;
+           healthdmgtotal = healthdmgtotal + (-saveMagicDMG);
        }
        else
        {
             CurrentMs -= magicAmount;
-       }       
+       }
+
+       if (healthdmgtotal != 0)
+       {
+           target.GetComponent<DmgIndicator>().showDamage(phyAmount, magicAmount, healthdmgtotal);           
+       }
+       else
+       {
+           target.GetComponent<DmgIndicator>().showDamage(phyAmount, magicAmount, 0);           
+       }
+       
+      // Debug.Log(savePhysDMG + " || " +  saveMagicDMG);
       
    }
 
@@ -160,7 +174,7 @@ public class CharacterStat : ScriptableObject
        get => currentAp;
        set
        {
-           currentAp = Mathf.Clamp(currentAp, 0, 9);
+           currentAp = Mathf.Clamp(value, 0, 9);
            switch (mChartype)
            {
                case CharType.Base: MoveRange = CurrentAp;

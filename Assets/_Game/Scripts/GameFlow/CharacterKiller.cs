@@ -18,6 +18,12 @@ public class CharacterKiller : MonoBehaviour, IAtomListener<GameObject>
 
     public void OnEventRaised(GameObject item)
     {
+        StartCoroutine(killWaitTime(item));
+    }
+
+    private IEnumerator killWaitTime(GameObject item)
+    {
+        yield return new WaitForSeconds(1);
         queue.KillUnit(item);
         item.transform.position = Vector3.one * 1000;
         item.GetComponent<Character>().OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;

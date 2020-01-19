@@ -24,10 +24,14 @@ public class HCBaseATK : Ability
                               crit); 
          target.GetComponent<Character>().CharStats.TakeDamage( physdmg,magicdmg, target);
          
+         //Visual Representation
+         target.GetComponent<DmgIndicator>().showHitOrMiss(true);
          Debug.Log("Hit, Character took " + magicdmg + " MagicDamage and " + physdmg + " PhysicalDamage"); //TODO Visual implementation of a HIT / raising an event for that
       }
       else
       {
+         //Visual Representation
+         target.GetComponent<DmgIndicator>().showHitOrMiss(false);
          Debug.Log("MISS"); //TODO Visual implementation of a MISS / raising an event for that
       }
    }
