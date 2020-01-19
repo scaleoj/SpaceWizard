@@ -14,6 +14,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     [SerializeField] private IntEvent hudStateChanged;
     [SerializeField] private State HUDstate;
     [SerializeField] private GameObjectEvent gameobjectChanged;
+    [SerializeField] private IntVariable selectedAbility;
 
     [SerializeField] private BoolVariable gameUpdates;
     //[SerializeField] private GameObjectVariable currentSelectedGameObject;
@@ -122,7 +123,17 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
                 }             
      
                break;
-           case 2: break; //ATK1
+           case 2:
+               if (selectedAbility.Value == 0) return;
+               tileAttributes =
+                   grid.GetTilesInRange(currentChar.OccupiedTile, currentChar.CharStats.PrimaryWeapon.Range);
+
+               for (int i = 0; i < tileAttributes.Length; i++)
+               {
+                   tileAttributes[i].node.GetComponent<TileContainer>().State = TileContainer.tileState.TARGET;
+               }
+               //ATK1
+               break; //ATK1
            case 3: break; //ATK2
            case 4: break; //WAIT
            default: break;
