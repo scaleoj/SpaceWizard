@@ -2578,8 +2578,7 @@ MonoBehaviour:
   - {fileID: 2106107671}
   - {fileID: 2109460480}
   - {fileID: 690235592}
-  currentGameObjectChanged: {fileID: 11400000, guid: 2b22fd178ff8a294881b4770ddb37a5b,
-    type: 2}
+  nextinQueue: {fileID: 11400000, guid: 5e8464c2c2b1aa0468fd6a20f9c8e060, type: 2}
   isOverUIObject: {fileID: 11400000, guid: d6d4d362e81def04297319010ed5b464, type: 2}
   queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
   updateHUD: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}
@@ -2610,9 +2609,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charStatChange: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}
-  CurrentGameObjectChanged: {fileID: 11400000, guid: 2b22fd178ff8a294881b4770ddb37a5b,
+  CurrentGameObjectChanged: {fileID: 11400000, guid: 5e8464c2c2b1aa0468fd6a20f9c8e060,
     type: 2}
   selectedGameobject: {fileID: 11400000, guid: 6c89f385036a694449864d4ff6649293, type: 2}
+  _queueManager: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
   HP: {fileID: 1738825062}
   PA: {fileID: 1994529981}
   MS: {fileID: 780690302}

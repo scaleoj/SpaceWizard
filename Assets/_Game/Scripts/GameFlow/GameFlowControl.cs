@@ -16,6 +16,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     [SerializeField] private State HUDstate;
     [SerializeField] private GameObjectEvent gameobjectChanged;
     [SerializeField] private IntVariable selectedAbility;
+    [SerializeField] private GameObjectEvent nextGOinQueue;
 
     [SerializeField] private BoolVariable gameUpdates;
     //[SerializeField] private GameObjectVariable currentSelectedGameObject;
@@ -58,6 +59,11 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         }
         
         HUDstate.SelectedAction = State.currentAction.IDLE;
+
+        queue.Queue[queue.ActivePosition].Key.GetComponent<Character>().OccupiedTile.GetComponent<TileContainer>().State
+            = TileContainer.tileState.SELECTED;
+        
+        nextGOinQueue.Raise( queue.Queue[queue.ActivePosition].Key);
         
         gameUpdates.Value = true;
     }
@@ -281,6 +287,11 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         {
             if (t != null)
             {
+                TileContainer.tileState state = t.node.GetComponent<TileContainer>().State;
+                if (state == TileContainer.tileState.SELECTED || state == TileContainer.tileState.HOVERING)
+                {
+                    continue;
+                }
                 t.node.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;                
             }
         }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using _Game.Scripts.GameFlow;
 using _Game.Scripts.GameFlow.Grid;
 using UnityAtoms;
 using UnityEngine;
@@ -13,6 +14,8 @@ namespace _Game.Scripts.Character.Stats
         [SerializeField] private GameObject occupiedTile;
 
         [SerializeField] private VoidEvent updateHUD;
+
+        [SerializeField] private QueueManager _queueManager;
 
         // Start is called before the first frame update
         void Start()
@@ -48,9 +51,20 @@ namespace _Game.Scripts.Character.Stats
             {
                 if (value != null)
                 {
+                    if (_queueManager.Queue[_queueManager.ActivePosition].Key == gameObject)
+                    {
+                        occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
+                        occupiedTile = value;
+                        occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
+                    }
+                    occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
                     gameObject.transform.position = new Vector3(value.transform.position.x,1f,value.transform.position.z);
                 }
-                occupiedTile = value;
+                else
+                {
+                    occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
+                    occupiedTile = value;
+                }
             }
         }
 

@@ -20,7 +20,7 @@ public class SelectorController : MonoBehaviour, IAtomListener<GameObject>
 
     public void OnEventRaised(GameObject item)
     {
-        if (item.GetComponent<TileContainer>() != null && item.layer == 9)
+        /*if (item.GetComponent<TileContainer>() != null && item.layer == 9)
         {
             if (lastClicked != null)
             {
@@ -40,6 +40,6 @@ public class SelectorController : MonoBehaviour, IAtomListener<GameObject>
         else
         {
             Debug.Log("Not a Tile.");
-        }
+        }*/
     }
 }

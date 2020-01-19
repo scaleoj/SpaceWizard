@@ -59,7 +59,7 @@ public class GOSelector : MonoBehaviour
                     }
                 }
 
-                if (tile.gameObject.layer == 9 && (tile.State == TileContainer.tileState.NORMAL || tile.State == TileContainer.tileState.IN_MOVE_RANGE) && !mouseOverUI.Value)
+                if (tile.gameObject.layer == 9 && (tile.State == TileContainer.tileState.NORMAL || tile.State == TileContainer.tileState.IN_MOVE_RANGE || tile.State == TileContainer.tileState.TARGET) && !mouseOverUI.Value)
                 {
                     hoverGO.Value = hit.transform.gameObject;
                     hoverGOChanged.Raise(hit.transform.gameObject);
@@ -74,6 +74,8 @@ public class GOSelector : MonoBehaviour
         else
         {
             //stdselector.SetActive(false);  
+            hoverGO.Value = null;
+            hoverGOChanged.Raise(null);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using UnityAtoms;
 using UnityEngine;
 
 namespace _Game.Scripts.GameFlow
@@ -7,7 +8,7 @@ namespace _Game.Scripts.GameFlow
     [CreateAssetMenu(menuName = "ScriptableObjects/GameFlow/QueueManager")]
     public class QueueManager : ScriptableObject
     {
-    
+        [SerializeField] private GameObjectEvent nextGameObjectInQueue;
         private Dictionary<GameObject, int> _initSheet; //Sheet for the initiative
         private List<KeyValuePair<GameObject, int>> _queue;
         private int _activePosition = 0;
@@ -56,6 +57,9 @@ namespace _Game.Scripts.GameFlow
             CharacterStat stat = _queue[_activePosition].Key.GetComponent<Character.Stats.Character>().CharStats;
             stat.CurrentAp += stat.Apgain;
             
+            _queue[_activePosition].Key.GetComponent<Character.Stats.Character>().OccupiedTile
+                .GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
+
             if (_activePosition < _queue.Count - 1)
             {
                 var link = _queue[_activePosition].Key.GetComponent<global::_Game.Scripts.Character.Stats.Character>();
@@ -82,6 +86,13 @@ namespace _Game.Scripts.GameFlow
                 link2.BeActive();
 
             }
+            
+            _queue[_activePosition].Key.GetComponent<Character.Stats.Character>().OccupiedTile
+                .GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
+            
+            nextGameObjectInQueue.Raise(_queue[_activePosition ].Key);
+            
+            Debug.Log("NEXT!  - " + _queue[_activePosition].Key);
         }
 
         private bool CheckEnd()

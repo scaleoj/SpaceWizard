@@ -19,7 +19,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
     [Header("AbilityFelder")] [SerializeField]
     private GameObject[] Weapon1AbilityButtons, Weapon2AbilityButtons;
     
-    [SerializeField] private GameObjectEvent currentGameObjectChanged;
+    [SerializeField] private GameObjectEvent nextinQueue;
 
     [SerializeField] private BoolVariable isOverUIObject;
 
@@ -33,15 +33,16 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
 
     private TextMeshProUGUI WeaponOneText, WeaponTwoText;
 
-    private GameObject lastClickedGameObject;
+    //private GameObject lastClickedGameObject;
     // Start is called before the first frame update
     void Awake()
     {
-        currentGameObjectChanged.RegisterListener(this);
+        nextinQueue.RegisterListener(this);
         textUpdater = statTexts.GetComponent<TextUpdater>();
         WeaponOneText = WeaponOneButton.GetComponentInChildren<TextMeshProUGUI>();
         WeaponTwoText = WeaponTwoButton.GetComponentInChildren<TextMeshProUGUI>();
         _eventSystem = GetComponent<EventSystem>();
+        OnEventRaised(queue.Queue[queue.ActivePosition].Key);
     }
 
 
@@ -68,7 +69,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
         
         if (item != null)
         {
-            lastClickedGameObject = item;
+           // lastClickedGameObject = item;
             statTexts.SetActive(true);
             statbackground.SetActive(true);
             if (item == queue.Queue[queue.ActivePosition].Key && item.GetComponent<Character>().CharStats.Team == 0)

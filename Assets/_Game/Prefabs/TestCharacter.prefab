@@ -203,6 +203,7 @@ MonoBehaviour:
   charStats: {fileID: 11400000, guid: ecdf7cf936e8ed446908ee5fed3e59c2, type: 2}
   occupiedTile: {fileID: 0}
   updateHUD: {fileID: 0}
+  _queueManager: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
 --- !u!114 &-1801643357559382559
 MonoBehaviour:
   m_ObjectHideFlags: 0

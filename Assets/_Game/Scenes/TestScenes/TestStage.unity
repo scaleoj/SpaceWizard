@@ -23734,6 +23734,12 @@ PrefabInstance:
       propertyPath: occupiedTile
       value: 
       objectReference: {fileID: 442785055}
+    - target: {fileID: 5999178283914831553, guid: 707141300f5c9374cb75ca3ca942b524,
+        type: 3}
+      propertyPath: updateHUD
+      value: 
+      objectReference: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a,
+        type: 2}
     - target: {fileID: 8352870207016690721, guid: 707141300f5c9374cb75ca3ca942b524,
         type: 3}
       propertyPath: m_DrawHalo
@@ -27026,6 +27032,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: be45c73a904eddc4cbeb3d71a468e8a3,
         type: 2}
+    - target: {fileID: 3058552619920812984, guid: dfd5396492ed5d847a547a806f8e0e06,
+        type: 3}
+      propertyPath: nextGOinQueue
+      value: 
+      objectReference: {fileID: 11400000, guid: 5e8464c2c2b1aa0468fd6a20f9c8e060,
+        type: 2}
+    - target: {fileID: 3917794257919911837, guid: dfd5396492ed5d847a547a806f8e0e06,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfd5396492ed5d847a547a806f8e0e06, type: 3}
 --- !u!1 &3059369236629110205
@@ -30151,6 +30168,12 @@ PrefabInstance:
       propertyPath: charStats
       value: 
       objectReference: {fileID: 11400000, guid: ecdf7cf936e8ed446908ee5fed3e59c2,
+        type: 2}
+    - target: {fileID: 5999178283914831553, guid: 707141300f5c9374cb75ca3ca942b524,
+        type: 3}
+      propertyPath: updateHUD
+      value: 
+      objectReference: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a,
         type: 2}
     - target: {fileID: 8352870207016690721, guid: 707141300f5c9374cb75ca3ca942b524,
         type: 3}
