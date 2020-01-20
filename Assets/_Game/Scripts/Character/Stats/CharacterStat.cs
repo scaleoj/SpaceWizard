@@ -20,8 +20,8 @@ public class CharacterStat : ScriptableObject
    public enum CharType {Base, Melee, Support, Tank, Sniper}
 
    public enum DamageType{Physical, Magic}
-   
-   
+
+   [SerializeField] private string charName;
    [Header("Health")]
    [SerializeField] private int currentHealth;
    [SerializeField] private int maxHealth;
@@ -63,6 +63,12 @@ public class CharacterStat : ScriptableObject
    private int team;//Teamcodes have to be decided, Option for several Teams at the same time
 
    public CharType MChartype => mChartype;
+
+   public string CharName
+   {
+       get => charName;
+       set => charName = value;
+   }
 
    private void OnEnable()
    {
