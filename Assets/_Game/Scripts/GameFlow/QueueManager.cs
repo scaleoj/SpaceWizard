@@ -120,7 +120,14 @@ namespace _Game.Scripts.GameFlow
 
         private void UpdateList()
         {
+            
             _queue = _initSheet.ToList();
+            
+            if (_activePosition >= _queue.Count - 1)
+            {
+                _activePosition = 0;
+            }
+            
         }
 
         private void Sort()
