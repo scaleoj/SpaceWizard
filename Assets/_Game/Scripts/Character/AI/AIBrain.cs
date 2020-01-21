@@ -63,15 +63,15 @@ namespace _Game.Scripts.Character.AI
                                    if (range < _range)
                                    {
                                        
-                                       Debug.Log("zu nah");
                                        Retreat();
                                        break;
                                         
                                    }
 
-                                   if(range > _range)
+                                   if(range >= _range)
                                    {
                                        Move(target);
+                                       break;
                                    }
 
                                    /* 
@@ -95,7 +95,7 @@ namespace _Game.Scripts.Character.AI
                                    }
                                    }*/
 
-                _senses.DecreaseAP();
+                //_senses.DecreaseAP();
                 
             }
                    

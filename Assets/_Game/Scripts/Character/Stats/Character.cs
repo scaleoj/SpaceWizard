@@ -79,7 +79,6 @@ namespace _Game.Scripts.Character.Stats
                         occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
                         occupiedTile = value;
                         occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
-                        Debug.Log("Shoudl be good now");
                     }
                     occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
                     gameObject.transform.position = new Vector3(value.transform.position.x,1f,value.transform.position.z);
@@ -96,11 +95,6 @@ namespace _Game.Scripts.Character.Stats
 
         public bool AImove(TileHub grid, List<TileAttribute> path)
         {
-            foreach (var VARIABLE in path)
-            {
-                Debug.Log(VARIABLE.gridX+"-"+ VARIABLE.gridY);
-            }
-
             ;
             //0 in Path list is the tile the Character is standing on
             //Last one is the Destination, try to go as far as possible
