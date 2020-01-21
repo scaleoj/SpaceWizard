@@ -25083,6 +25083,17 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3917794257919911837, guid: dfd5396492ed5d847a547a806f8e0e06,
+        type: 3}
+      propertyPath: m_input
+      value: 
+      objectReference: {fileID: 963194230}
+    - target: {fileID: 3917794257919911837, guid: dfd5396492ed5d847a547a806f8e0e06,
+        type: 3}
+      propertyPath: mouseOverUI
+      value: 
+      objectReference: {fileID: 11400000, guid: d6d4d362e81def04297319010ed5b464,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfd5396492ed5d847a547a806f8e0e06, type: 3}
 --- !u!1 &3059369236629110205
