@@ -8,7 +8,7 @@ namespace _Game.Scripts.GameFlow
     [CreateAssetMenu(menuName = "ScriptableObjects/GameFlow/QueueManager")]
     public class QueueManager : ScriptableObject
     {
-        [SerializeField] private GameObjectEvent nextGameObjectInQueue;
+        [SerializeField] private VoidEvent newQueueGameObject;
         private Dictionary<GameObject, int> _initSheet; //Sheet for the initiative
         private List<KeyValuePair<GameObject, int>> _queue;
         private int _activePosition = 0;
@@ -67,7 +67,7 @@ namespace _Game.Scripts.GameFlow
                 ++_activePosition;
                 link = _queue[_activePosition].Key.GetComponent<global::_Game.Scripts.Character.Stats.Character>();
                 link.CharStats.Active = true;
-                //nextGameObjectInQueue.Raise(_queue[_activePosition ].Key);
+                newQueueGameObject.Raise();
                 var link2 = _queue[_activePosition].Key.GetComponent<Character.AI.AIHub>();
                 if (link2 == null) return;
                 link2.PositionUpdate(); 
@@ -81,7 +81,7 @@ namespace _Game.Scripts.GameFlow
                 _activePosition = 0;
                 link = _queue[_activePosition].Key.GetComponent<global::_Game.Scripts.Character.Stats.Character>();
                 link.CharStats.Active = true;
-                //nextGameObjectInQueue.Raise(_queue[_activePosition ].Key);
+                newQueueGameObject.Raise();
                 var link2 = _queue[_activePosition].Key.GetComponent<Character.AI.AIHub>();
                 if (link2 == null) return;
                 link2.PositionUpdate();

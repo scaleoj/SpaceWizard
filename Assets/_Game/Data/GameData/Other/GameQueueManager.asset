@@ -12,5 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a1ee20afa73e42640843138b63dfac6e, type: 3}
   m_Name: GameQueueManager
   m_EditorClassIdentifier: 
-  nextGameObjectInQueue: {fileID: 11400000, guid: 5e8464c2c2b1aa0468fd6a20f9c8e060,
-    type: 2}
+  newQueueGameObject: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}

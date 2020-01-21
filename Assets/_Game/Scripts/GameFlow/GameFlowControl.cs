@@ -63,7 +63,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         queue.Queue[queue.ActivePosition].Key.GetComponent<Character>().OccupiedTile.GetComponent<TileContainer>().State
             = TileContainer.tileState.SELECTED;
         
-        nextGOinQueue.Raise( queue.Queue[queue.ActivePosition].Key);
+        nextGOinQueue.Raise(queue.Queue[queue.ActivePosition].Key);
         
         gameUpdates.Value = true;
     }

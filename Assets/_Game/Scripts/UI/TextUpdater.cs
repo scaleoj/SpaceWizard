@@ -44,30 +44,33 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>, IAtomListen
 
     public void OnEventRaised(GameObject item)
     {
-        if(item != null) UpdateText(item);   
+        Debug.Log(item);
+        if(item != null && item.GetComponent<Character>().CharStats.Team == 0) UpdateText(item);   
     }
     
     //OnEventRaised(CharacterStat item)
 
-    public void UpdateText()
+   /* public void UpdateText()
     {
         try
         {
-            CharacterStat stats = _queueManager.Queue[_queueManager.ActivePosition].Key.GetComponent<Character>().CharStats;
-            HPText.text = stats.CurrentHealth + "/" + stats.MaxHealth;
-            PAText.text = stats.CurrentArmor + "/" + stats.MaxArmor;
-            MSText.text = stats.CurrentMs + "/" + stats.MaxMs;
-            APText.text = stats.CurrentAp.ToString();
+           
+                CharacterStat stats = _queueManager.Queue[_queueManager.ActivePosition].Key.GetComponent<Character>().CharStats;
+                HPText.text = stats.CurrentHealth + "/" + stats.MaxHealth;
+                PAText.text = stats.CurrentArmor + "/" + stats.MaxArmor;
+                MSText.text = stats.CurrentMs + "/" + stats.MaxMs;
+                APText.text = stats.CurrentAp.ToString();
+            
         }
         catch (Exception e)
         {
             Debug.Log("Warning: The Current Stats Text cannot be changed. Error" + e);
         }
-    }
+    }*/
 
     public void UpdateText(GameObject item)
     {
-        if (item.GetComponent<Character>() != null)
+        if (item.GetComponent<Character>() != null && item.GetComponent<Character>().CharStats.Team == 0)
         {
             CharacterStat stats = item.GetComponent<Character>().CharStats;
             HPText.text = stats.CurrentHealth + "/" + stats.MaxHealth;
