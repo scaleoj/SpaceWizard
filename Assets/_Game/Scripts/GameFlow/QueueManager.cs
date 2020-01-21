@@ -86,7 +86,6 @@ namespace _Game.Scripts.GameFlow
                 if (link2 == null) return;
                 link2.PositionUpdate();
                 link2.BeActive();
-
             }
             
             //_queue[_activePosition].Key.GetComponent<Character.Stats.Character>().OccupiedTile

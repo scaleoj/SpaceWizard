@@ -125,15 +125,10 @@ namespace _Game.Scripts.Character.Stats
             switch (type)
             {
                 case CharacterStat.CharType.Base: return distance;
-                    break;
                 case CharacterStat.CharType.Melee: return  distance / 3 + 1;
-                    break;
                 case CharacterStat.CharType.Support: return distance / 2 + 1;
-                    break;
                 case CharacterStat.CharType.Tank: return distance;
-                    break;
                 case CharacterStat.CharType.Sniper: return  distance;
-                    break;
                 default: return 0;
             }
         }
