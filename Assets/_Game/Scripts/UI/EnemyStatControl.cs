@@ -75,7 +75,7 @@ public class EnemyStatControl : MonoBehaviour, IAtomListener<Void>, IAtomListene
     public void UpdateText()
     {
             
-        if (selectedGameobject != null && selectedGameobject.Value.GetComponent<TileContainer>().OccupiedGameObject != null && selectedGameobject.Value.GetComponent<TileContainer>().OccupiedGameObject.GetComponent<Character>().CharStats.Team == 1)
+        if (selectedGameobject.Value != null && selectedGameobject.Value.GetComponent<TileContainer>().OccupiedGameObject != null && selectedGameobject.Value.GetComponent<TileContainer>().OccupiedGameObject.GetComponent<Character>().CharStats.Team == 1)
         {
             Container.SetActive(true);
             CharacterStat stats = selectedGameobject.Value.GetComponent<TileContainer>().OccupiedGameObject.GetComponent<Character>().CharStats;
