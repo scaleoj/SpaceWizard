@@ -95,9 +95,9 @@ namespace _Game.Scripts.Character.Stats
 
         public bool AImove(TileHub grid, List<TileAttribute> path)
         {
-            ;
             //0 in Path list is the tile the Character is standing on
             //Last one is the Destination, try to go as far as possible
+            bool pathfinished = false;
             for (int i = 1; i < path.Count; i++)
             {
                 if (getAPMoveCosts(i, charStats.MChartype) < charStats.CurrentAp)
@@ -105,19 +105,18 @@ namespace _Game.Scripts.Character.Stats
                     //int distance = grid.GetRange(OccupiedTile, path[i - 1].node);
                     //Debug.Log("AI moved distance: " +  distance);
                     
-                    CharStats.MoveReduceAp(i - 1);
+                    CharStats.MoveReduceAp(1);
                     OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
                     OccupiedTile = path[i - 1].node;
                     OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = gameObject;
-                    return true;
                 }
                 else
                 {
                     Debug.Log("Cant move hi");
+                    return false;
                 }
             }
-            
-            return false;
+            return true;
         }
 
         public int getAPMoveCosts(int distance, CharacterStat.CharType type)

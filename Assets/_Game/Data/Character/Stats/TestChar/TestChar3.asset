@@ -10,25 +10,25 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31db0d5231939e848a7c0038dae9eecc, type: 3}
-  m_Name: TestChar2
+  m_Name: TestChar3
   m_EditorClassIdentifier: 
-  charName: Spaceghost
-  currentHealth: 2
-  maxHealth: 2
-  currentMp: 0
-  maxMp: 0
-  currentArmor: 2
-  maxArmor: 2
-  currentMs: 3
-  maxMs: 3
+  charName: Sniper2
+  currentHealth: 6
+  maxHealth: 6
+  currentMp: 2
+  maxMp: 2
+  currentArmor: 4
+  maxArmor: 4
+  currentMs: 2
+  maxMs: 2
   currentAp: 3
   apgain: 2
-  mChartype: 0
+  mChartype: 4
   queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
   updateHUD: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}
   runUpdates: {fileID: 11400000, guid: fa61081840812504fb9d6e6e088cfaae, type: 2}
   killChar: {fileID: 11400000, guid: 8975ce3e2a91efe48a38aa8f9229806c, type: 2}
-  primaryWeapon: {fileID: 11400000, guid: 76c4dea9d4b756b45a604434c768adf6, type: 2}
-  secondaryWeapon: {fileID: 11400000, guid: a5aa3d74f2ac55045974572bf13ec7fb, type: 2}
-  initiative: 2
-  team: 1
+  primaryWeapon: {fileID: 11400000, guid: 2a8b01e96a6e29242ab72719b459852c, type: 2}
+  secondaryWeapon: {fileID: 11400000, guid: 1e501ad86092f5b41908066b2ec9ff5a, type: 2}
+  initiative: 1
+  team: 0

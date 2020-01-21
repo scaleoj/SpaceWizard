@@ -137,6 +137,15 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
                break;
            case 2: //ATK1
                if (selectedAbility.Value == -1) return;
+               
+               int remainingAP1 = currentChar.CharStats.CurrentAp -
+                                 currentChar.CharStats.PrimaryWeapon.Abilities[selectedAbility.Value].ApCost;
+
+               if (remainingAP1 < 0)
+               {
+                   return;
+               }
+               
                tileAttributes =
                    grid.GetTilesInRange(currentChar.OccupiedTile, currentChar.CharStats.PrimaryWeapon.Range);
 
@@ -148,6 +157,16 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
                break; 
            case 3: //ATK2
                if (selectedAbility.Value == -1) return;
+               
+               int remainingAP2 = currentChar.CharStats.CurrentAp -
+                                 currentChar.CharStats.SecondaryWeapon.Abilities[selectedAbility.Value].ApCost;
+               
+               if (remainingAP2 < 0)
+               {
+                   return;
+               }
+               
+               
                tileAttributes =
                    grid.GetTilesInRange(currentChar.OccupiedTile, currentChar.CharStats.SecondaryWeapon.Range);
 
@@ -233,8 +252,11 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
                 tileInRange = true;
             }
         }
+        
+        int remainingAP = currentChar.CharStats.CurrentAp -
+                          currentChar.CharStats.SecondaryWeapon.Abilities[selectedAbility.Value].ApCost;
 
-        if (item.layer == 9 && tileInRange)
+        if (item.layer == 9 && tileInRange && remainingAP >= 0)
         {
             currentChar.CharStats.SecondaryWeapon.Abilities[selectedAbility.Value].Attack(item.GetComponent<TileContainer>().OccupiedGameObject, grid.GetRange(currentChar.OccupiedTile, item));
             currentChar.CharStats.CurrentAp -=
