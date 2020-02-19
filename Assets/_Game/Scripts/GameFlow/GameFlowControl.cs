@@ -38,7 +38,9 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         
         addUnitsToQueue(units); //Remove this when wanting to be able to manually place in unity
         savedStats = new CharContainer[units.Length];
-        for (int i = 0; i < units.Length; i++)
+        
+        
+        /*for (int i = 0; i < units.Length; i++)
         {
            // savedStats[i] = ScriptableObject.CreateInstance<CharacterStat>();
             CharacterStat stats = units[i].GetComponent<Character>().CharStats;
@@ -57,6 +59,8 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
              savedStats[i].currentMs = stats.CurrentMs;
              savedStats[i].apgain = stats.Apgain;
         }
+        */
+        
         
         HUDstate.SelectedAction = State.currentAction.IDLE;
 
@@ -68,10 +72,11 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         gameUpdates.Value = true;
     }
 
-    private void OnApplicationQuit()
+    private void OnDestroy()
     {
         gameUpdates.Value = false;
-        for (int i = 0; i < units.Length; i++)
+        
+        /*for (int i = 0; i < units.Length; i++)
         {
             CharacterStat stats = units[i].GetComponent<Character>().CharStats;
 
@@ -88,15 +93,14 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
             stats.CurrentMp = savedStats[i].currentMp;
             stats.CurrentMs = savedStats[i].currentMs;
             
-        }
+        }*/
     }
 
     public void addUnitsToQueue(GameObject[] unitArr)
     {
-        foreach (GameObject t in unitArr)
+        for (int i = 0; i < unitArr.Length; i++) 
         {
-            queue.SpawnUnit(t);
-            
+            queue.SpawnUnit(unitArr[i]);
         }
     }
 
@@ -137,6 +141,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
                break;
            case 2: //ATK1
                if (selectedAbility.Value == -1) return;
+               Debug.Log(selectedAbility.Value);
                
                int remainingAP1 = currentChar.CharStats.CurrentAp -
                                  currentChar.CharStats.PrimaryWeapon.Abilities[selectedAbility.Value].ApCost;

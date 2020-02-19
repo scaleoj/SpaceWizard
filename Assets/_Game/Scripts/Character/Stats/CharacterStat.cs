@@ -16,11 +16,14 @@ using _Game.Scripts.GameFlow;
 [CreateAssetMenu(menuName = "Character")]
 public class CharacterStat : ScriptableObject
 {
+    //------GENERAL------------------------------------//
+   [Header("General")] 
+   [SerializeField] private CharType mChartype;
+   [SerializeField] [Range(0,1)] private int team;//Teamcodes have to be decided, Option for several Teams at the same time
+   [Range(1, 10)] [SerializeField] private int initiative;
 
-   public enum CharType {Base, Melee, Support, Tank, Sniper}
 
-   public enum DamageType{Physical, Magic}
-
+   //--------STATS------------------------------------//
    [SerializeField] private string charName;
    [Header("Health")]
    [SerializeField] private int currentHealth;
@@ -39,31 +42,42 @@ public class CharacterStat : ScriptableObject
    [SerializeField] private int currentAp;
 
    [SerializeField] private int apgain;
+   
+   
+   //---------WEAPONS, ARMOR AND OTHER EQUIPMENT---------//
+   [Header("Equipment")] 
+   [SerializeField] private Weapon primaryWeapon;
+   [SerializeField] private Weapon secondaryWeapon;
 
-   private int _moveRange; //Move Range gets controlled by the AP count, look into the "GDD Tabelle" for the details.
-
-   [Header("Other")] [SerializeField] private CharType mChartype;
+   //---------ATOMS EVENTS, VARIABLES ETC-----------------//
    [SerializeField] private QueueManager queue;
    [SerializeField] private VoidEvent updateHUD;
    [SerializeField] private BoolVariable runUpdates;
    [SerializeField] private GameObjectEvent killChar;
    
-   [Header("Weapons")] 
-   [SerializeField] private Weapon primaryWeapon;
-   [SerializeField] private Weapon secondaryWeapon;
-
-   [Header("Initiative")] [Range(1, 10)] [SerializeField]
-   private int initiative;
-
+   
+   //--------NOT EDITOR EXPOSED VARIABLES--------------//
+   private int _moveRange; //Move Range gets controlled by the AP count, look into the "GDD Tabelle" for the details.
    private bool _active; //ShowinInspector missing
-
-   [Header("Team des Characters")]
-   [SerializeField]
-   [Range(0,1)]
-   private int team;//Teamcodes have to be decided, Option for several Teams at the same time
-
+   
+   //Weapon Clones that get Initated at the Start of the Game
+   private Weapon primaryWeaponClone;
+   private Weapon secondaryWeaponClone;
+   
+   //ENUMS
+   public enum CharType {Base, Melee, Support, Tank, Sniper}
+   public enum DamageType{Physical, Magic}
+   
+   //--------METHODS----------------------------------//
    public CharType MChartype => mChartype;
 
+
+   public void Initiate()
+   {
+       primaryWeaponClone = ScriptableObject.Instantiate(primaryWeapon);
+       secondaryWeaponClone = ScriptableObject.Instantiate(secondaryWeapon);
+   }
+   
    public string CharName
    {
        get => charName;

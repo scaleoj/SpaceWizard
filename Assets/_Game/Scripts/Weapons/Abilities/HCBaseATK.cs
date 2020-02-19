@@ -16,11 +16,11 @@ public class HCBaseATK : Ability
       }
       
       float randomNumber = UnityEngine.Random.Range(0f,1f);
-      if (randomNumber >= (distance * MotherWeapon.MissChance))
+      if (randomNumber >= (distance * ParentWeapon.MissChance))
       {
-         float crit = UnityEngine.Random.Range(0f, 1f) >= 0.05f ? MotherWeapon.CritMultiplier : 1.0f;
-         int magicdmg = (int) (UnityEngine.Random.Range(MotherWeapon.MinMagicDmg, MotherWeapon.MaxMagicDmg) * crit);
-         int physdmg = (int) (UnityEngine.Random.Range(MotherWeapon.MinPhysicalDmg, MotherWeapon.MaxPhysicalDmg) *
+         float crit = UnityEngine.Random.Range(0f, 1f) >= 0.05f ? ParentWeapon.CritMultiplier : 1.0f;
+         int magicdmg = (int) (UnityEngine.Random.Range(ParentWeapon.MinMagicDmg, ParentWeapon.MaxMagicDmg) * crit);
+         int physdmg = (int) (UnityEngine.Random.Range(ParentWeapon.MinPhysicalDmg, ParentWeapon.MaxPhysicalDmg) *
                               crit); 
          target.GetComponent<Character>().CharStats.TakeDamage( physdmg,magicdmg, target);
          

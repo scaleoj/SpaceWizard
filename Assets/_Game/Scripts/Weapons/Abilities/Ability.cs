@@ -10,7 +10,7 @@ public class Ability : ScriptableObject
     [SerializeField] private string abilityName;
     [SerializeField] private int aoeRange;
 
-    private Weapon motherWeapon;
+    private Weapon parentWeapon;
     public int ApCost
     {
         get => APCost;
@@ -23,10 +23,10 @@ public class Ability : ScriptableObject
         set => aoeRange = value;
     }
 
-    public Weapon MotherWeapon
+    public Weapon ParentWeapon
     {
-        get => motherWeapon;
-        set => motherWeapon = value;
+        get => parentWeapon;
+        set => parentWeapon = value;
     }
 
     public string AbilityName

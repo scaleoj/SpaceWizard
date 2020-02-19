@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f64af2ed99cb146358b8752c3e393fcc, type: 3}
   m_Name: SelectedAbility
   m_EditorClassIdentifier: 
-  _developerDescription: 
+  _developerDescription: 'Currently Selected Ability in the HUD.
+
+    -1 if no ability is selected.'
   _value: 0
   _initialValue: 0
   _oldValue: 0

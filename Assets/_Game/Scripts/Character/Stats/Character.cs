@@ -20,17 +20,27 @@ namespace _Game.Scripts.Character.Stats
 
         private TileContainer CTContainer;
 
+        private CharacterStat charStatCopy;
+        
         // Start is called before the first frame update
-        void Start()
+        void Awake()
         {
-            CharStats.PrimaryWeapon.MotherChar = CharStats;
-            CharStats.SecondaryWeapon.MotherChar = CharStats;
+            charStatCopy = ScriptableObject.Instantiate(charStats);
+            charStats.Initiate();
+            CharStats.PrimaryWeapon.ParentChar = charStatCopy;
+            CharStats.SecondaryWeapon.ParentChar = charStatCopy;
+
             CTContainer = occupiedTile.GetComponent<TileContainer>();
+        }
+
+        private void OnDestroy()
+        {
+            
         }
 
         private void Update()
         {
-            if (CTContainer != null)
+            if (CTContainer != null) //Optimize maybe
             {
                 if (_queueManager.Queue[_queueManager.ActivePosition].Key == gameObject)
                 {
@@ -63,8 +73,8 @@ namespace _Game.Scripts.Character.Stats
 
         public CharacterStat CharStats
         {
-            get => charStats;
-            set => charStats = value;
+            get => charStatCopy;
+            set => charStatCopy = value;
         }
 
         public GameObject OccupiedTile

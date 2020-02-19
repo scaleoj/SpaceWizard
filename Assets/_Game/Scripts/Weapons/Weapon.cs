@@ -17,21 +17,24 @@ public class Weapon : ScriptableObject
     [SerializeField] private float critMultiplier;
     [Header("ORDER ABILITIES FROM HIGHEST TO LOWEST AP-COST, MAX 3 ABILITIES")]
     [SerializeField] private Ability[] abilities;
+    private CharacterStat parentChar;
+    
+    private Ability[] abilityClones;
 
-    private CharacterStat motherChar;
-
-    private void OnEnable()
+    public void InitiateAbilities()
     {
+        abilityClones = new Ability[abilities.Length];
         for (int i = 0; i < abilities.Length; i++)
         {
-            abilities[i].MotherWeapon = this;
+            abilityClones[i] = ScriptableObject.Instantiate(abilities[i]);
+            abilityClones[i].ParentWeapon = this;
         }
     }
 
-    public CharacterStat MotherChar
+    public CharacterStat ParentChar
     {
-        get => motherChar;
-        set => motherChar = value;
+        get => parentChar;
+        set => parentChar = value;
     }
 
     public string Name
@@ -78,8 +81,8 @@ public class Weapon : ScriptableObject
 
     public Ability[] Abilities
     {
-        get => abilities;
-        set => abilities = value;
+        get => abilityClones;
+        set => abilityClones = value;
     }
 
     public int Range
