@@ -66,7 +66,7 @@ public class CharacterStat : ScriptableObject
    
    //ENUMS
    public enum CharType {Base, Melee, Support, Tank, Sniper}
-   public enum DamageType{Physical, Magic}
+   public enum DamageType{Normal,Physical, Magic} //Normal is for the Heal to just Heal the HP
    
    //--------METHODS----------------------------------//
    public CharType MChartype => mChartype;
@@ -104,6 +104,15 @@ public class CharacterStat : ScriptableObject
        //SecondaryWeapon.MotherChar = this;
    }
 
+   public void TakeHeal(int healthAmount, int phyAmount, int magicAmount, GameObject target)
+   {
+       CurrentHealth += healthAmount;
+       CurrentArmor += phyAmount;
+       CurrentMs += magicAmount;
+       
+       //TODO DAMAGE INDICATOR
+   }
+   
    public void TakeDamage(int phyAmount, int magicAmount, GameObject target)
    {
        int healthdmgtotal = 0;
