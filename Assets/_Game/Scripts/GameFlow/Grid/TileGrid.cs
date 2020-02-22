@@ -41,8 +41,7 @@ namespace _Game.Scripts.GameFlow.Grid
         public TileAttribute[,] Neighbours { get; private set; }
         
         public List<List<GameObject>> Cubes { get; }
-
-
+        
         public GameObject GetParent()
         {
             return _parent.gameObject;
@@ -54,13 +53,28 @@ namespace _Game.Scripts.GameFlow.Grid
             {
                 if (!i.Contains(retreat)) continue;
                 _retreat = retreat;
-                Debug.Log("Set Retreat Success");
             }
         }
 
         public GameObject GetRetreat()
         {
             return _retreat;
+        }
+        
+        public void ScanGrid()
+        {
+            for (var i = 0; i < _depth; ++i)
+            {
+                _lines.Add(_parent.GetChild(i).gameObject);
+                _lines[i].transform.position = _lines[i].transform.parent.position;
+                Cubes.Add(new List<GameObject>());
+                for (var j = 0; j < _width; ++j)
+                {
+                    Cubes[i].Add(_lines[i].transform.GetChild(j).gameObject);
+                    var tile = new TileAttribute(Cubes[i][j], i, j);
+                    Neighbours[i, j] = tile;
+                }
+            }
         }
         
         public void UpdateNeighbours()

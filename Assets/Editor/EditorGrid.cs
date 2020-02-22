@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using _Game.Scripts.GameFlow.Grid;
+using _Game.Scripts.Scriptable_Objects;
 using Object = UnityEngine.Object;
 
 namespace Editor
@@ -275,7 +276,9 @@ namespace Editor
 
         public TileGrid EditorToTileGrid()
         {
-            return new TileGrid(_width, _depth, _distanceBetweenPoints, _parent);
+            var grid = new TileGrid(_width, _depth, _distanceBetweenPoints, _parent);
+            grid.ScanGrid();
+            return grid;
         }
     }
 }

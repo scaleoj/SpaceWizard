@@ -19,17 +19,12 @@ namespace _Game.Scripts.GameFlow.Grid
         private void Awake()
         {
             _grid = gridObject.grid;
-            _walkableMask = _grid.GetMask();
+            Debug.Log(_grid);
+            //_walkableMask = _grid.GetMask();
             _pathfinder = new Pathfinder(_grid);
             _retreat = _grid.GetRetreat();
         }
-
-        private void Update()
-        {
-            Debug.Log(_retreat);
-            Debug.Log(_walkableMask);
-        }
-
+        
         public TileAttribute[] GetTilesInRange(GameObject start, int range)
         {
 

@@ -48,7 +48,6 @@ namespace Editor
                     _gridObject.grid = new TileGrid();
                 }
                 _loaded = true;
-
             }
             else
             {
@@ -72,6 +71,7 @@ namespace Editor
                 {
                     SaveGrid();
                 }
+
                 EditorGUILayout.EndHorizontal();
 
                 EditorGUILayout.BeginVertical();
@@ -79,26 +79,28 @@ namespace Editor
                 if (_editorGrid == null) return;
                 ChangeLogic();
             }
-            
-            
-            
-            
-            
-            
-           
         }
 
         private void SaveGrid()
         {
             if (_grid != null)
             {
-                _gridObject.grid = _grid;
+                if (_retreat != null)
+                {
+                    _grid = _editorGrid.EditorToTileGrid();
+                    _grid.SetRetreat((GameObject) _retreat);
+                    _grid.SetMask(_mask);
+                    _gridObject.grid = _grid;
+                }
+                else
+                {
+                    Debug.Log("No Retreat set");
+                }
             }
             else
             {
-                Debug.Log("no Grid build or Scanned");
+                Debug.Log("No Grid build or Scanned");
             }
-
         }
 
         private void BuildUi()
@@ -120,10 +122,11 @@ namespace Editor
                 _retreat = EditorGUILayout.ObjectField("RetreatTile", _retreat, typeof(GameObject), true);
                 EditorGUILayout.Space();
             }
-            EditorGUILayout.LabelField("WalkableLayer");
-            _mask = EditorGUILayout.MaskField(InternalEditorUtility.LayerMaskToConcatenatedLayersMask(_mask), InternalEditorUtility.layers);
-            EditorGUILayout.Space();
 
+            EditorGUILayout.LabelField("WalkableLayer");
+            _mask = EditorGUILayout.MaskField(InternalEditorUtility.LayerMaskToConcatenatedLayersMask(_mask),
+                InternalEditorUtility.layers);
+            EditorGUILayout.Space();
         }
 
         private void BuildGridButton()
@@ -166,7 +169,7 @@ namespace Editor
         {
             if (_prefab != null && !_prefabCheck)
             {
-                _editorGrid.SetPrefab((GameObject)_prefab);
+                _editorGrid.SetPrefab((GameObject) _prefab);
                 _prefabCheck = true;
             }
 
@@ -191,13 +194,6 @@ namespace Editor
                 _grid.UpdateNeighbours();
             }
 
-            if (_retreat != null)
-            {
-                _grid.SetRetreat((GameObject)_retreat);
-            }
-
-            _grid.SetMask(_mask);
-
             if (_oldDistanceBetweenPoints + 0.1f >= _distanceBetweenPoints &&
                 _oldDistanceBetweenPoints - 0.1f <= _distanceBetweenPoints ||
                 !_prefabCheck) return;
@@ -205,6 +201,5 @@ namespace Editor
             _grid = _editorGrid.EditorToTileGrid();
             _oldDistanceBetweenPoints = _distanceBetweenPoints;
         }
-
     }
 }

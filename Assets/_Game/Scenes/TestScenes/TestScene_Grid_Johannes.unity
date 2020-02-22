@@ -4128,6 +4128,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fe0e2e5e72a2947a7e18bfc8bba6e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gridObject: {fileID: 11400000, guid: eb32c9742b2a50b49b162cbf8b950cac, type: 2}
 --- !u!4 &1114788493
 Transform:
   m_ObjectHideFlags: 0
