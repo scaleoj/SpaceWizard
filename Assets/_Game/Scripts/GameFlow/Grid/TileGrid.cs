@@ -33,6 +33,11 @@ namespace _Game.Scripts.GameFlow.Grid
             Neighbours = new TileAttribute[_depth, _width];     
         }
 
+        public TileGrid()
+        {
+            
+        }
+
         public TileAttribute[,] Neighbours { get; private set; }
         
         public List<List<GameObject>> Cubes { get; }

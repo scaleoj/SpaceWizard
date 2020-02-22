@@ -2,6 +2,7 @@
 using UnityEngine;
 using _Game.Scripts.GameFlow.Grid;
 using UnityEditorInternal;
+using _Game.Scripts.Scriptable_Objects;
 
 namespace Editor
 {
@@ -22,6 +23,9 @@ namespace Editor
         private bool _prefabCheck;
         private LayerMask _mask;
         private Object _retreat;
+        private bool _loaded;
+        private Object _scriptOb;
+        private GridObject _gridObject;
 
 
         [MenuItem("Tools/Grid")]
@@ -32,29 +36,60 @@ namespace Editor
 
         private void OnGUI()
         {
-            GUILayout.Label("Build or Scan a Grid!", EditorStyles.label);
+            if (!_loaded)
+            {
+                _scriptOb = EditorGUILayout.ObjectField("Scriptable Object for Saves", _scriptOb,
+                    typeof(ScriptableObject), false);
+                if (_scriptOb == null) return;
+                _gridObject = (GridObject) _scriptOb;
+                if (_gridObject.grid == null)
+                {
+                    _gridObject.grid = new TileGrid();
+                }
+                _loaded = true;
 
+            }
+            else
+            {
+                GUILayout.Label("Build or Scan a Grid!", EditorStyles.label);
 
+                BuildUi();
+
+                EditorGUILayout.BeginHorizontal();
+
+                if (GUILayout.Button("Build new Grid!"))
+                {
+                    BuildGridButton();
+                }
+
+                if (GUILayout.Button("Scan old Grid!"))
+                {
+                    ScanGridButton();
+                }
+
+                if (GUILayout.Button("Save Grid!"))
+                {
+                    SaveGrid();
+                }
+                EditorGUILayout.EndHorizontal();
+
+                EditorGUILayout.BeginVertical();
+
+                if (_editorGrid == null) return;
+                ChangeLogic();
+            }
             
-            BuildUi();
+            
+            
+            
+            
+            
+           
+        }
 
-            EditorGUILayout.BeginHorizontal();
-
-            if (GUILayout.Button("Build new Grid!"))
-            {
-                BuildGridButton();
-            }
-
-            if (GUILayout.Button("Scan old Grid!"))
-            {
-                ScanGridButton();
-            }
-            EditorGUILayout.EndHorizontal();
-
-            EditorGUILayout.BeginVertical();
-
-            if (_editorGrid == null) return;
-            ChangeLogic();
+        private void SaveGrid()
+        {
+            _gridObject.grid = _grid;
         }
 
         private void BuildUi()
