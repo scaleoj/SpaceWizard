@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: TestChar2
   m_EditorClassIdentifier: 
   charName: Spaceghost
-  currentHealth: 2
-  maxHealth: 2
+  currentHealth: 4
+  maxHealth: 4
   currentMp: 0
   maxMp: 0
-  currentArmor: 2
-  maxArmor: 2
-  currentMs: 3
-  maxMs: 3
+  currentArmor: 9
+  maxArmor: 9
+  currentMs: 11
+  maxMs: 11
   currentAp: 3
   apgain: 2
   mChartype: 0
