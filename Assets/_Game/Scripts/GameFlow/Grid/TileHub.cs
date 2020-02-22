@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using _Game.Scripts.Scriptable_Objects;
 
 namespace _Game.Scripts.GameFlow.Grid
 {
@@ -13,12 +14,14 @@ namespace _Game.Scripts.GameFlow.Grid
         private Pathfinder _pathfinder;
         private GameObject _retreat;
         private LayerMask _walkableMask;
+        [SerializeField] private GridObject gridObject;
         
         private void Awake()
         {
+            _grid = gridObject.grid;
+            _walkableMask = _grid.GetMask();
             _pathfinder = new Pathfinder(_grid);
             _retreat = _grid.GetRetreat();
-            _walkableMask = _grid.GetMask();
         }
 
         private void Update()

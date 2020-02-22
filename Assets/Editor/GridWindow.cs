@@ -42,6 +42,7 @@ namespace Editor
                     typeof(ScriptableObject), false);
                 if (_scriptOb == null) return;
                 _gridObject = (GridObject) _scriptOb;
+                Debug.Log(_gridObject.grid);
                 if (_gridObject.grid == null)
                 {
                     _gridObject.grid = new TileGrid();
@@ -89,7 +90,15 @@ namespace Editor
 
         private void SaveGrid()
         {
-            _gridObject.grid = _grid;
+            if (_grid != null)
+            {
+                _gridObject.grid = _grid;
+            }
+            else
+            {
+                Debug.Log("no Grid build or Scanned");
+            }
+
         }
 
         private void BuildUi()
