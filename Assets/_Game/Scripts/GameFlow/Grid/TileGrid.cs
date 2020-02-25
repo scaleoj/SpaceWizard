@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
+
 
 namespace _Game.Scripts.GameFlow.Grid
 {
+    [System.Serializable]
     [ExecuteAlways]
     public class TileGrid
     {
@@ -13,10 +14,14 @@ namespace _Game.Scripts.GameFlow.Grid
         private int _depth;
         private float _distanceBetweenPoints;
 
-        private readonly Transform _parent;
+        private Transform _parent;
         private GameObject _prefab;
+        private GameObject _retreat;
+        private LayerMask _mask;
+        private List<List<GameObject>> _cubes;
 
-        private readonly List<GameObject> _lines;
+        private List<GameObject> _lines;
+        
 
         //check implementierung und mögliche Auslagerung von Neighbour
 
@@ -26,173 +31,79 @@ namespace _Game.Scripts.GameFlow.Grid
             _depth = dep;
             _distanceBetweenPoints = distance;
             _parent = par;
-            Cubes = new List<List<GameObject>>();
+            _cubes = new List<List<GameObject>>();
             _lines = new List<GameObject>();
-            Neighbours = new TileAttribute[_depth, _width];
+            Neighbours = new TileAttribute[_depth, _width];     
+        }
+
+        public TileGrid()
+        {
+
         }
 
         public TileAttribute[,] Neighbours { get; private set; }
+
+        public List<List<GameObject>> GetCubes()
+        {
+            return _cubes;
+        }
+
+        public void SetCubes(List<List<GameObject>> cubes)
+        {
+            _cubes = cubes;
+        }
         
-        public List<List<GameObject>> Cubes { get; }
-
-        public void SetPrefab(GameObject pref)
+        public GameObject GetParent()
         {
-            _prefab = pref;
+            return _parent.gameObject;
         }
 
-        public GameObject getPrefab()
+        public void SetParent(GameObject par)
         {
-            return _prefab;
+            _parent = par.transform;
         }
-    
-        //O(n^2 + c)
-        public void BuildGrid()
-        {
 
-            for (var i = 0; i < _depth; i++)
+        public void SetRetreat(GameObject retreat)
+        {
+            foreach (var i in _cubes)
             {
-                Cubes.Add(new List<GameObject>());
-                _lines.Add(new GameObject("Line" + (i + 1)));
-                _lines[i].transform.SetParent(_parent);
-                _lines[i].transform.position = _lines[i].transform.parent.position;
-                for (var j = 0; j < _width; j++)
-                {
-                    Cubes[i].Add(PrefabUtility.InstantiatePrefab(_prefab) as GameObject);
-                    var tile = new TileAttribute(Cubes[i][j], i, j) {node = {layer = 9}};
-                    Neighbours[j, i] = tile;
-                    Cubes[i][j].transform.SetParent(_lines[i].transform);
-                    Cubes[i][j].name = "Tile " + (j);
-                    Cubes[i][j].transform.position = _parent.position + (new Vector3((j * _distanceBetweenPoints), 0, -(i * _distanceBetweenPoints)));
-                    Cubes[i][j].transform.localScale = new Vector3(Cubes[i][j].transform.localScale.x* _distanceBetweenPoints, Cubes[i][j].transform.localScale.y / 4, Cubes[i][j].transform.localScale.z* _distanceBetweenPoints);
-                    
-                }
-            } 
+                if (!i.Contains(retreat)) continue;
+                _retreat = retreat;
+            }
         }
-    
-        //O(n^2 + c)
+
+        public GameObject GetRetreat()
+        {
+            return _retreat;
+        }
+        
         public void ScanGrid()
         {
+            _cubes = new List<List<GameObject>>();
+            Neighbours = new TileAttribute[_depth, _width];
             for (var i = 0; i < _depth; ++i)
             {
                 _lines.Add(_parent.GetChild(i).gameObject);
                 _lines[i].transform.position = _lines[i].transform.parent.position;
-                Cubes.Add(new List<GameObject>());
+                _cubes.Add(new List<GameObject>());
                 for (var j = 0; j < _width; ++j)
                 {
-                    Cubes[i].Add(_lines[i].transform.GetChild(j).gameObject);
-                    var tile = new TileAttribute(Cubes[i][j], i, j);
+                    _cubes[i].Add(_lines[i].transform.GetChild(j).gameObject);
+                    var tile = new TileAttribute(_cubes[i][j], i, j);
                     Neighbours[i, j] = tile;
                 }
             }
-        }
-
-        public void UpdateWidth(int newWidth)
-        {
-            if (newWidth < _width)
-            {
-                for (var i = 0; i < _depth; ++i)
-                {
-                    for (var j = _width-1; j >= newWidth; --j)
-                    {
-                        Object.DestroyImmediate(Cubes[i][j]);
-                        Cubes[i].Remove(Cubes[i][j]);
-                    }
-                }
-            }
-            else if (newWidth > _width)
-            {
-                for (var i = 0; i < _depth; ++i)
-                {
-                    for (var j = _width; j < newWidth; ++j)
-                    {
-                        //cubes[i].Add(GameObject.CreatePrimitive(PrimitiveType.Cube));
-                        Cubes[i].Add(PrefabUtility.InstantiatePrefab(_prefab) as GameObject);
-                        var tile = new TileAttribute(Cubes[i][j], i, j);
-                        Cubes[i][j].transform.SetParent(_lines[i].transform);
-                        Cubes[i][j].name = "Tile " + (j);
-                        Cubes[i][j].transform.position = _parent.position + new Vector3(j * _distanceBetweenPoints, 0, -(i * _distanceBetweenPoints));
-                        Cubes[i][j].transform.localScale = new Vector3(Cubes[i][j].transform.localScale.x* _distanceBetweenPoints, Cubes[i][j].transform.localScale.y / 4, Cubes[i][j].transform.localScale.z* _distanceBetweenPoints);
-                    }
-                }
-            }
-
-            _width = newWidth;
-        }
-
-        public void UpdateDepth(int newDepth)
-        {
-             if (newDepth < _depth)
-             {
-                 
-                for(var i = _depth-1; i >= newDepth; --i)
-                {
-                    
-                    foreach (Transform item in _lines[i].transform)
-                    {
-                        Cubes[i].Remove(item.gameObject);
-                    }
-                    
-                    Cubes.Remove(Cubes[i]);
-                    Object.DestroyImmediate(_lines[i]);
-                    _lines.Remove(_lines[i]);
-                }
-                
-             }else if (newDepth > _depth)
-             {
-                for (var i = _depth; i < newDepth; ++i)
-                {
-                    Cubes.Add(new List<GameObject>());
-                    _lines.Add(new GameObject("Line" + (i + 1)));
-                    _lines[i].transform.SetParent(_parent);
-                    _lines[i].transform.position = _lines[i].transform.parent.position;
-                    
-                    for (var j = 0; j < _width; j++)
-                    {
-                        Cubes[i].Add(PrefabUtility.InstantiatePrefab(_prefab) as GameObject);
-                        var tile = new TileAttribute(Cubes[i][j], i, j);
-                        Cubes[i][j].transform.SetParent(_lines[i].transform);
-                        Cubes[i][j].name = "Tile " + (j);
-                        Cubes[i][j].transform.position = _parent.position + new Vector3(j * _distanceBetweenPoints, 0, -(i * _distanceBetweenPoints));
-                        Cubes[i][j].transform.localScale = new Vector3(Cubes[i][j].transform.localScale.x* _distanceBetweenPoints, Cubes[i][j].transform.localScale.y / 4, Cubes[i][j].transform.localScale.z* _distanceBetweenPoints);
-     
-                    }
-                }
-             }
-
-             _depth = newDepth;
-        }
-
-        public void UpdateDistance(float newDistance)
-        {
-            
-            if (!(newDistance > 0.1f)) return;
-            for(var i = 0; i < Cubes.Count; ++i)
-            {
-                for(var j = 0; j < Cubes[i].Count; ++j)
-                {
-                    var local = Cubes[i][j].transform;
-                    var localScale = local.localScale;
-                    var anchor = _parent.position;
-                    localScale = new Vector3(localScale.x / _distanceBetweenPoints, localScale.y, localScale.z / _distanceBetweenPoints);
-                    localScale = new Vector3(localScale.x * newDistance, localScale.y, localScale.z* newDistance);
-                    local.localScale = localScale;
-                    var position = anchor + new Vector3(j*newDistance, 0, -(i*newDistance));
-                    local.transform.position = position;
-                }
-            }
-
-            _distanceBetweenPoints = newDistance;
         }
         
         public void UpdateNeighbours()
         {  
             Neighbours = null;
             Neighbours = new TileAttribute[_depth, _width];
-            for (var i = 0; i < Cubes.Count; ++i)
+            for (var i = 0; i < _cubes.Count; ++i)
             {
-                for (var j = 0; j < Cubes[i].Count; ++j)
+                for (var j = 0; j < _cubes[i].Count; ++j)
                 {
-                    var tile = new TileAttribute(Cubes[i][j], i, j);
+                    var tile = new TileAttribute(_cubes[i][j], i, j);
                     Neighbours[i, j] = tile;
                 }
             }
@@ -200,7 +111,7 @@ namespace _Game.Scripts.GameFlow.Grid
         
         private bool CubeContains(GameObject obj)
         {
-            foreach (var list in Cubes)
+            foreach (var list in _cubes)
             {
                 if ((list.Contains(obj)))
                 {
@@ -227,7 +138,7 @@ namespace _Game.Scripts.GameFlow.Grid
             {
                 for (var j = 0; j < _width; j++)
                 {
-                    if (Cubes[j][i] != start) continue;
+                    if (_cubes[j][i] != start) continue;
                     left = j - 1 < 0 ? null : Neighbours[j - 1,i];
                     bot = i - 1 < 0 ? null : Neighbours[j,i-1];
                     right = j+1 >= _width ? null : Neighbours[j + 1,i];
@@ -271,6 +182,16 @@ namespace _Game.Scripts.GameFlow.Grid
             }
 
             return tilesInRange.Distinct().ToArray();
+        }
+
+        public LayerMask GetMask()
+        {
+            return _mask;
+        }
+
+        public void SetMask(LayerMask mask)
+        {
+            _mask = mask;
         }
     }
 }

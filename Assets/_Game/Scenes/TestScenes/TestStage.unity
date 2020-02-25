@@ -56,7 +56,7 @@ LightmapSettings:
   m_LightmapEditorSettings:
     serializedVersion: 12
     m_Resolution: 4
-    m_BakeResolution: 32
+    m_BakeResolution: 128
     m_AtlasSize: 512
     m_AO: 1
     m_AOMaxDistance: 1
@@ -77,7 +77,7 @@ LightmapSettings:
     m_PVRSampling: 1
     m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 512
-    m_PVRBounces: 1
+    m_PVRBounces: 4
     m_PVREnvironmentSampleCount: 256
     m_PVREnvironmentReferencePointCount: 2048
     m_PVRFilteringMode: 1
@@ -97,7 +97,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: 6cbe7c9bdc23e0c4080daa11ef9e81b0,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -6624,14 +6625,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fe0e2e5e72a2947a7e18bfc8bba6e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  width: 12
-  depth: 12
-  distanceBetweenPoints: 1.6
-  prefab: {fileID: 4486421839476658966, guid: 0dc3b35e7fa2fc7499756e6fdcbe67f0, type: 3}
-  retreat: {fileID: 1554672960}
-  walkableMask:
-    serializedVersion: 2
-    m_Bits: 512
+  gridObject: {fileID: 11400000, guid: eb32c9742b2a50b49b162cbf8b950cac, type: 2}
 --- !u!4 &563496734
 Transform:
   m_ObjectHideFlags: 0
@@ -16686,12 +16680,6 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &1554672960 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4486421839476658966, guid: 0dc3b35e7fa2fc7499756e6fdcbe67f0,
-    type: 3}
-  m_PrefabInstance: {fileID: 27013533}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1559339948 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4486421839476658965, guid: 0dc3b35e7fa2fc7499756e6fdcbe67f0,
