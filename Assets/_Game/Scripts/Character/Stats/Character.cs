@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using _Game.Scripts.GameFlow;
 using _Game.Scripts.GameFlow.Grid;
 using UnityAtoms;
@@ -21,6 +21,9 @@ namespace _Game.Scripts.Character.Stats
         private TileContainer CTContainer;
 
         private CharacterStat charStatCopy;
+
+        private bool inMoveProcess;
+        
         
         // Start is called before the first frame update
         void Awake()
@@ -103,11 +106,12 @@ namespace _Game.Scripts.Character.Stats
             }
         }
 
-        public bool AImove(TileHub grid, List<TileAttribute> path)
+        public void AImove(TileHub grid, List<TileAttribute> path)
         {
             //0 in Path list is the tile the Character is standing on
             //Last one is the Destination, try to go as far as possible
-            bool pathfinished = false;
+            
+           /* pathfinished = false;
             for (int i = 1; i < path.Count; i++)
             {
                 if (getAPMoveCosts(i, charStats.MChartype) < charStats.CurrentAp)
@@ -126,7 +130,37 @@ namespace _Game.Scripts.Character.Stats
                     return false;
                 }
             }
-            return true;
+            return true;*/
+           StartCoroutine(AImoveSlow(grid, path));
+        }
+
+        public IEnumerator AImoveSlow(TileHub grid, List<TileAttribute> path)
+        {
+            //0 in Path list is the tile the Character is standing on
+            //Last one is the Destination, try to go as far as possible
+            
+            //NOTE: FULL AP COST OF THE MOVE IS CALCULATED AT THE END
+            inMoveProcess = true;
+            for (int i = 1; i < path.Count; i++)
+            {
+                if (getAPMoveCosts(i, charStats.MChartype) < charStats.CurrentAp)
+                {
+                    //int distance = grid.GetRange(OccupiedTile, path[i - 1].node);
+                    //Debug.Log("AI moved distance: " +  distance);
+                    
+                    CharStats.MoveReduceAp(1);
+                    OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
+                    OccupiedTile = path[i - 1].node;
+                    OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = gameObject;
+                    yield return new WaitForSeconds(0.5f);
+                }
+                else
+                {
+                    Debug.Log("Cant move hi");
+                    break;
+                }
+            }
+            inMoveProcess = false;
         }
 
         public int getAPMoveCosts(int distance, CharacterStat.CharType type)
@@ -140,6 +174,12 @@ namespace _Game.Scripts.Character.Stats
                 case CharacterStat.CharType.Sniper: return  distance;
                 default: return 0;
             }
+        }
+
+        public bool InMoveProcess
+        {
+            get => inMoveProcess;
+            set => inMoveProcess = value;
         }
     }
 }

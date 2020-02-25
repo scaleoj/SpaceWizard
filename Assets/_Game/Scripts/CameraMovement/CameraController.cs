@@ -26,6 +26,11 @@ public class CameraController : MonoBehaviour
         cam = gameObject.GetComponent<Camera>();
     }
 
+    public IEnumerator CameraInterpolationRotator(Quaternion start, Quaternion end)
+    {
+        yield return null;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -44,6 +49,8 @@ public class CameraController : MonoBehaviour
             {
                 //transform.rotation = Quaternion.AngleAxis(90f, Vector3.up);
                 //transform.Rotate(new Vector3(1f,90f,1f));
+                transform.Rotate(new Vector3(0f,90f,0f),Space.World);
+                //transform.rotation  = new Quaternion(transform.rotation.eulerAngles.x + 90f, transform.rotation.eulerAngles.y + 90f,transform.rotation.eulerAngles.z + 90f,transform.rotation.w); 
             }
 
             if (m_input.RotateLeft())
@@ -67,8 +74,8 @@ public class CameraController : MonoBehaviour
             
             if (m_input.RotateRight())
             {
-                //transform.rotation = Quaternion.AngleAxis(transform.eulerAngles.y + 90.0f, new Vector3(transform.eulerAngles.x, 1,0));
-                //transform.Rotate(new Vector3(1f,90f,1f));
+                //transform.Rotate(new Vector3(0f,90f,0f),Space.World); //Works but needs to be tweaked for usage
+
             }
 
             if (m_input.RotateLeft())
