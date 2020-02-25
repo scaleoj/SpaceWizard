@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.WSA;
 
 namespace _Game.Scripts.GameFlow.Grid
 {
@@ -25,18 +26,18 @@ namespace _Game.Scripts.GameFlow.Grid
             var startBool = false;
             var endBool = false;
 
-            foreach (var t in _grid.Cubes)
+            foreach (var t in _grid.GetCubes())
             {
                 if (t.Contains(start))
                 {
-                    startX = _grid.Cubes.IndexOf(t);
+                    startX = _grid.GetCubes().IndexOf(t);
                     startY = t.IndexOf(start);
                     startBool = true;
                 }
 
                 if (t.Contains(end))
                 {
-                    endX = _grid.Cubes.IndexOf(t);
+                    endX = _grid.GetCubes().IndexOf(t);
                     endY = t.IndexOf(end);
                     endBool = true;
                 }
@@ -76,7 +77,7 @@ namespace _Game.Scripts.GameFlow.Grid
                 
                 foreach (var tiles in tilesInRange)
                 {
-                    if (tiles.node.layer == LayerMask.GetMask("Walkable") || closedList.Contains(tiles))
+                    if (tiles.node.layer != 9<<LayerMask.GetMask("Walkable") || closedList.Contains(tiles))
                     {
                         continue;
                     }

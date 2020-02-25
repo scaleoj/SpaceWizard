@@ -1,12 +1,10 @@
-﻿
-using UnityEngine;
+﻿using UnityEngine;
 using _Game.Scripts.GameFlow.Grid;
 
 namespace _Game.Scripts.Character.AI
 {
     public class AiBrain
     {
-
         private const int Melee = 1;
         private const int Ranged = 3;
         private const int Sniper = 5;
@@ -40,16 +38,16 @@ namespace _Game.Scripts.Character.AI
                     break;
                 default:
                     _range = Melee;
-                    break;   
+                    break;
             }
         }
-        
+
         //DecisionMaking
         public void MakeDecision()
         {
             var range = 0;
             Stats.Character target = null;
-            
+
             foreach (var ch in _senses.GetRanges())
             {
                 if (ch.Key.GetComponent<Stats.Character>().CharStats.Team == _team) continue;
@@ -57,63 +55,57 @@ namespace _Game.Scripts.Character.AI
                 range = ch.Value;
                 break;
             }
+
             while (_senses.ApCount() > 0)
             {
+                if (range < _range)
+                {
+                    Retreat();
+                    break;
+                }
+
+                if (range >= _range)
+                {
+                    Move(target);
+                    break;
+                }
+
+                /* 
                 
-                                   if (range < _range)
-                                   {
-                                       
-                                       Retreat();
-                                       break;
-                                        
-                                   }
-
-                                   if(range >= _range)
-                                   {
-                                       Move(target);
-                                       break;
-                                   }
-
-                                   /* 
-                                   
-                                   for (var i = 0; i < _character.CharStats.PrimaryWeapon.Abilities.Length-1; i=i)
-                                   {
-                                   if (_senses.ApCount() >= _character.CharStats.PrimaryWeapon.Abilities[i].ApCost)
-                                   {
-                                   if (_character.CharStats.PrimaryWeapon.Range <= _senses.GetRanges()[0].Value)
-                                   {
-                                   _character.CharStats.PrimaryWeapon.Abilities[i].Attack(_senses.GetRanges()[0].Key, _senses.GetRanges()[0].Value);
-                                   }
-                                   else
-                                   {
-                                   i++;
-                                   }
-                                   }
-                                   else
-                                   {
-                                   i++;
-                                   }
-                                   }*/
+                for (var i = 0; i < _character.CharStats.PrimaryWeapon.Abilities.Length-1; i=i)
+                {
+                if (_senses.ApCount() >= _character.CharStats.PrimaryWeapon.Abilities[i].ApCost)
+                {
+                if (_character.CharStats.PrimaryWeapon.Range <= _senses.GetRanges()[0].Value)
+                {
+                _character.CharStats.PrimaryWeapon.Abilities[i].Attack(_senses.GetRanges()[0].Key, _senses.GetRanges()[0].Value);
+                }
+                else
+                {
+                i++;
+                }
+                }
+                else
+                {
+                i++;
+                }
+                }*/
 
                 //_senses.DecreaseAP();
-                
             }
-                   
-                
-            _senses.Next();
 
+
+            _senses.Next();
         }
 
         private void Retreat()
         {
-           _senses.Retreat();
+            _senses.Retreat();
         }
 
         private void Move(Stats.Character target)
         {
             _senses.Move(target);
         }
-        
-
     }
 }
