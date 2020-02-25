@@ -14,12 +14,14 @@ namespace _Game.Scripts.GameFlow.Grid
         private int _depth;
         private float _distanceBetweenPoints;
 
-        private readonly Transform _parent;
+        private Transform _parent;
         private GameObject _prefab;
         private GameObject _retreat;
         private LayerMask _mask;
+        private List<List<GameObject>> _cubes;
 
-        private readonly List<GameObject> _lines;
+        private List<GameObject> _lines;
+        
 
         //check implementierung und mögliche Auslagerung von Neighbour
 
@@ -29,28 +31,41 @@ namespace _Game.Scripts.GameFlow.Grid
             _depth = dep;
             _distanceBetweenPoints = distance;
             _parent = par;
-            Cubes = new List<List<GameObject>>();
+            _cubes = new List<List<GameObject>>();
             _lines = new List<GameObject>();
             Neighbours = new TileAttribute[_depth, _width];     
         }
 
         public TileGrid()
         {
-            
+
         }
 
         public TileAttribute[,] Neighbours { get; private set; }
-        
-        public List<List<GameObject>> Cubes { get; }
+
+        public List<List<GameObject>> GetCubes()
+        {
+            return _cubes;
+        }
+
+        public void SetCubes(List<List<GameObject>> cubes)
+        {
+            _cubes = cubes;
+        }
         
         public GameObject GetParent()
         {
             return _parent.gameObject;
         }
 
+        public void SetParent(GameObject par)
+        {
+            _parent = par.transform;
+        }
+
         public void SetRetreat(GameObject retreat)
         {
-            foreach (var i in Cubes)
+            foreach (var i in _cubes)
             {
                 if (!i.Contains(retreat)) continue;
                 _retreat = retreat;
@@ -64,15 +79,17 @@ namespace _Game.Scripts.GameFlow.Grid
         
         public void ScanGrid()
         {
+            _cubes = new List<List<GameObject>>();
+            Neighbours = new TileAttribute[_depth, _width];
             for (var i = 0; i < _depth; ++i)
             {
                 _lines.Add(_parent.GetChild(i).gameObject);
                 _lines[i].transform.position = _lines[i].transform.parent.position;
-                Cubes.Add(new List<GameObject>());
+                _cubes.Add(new List<GameObject>());
                 for (var j = 0; j < _width; ++j)
                 {
-                    Cubes[i].Add(_lines[i].transform.GetChild(j).gameObject);
-                    var tile = new TileAttribute(Cubes[i][j], i, j);
+                    _cubes[i].Add(_lines[i].transform.GetChild(j).gameObject);
+                    var tile = new TileAttribute(_cubes[i][j], i, j);
                     Neighbours[i, j] = tile;
                 }
             }
@@ -82,11 +99,11 @@ namespace _Game.Scripts.GameFlow.Grid
         {  
             Neighbours = null;
             Neighbours = new TileAttribute[_depth, _width];
-            for (var i = 0; i < Cubes.Count; ++i)
+            for (var i = 0; i < _cubes.Count; ++i)
             {
-                for (var j = 0; j < Cubes[i].Count; ++j)
+                for (var j = 0; j < _cubes[i].Count; ++j)
                 {
-                    var tile = new TileAttribute(Cubes[i][j], i, j);
+                    var tile = new TileAttribute(_cubes[i][j], i, j);
                     Neighbours[i, j] = tile;
                 }
             }
@@ -94,7 +111,7 @@ namespace _Game.Scripts.GameFlow.Grid
         
         private bool CubeContains(GameObject obj)
         {
-            foreach (var list in Cubes)
+            foreach (var list in _cubes)
             {
                 if ((list.Contains(obj)))
                 {
@@ -121,7 +138,7 @@ namespace _Game.Scripts.GameFlow.Grid
             {
                 for (var j = 0; j < _width; j++)
                 {
-                    if (Cubes[j][i] != start) continue;
+                    if (_cubes[j][i] != start) continue;
                     left = j - 1 < 0 ? null : Neighbours[j - 1,i];
                     bot = i - 1 < 0 ? null : Neighbours[j,i-1];
                     right = j+1 >= _width ? null : Neighbours[j + 1,i];

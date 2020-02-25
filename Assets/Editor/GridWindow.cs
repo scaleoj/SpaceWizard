@@ -43,7 +43,6 @@ namespace Editor
                     typeof(ScriptableObject), false);
                 if (_scriptOb == null) return;
                 _gridObject = (GridObject) _scriptOb;
-                Debug.Log(_gridObject.grid);
                 if (_gridObject.grid == null)
                 {
                     _gridObject.grid = new TileGrid();
@@ -91,6 +90,8 @@ namespace Editor
                     _grid = _editorGrid.EditorToTileGrid();
                     _grid.SetRetreat((GameObject) _retreat);
                     _grid.SetMask(_mask);
+                    _grid.SetParent(_editorGrid.GetParent());
+                    _grid.SetCubes(_editorGrid.Cubes);
                     _gridObject.grid = _grid;
                     _scriptOb = _gridObject;
                 }
