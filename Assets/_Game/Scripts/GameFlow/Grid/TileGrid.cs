@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
+
 
 namespace _Game.Scripts.GameFlow.Grid
 {
+    [System.Serializable]
     [ExecuteAlways]
     public class TileGrid
     {

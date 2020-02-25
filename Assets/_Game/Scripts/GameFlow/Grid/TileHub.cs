@@ -20,7 +20,7 @@ namespace _Game.Scripts.GameFlow.Grid
         {
             _grid = gridObject.grid;
             Debug.Log(_grid);
-            //_walkableMask = _grid.GetMask();
+            _walkableMask = _grid.GetMask();
             _pathfinder = new Pathfinder(_grid);
             _retreat = _grid.GetRetreat();
         }

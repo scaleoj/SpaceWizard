@@ -38,6 +38,7 @@ namespace Editor
         {
             if (!_loaded)
             {
+                
                 _scriptOb = EditorGUILayout.ObjectField("Scriptable Object for Saves", _scriptOb,
                     typeof(ScriptableObject), false);
                 if (_scriptOb == null) return;
@@ -91,6 +92,7 @@ namespace Editor
                     _grid.SetRetreat((GameObject) _retreat);
                     _grid.SetMask(_mask);
                     _gridObject.grid = _grid;
+                    _scriptOb = _gridObject;
                 }
                 else
                 {
@@ -126,6 +128,7 @@ namespace Editor
             EditorGUILayout.LabelField("WalkableLayer");
             _mask = EditorGUILayout.MaskField(InternalEditorUtility.LayerMaskToConcatenatedLayersMask(_mask),
                 InternalEditorUtility.layers);
+            _mask = InternalEditorUtility.ConcatenatedLayersMaskToLayerMask(_mask);
             EditorGUILayout.Space();
         }
 
