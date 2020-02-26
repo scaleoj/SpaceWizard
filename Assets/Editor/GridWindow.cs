@@ -43,10 +43,6 @@ namespace Editor
                     typeof(ScriptableObject), false);
                 if (_scriptOb == null) return;
                 _gridObject = (GridObject) _scriptOb;
-                if (_gridObject.grid == null)
-                {
-                    _gridObject.grid = new TileGrid();
-                }
                 _loaded = true;
             }
             else
@@ -87,13 +83,16 @@ namespace Editor
             {
                 if (_retreat != null)
                 {
-                    _grid = _editorGrid.EditorToTileGrid();
-                    _grid.SetRetreat((GameObject) _retreat);
-                    _grid.SetMask(_mask);
-                    _grid.SetParent(_editorGrid.GetParent());
-                    _grid.SetCubes(_editorGrid.Cubes);
-                    _gridObject.grid = _grid;
+                    _gridObject.Width = _editorGrid.GetWidth();
+                    _gridObject.Depth = _editorGrid.GetDepth();
+                    _gridObject.DistanceBetweenPoints = _editorGrid.GetDistance();
+                    _gridObject.Retreat = (GameObject) _retreat;
+                    _gridObject.Mask = _mask;
                     _scriptOb = _gridObject;
+                    AssetDatabase.SaveAssets();
+                    AssetDatabase.Refresh();
+                    EditorUtility.SetDirty(_gridObject);
+                    
                 }
                 else
                 {

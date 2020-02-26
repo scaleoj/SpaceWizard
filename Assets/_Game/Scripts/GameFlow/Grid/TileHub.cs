@@ -18,10 +18,14 @@ namespace _Game.Scripts.GameFlow.Grid
         
         private void Awake()
         {
-            _grid = gridObject.grid;
+            Debug.Log("Width " + gridObject.Width);
+            Debug.Log("Depth " + gridObject.Depth);
+            Debug.Log("Distance " + gridObject.DistanceBetweenPoints);
+            Debug.Log("Mask " + gridObject.Mask);
+            _grid = new TileGrid(gridObject.Width, gridObject.Depth, gridObject.DistanceBetweenPoints, gameObject.transform);
             _grid.ScanGrid();
-            _walkableMask = _grid.GetMask();
-            _retreat = _grid.GetRetreat();
+            _walkableMask = gridObject.Mask;
+            _retreat = gridObject.Retreat;
             _pathfinder = new Pathfinder(_grid);
             
         }

@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace _Game.Scripts.GameFlow.Grid
 {
+   [Serializable]
    public class TileAttribute
    {
       public TileAttribute(GameObject node, int x, int y)

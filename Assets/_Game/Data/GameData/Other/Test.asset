@@ -12,3 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27545d0e7aaa9c648ae7e43c692963a1, type: 3}
   m_Name: Test
   m_EditorClassIdentifier: 
+  _width: 12
+  _depth: 12
+  _distanceBetweenPoints: 1.5999999
+  _retreat: {fileID: 0}
+  _mask: 512
