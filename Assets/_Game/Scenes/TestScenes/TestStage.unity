@@ -30695,7 +30695,7 @@ PrefabInstance:
     - target: {fileID: 9010099159844992297, guid: 8c5423eaeff94be4aa1f202e60da4145,
         type: 3}
       propertyPath: orthographic
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9010099159844992297, guid: 8c5423eaeff94be4aa1f202e60da4145,
         type: 3}
@@ -30712,6 +30712,11 @@ PrefabInstance:
       propertyPath: stdselector
       value: 
       objectReference: {fileID: 1096086609}
+    - target: {fileID: 9010099159844992303, guid: 8c5423eaeff94be4aa1f202e60da4145,
+        type: 3}
+      propertyPath: trueIsometricCam
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c5423eaeff94be4aa1f202e60da4145, type: 3}
 --- !u!1 &9010099160773433435 stripped
