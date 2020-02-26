@@ -6,7 +6,6 @@ using UnityEngine;
 namespace _Game.Scripts.GameFlow.Grid
 {
     [System.Serializable]
-    [ExecuteAlways]
     public class TileGrid
     {
 
@@ -15,15 +14,13 @@ namespace _Game.Scripts.GameFlow.Grid
         private float _distanceBetweenPoints;
 
         private Transform _parent;
-        private GameObject _prefab;
         private GameObject _retreat;
         private LayerMask _mask;
         private List<List<GameObject>> _cubes;
+        private TileAttribute[,] _neighbours;
 
         private List<GameObject> _lines;
         
-
-        //check implementierung und mögliche Auslagerung von Neighbour
 
         public TileGrid(int wid, int dep, float distance, Transform par)
         {
@@ -33,7 +30,7 @@ namespace _Game.Scripts.GameFlow.Grid
             _parent = par;
             _cubes = new List<List<GameObject>>();
             _lines = new List<GameObject>();
-            Neighbours = new TileAttribute[_depth, _width];     
+            _neighbours = new TileAttribute[_depth, _width];     
         }
 
         public TileGrid()
@@ -41,7 +38,15 @@ namespace _Game.Scripts.GameFlow.Grid
 
         }
 
-        public TileAttribute[,] Neighbours { get; private set; }
+        public TileAttribute[,] GetNeighbours()
+        {
+            return _neighbours;
+        }
+
+        public void SetNeighbours(TileAttribute[,] temp)
+        {
+            _neighbours = temp;
+        }
 
         public List<List<GameObject>> GetCubes()
         {
@@ -79,8 +84,10 @@ namespace _Game.Scripts.GameFlow.Grid
         
         public void ScanGrid()
         {
+            _width = _parent.GetChild(0).childCount;
+            _depth = _parent.childCount;
             _cubes = new List<List<GameObject>>();
-            Neighbours = new TileAttribute[_depth, _width];
+            _neighbours = new TileAttribute[_depth, _width];
             for (var i = 0; i < _depth; ++i)
             {
                 _lines.Add(_parent.GetChild(i).gameObject);
@@ -90,21 +97,22 @@ namespace _Game.Scripts.GameFlow.Grid
                 {
                     _cubes[i].Add(_lines[i].transform.GetChild(j).gameObject);
                     var tile = new TileAttribute(_cubes[i][j], i, j);
-                    Neighbours[i, j] = tile;
+                    _neighbours[i, j] = tile;
                 }
             }
+            
         }
         
         public void UpdateNeighbours()
         {  
-            Neighbours = null;
-            Neighbours = new TileAttribute[_depth, _width];
+            _neighbours = null;
+            _neighbours = new TileAttribute[_depth, _width];
             for (var i = 0; i < _cubes.Count; ++i)
             {
                 for (var j = 0; j < _cubes[i].Count; ++j)
                 {
                     var tile = new TileAttribute(_cubes[i][j], i, j);
-                    Neighbours[i, j] = tile;
+                    _neighbours[i, j] = tile;
                 }
             }
         }
@@ -139,10 +147,10 @@ namespace _Game.Scripts.GameFlow.Grid
                 for (var j = 0; j < _width; j++)
                 {
                     if (_cubes[j][i] != start) continue;
-                    left = j - 1 < 0 ? null : Neighbours[j - 1,i];
-                    bot = i - 1 < 0 ? null : Neighbours[j,i-1];
-                    right = j+1 >= _width ? null : Neighbours[j + 1,i];
-                    top = i+1 >= _depth ? null : Neighbours[j,i+1];  
+                    left = j - 1 < 0 ? null : _neighbours[j - 1,i];
+                    bot = i - 1 < 0 ? null : _neighbours[j,i-1];
+                    right = j+1 >= _width ? null : _neighbours[j + 1,i];
+                    top = i+1 >= _depth ? null : _neighbours[j,i+1];  
                     
                     found = true;
                     break;

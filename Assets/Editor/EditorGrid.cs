@@ -277,6 +277,7 @@ namespace Editor
         public TileGrid EditorToTileGrid()
         {
             var grid = new TileGrid(_width, _depth, _distanceBetweenPoints, _parent);
+            Debug.Log(_width);
             grid.ScanGrid();
             return grid;
         }

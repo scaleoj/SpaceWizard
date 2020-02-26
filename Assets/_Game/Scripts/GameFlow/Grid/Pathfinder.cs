@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.WSA;
 
 namespace _Game.Scripts.GameFlow.Grid
 {
@@ -52,7 +51,7 @@ namespace _Game.Scripts.GameFlow.Grid
             var openList = new List<TileAttribute>();
             var closedList = new HashSet<TileAttribute>();
             
-            openList.Add(_grid.Neighbours[startX, startY]);
+            openList.Add(_grid.GetNeighbours()[startX, startY]);
             while (openList.Count > 0)
             {
                 var currentTile = openList[0];
@@ -69,7 +68,7 @@ namespace _Game.Scripts.GameFlow.Grid
 
                 if (currentTile.Node == end)
                 {
-                    return GetFinalPath(_grid.Neighbours[startX, startY], _grid.Neighbours[endX, endY]);
+                    return GetFinalPath(_grid.GetNeighbours()[startX, startY], _grid.GetNeighbours()[endX, endY]);
                 }
 
                 var tilesInRange = _grid.GetNeighboursTiles(currentTile.Node);
@@ -87,7 +86,7 @@ namespace _Game.Scripts.GameFlow.Grid
                     if (moveCost >= tiles.G &&
                         openList.Contains(tiles)) continue;
                     tiles.G = moveCost;
-                    tiles.H = GetManhattenDistance(tiles, _grid.Neighbours[endX, endY]);
+                    tiles.H = GetManhattenDistance(tiles, _grid.GetNeighbours()[endX, endY]);
                     tiles.Parent = currentTile;
                     if (!openList.Contains(tiles))
                     {
