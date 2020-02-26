@@ -32,10 +32,10 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
        cam.orthographic = trueIsometricCam;
-        if (trueIsometricCam)
+       if (trueIsometricCam)
         {
             //MOVEMENT
             Vector3 direction = new Vector3(Mathf.Clamp(m_input.Horizontal() + m_input.Vertical(), -1.25f, 1.25f) * cameraMovementSpeed, 0f , Mathf.Clamp(m_input.Horizontal() - m_input.Vertical(), -1.25f, 1.25f) * cameraMovementSpeed); 
@@ -83,5 +83,8 @@ public class CameraController : MonoBehaviour
                 //transform.Rotate(new Vector3(1f,90f,1f));
             }
         }
+       
+       //CLIPPING
+       
     }
 }
