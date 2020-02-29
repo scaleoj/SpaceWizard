@@ -15,7 +15,7 @@ namespace _Game.Scripts.GameFlow.Grid
          H = 0;
       }
 
-      public TileAttribute Parent;
+      public TileAttribute parent;
 
       public GameObject node;
 

@@ -84,10 +84,6 @@ namespace Editor
             return _distanceBetweenPoints;
         }
 
-        public GameObject GetPrefab()
-        {
-            return _prefab;
-        }
 
         public string GetName()
         {
@@ -245,41 +241,6 @@ namespace Editor
             }
 
             _distanceBetweenPoints = newDistance;
-        }
-
-        public void UpdateNeighbours()
-        {
-            Neighbours = null;
-            Neighbours = new TileAttribute[_depth, _width];
-            for (var i = 0; i < Cubes.Count; ++i)
-            {
-                for (var j = 0; j < Cubes[i].Count; ++j)
-                {
-                    var tile = new TileAttribute(Cubes[i][j], i, j);
-                    Neighbours[i, j] = tile;
-                }
-            }
-        }
-
-        private bool CubeContains(GameObject obj)
-        {
-            foreach (var list in Cubes)
-            {
-                if ((list.Contains(obj)))
-                {
-                    return true;
-                }
-            }
-
-            return false;
-        }
-
-        public TileGrid EditorToTileGrid()
-        {
-            var grid = new TileGrid(_width, _depth, _distanceBetweenPoints, _parent);
-            Debug.Log(_width);
-            grid.ScanGrid();
-            return grid;
         }
     }
 }

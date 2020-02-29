@@ -87,7 +87,7 @@ namespace _Game.Scripts.GameFlow.Grid
                         openList.Contains(tiles)) continue;
                     tiles.G = moveCost;
                     tiles.H = GetManhattenDistance(tiles, _grid.GetNeighbours()[endX, endY]);
-                    tiles.Parent = currentTile;
+                    tiles.parent = currentTile;
                     if (!openList.Contains(tiles))
                     {
                         openList.Add(tiles);
@@ -117,7 +117,7 @@ namespace _Game.Scripts.GameFlow.Grid
             while (currentTile != start)
             {
                 finalPath.Add(currentTile);
-                currentTile = currentTile.Parent;
+                currentTile = currentTile.parent;
             }
             finalPath.Reverse();
 
