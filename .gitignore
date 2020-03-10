@@ -70,3 +70,4 @@ crashlytics-build.properties
 .idea/.idea.spacewizards/riderModule.iml
 .idea/
 Assets/Plugins/Editor.meta
+Assets/_Game/Plugins/Editor.meta
