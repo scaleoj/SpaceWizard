@@ -76,23 +76,23 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
             {
                 abilityBackground.SetActive(true);
                 ActionMenuContainer.SetActive(true);
-                if (item.GetComponent<Character>().CharStats.PrimaryWeapon.Name == "EMPTY")
+                if (item.GetComponent<Character>().CharStats.PrimaryWeapon.WeaponName == "EMPTY")
                 {
                     WeaponOneButton.SetActive(false);
                 }
                 else
                 {
                     WeaponOneButton.SetActive(true);
-                    WeaponOneText.text = item.GetComponent<Character>().CharStats.PrimaryWeapon.Name;     
+                    WeaponOneText.text = item.GetComponent<Character>().CharStats.PrimaryWeapon.WeaponName;     
                 }
-                if (item.GetComponent<Character>().CharStats.SecondaryWeapon.Name == "EMPTY")
+                if (item.GetComponent<Character>().CharStats.SecondaryWeapon.WeaponName == "EMPTY")
                 {
                     WeaponTwoButton.SetActive(false);
                 }
                 else
                 {
                     WeaponTwoButton.SetActive(true);
-                    WeaponTwoText.text = item.GetComponent<Character>().CharStats.SecondaryWeapon.Name;     
+                    WeaponTwoText.text = item.GetComponent<Character>().CharStats.SecondaryWeapon.WeaponName;     
                 }
             }
             else

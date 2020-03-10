@@ -2,12 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "Weapon",menuName = "ScriptableObjects/Weapons/Weapon")]
 public class Weapon : ScriptableObject
 {
+    //ToolTip and purely visual Stuff
+    [FormerlySerializedAs("name")] [SerializeField] private string weaponName;
+    [SerializeField] private string weaponDescription;
+    
     //Parameter
-    [SerializeField] private string name;
     [SerializeField] private int minPhysicalDmg;
     [SerializeField] private int maxPhysicalDmg;
     [SerializeField] private int minMagicDmg;
@@ -41,10 +45,16 @@ public class Weapon : ScriptableObject
         set => parentChar = value;
     }
 
-    public string Name
+    public string WeaponName
     {
-        get => name;
-        set => name = value;
+        get => weaponName;
+        set => weaponName = value;
+    }
+
+    public string WeaponDescription
+    {
+        get => weaponDescription;
+        set => weaponDescription = value;
     }
 
     public int MinPhysicalDmg

@@ -6,11 +6,18 @@ public class Ability : ScriptableObject
 {
     public virtual void Attack(GameObject target, int distance) {}
     
-    [SerializeField] private int APCost;
+    //ToolTip and purely visual Stuff
     [SerializeField] private string abilityName;
+    [SerializeField] private string abilityDescription;
+    
+    //Parameter
     [SerializeField] private int aoeRange;
+    [SerializeField] private int APCost;
 
     private Weapon parentWeapon;
+    
+    
+    //GET,SET
     public int ApCost
     {
         get => APCost;
@@ -33,5 +40,11 @@ public class Ability : ScriptableObject
     {
         get => abilityName;
         set => abilityName = value;
+    }
+
+    public string AbilityDescription
+    {
+        get => abilityDescription;
+        set => abilityDescription = value;
     }
 }
