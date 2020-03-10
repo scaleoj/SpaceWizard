@@ -33,53 +33,14 @@ namespace _Game.Scripts.GameFlow.Grid
             _neighbours = new TileAttribute[_depth, _width];     
         }
 
-        public TileGrid()
-        {
-
-        }
-
         public TileAttribute[,] GetNeighbours()
         {
             return _neighbours;
         }
-
-        public void SetNeighbours(TileAttribute[,] temp)
-        {
-            _neighbours = temp;
-        }
-
+        
         public List<List<GameObject>> GetCubes()
         {
             return _cubes;
-        }
-
-        public void SetCubes(List<List<GameObject>> cubes)
-        {
-            _cubes = cubes;
-        }
-        
-        public GameObject GetParent()
-        {
-            return _parent.gameObject;
-        }
-
-        public void SetParent(GameObject par)
-        {
-            _parent = par.transform;
-        }
-
-        public void SetRetreat(GameObject retreat)
-        {
-            foreach (var i in _cubes)
-            {
-                if (!i.Contains(retreat)) continue;
-                _retreat = retreat;
-            }
-        }
-
-        public GameObject GetRetreat()
-        {
-            return _retreat;
         }
         
         public void ScanGrid()
@@ -101,20 +62,6 @@ namespace _Game.Scripts.GameFlow.Grid
                 }
             }
             
-        }
-        
-        public void UpdateNeighbours()
-        {  
-            _neighbours = null;
-            _neighbours = new TileAttribute[_depth, _width];
-            for (var i = 0; i < _cubes.Count; ++i)
-            {
-                for (var j = 0; j < _cubes[i].Count; ++j)
-                {
-                    var tile = new TileAttribute(_cubes[i][j], i, j);
-                    _neighbours[i, j] = tile;
-                }
-            }
         }
         
         private bool CubeContains(GameObject obj)
@@ -190,16 +137,6 @@ namespace _Game.Scripts.GameFlow.Grid
             }
 
             return tilesInRange.Distinct().ToArray();
-        }
-
-        public LayerMask GetMask()
-        {
-            return _mask;
-        }
-
-        public void SetMask(LayerMask mask)
-        {
-            _mask = mask;
         }
     }
 }

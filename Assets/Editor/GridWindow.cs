@@ -18,7 +18,6 @@ namespace Editor
         private float _distanceBetweenPoints = 1f;
         private float _oldDistanceBetweenPoints = 1f;
         private EditorGrid _editorGrid;
-        private TileGrid _grid;
         private bool _rdy;
         private bool _prefabCheck;
         private LayerMask _mask;
@@ -79,7 +78,7 @@ namespace Editor
 
         private void SaveGrid()
         {
-            if (_grid != null)
+            if (_root != null)
             {
                 if (_retreat != null)
                 {
@@ -119,7 +118,7 @@ namespace Editor
             EditorGUILayout.Space();
             _distanceBetweenPoints = EditorGUILayout.FloatField("Scale", _distanceBetweenPoints);
             EditorGUILayout.Space();
-            if (_grid != null)
+            if (_root != null)
             {
                 _retreat = EditorGUILayout.ObjectField("RetreatTile", _retreat, typeof(GameObject), true);
                 EditorGUILayout.Space();
@@ -139,7 +138,7 @@ namespace Editor
                 _editorGrid = new EditorGrid(_name, _width, _depth, _distanceBetweenPoints,
                     (GameObject) _prefab);
                 _editorGrid.BuildGrid();
-                _grid = _editorGrid.EditorToTileGrid();
+                _root = _editorGrid.GetParent();
                 Selection.SetActiveObjectWithContext(_editorGrid.GetParent(), this);
             }
             else
@@ -158,7 +157,6 @@ namespace Editor
                 _width = _editorGrid.GetWidth();
                 _depth = _editorGrid.GetDepth();
                 _distanceBetweenPoints = _editorGrid.GetDistance();
-                _grid = _editorGrid.EditorToTileGrid();
                 _prefabCheck = false;
                 Selection.SetActiveObjectWithContext(_root, this);
             }
@@ -185,23 +183,18 @@ namespace Editor
             {
                 _editorGrid.UpdateWidth(_width);
                 _oldWidth = _width;
-                _grid = _editorGrid.EditorToTileGrid();
-                _grid.UpdateNeighbours();
             }
 
             if (_oldDepth != _depth && _prefabCheck)
             {
                 _editorGrid.UpdateDepth(_depth);
                 _oldDepth = _depth;
-                _grid = _editorGrid.EditorToTileGrid();
-                _grid.UpdateNeighbours();
             }
 
             if (_oldDistanceBetweenPoints + 0.1f >= _distanceBetweenPoints &&
                 _oldDistanceBetweenPoints - 0.1f <= _distanceBetweenPoints ||
                 !_prefabCheck) return;
             _editorGrid.UpdateDistance(_distanceBetweenPoints);
-            _grid = _editorGrid.EditorToTileGrid();
             _oldDistanceBetweenPoints = _distanceBetweenPoints;
         }
     }

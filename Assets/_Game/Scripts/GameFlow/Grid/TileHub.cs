@@ -16,12 +16,11 @@ namespace _Game.Scripts.GameFlow.Grid
         private LayerMask _walkableMask;
         [SerializeField] private GridObject gridObject;
         
+        
+        public GameObject Retreat => _retreat;
+        
         private void Awake()
         {
-            Debug.Log("Width " + gridObject.Width);
-            Debug.Log("Depth " + gridObject.Depth);
-            Debug.Log("Distance " + gridObject.DistanceBetweenPoints);
-            Debug.Log("Mask " + gridObject.Mask);
             _grid = new TileGrid(gridObject.Width, gridObject.Depth, gridObject.DistanceBetweenPoints, gameObject.transform);
             _grid.ScanGrid();
             _walkableMask = gridObject.Mask;
@@ -46,6 +45,5 @@ namespace _Game.Scripts.GameFlow.Grid
             return FindPath(start, end).Count;
         }
 
-        public GameObject Retreat => _retreat;
     }
 }
