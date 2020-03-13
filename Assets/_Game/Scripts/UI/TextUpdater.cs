@@ -16,25 +16,17 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>, IAtomListen
     [SerializeField] private GameObjectEvent CurrentGameObjectChanged;
     [SerializeField] private GameObjectVariable selectedGameobject;
     [SerializeField] private QueueManager _queueManager;
-
-    [SerializeField] private GameObject HP;
-    [SerializeField] private GameObject PA;
-    [SerializeField] private GameObject MS;
+    
     [SerializeField] private GameObject AP;
     
-
-    private TextMeshProUGUI HPText;
-    private TextMeshProUGUI PAText;
-    private TextMeshProUGUI MSText;
+    
     private TextMeshProUGUI APText;
 
     //private TextMeshProUGUI guiText;
     // Start is called before the first frame update
     void Start()
     {
-        HPText = HP.GetComponent<TextMeshProUGUI>();
-        PAText = PA.GetComponent<TextMeshProUGUI>();
-        MSText = MS.GetComponent<TextMeshProUGUI>();
+
         APText = AP.GetComponent<TextMeshProUGUI>();
         CurrentGameObjectChanged.RegisterListener(this);
         charStatChange.RegisterListener(this);
@@ -73,9 +65,6 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>, IAtomListen
         if (item.GetComponent<Character>() != null && item.GetComponent<Character>().CharStats.Team == 0)
         {
             CharacterStat stats = item.GetComponent<Character>().CharStats;
-            HPText.text = stats.CurrentHealth + "/" + stats.MaxHealth;
-            PAText.text = stats.CurrentArmor + "/" + stats.MaxArmor;
-            MSText.text = stats.CurrentMs + "/" + stats.MaxMs;
             APText.text = stats.CurrentAp.ToString();
         }
     }

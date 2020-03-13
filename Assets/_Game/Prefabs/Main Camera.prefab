@@ -113,12 +113,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trueIsometricCam: 0
-  cameraMaxXrange: 11
-  cameraMaxZRange: 11
+  doZoomLerp: 0
+  cameraMaxXrange: 8
+  cameraMaxZRange: 8
   cameraMaxZoomOut: 12
   cameraMaxZoomIn: 5
-  zoomSpeed: 0.5
-  cameraMovementSpeed: 0.08
+  zoomSpeed: 20
+  zoomLerpSpeed: 1
+  cameraMovementSpeed: 8
 --- !u!114 &9010099159844992301
 MonoBehaviour:
   m_ObjectHideFlags: 0

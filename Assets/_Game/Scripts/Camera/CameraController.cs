@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
 
@@ -10,15 +11,23 @@ public class CameraController : MonoBehaviour
 
     private PlayerInputProvider m_input;
     [SerializeField] private bool trueIsometricCam;
-    [SerializeField] private int cameraMaxXrange = 10;
-    [SerializeField] private int cameraMaxZRange = 10;
+    [SerializeField] private bool doZoomLerp;
+    [FormerlySerializedAs("cameraMaxXrange")] [SerializeField] private int cameraMaxPosXrange = 10;
+    [SerializeField] private int cameraMaxNegXrange = 10;
+    [FormerlySerializedAs("cameraMaxZRange")] [SerializeField] private int cameraMaxPosZRange = 10;
+    [SerializeField] private int cameraMaxNegZrange = 10;
     [SerializeField] private float cameraMaxZoomOut = 10f;
     [SerializeField] private float cameraMaxZoomIn = 3.5f;
     [SerializeField] private float zoomSpeed = 0.5f;
+    [SerializeField] private float zoomLerpSpeed = 1f;
 
     [SerializeField] private float cameraMovementSpeed;
+    
+    
 
     private Camera cam;
+
+    //private float zoomLerpTime;
     // Start is called before the first frame update
     void Awake()
     {
@@ -32,7 +41,7 @@ public class CameraController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
        cam.orthographic = trueIsometricCam;
        if (trueIsometricCam)
@@ -40,7 +49,7 @@ public class CameraController : MonoBehaviour
             //MOVEMENT
             Vector3 direction = new Vector3(Mathf.Clamp(m_input.Horizontal() + m_input.Vertical(), -1.25f, 1.25f) * cameraMovementSpeed, 0f , Mathf.Clamp(m_input.Horizontal() - m_input.Vertical(), -1.25f, 1.25f) * cameraMovementSpeed); 
             transform.position += direction;
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -cameraMaxXrange, cameraMaxXrange), 12f,Mathf.Clamp(transform.position.z, -cameraMaxZRange,cameraMaxZRange));
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -cameraMaxPosXrange, cameraMaxPosXrange), 12f,Mathf.Clamp(transform.position.z, -cameraMaxPosZRange,cameraMaxPosZRange));
             //ZOOM
             cam.orthographicSize += -m_input.scrollWheelDelta() * zoomSpeed;
             cam.orthographicSize = Mathf.Clamp(cam.orthographicSize, cameraMaxZoomIn, cameraMaxZoomOut);
@@ -62,15 +71,41 @@ public class CameraController : MonoBehaviour
         else
         {
             Vector3 direction = new Vector3(Mathf.Clamp(m_input.Horizontal() + m_input.Vertical(), -1.25f, 1.25f) * cameraMovementSpeed, 0f , Mathf.Clamp(m_input.Horizontal() - m_input.Vertical(), -1.25f, 1.25f) * cameraMovementSpeed); 
-            Vector3 zoom = new Vector3( m_input.scrollWheelDelta() * zoomSpeed, -m_input.scrollWheelDelta() * zoomSpeed , m_input.scrollWheelDelta() * zoomSpeed);
-            transform.position += direction;
-            if (transform.position.y <= cameraMaxZoomIn || transform.position.y >= cameraMaxZoomOut)
+            Vector3 zoom = new Vector3( m_input.scrollWheelDelta() * zoomSpeed, -m_input.scrollWheelDelta() * zoomSpeed, m_input.scrollWheelDelta() * zoomSpeed);
+            transform.position += direction * Time.deltaTime;
+            if (doZoomLerp)
             {
-                zoom.x = 0.0f;
-                zoom.z = 0.0f;
+                if (transform.position.y <= cameraMaxZoomIn && zoom.y < 0f) //If max zoomed in, "disable" zoom in
+                {
+                    zoom.x = 0.0f;
+                    zoom.z = 0.0f;
+                    zoom.y = 0f;
+                }
+                if ( transform.position.y >= cameraMaxZoomOut && zoom.y > 0f) //If max zoomed out, "disable" zoom out
+                {
+                    zoom.x = 0.0f;
+                    zoom.z = 0.0f;
+                    zoom.y = 0f;
+                }
+
+                if (zoom != Vector3.zero)
+                {
+                    StartCoroutine(zoomLerp(zoom * Time.deltaTime));
+                }
             }
-            transform.position += zoom;
-            transform.position = new Vector3(Mathf.Clamp(transform.position.x, -cameraMaxXrange, cameraMaxXrange), Mathf.Clamp(transform.position.y, cameraMaxZoomIn, cameraMaxZoomOut) ,Mathf.Clamp(transform.position.z, -cameraMaxZRange,cameraMaxZRange));
+            else
+            {
+                if (transform.position.y <= cameraMaxZoomIn ||transform.position.y >= cameraMaxZoomOut)
+                {
+                    zoom.x = 0.0f;
+                    zoom.z = 0.0f;
+                }
+
+                transform.position += zoom * Time.deltaTime;
+            }
+            
+            //transform.position = Vector3.Lerp(,zoom);
+            transform.position = new Vector3(Mathf.Clamp(transform.position.x, cameraMaxNegXrange, cameraMaxPosXrange), Mathf.Clamp(transform.position.y, cameraMaxZoomIn, cameraMaxZoomOut) ,Mathf.Clamp(transform.position.z, cameraMaxNegZrange,cameraMaxPosZRange));
             
             if (m_input.RotateRight())
             {
@@ -86,5 +121,18 @@ public class CameraController : MonoBehaviour
        
        //CLIPPING
        
+    }
+
+    private IEnumerator zoomLerp(Vector3 zoom)
+    {
+        Vector3 zoomCopy = new Vector3(zoom.x,zoom.y,zoom.z);
+        Vector3 oldPos = transform.position;
+        float curTime = 0f;
+        while (curTime <= 1.0f)
+        {
+            Debug.Log(curTime);
+            transform.position = Vector3.Lerp(oldPos ,oldPos + zoomCopy, curTime += (Time.deltaTime * zoomLerpSpeed) );
+            yield return null;
+        }
     }
 }
