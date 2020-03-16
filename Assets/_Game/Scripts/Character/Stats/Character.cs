@@ -28,17 +28,14 @@ namespace _Game.Scripts.Character.Stats
         // Start is called before the first frame update
         void Awake()
         {
-            charStatCopy = ScriptableObject.Instantiate(charStats);
+            charStatCopy = Instantiate(charStats);
             charStats.Initiate();
             CharStats.PrimaryWeapon.ParentChar = charStatCopy;
             CharStats.SecondaryWeapon.ParentChar = charStatCopy;
-
-            CTContainer = occupiedTile.GetComponent<TileContainer>();
-        }
-
-        private void OnDestroy()
-        {
+            CharStats.PrimaryWeapon.InitiateAbilities();
+            CharStats.SecondaryWeapon.InitiateAbilities();
             
+            CTContainer = occupiedTile.GetComponent<TileContainer>();
         }
 
         private void Update()

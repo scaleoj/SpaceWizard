@@ -74,8 +74,8 @@ public class CharacterStat : ScriptableObject
 
    public void Initiate()
    {
-       primaryWeaponClone = ScriptableObject.Instantiate(primaryWeapon);
-       secondaryWeaponClone = ScriptableObject.Instantiate(secondaryWeapon);
+       primaryWeaponClone = Instantiate(primaryWeapon);
+       secondaryWeaponClone = Instantiate(secondaryWeapon);
    }
    
    public string CharName
@@ -288,20 +288,20 @@ public class CharacterStat : ScriptableObject
 
    public Weapon PrimaryWeapon
    {
-       get => primaryWeapon;
+       get => primaryWeaponClone;
        set
        {
-           primaryWeapon = value;
+           primaryWeaponClone = value;
            //if(runUpdates != null && runUpdates.Value) updateHUD.Raise();
        }
    }
 
    public Weapon SecondaryWeapon
    {
-       get => secondaryWeapon;
+       get => secondaryWeaponClone;
        set
        {
-           secondaryWeapon = value;
+           secondaryWeaponClone = value;
            //if(runUpdates != null && runUpdates.Value) updateHUD.Raise();
        }
    }

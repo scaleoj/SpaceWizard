@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SocialPlatforms;
@@ -11,10 +12,21 @@ public class LightFlicker : MonoBehaviour
     private float currentTime;
     private float randNum;
     private Light _light;
+
+    private Material mat;
     // Start is called before the first frame update
     void Awake()
     {
-        _light = gameObject.GetComponent<Light>();
+        try
+        {
+            _light = gameObject.GetComponentInChildren<Light>();
+            mat = new Material(GetComponent<MeshRenderer>().material);
+            GetComponent<MeshRenderer>().material = mat;
+        }
+        catch (Exception e)
+        {
+            Debug.LogError("Couldnt find any Light Component in the Children of <" + gameObject + ">. Full Error :" + e);
+        }
     }
 
     // Update is called once per frame
@@ -28,6 +40,7 @@ public class LightFlicker : MonoBehaviour
             if (currentTime > minDeadTime)
             {
                 _light.enabled = false;
+                mat.DisableKeyword("_EMISSION");
                 currentTime = 0f;
             }
         }
@@ -36,6 +49,7 @@ public class LightFlicker : MonoBehaviour
             if (currentTime > minDeadTime)
             {
                 _light.enabled = true;
+                mat.EnableKeyword("_EMISSION");
                 currentTime = 0f;
             }
         }

@@ -78,14 +78,28 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
                 ActionMenuContainer.SetActive(true);
                 if (item.GetComponent<Character>().CharStats.PrimaryWeapon.WeaponName != "EMPTY")
                 {
+                    Debug.Log("EYYO Weapon not empty");
                     ShowWeaponOneAbilities();
+                }
+                else
+                {
+                    for (int i = 0; i < Weapon1AbilityButtons.Length; i++)
+                    {
+                        Weapon1AbilityButtons[i].SetActive(false);
+                    }
                 }
                 //WeaponOneText.text = item.GetComponent<Character>().CharStats.PrimaryWeapon.WeaponName;     
                 
                 if (item.GetComponent<Character>().CharStats.SecondaryWeapon.WeaponName != "EMPTY")
                 {
-
                     ShowWeaponTwoAbilities();
+                }
+                else
+                {
+                    for (int i = 0; i < Weapon2AbilityButtons.Length; i++)
+                    {
+                        Weapon2AbilityButtons[i].SetActive(false);
+                    }
                 }
                 
             }
@@ -112,11 +126,20 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
     {
         Ability[] abilitiesDummy = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>().CharStats
             .PrimaryWeapon.Abilities;
+        Debug.Log(queue.Queue[queue.ActivePosition].Key.GetComponent<Character>().CharStats
+            .PrimaryWeapon);
         for (int i = 0; i < abilitiesDummy.Length; i++)
         {
-            //Weapon1AbilityButtons[i].SetActive(true);
-            Weapon1AbilityButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = abilitiesDummy[i].AbilityName;
+            Debug.Log("Loading... >" + Weapon1AbilityButtons[i]);
+            Weapon1AbilityButtons[i].SetActive(true);
+            Weapon1AbilityButtons[i].GetComponent<TextLinker>().AbilityUiText.text = abilitiesDummy[i].AbilityName;
+            Weapon1AbilityButtons[i].GetComponent<TextLinker>().ApCostUi.text = abilitiesDummy[i].ApCost.ToString();
         }
+
+       /* for (int i = abilitiesDummy.Length; i < Weapon1AbilityButtons.Length; i++)
+        {
+            Weapon1AbilityButtons[i - 1].SetActive(false);
+        } */
     }
 
     public void ShowWeaponTwoAbilities()
@@ -125,8 +148,14 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
             .SecondaryWeapon.Abilities;
         for (int i = 0; i < abilitiesDummy.Length; i++)
         {
-            //Weapon2AbilityButtons[i].SetActive(true);
-            Weapon2AbilityButtons[i].GetComponentInChildren<TextMeshProUGUI>().text = abilitiesDummy[i].AbilityName;
+            Debug.Log("Loading... >" + Weapon2AbilityButtons[i]);
+            Weapon2AbilityButtons[i].SetActive(true);
+            Weapon2AbilityButtons[i].GetComponent<TextLinker>().AbilityUiText.text = abilitiesDummy[i].AbilityName;
+            Weapon2AbilityButtons[i].GetComponent<TextLinker>().ApCostUi.text = abilitiesDummy[i].ApCost.ToString();
         }
+       /* for (int i = abilitiesDummy.Length; i < Weapon2AbilityButtons.Length; i++)
+        {
+            Weapon2AbilityButtons[i-1].SetActive(false);
+        }*/
     }
 }

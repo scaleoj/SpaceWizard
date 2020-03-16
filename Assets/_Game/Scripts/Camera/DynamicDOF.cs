@@ -27,7 +27,6 @@ public class DynamicDOF : MonoBehaviour
         {
             //distance = Vector3.Distance(transform.position, hit.point);
             dof.focusDistance.value = Vector3.Distance(transform.position, hit.point);;
-            Debug.Log("Hit");
         }
     }
 }
