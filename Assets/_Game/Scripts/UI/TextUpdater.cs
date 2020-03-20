@@ -65,7 +65,7 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>, IAtomListen
         if (item.GetComponent<Character>() != null && item.GetComponent<Character>().CharStats.Team == 0)
         {
             CharacterStat stats = item.GetComponent<Character>().CharStats;
-            APText.text = stats.CurrentAp.ToString();
+            APText.text = stats.CurrentAp + "/" + stats.MaxAp;
         }
     }
 

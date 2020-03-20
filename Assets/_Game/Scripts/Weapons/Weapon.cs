@@ -29,13 +29,13 @@ public class Weapon : ScriptableObject
     
     private Ability[] abilityClones;
 
-    public void InitiateAbilities()
+    public void InitiateAbilities(Weapon parent)
     {
         abilityClones = new Ability[abilities.Length];
         for (int i = 0; i < abilities.Length; i++)
         {
-            abilityClones[i] = ScriptableObject.Instantiate(abilities[i]);
-            abilityClones[i].ParentWeapon = this;
+            abilityClones[i] = Instantiate(abilities[i]);
+            abilityClones[i].ParentWeapon = parent;
         }
     }
 

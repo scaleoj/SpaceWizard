@@ -41,6 +41,8 @@ public class CharacterStat : ScriptableObject
    [Header("Action Points")]
    [SerializeField] private int currentAp;
 
+   [SerializeField] private int maxAP;
+
    [SerializeField] private int apgain;
    
    
@@ -198,12 +200,18 @@ public class CharacterStat : ScriptableObject
        }
    }
 
+   public int MaxAp
+   {
+       get => maxAP;
+       set => maxAP = value;
+   }
+
    public int CurrentAp
    {
        get => currentAp;
        set
        {
-           currentAp = Mathf.Clamp(value, 0, 9);
+           currentAp = Mathf.Clamp(value, 0, maxAP);
            switch (mChartype)
            {
                case CharType.Base: MoveRange = CurrentAp;
@@ -285,7 +293,21 @@ public class CharacterStat : ScriptableObject
            //updateHUD.Raise();
        } 
    }
+   
+   /* ATTENTION: This method is only for internal use! Use <PrimaryWeapon/SecondaryWeapon> to access the Variables. */
+   public Weapon OriginalPrimaryWeapon
+   {
+       get => primaryWeapon;
+       set => primaryWeapon = value;
+   }
 
+   public Weapon OriginalSecondaryWeapon
+   {
+       get => secondaryWeapon;
+       set => secondaryWeapon = value;
+   }
+
+   /* Returns the runtime created clones. Use this if u want to access any Weapons. */
    public Weapon PrimaryWeapon
    {
        get => primaryWeaponClone;

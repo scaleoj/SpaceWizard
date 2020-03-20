@@ -29,11 +29,12 @@ namespace _Game.Scripts.Character.Stats
         void Awake()
         {
             charStatCopy = Instantiate(charStats);
-            charStats.Initiate();
-            CharStats.PrimaryWeapon.ParentChar = charStatCopy;
-            CharStats.SecondaryWeapon.ParentChar = charStatCopy;
-            CharStats.PrimaryWeapon.InitiateAbilities();
-            CharStats.SecondaryWeapon.InitiateAbilities();
+            charStatCopy.Initiate();
+
+            charStatCopy.PrimaryWeapon.ParentChar = charStatCopy;
+            charStatCopy.SecondaryWeapon.ParentChar = charStatCopy;
+            charStatCopy.PrimaryWeapon.InitiateAbilities(charStatCopy.PrimaryWeapon);
+            charStatCopy.SecondaryWeapon.InitiateAbilities(charStatCopy.SecondaryWeapon);
             
             CTContainer = occupiedTile.GetComponent<TileContainer>();
         }

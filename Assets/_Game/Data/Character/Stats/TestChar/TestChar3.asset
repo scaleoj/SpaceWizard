@@ -25,6 +25,7 @@ MonoBehaviour:
   currentMs: 2
   maxMs: 2
   currentAp: 3
+  maxAP: 9
   apgain: 2
   primaryWeapon: {fileID: 11400000, guid: b065b6e1f2d7836419ebd844f9cd751d, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: a6b9824dd177edb4692aba0574dd96fc, type: 2}

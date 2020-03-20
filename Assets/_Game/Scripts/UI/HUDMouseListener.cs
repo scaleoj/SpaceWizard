@@ -12,7 +12,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
 {
     [SerializeField] private GameObject statTexts, ActionMenuContainer, WeaponOneButton, WeaponTwoButton;
     [FormerlySerializedAs("background")] [SerializeField] private GameObject abilityBackground;
-    [SerializeField] private GameObject statbackground;
+    [SerializeField] private GameObject APBar;
 
 
     [Header("AbilityFelder")] [SerializeField]
@@ -28,7 +28,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
 
     private EventSystem _eventSystem;
 
-    private TextUpdater textUpdater;
+    //private TextUpdater textUpdater;
 
     //private TextMeshProUGUI WeaponOneText, WeaponTwoText;
 
@@ -37,7 +37,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
     void Awake()
     {
         nextinQueue.RegisterListener(this);
-        textUpdater = statTexts.GetComponent<TextUpdater>();
+        //textUpdater = statTexts.GetComponent<TextUpdater>();
         //WeaponOneText = WeaponOneButton.GetComponentInChildren<TextMeshProUGUI>();
         //WeaponTwoText = WeaponTwoButton.GetComponentInChildren<TextMeshProUGUI>();
         _eventSystem = GetComponent<EventSystem>();
@@ -76,9 +76,10 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
             {
                 abilityBackground.SetActive(true);
                 ActionMenuContainer.SetActive(true);
+                statTexts.SetActive(true);
+                APBar.SetActive(true);
                 if (item.GetComponent<Character>().CharStats.PrimaryWeapon.WeaponName != "EMPTY")
                 {
-                    Debug.Log("EYYO Weapon not empty");
                     ShowWeaponOneAbilities();
                 }
                 else
@@ -116,7 +117,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
         {
             abilityBackground.SetActive(false);
             statTexts.SetActive(false);
-            statbackground.SetActive(false);
+            APBar.SetActive(false);
             ActionMenuContainer.SetActive(false);
         }
     }
@@ -126,20 +127,24 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
     {
         Ability[] abilitiesDummy = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>().CharStats
             .PrimaryWeapon.Abilities;
-        Debug.Log(queue.Queue[queue.ActivePosition].Key.GetComponent<Character>().CharStats
-            .PrimaryWeapon);
         for (int i = 0; i < abilitiesDummy.Length; i++)
         {
-            Debug.Log("Loading... >" + Weapon1AbilityButtons[i]);
             Weapon1AbilityButtons[i].SetActive(true);
             Weapon1AbilityButtons[i].GetComponent<TextLinker>().AbilityUiText.text = abilitiesDummy[i].AbilityName;
             Weapon1AbilityButtons[i].GetComponent<TextLinker>().ApCostUi.text = abilitiesDummy[i].ApCost.ToString();
         }
 
-       /* for (int i = abilitiesDummy.Length; i < Weapon1AbilityButtons.Length; i++)
+        if (abilitiesDummy.Length != 0)
         {
-            Weapon1AbilityButtons[i - 1].SetActive(false);
-        } */
+            for (int i = Weapon1AbilityButtons.Length - 1; i >= abilitiesDummy.Length; i--)
+            {
+                Weapon1AbilityButtons[i].SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.Log(abilitiesDummy.Length);
+        }
     }
 
     public void ShowWeaponTwoAbilities()
@@ -148,14 +153,21 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
             .SecondaryWeapon.Abilities;
         for (int i = 0; i < abilitiesDummy.Length; i++)
         {
-            Debug.Log("Loading... >" + Weapon2AbilityButtons[i]);
             Weapon2AbilityButtons[i].SetActive(true);
             Weapon2AbilityButtons[i].GetComponent<TextLinker>().AbilityUiText.text = abilitiesDummy[i].AbilityName;
             Weapon2AbilityButtons[i].GetComponent<TextLinker>().ApCostUi.text = abilitiesDummy[i].ApCost.ToString();
         }
-       /* for (int i = abilitiesDummy.Length; i < Weapon2AbilityButtons.Length; i++)
+
+        if (abilitiesDummy.Length != 0)
         {
-            Weapon2AbilityButtons[i-1].SetActive(false);
-        }*/
+            for (int i = Weapon2AbilityButtons.Length - 1; i >= abilitiesDummy.Length; i--)
+            {
+                Weapon2AbilityButtons[i].SetActive(false);
+            }  
+        }
+        else
+        {
+            Debug.Log(abilitiesDummy.Length);
+        }
     }
 }

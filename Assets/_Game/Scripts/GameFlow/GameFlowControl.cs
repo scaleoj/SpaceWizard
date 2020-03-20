@@ -141,7 +141,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
                break;
            case 2: //ATK1
                if (selectedAbility.Value == -1) return;
-               Debug.Log(selectedAbility.Value);
+               Debug.Log("Selected Ability in Gameflowcontrol: " + selectedAbility.Value);
                
                int remainingAP1 = currentChar.CharStats.CurrentAp -
                                  currentChar.CharStats.PrimaryWeapon.Abilities[selectedAbility.Value].ApCost;
@@ -163,6 +163,9 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
            case 3: //ATK2
                if (selectedAbility.Value == -1) return;
                
+               Debug.Log("Selected Ability in Gameflowcontrol: " + selectedAbility.Value);
+               Debug.Log(currentChar.CharStats.SecondaryWeapon.Abilities.Length);
+               Debug.Log(currentChar.CharStats.SecondaryWeapon.Abilities[0]);
                int remainingAP2 = currentChar.CharStats.CurrentAp -
                                  currentChar.CharStats.SecondaryWeapon.Abilities[selectedAbility.Value].ApCost;
                
