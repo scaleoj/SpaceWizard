@@ -25,17 +25,51 @@ namespace _Game.Scripts.Character.Stats
         private bool inMoveProcess;
         
         
-        // Start is called before the first frame update
+        // Configures and copies SO`s
         void Awake()
         {
             charStatCopy = Instantiate(charStats);
-            charStatCopy.Initiate();
 
+            //Create Copies
+            Weapon primWeapon = Instantiate(charStats.PrimaryWeapon);
+            Weapon secondWeapon = Instantiate(charStats.SecondaryWeapon);
+
+            Ability[] weapOneAbilites = new Ability[charStats.PrimaryWeapon.Abilities.Length];
+            Ability[] weapTwoAbilities = new Ability[charStats.SecondaryWeapon.Abilities.Length];
+
+            for (int i = 0; i < charStats.PrimaryWeapon.Abilities.Length; i++)
+            {
+                weapOneAbilites[i] = Instantiate(charStats.PrimaryWeapon.Abilities[i]);
+            }
+            
+            for (int i = 0; i < charStats.SecondaryWeapon.Abilities.Length; i++)
+            {
+                weapTwoAbilities[i] = Instantiate(charStats.SecondaryWeapon.Abilities[i]);
+            }
+            
+            //Link Character -> Weapons
+            charStatCopy.PrimaryWeapon = primWeapon;
+            charStatCopy.SecondaryWeapon = secondWeapon;
+
+            //Link Weapons -> Abilities
+            charStatCopy.PrimaryWeapon.Abilities = weapOneAbilites;
+            charStatCopy.SecondaryWeapon.Abilities = weapTwoAbilities;
+
+            //Link Character <- Weapons
             charStatCopy.PrimaryWeapon.ParentChar = charStatCopy;
             charStatCopy.SecondaryWeapon.ParentChar = charStatCopy;
-            charStatCopy.PrimaryWeapon.InitiateAbilities(charStatCopy.PrimaryWeapon);
-            charStatCopy.SecondaryWeapon.InitiateAbilities(charStatCopy.SecondaryWeapon);
+
+            //Link Weapons <- Abilties
+            for (int i = 0; i < charStats.PrimaryWeapon.Abilities.Length; i++)
+            {
+                charStatCopy.PrimaryWeapon.Abilities[i].ParentWeapon = charStatCopy.PrimaryWeapon;
+            }
             
+            for (int i = 0; i < charStats.SecondaryWeapon.Abilities.Length; i++)
+            {
+                charStatCopy.SecondaryWeapon.Abilities[i].ParentWeapon = charStatCopy.SecondaryWeapon;
+            }
+
             CTContainer = occupiedTile.GetComponent<TileContainer>();
         }
 
@@ -72,6 +106,14 @@ namespace _Game.Scripts.Character.Stats
             CharStats.CurrentMs = CharStats.MaxMs;
         }
 
+        public CharacterStat OriginalCharStats
+        {
+            get => charStats;
+            set => charStats = value;
+        }
+
+        //Reminder: Ugly might need to change
+        /*Returns the Charstat Copy. For changing the original one use OriginalCharStats().*/
         public CharacterStat CharStats
         {
             get => charStatCopy;

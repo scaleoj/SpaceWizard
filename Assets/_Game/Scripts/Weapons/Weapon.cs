@@ -27,17 +27,7 @@ public class Weapon : ScriptableObject
     //Internal Attributes
     private CharacterStat parentChar;
     
-    private Ability[] abilityClones;
-
-    public void InitiateAbilities(Weapon parent)
-    {
-        abilityClones = new Ability[abilities.Length];
-        for (int i = 0; i < abilities.Length; i++)
-        {
-            abilityClones[i] = Instantiate(abilities[i]);
-            abilityClones[i].ParentWeapon = parent;
-        }
-    }
+    
 
     public CharacterStat ParentChar
     {
@@ -107,8 +97,8 @@ public class Weapon : ScriptableObject
 
     public Ability[] Abilities
     {
-        get => abilityClones;
-        set => abilityClones = value;
+        get => abilities;
+        set => abilities = value;
     }
 
     public int Range

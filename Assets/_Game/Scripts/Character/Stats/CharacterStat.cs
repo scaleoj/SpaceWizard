@@ -63,8 +63,8 @@ public class CharacterStat : ScriptableObject
    private bool _active; //ShowinInspector missing
    
    //Weapon Clones that get Initated at the Start of the Game
-   private Weapon primaryWeaponClone;
-   private Weapon secondaryWeaponClone;
+   //private Weapon primaryWeaponClone;
+   //private Weapon secondaryWeaponClone;
    
    //ENUMS
    public enum CharType {Base, Melee, Support, Tank, Sniper}
@@ -73,13 +73,6 @@ public class CharacterStat : ScriptableObject
    //--------METHODS----------------------------------//
    public CharType MChartype => mChartype;
 
-
-   public void Initiate()
-   {
-       primaryWeaponClone = Instantiate(primaryWeapon);
-       secondaryWeaponClone = Instantiate(secondaryWeapon);
-   }
-   
    public string CharName
    {
        get => charName;
@@ -294,36 +287,23 @@ public class CharacterStat : ScriptableObject
        } 
    }
    
-   /* ATTENTION: This method is only for internal use! Use <PrimaryWeapon/SecondaryWeapon> to access the Variables. */
-   public Weapon OriginalPrimaryWeapon
-   {
-       get => primaryWeapon;
-       set => primaryWeapon = value;
-   }
-
-   public Weapon OriginalSecondaryWeapon
-   {
-       get => secondaryWeapon;
-       set => secondaryWeapon = value;
-   }
-
    /* Returns the runtime created clones. Use this if u want to access any Weapons. */
    public Weapon PrimaryWeapon
    {
-       get => primaryWeaponClone;
+       get => primaryWeapon;
        set
        {
-           primaryWeaponClone = value;
+           primaryWeapon = value;
            //if(runUpdates != null && runUpdates.Value) updateHUD.Raise();
        }
    }
 
    public Weapon SecondaryWeapon
    {
-       get => secondaryWeaponClone;
+       get => secondaryWeapon;
        set
        {
-           secondaryWeaponClone = value;
+           secondaryWeapon = value;
            //if(runUpdates != null && runUpdates.Value) updateHUD.Raise();
        }
    }
