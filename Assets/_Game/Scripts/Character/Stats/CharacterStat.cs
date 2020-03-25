@@ -62,9 +62,6 @@ public class CharacterStat : ScriptableObject
    private int _moveRange; //Move Range gets controlled by the AP count, look into the "GDD Tabelle" for the details.
    private bool _active; //ShowinInspector missing
    
-   //Weapon Clones that get Initated at the Start of the Game
-   //private Weapon primaryWeaponClone;
-   //private Weapon secondaryWeaponClone;
    
    //ENUMS
    public enum CharType {Base, Melee, Support, Tank, Sniper}
@@ -94,9 +91,6 @@ public class CharacterStat : ScriptableObject
            case CharType.Sniper: MoveRange = CurrentAp;
                break;
        }
-       
-       //PrimaryWeapon.MotherChar = this;
-       //SecondaryWeapon.MotherChar = this;
    }
 
    public void TakeHeal(int healthAmount, int phyAmount, int magicAmount, GameObject target)
@@ -148,8 +142,6 @@ public class CharacterStat : ScriptableObject
            target.GetComponent<DmgIndicator>().showDamage(phyAmount, magicAmount, 0);           
        }
        
-      // Debug.Log(savePhysDMG + " || " +  saveMagicDMG);
-      
    }
 
    //Getter, Setter
@@ -283,7 +275,6 @@ public class CharacterStat : ScriptableObject
        set
        {
            initiative = value < 0 ? 0 : value;
-           //updateHUD.Raise();
        } 
    }
    
@@ -294,7 +285,6 @@ public class CharacterStat : ScriptableObject
        set
        {
            primaryWeapon = value;
-           //if(runUpdates != null && runUpdates.Value) updateHUD.Raise();
        }
    }
 
@@ -304,7 +294,6 @@ public class CharacterStat : ScriptableObject
        set
        {
            secondaryWeapon = value;
-           //if(runUpdates != null && runUpdates.Value) updateHUD.Raise();
        }
    }
 

@@ -8,7 +8,7 @@ using UnityEngine.Serialization;
 using _Game.Scripts.Character.Stats;
 using _Game.Scripts.GameFlow;
 
-public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
+public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>, IAtomListener<Void>
 {
     [SerializeField] private GameObject statTexts, ActionMenuContainer, WeaponOneButton, WeaponTwoButton;
     [FormerlySerializedAs("background")] [SerializeField] private GameObject abilityBackground;
@@ -28,20 +28,15 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
 
     private EventSystem _eventSystem;
 
-    //private TextUpdater textUpdater;
+    private GameObject lastObjectInQueue;
 
-    //private TextMeshProUGUI WeaponOneText, WeaponTwoText;
-
-    //private GameObject lastClickedGameObject;
-    // Start is called before the first frame update
     void Awake()
     {
         nextinQueue.RegisterListener(this);
-        //textUpdater = statTexts.GetComponent<TextUpdater>();
-        //WeaponOneText = WeaponOneButton.GetComponentInChildren<TextMeshProUGUI>();
-        //WeaponTwoText = WeaponTwoButton.GetComponentInChildren<TextMeshProUGUI>();
+        updateHUD.RegisterListener(this);
         _eventSystem = GetComponent<EventSystem>();
         OnEventRaised(queue.Queue[queue.ActivePosition].Key);
+        lastObjectInQueue = queue.Queue[queue.ActivePosition].Key;
     }
 
 
@@ -69,9 +64,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
         
         if (item != null)
         {
-           // lastClickedGameObject = item;
-            //statTexts.SetActive(true);
-            //statbackground.SetActive(true);
+
             if (/*item == queue.Queue[queue.ActivePosition].Key &&*/ item.GetComponent<Character>().CharStats.Team == 0)
             {
                 abilityBackground.SetActive(true);
@@ -89,8 +82,8 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
                         Weapon1AbilityButtons[i].SetActive(false);
                     }
                 }
-                //WeaponOneText.text = item.GetComponent<Character>().CharStats.PrimaryWeapon.WeaponName;     
-                
+
+                Debug.Log(item.GetComponent<Character>().CharStats.SecondaryWeapon.WeaponName);
                 if (item.GetComponent<Character>().CharStats.SecondaryWeapon.WeaponName != "EMPTY")
                 {
                     ShowWeaponTwoAbilities();
@@ -111,7 +104,6 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
             }
             
             updateHUD.Raise();
-            //textUpdater.UpdateText(item);
         }
         else
         {
@@ -168,6 +160,15 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
         else
         {
             Debug.Log(abilitiesDummy.Length);
+        }
+    }
+    
+    public void OnEventRaised(Void item)
+    {
+        if (lastObjectInQueue != queue.Queue[queue.ActivePosition].Key)
+        {
+            lastObjectInQueue = queue.Queue[queue.ActivePosition].Key;
+            OnEventRaised(lastObjectInQueue);
         }
     }
 }
