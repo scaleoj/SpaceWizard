@@ -16,8 +16,8 @@ MonoBehaviour:
   team: 0
   initiative: 3
   charName: SpaceGhost One
-  currentHealth: 5
-  maxHealth: 10
+  currentHealth: 6
+  maxHealth: 6
   currentMp: 10
   maxMp: 10
   currentArmor: 10
