@@ -196,7 +196,6 @@ namespace _Game.Scripts.Character.Stats
                 }
                 else
                 {
-                    Debug.Log("Cant move hi");
                     break;
                 }
             }

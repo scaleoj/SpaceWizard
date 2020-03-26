@@ -83,7 +83,6 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>, IAtomL
                     }
                 }
 
-                Debug.Log(item.GetComponent<Character>().CharStats.SecondaryWeapon.WeaponName);
                 if (item.GetComponent<Character>().CharStats.SecondaryWeapon.WeaponName != "EMPTY")
                 {
                     ShowWeaponTwoAbilities();

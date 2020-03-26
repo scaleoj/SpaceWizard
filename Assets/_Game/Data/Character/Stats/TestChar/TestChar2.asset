@@ -15,7 +15,7 @@ MonoBehaviour:
   mChartype: 2
   team: 1
   initiative: 2
-  charName: Spaceghost Two
+  charName: Panzerknacker(3)
   currentHealth: 5
   maxHealth: 5
   currentMp: 0

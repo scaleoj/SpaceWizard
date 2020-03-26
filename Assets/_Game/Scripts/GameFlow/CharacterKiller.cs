@@ -10,6 +10,7 @@ public class CharacterKiller : MonoBehaviour, IAtomListener<GameObject>
 {
     [SerializeField] private GameObjectEvent killChar;
     [SerializeField] private QueueManager queue;
+    [SerializeField] private VoidEvent updateHUD;
 
     private void Awake()
     {
@@ -24,6 +25,7 @@ public class CharacterKiller : MonoBehaviour, IAtomListener<GameObject>
     private IEnumerator killWaitTime(GameObject item)
     {
         yield return new WaitForSeconds(1);
+        //updateHUD.Raise();
         queue.KillUnit(item);
         item.transform.position = Vector3.one * 1000;
         item.GetComponent<Character>().OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
