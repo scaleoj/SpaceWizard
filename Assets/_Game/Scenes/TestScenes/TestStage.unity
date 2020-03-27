@@ -33633,6 +33633,12 @@ PrefabInstance:
       propertyPath: cameraMaxNegXrange
       value: -11
       objectReference: {fileID: 0}
+    - target: {fileID: 9010099159844992303, guid: 8c5423eaeff94be4aa1f202e60da4145,
+        type: 3}
+      propertyPath: graphihcsSettings
+      value: 
+      objectReference: {fileID: 11400000, guid: 868f83cf8a647a441a97de018091436a,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c5423eaeff94be4aa1f202e60da4145, type: 3}
 --- !u!1 &9010099160773433435 stripped

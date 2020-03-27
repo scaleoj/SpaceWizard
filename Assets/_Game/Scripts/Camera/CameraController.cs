@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
+using UnityEngine.Rendering.PostProcessing;
 using UnityEngine.Serialization;
 using Quaternion = UnityEngine.Quaternion;
 using Vector3 = UnityEngine.Vector3;
@@ -10,6 +11,7 @@ public class CameraController : MonoBehaviour
 {
 
     private PlayerInputProvider m_input;
+    [SerializeField] private Settings graphihcsSettings;
     [SerializeField] private bool trueIsometricCam;
     [SerializeField] private bool doZoomLerp;
     [FormerlySerializedAs("cameraMaxXrange")] [SerializeField] private int cameraMaxPosXrange = 10;
@@ -22,10 +24,12 @@ public class CameraController : MonoBehaviour
     [SerializeField] private float zoomLerpSpeed = 1f;
 
     [SerializeField] private float cameraMovementSpeed;
-    
-    
+
+
 
     private Camera cam;
+    private DepthOfField dof;
+    private ChromaticAberration _chromaticAberration;
 
     //private float zoomLerpTime;
     // Start is called before the first frame update
@@ -33,6 +37,12 @@ public class CameraController : MonoBehaviour
     {
         m_input = GetComponent<PlayerInputProvider>();
         cam = gameObject.GetComponent<Camera>();
+        
+        GetComponent<PostProcessVolume>().profile.TryGetSettings(out dof);
+        GetComponent<PostProcessVolume>().profile.TryGetSettings(out _chromaticAberration);
+        
+        dof.enabled.value = graphihcsSettings.DepthOfField;
+        _chromaticAberration.enabled.value = graphihcsSettings.ChromaticAberattion;
     }
 
     public IEnumerator CameraInterpolationRotator(Quaternion start, Quaternion end)
