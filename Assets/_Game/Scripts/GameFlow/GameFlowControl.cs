@@ -17,6 +17,8 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     [SerializeField] private GameObjectEvent gameobjectChanged;
     [SerializeField] private IntVariable selectedAbility;
     [SerializeField] private GameObjectEvent nextGOinQueue;
+    [SerializeField] private StringEvent alertEvent;
+
 
     [SerializeField] private BoolVariable gameUpdates;
     //[SerializeField] private GameObjectVariable currentSelectedGameObject;
@@ -146,6 +148,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
 
                if (remainingAP1 < 0)
                {
+                   alertEvent.Raise("Not enough Action-Points!");
                    return;
                }
                
@@ -166,6 +169,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
                
                if (remainingAP2 < 0)
                {
+                   alertEvent.Raise("Not enough Action-Points!");
                    return;
                }
                
@@ -300,7 +304,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         }
         else
         {
-            Debug.Log("Cant Move");
+            alertEvent.Raise("Not enough Action-Points to move there!");
         }
     }
 

@@ -17,6 +17,7 @@ public class GOSelector : MonoBehaviour
     [SerializeField] private GameObjectEvent hoverGOChanged;
     [SerializeField] private GameObject stdselector;
     [SerializeField] private BoolVariable mouseOverUI;
+
     private Camera cam;
     
     void Start()
@@ -30,6 +31,7 @@ public class GOSelector : MonoBehaviour
         Ray rayfromMouse = cam.ScreenPointToRay(m_input.mousePos());
         if (Physics.Raycast(rayfromMouse.origin, rayfromMouse.direction, out hit, 50f))
         {
+            
             if (hit.transform.gameObject.GetComponent<TileContainer>() != null)
             {
                 TileContainer tile = hit.transform.gameObject.GetComponent<TileContainer>();
@@ -59,6 +61,7 @@ public class GOSelector : MonoBehaviour
                     }
                 }
 
+
                 if (tile.gameObject.layer == 9 && (tile.State == TileContainer.tileState.NORMAL || tile.State == TileContainer.tileState.IN_MOVE_RANGE || tile.State == TileContainer.tileState.TARGET) && !mouseOverUI.Value)
                 {
                     hoverGO.Value = hit.transform.gameObject;
@@ -77,6 +80,8 @@ public class GOSelector : MonoBehaviour
             else
             {
                 //stdselector.SetActive(false);
+                hoverGO.Value = null;
+                hoverGOChanged.Raise(null);
             }    
         }
         else

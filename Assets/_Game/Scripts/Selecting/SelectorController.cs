@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SelectorController : MonoBehaviour, IAtomListener<GameObject>
 {
-    
+    /*MIGHT WANT TO DELETE THIS SCRIPT*/
     [SerializeField] private GameObjectEvent currentGameObjectChanged;
 
     private GameObject lastClicked;
