@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54fc04d52438f364eaeda64cb6d9f61d, type: 3}
-  m_Name: Snipe
+  m_Script: {fileID: 11500000, guid: e845f719952b9ec42aa1082b6205599d, type: 3}
+  m_Name: MoveToolTip
   m_EditorClassIdentifier: 
-  abilityName: Snipeshot
-  abilityDescription: Shoots a long distance snipe shot at the specified target.
-  aoeRange: 0
-  APCost: 4
+  header: Move Unit
+  description: 'Moves your character to a tile in range. The further away the tile
+    is, the more Action Points it costs.
+
+
+    AP Cost:  1 - 3 per tile'

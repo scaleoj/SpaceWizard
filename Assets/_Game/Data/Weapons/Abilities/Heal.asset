@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 906c31fe4920344478ad42f110fc2b55, type: 3}
   m_Name: Heal
   m_EditorClassIdentifier: 
-  APCost: 2
   abilityName: Heal
+  abilityDescription: 'Heals the specified target.
+
+
+    AP Cost: 2'
   aoeRange: 2
+  APCost: 2

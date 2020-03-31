@@ -8,8 +8,8 @@ using UnityEngine.Serialization;
 public class Weapon : ScriptableObject
 {
     //ToolTip and purely visual Stuff
-    [FormerlySerializedAs("name")] [SerializeField] private string weaponName;
-    [SerializeField] private string weaponDescription;
+    [FormerlySerializedAs("name")] [TextArea] [SerializeField] private string weaponName;
+    [TextArea][SerializeField] private string weaponDescription;
     
     //Parameter
     [SerializeField] private int minPhysicalDmg;
