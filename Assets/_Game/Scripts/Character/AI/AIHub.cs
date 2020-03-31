@@ -4,7 +4,7 @@ using _Game.Scripts.GameFlow.Grid;
 
 namespace _Game.Scripts.Character.AI
 {
-    public class AiHub : MonoBehaviour
+    public class AIHub : MonoBehaviour
     {
         private AiState _state;
         
@@ -20,41 +20,39 @@ namespace _Game.Scripts.Character.AI
             set => _state = value;
         }
 
-        public enum Team
-        {
-            Team1,
-            Team2
-        }
+
         
         private AiBrain _brain;
         private AiSenses _senses;
         private Stats.Character _character;
 
         [SerializeField] private TileHub hub;
-        [SerializeField] private Team team;
         [SerializeField] private QueueManager queueManager;
-        [SerializeField] private Team playerTeam;
-
 
 
         // Start is called before the first frame update
         private void Start()
         {
             _state = AiState.Asleep;
+            
             _character = GetComponent<global::_Game.Scripts.Character.Stats.Character>();
-            if (team == playerTeam) return;
+            if (_character.CharStats.Team == 0) return;
             while (hub == null)
-            {
-                _senses = new AiSenses(hub, queueManager, _character);
+            {   
                 Debug.Log(gameObject.name + ": No TileHub found!");
             }
-            _brain = new AiBrain(_senses, team);
-
+            _senses = new AiSenses(hub, queueManager, _character);
+            _brain = new AiBrain(_senses, hub, _character);
         }
 
         public void PositionUpdate()
         {
             _senses.UpdateRanges();
+        }
+
+        public void BeActive()
+        {
+            _brain.MakeDecision();
         }
 
     }

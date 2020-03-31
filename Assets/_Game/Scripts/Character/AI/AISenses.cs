@@ -1,6 +1,8 @@
 ﻿
 
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using _Game.Scripts.GameFlow;
 using _Game.Scripts.GameFlow.Grid;
@@ -33,6 +35,55 @@ namespace _Game.Scripts.Character.AI
             }
 
             _otherCharacterRange = list;
+        }
+
+        public List<KeyValuePair<GameObject, int>> GetRanges()
+        {
+            var copy = _otherCharacterRange;
+            copy.Sort((x, y) => y.Value.CompareTo(x.Value));
+            return copy;
+        }
+
+        public void Retreat()
+        {
+            var tempPath = _hub.FindPath(_character.OccupiedTile, _hub.Retreat);
+            
+            if (tempPath.Count > 3)
+            {
+                tempPath = tempPath.Take(4).ToList();
+            }
+            _character.AImove(_hub, tempPath);
+        }
+        
+        public void Move(Stats.Character target)
+        {
+ 
+            var tempPath = _hub.FindPath(_character.OccupiedTile, target.OccupiedTile); 
+             _character.AImove(_hub, tempPath);
+             /*
+ UpdateRanges();
+ */
+        }
+
+        public int ApCount()
+        {
+            return _character.CharStats.CurrentAp;
+        }
+
+        public void DecreaseAP()
+        {
+            _character.CharStats.CurrentAp--;
+        }
+
+
+        public void Next()
+        {
+            _queueManager.Next();
+        }
+
+        public String Name()
+        {
+            return _character.name;
         }
     }
     

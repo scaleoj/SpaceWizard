@@ -12,9 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537e5452d4361254280c6729caab9066, type: 3}
   m_Name: Sniper Rifle
   m_EditorClassIdentifier: 
-  name: Long Road Ahead
-  minPhysicalDmg: 3
-  maxPhysicalDmg: 5
+  weaponName: Long Road Ahead
+  weaponDescription: An old sniper rifle that hits its target with certainty
+  minPhysicalDmg: 2
+  maxPhysicalDmg: 4
   minMagicDmg: 0
   maxMagicDmg: 0
+  minPureDmg: 1
+  maxPureDmg: 2
   range: 10
+  missChance: 0.01
+  critMultiplier: 1.5
+  abilities:
+  - {fileID: 11400000, guid: 25afc6dade10d2340b4b002cb277b7a2, type: 2}

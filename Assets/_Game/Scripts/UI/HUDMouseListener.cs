@@ -8,31 +8,35 @@ using UnityEngine.Serialization;
 using _Game.Scripts.Character.Stats;
 using _Game.Scripts.GameFlow;
 
-public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
+public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>, IAtomListener<Void>
 {
     [SerializeField] private GameObject statTexts, ActionMenuContainer, WeaponOneButton, WeaponTwoButton;
     [FormerlySerializedAs("background")] [SerializeField] private GameObject abilityBackground;
-    [SerializeField] private GameObject statbackground;
+    [SerializeField] private GameObject APBar;
 
-    [SerializeField] private GameObjectEvent currentGameObjectChanged;
+
+    [Header("AbilityFelder")] [SerializeField]
+    private GameObject[] Weapon1AbilityButtons, Weapon2AbilityButtons;
+    
+    [SerializeField] private GameObjectEvent nextinQueue;
 
     [SerializeField] private BoolVariable isOverUIObject;
 
     [SerializeField] private QueueManager queue;
 
+    [SerializeField] private VoidEvent updateHUD;
+
     private EventSystem _eventSystem;
 
-    private TextUpdater textUpdater;
+    private GameObject lastObjectInQueue;
 
-    private TextMeshProUGUI WeaponOneText, WeaponTwoText;
-    // Start is called before the first frame update
     void Awake()
     {
-        currentGameObjectChanged.RegisterListener(this);
-        textUpdater = statTexts.GetComponent<TextUpdater>();
-        WeaponOneText = WeaponOneButton.GetComponentInChildren<TextMeshProUGUI>();
-        WeaponTwoText = WeaponTwoButton.GetComponentInChildren<TextMeshProUGUI>();
+        nextinQueue.RegisterListener(this);
+        updateHUD.RegisterListener(this);
         _eventSystem = GetComponent<EventSystem>();
+        OnEventRaised(queue.Queue[queue.ActivePosition].Key);
+        lastObjectInQueue = queue.Queue[queue.ActivePosition].Key;
     }
 
 
@@ -54,35 +58,43 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
         abilityBackground.SetActive(false);
     }
 
+    /*-Gets raised whenever next() in the QueueManager is called, Updates UI-*/
     public void OnEventRaised(GameObject item)
     {
         
         if (item != null)
         {
-            statTexts.SetActive(true);
-            statbackground.SetActive(true);
-            if (item == queue.Queue[queue.ActivePosition].Key)
+
+            if (/*item == queue.Queue[queue.ActivePosition].Key &&*/ item.GetComponent<Character>().CharStats.Team == 0)
             {
                 abilityBackground.SetActive(true);
                 ActionMenuContainer.SetActive(true);
-                if (item.GetComponent<Character>().CharStats.PrimaryWeapon.Name == "EMPTY")
+                statTexts.SetActive(true);
+                APBar.SetActive(true);
+                if (item.GetComponent<Character>().CharStats.PrimaryWeapon.WeaponName != "EMPTY")
                 {
-                    WeaponOneButton.SetActive(false);
+                    ShowWeaponOneAbilities();
                 }
                 else
                 {
-                    WeaponOneButton.SetActive(true);
-                    WeaponOneText.text = item.GetComponent<Character>().CharStats.PrimaryWeapon.Name;     
+                    for (int i = 0; i < Weapon1AbilityButtons.Length; i++)
+                    {
+                        Weapon1AbilityButtons[i].SetActive(false);
+                    }
                 }
-                if (item.GetComponent<Character>().CharStats.SecondaryWeapon.Name == "EMPTY")
+
+                if (item.GetComponent<Character>().CharStats.SecondaryWeapon.WeaponName != "EMPTY")
                 {
-                    WeaponTwoButton.SetActive(false);
+                    ShowWeaponTwoAbilities();
                 }
                 else
                 {
-                    WeaponTwoButton.SetActive(true);
-                    WeaponTwoText.text = item.GetComponent<Character>().CharStats.SecondaryWeapon.Name;     
+                    for (int i = 0; i < Weapon2AbilityButtons.Length; i++)
+                    {
+                        Weapon2AbilityButtons[i].SetActive(false);
+                    }
                 }
+                
             }
             else
             {
@@ -90,14 +102,72 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>
                 abilityBackground.SetActive(false);
             }
             
-            textUpdater.UpdateText(item);
+            updateHUD.Raise();
         }
         else
         {
             abilityBackground.SetActive(false);
             statTexts.SetActive(false);
-            statbackground.SetActive(false);
+            APBar.SetActive(false);
             ActionMenuContainer.SetActive(false);
+        }
+    }
+    
+    //Control methods for the UI
+    public void ShowWeaponOneAbilities()
+    {
+        Ability[] abilitiesDummy = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>().CharStats
+            .PrimaryWeapon.Abilities;
+        for (int i = 0; i < abilitiesDummy.Length; i++)
+        {
+            Weapon1AbilityButtons[i].SetActive(true);
+            Weapon1AbilityButtons[i].GetComponent<TextLinker>().AbilityUiText.text = abilitiesDummy[i].AbilityName;
+            Weapon1AbilityButtons[i].GetComponent<TextLinker>().ApCostUi.text = abilitiesDummy[i].ApCost.ToString();
+        }
+
+        if (abilitiesDummy.Length != 0)
+        {
+            for (int i = Weapon1AbilityButtons.Length - 1; i >= abilitiesDummy.Length; i--)
+            {
+                Weapon1AbilityButtons[i].SetActive(false);
+            }
+        }
+        else
+        {
+            Debug.Log(abilitiesDummy.Length);
+        }
+    }
+
+    public void ShowWeaponTwoAbilities()
+    {
+        Ability[] abilitiesDummy = queue.Queue[queue.ActivePosition].Key.GetComponent<Character>().CharStats
+            .SecondaryWeapon.Abilities;
+        for (int i = 0; i < abilitiesDummy.Length; i++)
+        {
+            Weapon2AbilityButtons[i].SetActive(true);
+            Weapon2AbilityButtons[i].GetComponent<TextLinker>().AbilityUiText.text = abilitiesDummy[i].AbilityName;
+            Weapon2AbilityButtons[i].GetComponent<TextLinker>().ApCostUi.text = abilitiesDummy[i].ApCost.ToString();
+        }
+
+        if (abilitiesDummy.Length != 0)
+        {
+            for (int i = Weapon2AbilityButtons.Length - 1; i >= abilitiesDummy.Length; i--)
+            {
+                Weapon2AbilityButtons[i].SetActive(false);
+            }  
+        }
+        else
+        {
+            Debug.Log(abilitiesDummy.Length);
+        }
+    }
+    
+    public void OnEventRaised(Void item)
+    {
+        if (lastObjectInQueue != queue.Queue[queue.ActivePosition].Key)
+        {
+            lastObjectInQueue = queue.Queue[queue.ActivePosition].Key;
+            OnEventRaised(lastObjectInQueue);
         }
     }
 }

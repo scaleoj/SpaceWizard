@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.WSA;
 
 namespace _Game.Scripts.GameFlow.Grid
 {
@@ -16,7 +16,6 @@ namespace _Game.Scripts.GameFlow.Grid
 
         public List<TileAttribute> FindPath(GameObject start, GameObject end)
         {
-            
             //Implementierung A*
             var startX = 0;
             var startY = 0;
@@ -26,19 +25,18 @@ namespace _Game.Scripts.GameFlow.Grid
             var startBool = false;
             var endBool = false;
 
-            
-            foreach (var t in _grid.Cubes)
+            foreach (var t in _grid.GetCubes())
             {
                 if (t.Contains(start))
                 {
-                    startX = _grid.Cubes.IndexOf(t);
+                    startX = _grid.GetCubes().IndexOf(t);
                     startY = t.IndexOf(start);
                     startBool = true;
                 }
 
                 if (t.Contains(end))
                 {
-                    endX = _grid.Cubes.IndexOf(t);
+                    endX = _grid.GetCubes().IndexOf(t);
                     endY = t.IndexOf(end);
                     endBool = true;
                 }
@@ -53,7 +51,7 @@ namespace _Game.Scripts.GameFlow.Grid
             var openList = new List<TileAttribute>();
             var closedList = new HashSet<TileAttribute>();
             
-            openList.Add(_grid.Neighbours[startX, startY]);
+            openList.Add(_grid.GetNeighbours()[startX, startY]);
             while (openList.Count > 0)
             {
                 var currentTile = openList[0];
@@ -70,11 +68,15 @@ namespace _Game.Scripts.GameFlow.Grid
 
                 if (currentTile.Node == end)
                 {
-                    return GetFinalPath(_grid.Neighbours[startX, startY], _grid.Neighbours[endX, endY]);
+                    return GetFinalPath(_grid.GetNeighbours()[startX, startY], _grid.GetNeighbours()[endX, endY]);
                 }
-                foreach (var tiles in _grid.GetNeighboursTiles(currentTile.Node))
+
+                var tilesInRange = _grid.GetNeighboursTiles(currentTile.Node);
+                tilesInRange = tilesInRange.Where(c => c != null);
+                
+                foreach (var tiles in tilesInRange)
                 {
-                    if (tiles.node.layer == LayerMask.GetMask("Walkable") || closedList.Contains(tiles))
+                    if (tiles.node.layer != 9<<LayerMask.GetMask("Walkable") || closedList.Contains(tiles))
                     {
                         continue;
                     }
@@ -84,8 +86,8 @@ namespace _Game.Scripts.GameFlow.Grid
                     if (moveCost >= tiles.G &&
                         openList.Contains(tiles)) continue;
                     tiles.G = moveCost;
-                    tiles.H = GetManhattenDistance(tiles, _grid.Neighbours[endX, endY]);
-                    tiles.Parent = currentTile;
+                    tiles.H = GetManhattenDistance(tiles, _grid.GetNeighbours()[endX, endY]);
+                    tiles.parent = currentTile;
                     if (!openList.Contains(tiles))
                     {
                         openList.Add(tiles);
@@ -115,7 +117,7 @@ namespace _Game.Scripts.GameFlow.Grid
             while (currentTile != start)
             {
                 finalPath.Add(currentTile);
-                currentTile = currentTile.Parent;
+                currentTile = currentTile.parent;
             }
             finalPath.Reverse();
 

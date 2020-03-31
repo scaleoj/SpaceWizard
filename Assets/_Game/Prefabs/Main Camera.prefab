@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb36a1e500b6bc142a62e1d976b4d7e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  deadButtonTime: 0
+  deadButtonTime: 0.08
 --- !u!114 &9010099159844992303
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,12 +113,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   trueIsometricCam: 0
-  cameraMaxXrange: 5
-  cameraMaxZRange: 5
-  cameraMaxZoomOut: 10
-  cameraMaxZoomIn: 3.5
-  zoomSpeed: 0.5
-  cameraMovementSpeed: 0.08
+  doZoomLerp: 0
+  cameraMaxXrange: 8
+  cameraMaxZRange: 8
+  cameraMaxZoomOut: 12
+  cameraMaxZoomIn: 5
+  zoomSpeed: 20
+  zoomLerpSpeed: 1
+  cameraMovementSpeed: 8
 --- !u!114 &9010099159844992301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -136,7 +138,13 @@ MonoBehaviour:
     type: 2}
   currentGameObjectChanged: {fileID: 11400000, guid: ceeca165deee9254a9f7954dfedd4a4c,
     type: 2}
+  currentCharacter: {fileID: 11400000, guid: 6c89f385036a694449864d4ff6649293, type: 2}
+  currentCharacterChanged: {fileID: 11400000, guid: 2b22fd178ff8a294881b4770ddb37a5b,
+    type: 2}
+  hoverGO: {fileID: 11400000, guid: cc5915cf186c3a94ab32349f162c10fc, type: 2}
+  hoverGOChanged: {fileID: 11400000, guid: c93762a5a0205df4fa0ff222e37b3708, type: 2}
   stdselector: {fileID: 0}
+  mouseOverUI: {fileID: 11400000, guid: d6d4d362e81def04297319010ed5b464, type: 2}
 --- !u!114 &5608293321202328569
 MonoBehaviour:
   m_ObjectHideFlags: 0

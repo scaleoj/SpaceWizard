@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class SelectorController : MonoBehaviour, IAtomListener<GameObject>
 {
-    
+    /*MIGHT WANT TO DELETE THIS SCRIPT*/
     [SerializeField] private GameObjectEvent currentGameObjectChanged;
 
     private GameObject lastClicked;
@@ -20,20 +20,26 @@ public class SelectorController : MonoBehaviour, IAtomListener<GameObject>
 
     public void OnEventRaised(GameObject item)
     {
-        if (item.GetComponent<TileContainer>() != null /*&& item.GetComponent<TileContainer>().Walkable*/)
+        /*if (item.GetComponent<TileContainer>() != null && item.layer == 9)
         {
             if (lastClicked != null)
             {
-                lastClicked.GetComponent<TileContainer>().State = saveTileState;
+                if (lastClicked.GetComponent<TileContainer>().State != TileContainer.tileState.HOVERING)
+                {
+                    lastClicked.GetComponent<TileContainer>().State = saveTileState;
+                }
             }
-            saveTileState = item.GetComponent<TileContainer>().State;
+
+            if (item.GetComponent<TileContainer>().State != TileContainer.tileState.HOVERING)
+            {
+                saveTileState = item.GetComponent<TileContainer>().State;
+            }
             lastClicked = item;
             item.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
-            
         }
         else
         {
             Debug.Log("Not a Tile.");
-        }
+        }*/
     }
 }

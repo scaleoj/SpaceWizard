@@ -11,7 +11,7 @@ public class TileContainer : MonoBehaviour
     */
     public enum tileState
     {
-        NORMAL, SELECTED, TARGET, IN_MOVE_RANGE
+        NORMAL, SELECTED, TARGET, IN_MOVE_RANGE, HOVERING
     }
     [Header("Meshes and Materials")]
     [SerializeField] private Mesh selectedMesh;
@@ -20,6 +20,8 @@ public class TileContainer : MonoBehaviour
     [SerializeField] private Material targetMaterial;
     [SerializeField] private Mesh inMoveRangeMesh;
     [SerializeField] private Material inMoveRangeMaterial;
+    [SerializeField] private Mesh hoveringMesh;
+    [SerializeField] private Material hoveringMaterial;
 
     [Header("Highlighter")]
     [SerializeField]private GameObject selectedHighlighter;
@@ -66,14 +68,22 @@ public class TileContainer : MonoBehaviour
                     meshRenderer.enabled = true;
                     meshFilter.mesh = targetMesh;
                     meshRenderer.material = targetMaterial;
+                    selectedHighlighter.SetActive(true);
+                    selectedHighlighter.GetComponent<Light>().color = Color.red;
                     break;
                 case tileState.IN_MOVE_RANGE:
                     meshRenderer.enabled = true;
                     meshFilter.mesh = inMoveRangeMesh;
                     meshRenderer.material = inMoveRangeMaterial;
-                    selectedHighlighter.SetActive(true);
-                    
+                    selectedHighlighter.SetActive(true);                 
                     selectedHighlighter.GetComponent<Light>().color = Color.blue;
+                    break;
+                case tileState.HOVERING:
+                    meshRenderer.enabled = true;
+                    meshFilter.mesh = hoveringMesh;
+                    meshRenderer.material = hoveringMaterial;
+                    selectedHighlighter.SetActive(true);
+                    selectedHighlighter.GetComponent<Light>().color = Color.yellow;
                     break;
                 default:
                     meshRenderer.enabled = false;

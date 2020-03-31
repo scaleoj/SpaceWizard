@@ -13,20 +13,25 @@ public class GOSelector : MonoBehaviour
     [SerializeField] private GameObjectEvent currentGameObjectChanged;
     [SerializeField] private GameObjectVariable currentCharacter;
     [SerializeField] private GameObjectEvent currentCharacterChanged;
+    [SerializeField] private GameObjectVariable hoverGO;
+    [SerializeField] private GameObjectEvent hoverGOChanged;
     [SerializeField] private GameObject stdselector;
     [SerializeField] private BoolVariable mouseOverUI;
+
     private Camera cam;
     
     void Start()
     {
         cam = GetComponent<Camera>();
     }
+
     private void Update()
     {
         RaycastHit hit;
         Ray rayfromMouse = cam.ScreenPointToRay(m_input.mousePos());
         if (Physics.Raycast(rayfromMouse.origin, rayfromMouse.direction, out hit, 50f))
         {
+            
             if (hit.transform.gameObject.GetComponent<TileContainer>() != null)
             {
                 TileContainer tile = hit.transform.gameObject.GetComponent<TileContainer>();
@@ -43,27 +48,47 @@ public class GOSelector : MonoBehaviour
                     {
                         currentCharacter.Value = null;
                         currentCharacterChanged.Raise(null);
-                    }   
+                    }
+                    
+                    if (tile.gameObject.layer == 9 && tile.State == TileContainer.tileState.NORMAL)
+                    {
+                       // stdselector.SetActive(true);
+                       // stdselector.transform.position = hit.transform.position;   
+                    }
+                    else
+                    {
+                       // stdselector.SetActive(false);
+                    }
+                }
+
+
+                if (tile.gameObject.layer == 9 && (tile.State == TileContainer.tileState.NORMAL || tile.State == TileContainer.tileState.IN_MOVE_RANGE || tile.State == TileContainer.tileState.TARGET) && !mouseOverUI.Value)
+                {
+                    hoverGO.Value = hit.transform.gameObject;
+                    hoverGOChanged.Raise(hit.transform.gameObject);
                 }
                 
-                if (tile.Walkable && tile.State == TileContainer.tileState.NORMAL)
+                
+
+                if (mouseOverUI.Value || tile.State == TileContainer.tileState.SELECTED)
                 {
-                    stdselector.SetActive(true);
-                    stdselector.transform.position = hit.transform.position;   
+                    hoverGO.Value = null;
+                    hoverGOChanged.Raise(null);
                 }
-                else
-                {
-                    stdselector.SetActive(false);
-                }
+                
             }
             else
             {
-                stdselector.SetActive(false);
+                //stdselector.SetActive(false);
+                hoverGO.Value = null;
+                hoverGOChanged.Raise(null);
             }    
         }
         else
         {
-            stdselector.SetActive(false);  
+            //stdselector.SetActive(false);  
+            hoverGO.Value = null;
+            hoverGOChanged.Raise(null);
         }
     }
 }
