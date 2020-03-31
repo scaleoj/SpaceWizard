@@ -7,8 +7,8 @@ public class Ability : ScriptableObject
     public virtual void Attack(GameObject target, int distance) {}
     
     //ToolTip and purely visual Stuff
-    [SerializeField] private string abilityName;
-    [SerializeField] private string abilityDescription;
+    [TextArea][SerializeField] private string abilityName;
+    [TextArea][SerializeField] private string abilityDescription;
     
     //Parameter
     [SerializeField] private int aoeRange;

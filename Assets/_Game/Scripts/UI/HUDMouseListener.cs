@@ -123,6 +123,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>, IAtomL
             Weapon1AbilityButtons[i].SetActive(true);
             Weapon1AbilityButtons[i].GetComponent<TextLinker>().AbilityUiText.text = abilitiesDummy[i].AbilityName;
             Weapon1AbilityButtons[i].GetComponent<TextLinker>().ApCostUi.text = abilitiesDummy[i].ApCost.ToString();
+            Weapon1AbilityButtons[i].GetComponent<ToolTip>().SetLinkedObject(abilitiesDummy[i]);
         }
 
         if (abilitiesDummy.Length != 0)
@@ -147,6 +148,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>, IAtomL
             Weapon2AbilityButtons[i].SetActive(true);
             Weapon2AbilityButtons[i].GetComponent<TextLinker>().AbilityUiText.text = abilitiesDummy[i].AbilityName;
             Weapon2AbilityButtons[i].GetComponent<TextLinker>().ApCostUi.text = abilitiesDummy[i].ApCost.ToString();
+            Weapon2AbilityButtons[i].GetComponent<ToolTip>().SetLinkedObject(abilitiesDummy[i]);
         }
 
         if (abilitiesDummy.Length != 0)
