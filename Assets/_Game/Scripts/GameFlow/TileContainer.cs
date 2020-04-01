@@ -11,7 +11,7 @@ public class TileContainer : MonoBehaviour
     */
     public enum tileState
     {
-        NORMAL, SELECTED, TARGET, IN_MOVE_RANGE, HOVERING
+        NORMAL, SELECTED, TARGET, IN_MOVE_RANGE, HOVERING, HIGHLIGHTED
     }
     [Header("Meshes and Materials")]
     [SerializeField] private Mesh selectedMesh;
@@ -22,6 +22,8 @@ public class TileContainer : MonoBehaviour
     [SerializeField] private Material inMoveRangeMaterial;
     [SerializeField] private Mesh hoveringMesh;
     [SerializeField] private Material hoveringMaterial;
+    [SerializeField] private Mesh highlightMesh;
+    [SerializeField] private Material highlightMaterial;
 
     [Header("Highlighter")]
     [SerializeField]private GameObject selectedHighlighter;
@@ -84,6 +86,13 @@ public class TileContainer : MonoBehaviour
                     meshRenderer.material = hoveringMaterial;
                     selectedHighlighter.SetActive(true);
                     selectedHighlighter.GetComponent<Light>().color = Color.yellow;
+                    break;
+                case tileState.HIGHLIGHTED:
+                    meshRenderer.enabled = true;
+                    meshFilter.mesh = highlightMesh;
+                    meshRenderer.material = highlightMaterial;
+                    selectedHighlighter.SetActive(true);
+                    selectedHighlighter.GetComponent<Light>().color = Color.green;
                     break;
                 default:
                     meshRenderer.enabled = false;

@@ -304,7 +304,14 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         }
         else
         {
-            alertEvent.Raise("Not enough Action-Points to move there!");
+            if (item.GetComponent<TileContainer>().OccupiedGameObject != null)
+            {
+                alertEvent.Raise("Tile already occupied!");
+            }
+            else
+            {
+                alertEvent.Raise("Not enough Action-Points to move there!");
+            }
         }
     }
 

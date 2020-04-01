@@ -16,6 +16,7 @@ public class UIQueueControl : MonoBehaviour, IAtomListener<Void>
 
     private TextMeshProUGUI[] nameTexts;
     private TextMeshProUGUI[] positionTexts;
+    private TileContainer.tileState cachedState;
     
     void Start()
     {
@@ -73,6 +74,49 @@ public class UIQueueControl : MonoBehaviour, IAtomListener<Void>
             else
             {
                 queueSlots[i].SetActive(false);
+            }
+        }
+    }
+
+    public void highlightOnPointerEnter(GameObject originSlot)
+    {
+        for (int i = 0; i < queueSlots.Length; i++)
+        {
+            if (originSlot == queueSlots[i])
+            {
+                if (_queueManager.ActivePosition + i < _queueManager.Queue.Count)
+                {
+                    cachedState = _queueManager.Queue[_queueManager.ActivePosition + i].Key.GetComponent<Character>().OccupiedTile
+                        .GetComponent<TileContainer>().State;
+                    _queueManager.Queue[_queueManager.ActivePosition + i].Key.GetComponent<Character>().OccupiedTile
+                        .GetComponent<TileContainer>().State = TileContainer.tileState.HIGHLIGHTED;
+                }
+                else
+                {
+                    cachedState = _queueManager.Queue[_queueManager.ActivePosition + i - _queueManager.Queue.Count].Key.GetComponent<Character>().OccupiedTile
+                        .GetComponent<TileContainer>().State;
+                    _queueManager.Queue[_queueManager.ActivePosition + i - _queueManager.Queue.Count].Key.GetComponent<Character>().OccupiedTile
+                        .GetComponent<TileContainer>().State = TileContainer.tileState.HIGHLIGHTED;
+                }
+            }
+        }
+    }
+
+    public void highlightOnPointerExit(GameObject originSlot)
+    {
+        for (int i = 0; i < queueSlots.Length; i++)
+        {
+            if (originSlot == queueSlots[i])
+            {
+                if (_queueManager.ActivePosition + i < _queueManager.Queue.Count)
+                {
+                    _queueManager.Queue[_queueManager.ActivePosition + i].Key.GetComponent<Character>().OccupiedTile
+                        .GetComponent<TileContainer>().State = cachedState;                }
+                else
+                {
+                    _queueManager.Queue[_queueManager.ActivePosition + i - _queueManager.Queue.Count].Key.GetComponent<Character>().OccupiedTile
+                        .GetComponent<TileContainer>().State = cachedState;
+                }
             }
         }
     }

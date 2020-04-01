@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e845f719952b9ec42aa1082b6205599d, type: 3}
-  m_Name: MoveToolTip
+  m_Name: ApBatteryToolTIp
   m_EditorClassIdentifier: 
-  header: Move Unit
-  description: Moves your character to a tile in range. The further away the tile
-    is, the more Action Points it costs. Costs depend on your class.
+  header: Action Points
+  description: These are your current Action Points. Everything you do costs Action
+    Points. Use them carefully!
