@@ -26982,6 +26982,23 @@ PrefabInstance:
       propertyPath: _layer.m_Bits
       value: 512
       objectReference: {fileID: 0}
+    - target: {fileID: 3917794257919911837, guid: dfd5396492ed5d847a547a806f8e0e06,
+        type: 3}
+      propertyPath: grid
+      value: 
+      objectReference: {fileID: 563496733}
+    - target: {fileID: 3917794257919911837, guid: dfd5396492ed5d847a547a806f8e0e06,
+        type: 3}
+      propertyPath: _queueManager
+      value: 
+      objectReference: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9,
+        type: 2}
+    - target: {fileID: 3917794257919911837, guid: dfd5396492ed5d847a547a806f8e0e06,
+        type: 3}
+      propertyPath: currentHudState
+      value: 
+      objectReference: {fileID: 11400000, guid: 8eeb5112d4387a543a3ff8c9eb02ef8e,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dfd5396492ed5d847a547a806f8e0e06, type: 3}
 --- !u!1 &3059369236629110205

@@ -1,5 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using _Game.Scripts.Character.Stats;
+using _Game.Scripts.GameFlow;
+using _Game.Scripts.GameFlow.Grid;
 using UnityAtoms;
 using UnityEngine;
 
@@ -9,12 +12,23 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
     [SerializeField] private GameObjectVariable clickedGameObject;
     [SerializeField] private PlayerInputProvider m_input;
     [SerializeField] private BoolVariable mouseOverUI;
+    [SerializeField] private State currentHudState;
+    [SerializeField] private TileHub grid;
+    [SerializeField] private QueueManager _queueManager;
 
     private GameObject lastHovered;
 
     private bool wasClicked;
 
     private TileContainer.tileState saveTileState;
+
+    private TileContainer.tileState[] savedPathTileStates;
+    
+    //private List<TileAttribute> savedPathTiles;
+
+    private TileAttribute[] currentPathTiles;
+
+    private bool first = true;
 
     void Start()
     {
@@ -39,8 +53,9 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
     public void OnEventRaised(GameObject item)
     {
         if (item != null && item.layer == 9)
-       {
-           if (item.GetComponent<TileContainer>().State != TileContainer.tileState.SELECTED)
+        {
+            TileContainer itemTileContainer = item.GetComponent<TileContainer>(); //Optimization
+           if (itemTileContainer.State != TileContainer.tileState.SELECTED)
            {
                if (lastHovered != null)
                {
@@ -48,6 +63,7 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
                    {
                        lastHovered.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
                        wasClicked = false;
+                       
                    }
                    else
                    {
@@ -55,9 +71,28 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
                    }
                }
 
-               saveTileState = item.GetComponent<TileContainer>().State;
-               lastHovered = item;
-               item.GetComponent<TileContainer>().State = TileContainer.tileState.HOVERING;
+               if (itemTileContainer.State == TileContainer.tileState.HIGHLIGHTED && savedPathTileStates != null /*&& savedPathTileStates.Length > 1*/ && currentHudState.SelectedAction == State.currentAction.MOVE) //When u move from the hovered tile to the last tile in the highlighted path to prevent it saving "HIGHLIGHTED" as the tile state
+               {
+                   saveTileState = savedPathTileStates[savedPathTileStates.Length - 1];
+                   lastHovered = item;
+                   itemTileContainer.State = TileContainer.tileState.HOVERING;
+               }
+               /*else if(itemTileContainer.State == TileContainer.tileState.HIGHLIGHTED && savedPathTileStates != null && savedPathTileStates.Length == 0 && currentHudState.SelectedAction == State.currentAction.MOVE)
+               {
+                   
+               }*/
+               else if (itemTileContainer.State == TileContainer.tileState.HIGHLIGHTED && currentHudState.SelectedAction == State.currentAction.IDLE) //Else it bugs when moving cursor from the queue to the field directly over a highlighted tile
+               {
+                   saveTileState = TileContainer.tileState.NORMAL;
+                   lastHovered = item;
+                   itemTileContainer.State = TileContainer.tileState.HOVERING;
+               }
+               else
+               {
+                   saveTileState = itemTileContainer.State;
+                   lastHovered = item;
+                   itemTileContainer.State = TileContainer.tileState.HOVERING;
+               }
            }
            else
            {
@@ -75,5 +110,73 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
                lastHovered = null;
            }
        }
+
+        /*Highlight of pathtiles*/
+        
+        if (lastHovered != null) //Lasthovered is the currenthovered Tile here. Its set when a viable tile is hovered. Otherwise its null
+        {
+            switch (currentHudState.SelectedAction) 
+            {
+                case State.currentAction.MOVE:
+                    
+                    //Remove old path
+                    if (currentPathTiles != null && savedPathTileStates != null)
+                    {
+                        for (int i = 0; i < currentPathTiles.Length - 1; i++)
+                        {
+                            currentPathTiles[i].node.GetComponent<TileContainer>().State = savedPathTileStates[i];
+                        }
+                    } 
+                    
+                    // Array Init / Calc new path
+                    currentPathTiles = grid.FindPath(
+                            _queueManager.Queue[_queueManager.ActivePosition].Key.GetComponent<Character>()
+                                .OccupiedTile, item).ToArray();
+                    
+                    //Remove Final Tile which is the hovered tile/ set it null
+                    if (currentPathTiles.Length > 0)
+                    {
+                        currentPathTiles[currentPathTiles.Length - 1] = null;
+                        //Init SavedPath Tiles
+                        savedPathTileStates = new TileContainer.tileState[currentPathTiles.Length - 1];
+                    }
+
+                    for (int i = 0; i < currentPathTiles.Length - 1; i++)
+                    {
+                        //Save state
+                        savedPathTileStates[i] = currentPathTiles[i].node.GetComponent<TileContainer>().State;
+                        //Highlight current path
+                        currentPathTiles[i].node.GetComponent<TileContainer>().State =
+                            TileContainer.tileState.HIGHLIGHTED;
+                    }
+                    
+                    break;
+            }
+        }
+        else //Reset Old Pathtiles when hovered object isnt a legit tile, or a click was entered
+        {
+            if (currentHudState.SelectedAction == State.currentAction.MOVE)
+                if (currentPathTiles != null && currentPathTiles.Length > 0 && savedPathTileStates != null)
+                { 
+                    for (int i = 0; i < currentPathTiles.Length - 1; i++)
+                    {
+                        currentPathTiles[i].node.GetComponent<TileContainer>().State = savedPathTileStates[i];
+                    }
+                }
+            savedPathTileStates = null;
+        }
+        
+        if (lastHovered != null && wasClicked && lastHovered.GetComponent<TileContainer>().State == TileContainer.tileState.IN_MOVE_RANGE && currentHudState.SelectedAction == State.currentAction.MOVE)
+        {
+            if (currentHudState.SelectedAction == State.currentAction.MOVE)
+                if (currentPathTiles != null && currentPathTiles.Length > 0 && savedPathTileStates != null)
+                { 
+                    for (int i = 0; i < currentPathTiles.Length - 1; i++)
+                    {
+                        currentPathTiles[i].node.GetComponent<TileContainer>().State = savedPathTileStates[i];
+                    }
+                }
+            savedPathTileStates = null;
+        }
     }
 }
