@@ -15,6 +15,7 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
     [SerializeField] private State currentHudState;
     [SerializeField] private TileHub grid;
     [SerializeField] private QueueManager _queueManager;
+    [SerializeField] private IntEvent current_Move_Ap_Cost;
 
     private GameObject lastHovered;
 
@@ -133,6 +134,13 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
                             _queueManager.Queue[_queueManager.ActivePosition].Key.GetComponent<Character>()
                                 .OccupiedTile, item).ToArray();
                     
+                    //Raise Int Event so Path costs are shown on the UI
+                    int moveCosts = Character.getAPMoveCosts(currentPathTiles.Length,
+                        _queueManager.Queue[_queueManager.ActivePosition].Key.GetComponent<Character>().CharStats
+                            .MChartype);
+                    current_Move_Ap_Cost.Raise(moveCosts);
+
+
                     //Remove Final Tile which is the hovered tile/ set it null
                     if (currentPathTiles.Length > 0)
                     {
@@ -164,6 +172,7 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
                     }
                 }
             savedPathTileStates = null;
+            current_Move_Ap_Cost.Raise(-1);
         }
         
         if (lastHovered != null && wasClicked && lastHovered.GetComponent<TileContainer>().State == TileContainer.tileState.IN_MOVE_RANGE && currentHudState.SelectedAction == State.currentAction.MOVE)
@@ -177,6 +186,7 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
                     }
                 }
             savedPathTileStates = null;
+            current_Move_Ap_Cost.Raise(-1);
         }
     }
 }

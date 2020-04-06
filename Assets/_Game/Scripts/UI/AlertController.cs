@@ -12,6 +12,7 @@ public class AlertController : MonoBehaviour, IAtomListener<string>
     [SerializeField] private Vector3 endPosOffset;
     [SerializeField] private RectTransform _textTransform;
     [SerializeField] private TextMeshProUGUI _textMesh;
+    [SerializeField] private RectTransform _backgroundTransform;
     private bool routineIsRunning;
 
     private Vector3 originalPos;
@@ -35,13 +36,15 @@ public class AlertController : MonoBehaviour, IAtomListener<string>
         _textMesh.text = item;
         
         Vector2 startPos = _textTransform.position;
-        Vector2 endPos = _textTransform.position + endPosOffset;
+        Vector2 endPos = new Vector2( _textTransform.position.x + endPosOffset.x * Screen.width, _textTransform.position.y + endPosOffset.y * Screen.width);
         
         //Move Alert down
         for (float i = 0f; i < 1f; i += Time.deltaTime * transitionSpeed)
         {
             yield return null;
-            _textTransform.position = Vector2.Lerp(startPos, endPos, i);
+            Vector2 lerpedVector = Vector2.Lerp(startPos, endPos, i);
+            _textTransform.position = lerpedVector;
+            _backgroundTransform.position = lerpedVector;
         }
         
         //Show Alert
@@ -51,12 +54,17 @@ public class AlertController : MonoBehaviour, IAtomListener<string>
         for (float i = 0f; i < 1f; i += Time.deltaTime * transitionSpeed)
         {
             yield return null;
-            _textTransform.position = Vector2.Lerp(endPos, startPos, i);
+            Vector2 lerpedVector = Vector2.Lerp(endPos, startPos, i);
+            _textTransform.position = lerpedVector;
+            _backgroundTransform.position = lerpedVector;
         }
         
         yield return null;
         
+        Debug.Log(originalPos);
+        
         _textTransform.position = originalPos;
+        _backgroundTransform.position = originalPos;
 
         routineIsRunning = false;
     }

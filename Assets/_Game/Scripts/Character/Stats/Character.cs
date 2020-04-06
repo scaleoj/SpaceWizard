@@ -205,7 +205,7 @@ namespace _Game.Scripts.Character.Stats
             inMoveProcess = false;
         }
 
-        public int getAPMoveCosts(int distance, CharacterStat.CharType type)
+        public static int getAPMoveCosts(int distance, CharacterStat.CharType type)
         {
             switch (type)
             {
