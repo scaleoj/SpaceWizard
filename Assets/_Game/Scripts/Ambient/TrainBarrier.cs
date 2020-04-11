@@ -23,7 +23,6 @@ public class TrainBarrier : MonoBehaviour, IAtomListener<bool>
 
     private IEnumerator moveBarrier(bool trainIsMoving)
     {
-        Debug.Log("EYO ITS ROTATING");
         currTime = 0f;
         if (trainIsMoving)
         {
