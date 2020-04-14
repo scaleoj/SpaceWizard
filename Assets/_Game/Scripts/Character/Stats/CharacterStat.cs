@@ -61,8 +61,8 @@ public class CharacterStat : ScriptableObject
    //--------NOT EDITOR EXPOSED VARIABLES--------------//
    private int _moveRange; //Move Range gets controlled by the AP count, look into the "GDD Tabelle" for the details.
    private bool _active; //ShowinInspector missing
-   
-   
+   private List<Effect> _activeEffects;
+
    //ENUMS
    public enum CharType {Base, Melee, Support, Tank, Sniper}
    public enum DamageType{Normal,Physical, Magic} //Normal is for the Heal to just Heal the HP
@@ -91,6 +91,9 @@ public class CharacterStat : ScriptableObject
            case CharType.Sniper: MoveRange = CurrentAp;
                break;
        }
+       
+       //Init
+       _activeEffects = new List<Effect>();
    }
 
    public void TakeHeal(int healthAmount, int phyAmount, int magicAmount, GameObject target)
@@ -141,7 +144,24 @@ public class CharacterStat : ScriptableObject
        {
            target.GetComponent<DmgIndicator>().showDamage(phyAmount, magicAmount, 0);           
        }
-       
+   }
+
+   public Effect containsEffect(int effectID)
+   {
+       if (_activeEffects != null && _activeEffects.Count > 0)
+       {
+           bool foundEffect;
+           for (int i = 0; i < _activeEffects.Count; i++)
+           {
+               if (_activeEffects[i].effectID == effectID) return _activeEffects[i];
+           }
+
+           return null;
+       }
+       else
+       {
+           return null;
+       }
    }
 
    //Getter, Setter
@@ -298,6 +318,13 @@ public class CharacterStat : ScriptableObject
    }
 
    public bool Active { get; set; }
+
+   public List<Effect> ActiveEffects
+   {
+       get => _activeEffects;
+       set => _activeEffects = value;
+   }
+
 
    public int Team
    {

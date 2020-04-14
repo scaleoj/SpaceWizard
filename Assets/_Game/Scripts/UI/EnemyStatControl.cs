@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using _Game.Scripts.Character.Stats;
 using _Game.Scripts.GameFlow;
+using UnityEngine.Serialization;
 
 public class EnemyStatControl : MonoBehaviour, IAtomListener<Void>, IAtomListener<GameObject>
 {
@@ -15,7 +16,7 @@ public class EnemyStatControl : MonoBehaviour, IAtomListener<Void>, IAtomListene
     [SerializeField] private GameObjectVariable selectedGameobject;
     [SerializeField] private QueueManager _queueManager;
 
-    [SerializeField] private GameObject HP;
+    [SerializeField] private GameObject ClassName;
     [SerializeField] private GameObject PA;
     [SerializeField] private GameObject MS;
     [SerializeField] private GameObject AP;
@@ -23,7 +24,7 @@ public class EnemyStatControl : MonoBehaviour, IAtomListener<Void>, IAtomListene
     [SerializeField] private GameObject Container;
     
 
-    private TextMeshProUGUI HPText;
+    private TextMeshProUGUI ClassText;
     private TextMeshProUGUI PAText;
     private TextMeshProUGUI MSText;
     private TextMeshProUGUI APText;
@@ -33,7 +34,7 @@ public class EnemyStatControl : MonoBehaviour, IAtomListener<Void>, IAtomListene
     // Start is called before the first frame update
     void Start()
     {
-        HPText = HP.GetComponent<TextMeshProUGUI>();
+        ClassText = ClassName.GetComponent<TextMeshProUGUI>();
         PAText = PA.GetComponent<TextMeshProUGUI>();
         MSText = MS.GetComponent<TextMeshProUGUI>();
         APText = AP.GetComponent<TextMeshProUGUI>();
@@ -60,11 +61,11 @@ public class EnemyStatControl : MonoBehaviour, IAtomListener<Void>, IAtomListene
         {
             Container.SetActive(true);
             CharacterStat stats = item.GetComponent<TileContainer>().OccupiedGameObject.GetComponent<Character>().CharStats;
-            HPText.text = "HP: " + stats.CurrentHealth + "/" + stats.MaxHealth;
+            ClassText.text = stats.MChartype.ToString();
             PAText.text = "PA: " +stats.CurrentArmor + "/" + stats.MaxArmor;
             MSText.text = "MS: " +stats.CurrentMs + "/" + stats.MaxMs;
             APText.text = "AP: " +stats.CurrentAp.ToString();
-            enemyNameText.text = "Enemy \n" + stats.CharName;
+            enemyNameText.text = stats.CharName;
         }
         else
         {
@@ -79,11 +80,11 @@ public class EnemyStatControl : MonoBehaviour, IAtomListener<Void>, IAtomListene
         {
             Container.SetActive(true);
             CharacterStat stats = selectedGameobject.Value.GetComponent<TileContainer>().OccupiedGameObject.GetComponent<Character>().CharStats;
-            HPText.text = "HP: " + stats.CurrentHealth + "/" + stats.MaxHealth;
+            ClassText.text = stats.MChartype.ToString();
             PAText.text = "PA: " +stats.CurrentArmor + "/" + stats.MaxArmor;
             MSText.text = "MS: " +stats.CurrentMs + "/" + stats.MaxMs;
             APText.text = "AP: " +stats.CurrentAp.ToString();
-            enemyNameText.text = "Enemy \n" + stats.CharName;
+            enemyNameText.text = stats.CharName;
         }
         else
         {

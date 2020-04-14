@@ -7,6 +7,7 @@ public class QueueSlotContainer : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI positionText;
+    [SerializeField] private TextMeshProUGUI charTypeText;
 
     public TextMeshProUGUI NameText
     {
@@ -18,5 +19,11 @@ public class QueueSlotContainer : MonoBehaviour
     {
         get => positionText;
         set => positionText = value;
+    }
+
+    public TextMeshProUGUI CharTypeText
+    {
+        get => charTypeText;
+        set => charTypeText = value;
     }
 }
