@@ -45,6 +45,7 @@ public class DmgIndicator : MonoBehaviour
         }
 
         StartCoroutine(HitRoutine());
+        StartCoroutine(HitCharHighlightRoutine(hit));
     }
 
     public IEnumerator DamageRoutine()
@@ -57,7 +58,52 @@ public class DmgIndicator : MonoBehaviour
 
     public IEnumerator HitRoutine()
     {
-        yield return new WaitForSeconds(2);
+        //Text
+        yield return new WaitForSeconds(2.75f);
         hitText.gameObject.SetActive(false);
+    }
+
+    public IEnumerator HitCharHighlightRoutine(bool hit)
+    {
+        //DMG Flash
+        if (hit)
+        {
+            //Init
+            MeshRenderer meshRend = gameObject.GetComponent<MeshRenderer>();
+            Material oldMat = meshRend.material;
+            Material copyMat = new Material(meshRend.material);
+            meshRend.material = copyMat;
+            Transform charTransform = transform;
+            Vector3 oldPos = new Vector3(charTransform.position.x, charTransform.position.y, charTransform.position.z);
+
+            float posOffset = 0.05f;
+            float waitTime = 0.075f;
+            float duration = 0.5f;
+
+            bool isRed = false;
+            //Dmg highlight
+            for (float i = 0; i <= duration; i += waitTime)
+            {
+                yield return new WaitForSeconds(waitTime);
+                if (isRed)
+                {
+                    copyMat.color = Color.white;
+                    charTransform.position = new Vector3(charTransform.position.x + posOffset, charTransform.position.y, charTransform.position.z - posOffset);
+                    isRed = false;
+                }
+                else
+                {
+                    copyMat.color = Color.red;
+                    charTransform.position = new Vector3(charTransform.position.x - posOffset, charTransform.position.y, charTransform.position.z + posOffset);
+                    isRed = true;
+                }
+            }
+
+
+            
+            //Reset stuff
+            meshRend.material = oldMat;
+            charTransform.position = oldPos;
+        }
     }
 }
