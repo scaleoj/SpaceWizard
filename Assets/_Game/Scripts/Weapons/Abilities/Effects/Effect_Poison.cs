@@ -27,5 +27,7 @@ public class Effect_Poison : Effect
     {
         CharacterStat stats = target.GetComponent<Character>().CharStats;
         stats.TakeDamage(physDamage, magicDamage, target);
+        DmgIndicator dmgIndicator= target.GetComponent<DmgIndicator>();
+        dmgIndicator.StartCoroutine(dmgIndicator.HitCharHighlightRoutine(true, Color.green));
     }
 }

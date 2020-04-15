@@ -23,8 +23,19 @@ public class Effect_Ablity : Ability
         }
         else
         {
-            stats.ActiveEffects.Add(copiedEffect);
-            copiedEffect.EnableEffect(target);   
+            float randomNumber = UnityEngine.Random.Range(0f,1f);
+            if (randomNumber >= (distance * ParentWeapon.MissChance))
+            {
+                //HIT
+                stats.ActiveEffects.Add(copiedEffect);
+                copiedEffect.EnableEffect(target);  
+                target.GetComponent<DmgIndicator>().showHitOrMiss(true, Color.green);
+            }
+            else
+            {
+                //MISS
+                target.GetComponent<DmgIndicator>().showHitOrMiss(false, Color.white);
+            }
         }
     }
 }

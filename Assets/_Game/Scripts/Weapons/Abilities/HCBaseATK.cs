@@ -25,13 +25,13 @@ public class HCBaseATK : Ability
          target.GetComponent<Character>().CharStats.TakeDamage( physdmg,magicdmg, target);
          
          //Visual Representation
-         target.GetComponent<DmgIndicator>().showHitOrMiss(true);
+         target.GetComponent<DmgIndicator>().showHitOrMiss(true, Color.red);
          //Debug.Log("Hit, Character took " + magicdmg + " MagicDamage and " + physdmg + " PhysicalDamage"); //TODO Visual implementation of a HIT / raising an event for that
       }
       else
       {
          //Visual Representation
-         target.GetComponent<DmgIndicator>().showHitOrMiss(false);
+         target.GetComponent<DmgIndicator>().showHitOrMiss(false, Color.white);
          //Debug.Log("MISS"); //TODO Visual implementation of a MISS / raising an event for that
       }
    }

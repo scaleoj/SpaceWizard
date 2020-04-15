@@ -32,7 +32,7 @@ public class DmgIndicator : MonoBehaviour
         StartCoroutine(DamageRoutine());
     }
 
-    public void showHitOrMiss(bool hit)
+    public void showHitOrMiss(bool hit, Color dmgCol)
     {
         hitText.gameObject.SetActive(true);
         if (hit)
@@ -45,12 +45,12 @@ public class DmgIndicator : MonoBehaviour
         }
 
         StartCoroutine(HitRoutine());
-        StartCoroutine(HitCharHighlightRoutine(hit));
+        StartCoroutine(HitCharHighlightRoutine(hit,dmgCol));
     }
 
     public IEnumerator DamageRoutine()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(2.5f);
         healthText.gameObject.SetActive(false);
         magicText.gameObject.SetActive(false);
         physText.gameObject.SetActive(false);
@@ -59,11 +59,11 @@ public class DmgIndicator : MonoBehaviour
     public IEnumerator HitRoutine()
     {
         //Text
-        yield return new WaitForSeconds(2.75f);
+        yield return new WaitForSeconds(2.5f);
         hitText.gameObject.SetActive(false);
     }
 
-    public IEnumerator HitCharHighlightRoutine(bool hit)
+    public IEnumerator HitCharHighlightRoutine(bool hit, Color dmgCol)
     {
         //DMG Flash
         if (hit)
@@ -80,22 +80,22 @@ public class DmgIndicator : MonoBehaviour
             float waitTime = 0.075f;
             float duration = 0.5f;
 
-            bool isRed = false;
+            bool isHighlighted = false;
             //Dmg highlight
             for (float i = 0; i <= duration; i += waitTime)
             {
                 yield return new WaitForSeconds(waitTime);
-                if (isRed)
+                if (isHighlighted)
                 {
                     copyMat.color = Color.white;
                     charTransform.position = new Vector3(charTransform.position.x + posOffset, charTransform.position.y, charTransform.position.z - posOffset);
-                    isRed = false;
+                    isHighlighted = false;
                 }
                 else
                 {
-                    copyMat.color = Color.red;
+                    copyMat.color = dmgCol;
                     charTransform.position = new Vector3(charTransform.position.x - posOffset, charTransform.position.y, charTransform.position.z + posOffset);
-                    isRed = true;
+                    isHighlighted = true;
                 }
             }
 
