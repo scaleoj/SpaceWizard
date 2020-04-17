@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using _Game.Scripts.Character.Stats;
 using UnityEngine;
@@ -29,12 +30,12 @@ public class Effect_Ablity : Ability
                 //HIT
                 stats.ActiveEffects.Add(copiedEffect);
                 copiedEffect.EnableEffect(target);  
-                target.GetComponent<DmgIndicator>().showHitOrMiss(true, Color.green);
+                target.GetComponent<DmgIndicator>().showHitOrMiss(true, Color.green, "Poisoned", Color.green);
             }
             else
             {
                 //MISS
-                target.GetComponent<DmgIndicator>().showHitOrMiss(false, Color.white);
+                target.GetComponent<DmgIndicator>().showHitOrMiss(false, Color.white, String.Empty, Color.white);
             }
         }
     }

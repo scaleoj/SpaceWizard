@@ -16,11 +16,11 @@ MonoBehaviour:
   abilityDescription: 'Weak Poison that does damage to the target every turn.
 
 
-    AP Cost: 2
+    AP Cost: 3
 
     Magic Damage: 1
 
     Physical Damage: 1'
   aoeRange: 0
-  APCost: 2
+  APCost: 3
   _effect: {fileID: 11400000, guid: 076df399aa0a0554993f8f1326cac9fa, type: 2}

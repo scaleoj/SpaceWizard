@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -9,6 +10,7 @@ public class DmgIndicator : MonoBehaviour
     [SerializeField] private TextMeshPro magicText;
     [SerializeField] private TextMeshPro healthText;
     [SerializeField] private TextMeshPro hitText;
+    [SerializeField] private TextMeshPro effectText;
 
     public void showDamage(int phys, int magic, int health)
     {
@@ -32,16 +34,20 @@ public class DmgIndicator : MonoBehaviour
         StartCoroutine(DamageRoutine());
     }
 
-    public void showHitOrMiss(bool hit, Color dmgCol)
+    public void showHitOrMiss(bool hit, Color dmgCol, string effectString, Color effectStringCol) //If its not an effect just set the effectName to an empty string
     {
         hitText.gameObject.SetActive(true);
+        effectText.gameObject.SetActive(true);
+        effectText.color = effectStringCol;
         if (hit)
         {
             hitText.text = "HIT";
+            effectText.text = effectString;
         }
         else
         {
             hitText.text = "MISS";
+            effectText.text = String.Empty;
         }
 
         StartCoroutine(HitRoutine());
@@ -61,6 +67,7 @@ public class DmgIndicator : MonoBehaviour
         //Text
         yield return new WaitForSeconds(2.5f);
         hitText.gameObject.SetActive(false);
+        effectText.gameObject.SetActive(false);
     }
 
     public IEnumerator HitCharHighlightRoutine(bool hit, Color dmgCol)
