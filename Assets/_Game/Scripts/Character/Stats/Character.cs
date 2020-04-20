@@ -149,12 +149,12 @@ namespace _Game.Scripts.Character.Stats
             }
         }
 
-        public void AImove(TileHub grid, List<TileAttribute> path)
+        /*public void AImove(TileHub grid, List<TileAttribute> path)
         {
             //0 in Path list is the tile the Character is standing on
             //Last one is the Destination, try to go as far as possible
             
-           /* pathfinished = false;
+            pathfinished = false;
             for (int i = 1; i < path.Count; i++)
             {
                 if (getAPMoveCosts(i, charStats.MChartype) < charStats.CurrentAp)
@@ -173,36 +173,46 @@ namespace _Game.Scripts.Character.Stats
                     return false;
                 }
             }
-            return true;*/
-           StartCoroutine(AImoveSlow(grid, path));
-        }
+            return true;
+           StartCoroutine(AImoveSlow(grid, path, this, ));
+        }*/
 
-        public IEnumerator AImoveSlow(TileHub grid, List<TileAttribute> path)
+        public static IEnumerator AImoveSlow(TileHub grid, List<TileAttribute> path, Character character, float moveTime)
         {
             //0 in Path list is the tile the Character is standing on
             //Last one is the Destination, try to go as far as possible
             
             //NOTE: FULL AP COST OF THE MOVE IS CALCULATED AT THE END
-            inMoveProcess = true;
+
+            int moveableDistance = 0;
+            
+            for (int i = path.Count; 0 < i; i -= getAPMoveCosts(1, character.charStats.MChartype))
+            {
+                moveableDistance++;
+            }
+
+            float timePerMove = moveTime / moveableDistance;
+            
+            character.inMoveProcess = true;
             for (int i = 1; i < path.Count; i++)
             {
-                if (getAPMoveCosts(i, charStats.MChartype) < charStats.CurrentAp)
+                if (getAPMoveCosts(i, character.charStats.MChartype) < character.charStats.CurrentAp)
                 {
                     //int distance = grid.GetRange(OccupiedTile, path[i - 1].node);
                     //Debug.Log("AI moved distance: " +  distance);
                     
-                    CharStats.MoveReduceAp(1);
-                    OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
-                    OccupiedTile = path[i - 1].node;
-                    OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = gameObject;
-                    yield return new WaitForSeconds(0.5f);
+                    character.CharStats.MoveReduceAp(1);
+                    character.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
+                    character.OccupiedTile = path[i - 1].node;
+                    character.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = character.gameObject;
+                    yield return new WaitForSeconds(timePerMove);
                 }
                 else
                 {
                     break;
                 }
             }
-            inMoveProcess = false;
+            character.inMoveProcess = false;
         }
 
         public static int getAPMoveCosts(int distance, CharacterStat.CharType type)

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using _Game.Scripts.GameFlow.Grid;
 
 namespace _Game.Scripts.Character.AI
@@ -43,8 +44,11 @@ namespace _Game.Scripts.Character.AI
         }
 
         //DecisionMaking
-        public void MakeDecision()
+        public IEnumerator MakeDecision()
         {
+            /*yield return new WaitForSeconds(time)
+             yield return null <- wait one frame*/
+
             var range = 0;
             Stats.Character target = null;
 
@@ -58,6 +62,11 @@ namespace _Game.Scripts.Character.AI
 
             while (_senses.ApCount() > 0)
             {
+                yield return new WaitForSeconds(0.5f);
+                if (AiSenses.isMoving)
+                {
+                    continue;
+                }
                 
                 if (range < _range)
                 {

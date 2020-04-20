@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using _Game.Scripts.GameFlow;
 using _Game.Scripts.GameFlow.Grid;
 
@@ -7,7 +9,7 @@ namespace _Game.Scripts.Character.AI
     public class AIHub : MonoBehaviour
     {
         private AiState _state;
-        
+
         public enum AiState
         {
             Awake,
@@ -52,7 +54,8 @@ namespace _Game.Scripts.Character.AI
 
         public void BeActive()
         {
-            _brain.MakeDecision();
+            Coroutine blub = StartCoroutine(_brain.MakeDecision());
+            //StopCoroutine(blub);
         }
 
     }
