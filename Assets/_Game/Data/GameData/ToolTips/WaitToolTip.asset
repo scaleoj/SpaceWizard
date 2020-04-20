@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: WaitToolTip
   m_EditorClassIdentifier: 
   header: Wait
-  description: Do nothing and wait for the next round.
+  description: 'Do nothing and wait for the next round. Refills Action Points.
+
+
+    AP Gain: +3'

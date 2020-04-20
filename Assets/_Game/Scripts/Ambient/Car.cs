@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityAtoms;
 using UnityEngine;
 
 public class Car : MonoBehaviour
@@ -9,6 +10,7 @@ public class Car : MonoBehaviour
     [SerializeField] private float lerpSpeedMultiplier;
     [Range(0f,1f)][SerializeField] private float frequency;
     [SerializeField] private float minDeadTime;
+    [SerializeField] private BoolVariable trainIsMoving;
     private bool isMoving;
     private float currTime;
     
@@ -33,7 +35,7 @@ public class Car : MonoBehaviour
             {
                 float randNum = UnityEngine.Random.Range(0f,1f);
         
-                if (randNum <= frequency)
+                if (randNum <= frequency && !trainIsMoving.Value)
                 {
                     isMoving = true;
                     currTime = 0f;

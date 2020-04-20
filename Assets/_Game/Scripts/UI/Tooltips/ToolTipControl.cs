@@ -95,7 +95,7 @@ public class ToolTipControl : MonoBehaviour
     public void EnableToolTip(GameObject UIElement)
     {
         container.SetActive(true);
-        container.gameObject.transform.position = new Vector3(Input.mousePosition.x + offset.x, Input.mousePosition.y + offset.y, Input.mousePosition.z);
+        container.gameObject.transform.position = new Vector3(Input.mousePosition.x + offset.x * Screen.width, Input.mousePosition.y + offset.y *  Screen.height, Input.mousePosition.z);
         description.text = UIElement.GetComponent<ToolTip>().GetDescription();
         headerName.text = UIElement.GetComponent<ToolTip>().GetName();
     }

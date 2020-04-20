@@ -36,7 +36,7 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>, IAtomListen
 
     public void OnEventRaised(GameObject item)
     {
-        Debug.Log(item);
+//        Debug.Log(item);
         if(item != null && item.GetComponent<Character>().CharStats.Team == 0) UpdateText(item);   
     }
     

@@ -13,8 +13,5 @@ MonoBehaviour:
   m_Name: MoveToolTip
   m_EditorClassIdentifier: 
   header: Move Unit
-  description: 'Moves your character to a tile in range. The further away the tile
-    is, the more Action Points it costs.
-
-
-    AP Cost:  1 - 3 per tile'
+  description: Moves your character to a tile in range. The further away the tile
+    is, the more Action Points it costs. Costs depend on your class.

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using _Game.Scripts.Character.Stats;
@@ -25,13 +26,13 @@ public class HCBaseATK : Ability
          target.GetComponent<Character>().CharStats.TakeDamage( physdmg,magicdmg, target);
          
          //Visual Representation
-         target.GetComponent<DmgIndicator>().showHitOrMiss(true);
+         target.GetComponent<DmgIndicator>().showHitOrMiss(true, Color.red, String.Empty, Color.white);
          //Debug.Log("Hit, Character took " + magicdmg + " MagicDamage and " + physdmg + " PhysicalDamage"); //TODO Visual implementation of a HIT / raising an event for that
       }
       else
       {
          //Visual Representation
-         target.GetComponent<DmgIndicator>().showHitOrMiss(false);
+         target.GetComponent<DmgIndicator>().showHitOrMiss(false, Color.white, String.Empty, Color.white);
          //Debug.Log("MISS"); //TODO Visual implementation of a MISS / raising an event for that
       }
    }

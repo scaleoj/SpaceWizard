@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66dfa04e8942d3e40afc541be96e0100, type: 3}
   m_Name: CurrentHUDState
   m_EditorClassIdentifier: 
-  selectedAction: 2
+  selectedAction: 0

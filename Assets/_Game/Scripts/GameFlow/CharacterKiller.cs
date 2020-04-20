@@ -28,7 +28,16 @@ public class CharacterKiller : MonoBehaviour, IAtomListener<GameObject>
         //updateHUD.Raise();
         queue.KillUnit(item);
         item.transform.position = Vector3.one * 1000;
-        item.GetComponent<Character>().OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
-        item.GetComponent<Character>().OccupiedTile = null;
+        Character itemChar = item.GetComponent<Character>();
+        itemChar.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
+        itemChar.OccupiedTile = null;
+        //Disable all effects
+        if (itemChar.CharStats.ActiveEffects.Count != 0)
+        {
+            for (int i = itemChar.CharStats.ActiveEffects.Count - 1; 0 <= i; i--)
+            {
+                itemChar.CharStats.ActiveEffects[i].DisableEffect(item);
+            }
+        }
     }
 }

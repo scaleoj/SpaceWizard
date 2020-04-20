@@ -79,11 +79,14 @@ namespace _Game.Scripts.Character.Stats
             {
                 if (_queueManager.Queue[_queueManager.ActivePosition].Key == gameObject)
                 {
-                    CTContainer.State = TileContainer.tileState.SELECTED;
+                    if (CTContainer.State != TileContainer.tileState.HIGHLIGHTED)
+                    {
+                        CTContainer.State = TileContainer.tileState.SELECTED;
+                    }
                 }
                 else
                 {
-                    if (CTContainer.State != TileContainer.tileState.TARGET && CTContainer.State != TileContainer.tileState.HOVERING)
+                    if (CTContainer.State != TileContainer.tileState.TARGET && CTContainer.State != TileContainer.tileState.HOVERING && CTContainer.State != TileContainer.tileState.HIGHLIGHTED)
                     {
                         CTContainer.State = TileContainer.tileState.NORMAL;
                     }
@@ -202,7 +205,7 @@ namespace _Game.Scripts.Character.Stats
             inMoveProcess = false;
         }
 
-        public int getAPMoveCosts(int distance, CharacterStat.CharType type)
+        public static int getAPMoveCosts(int distance, CharacterStat.CharType type)
         {
             switch (type)
             {

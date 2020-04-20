@@ -9,6 +9,7 @@ namespace _Game.Scripts.GameFlow
     public class QueueManager : ScriptableObject
     {
         [SerializeField] private VoidEvent newQueueGameObject;
+        [SerializeField] private GameObjectEvent currentQueueObjectChanged;
         private Dictionary<GameObject, int> _initSheet; //Sheet for the initiative
         private List<KeyValuePair<GameObject, int>> _queue;
         private int _activePosition = 0;
@@ -68,11 +69,11 @@ namespace _Game.Scripts.GameFlow
                 link = _queue[_activePosition].Key.GetComponent<global::_Game.Scripts.Character.Stats.Character>();
                 link.CharStats.Active = true;
                 newQueueGameObject.Raise();
+                currentQueueObjectChanged.Raise(_queue[_activePosition].Key);
                 var link2 = _queue[_activePosition].Key.GetComponent<Character.AI.AIHub>();
                 if (link2 == null) return;
                 link2.PositionUpdate(); 
                 link2.BeActive();
-
             }
             else
             {
@@ -82,17 +83,12 @@ namespace _Game.Scripts.GameFlow
                 link = _queue[_activePosition].Key.GetComponent<global::_Game.Scripts.Character.Stats.Character>();
                 link.CharStats.Active = true;
                 newQueueGameObject.Raise();
+                currentQueueObjectChanged.Raise(_queue[_activePosition].Key);
                 var link2 = _queue[_activePosition].Key.GetComponent<Character.AI.AIHub>();
                 if (link2 == null) return;
                 link2.PositionUpdate();
                 link2.BeActive();
             }
-            
-            //_queue[_activePosition].Key.GetComponent<Character.Stats.Character>().OccupiedTile
-                //.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
-            
-            
-            
         }
 
         private bool CheckEnd()
