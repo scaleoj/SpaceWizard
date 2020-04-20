@@ -12,6 +12,8 @@ public class APSliderControl : MonoBehaviour, IAtomListener<Void>
 
     [SerializeField] private QueueManager _queue;
 
+    [SerializeField] private GameObject text, background, filled;
+
     private Slider _slider;
     // Start is called before the first frame update
     void Start()
@@ -24,7 +26,19 @@ public class APSliderControl : MonoBehaviour, IAtomListener<Void>
     public void OnEventRaised(Void item)
     {
         CharacterStat currentChar = _queue.Queue[_queue.ActivePosition].Key.GetComponent<Character>().CharStats;
-        _slider.maxValue = currentChar.MaxAp;
-        _slider.value = currentChar.CurrentAp;
+        if (currentChar.Team == 0)
+        {
+            text.SetActive(true);
+            background.SetActive(true);
+            filled.SetActive(true);
+            _slider.maxValue = currentChar.MaxAp;
+            _slider.value = currentChar.CurrentAp;
+        }
+        else
+        {
+            filled.SetActive(false);
+            text.SetActive(false);
+            background.SetActive(false);
+        }
     }
 }

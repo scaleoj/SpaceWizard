@@ -63,23 +63,23 @@ namespace _Game.Scripts.Character.AI
             while (_senses.ApCount() > 0)
             {
                 yield return new WaitForSeconds(0.5f);
-                if (AiSenses.isMoving)
+                while (AiSenses.isMoving)
                 {
-                    continue;
+                    yield return new WaitForSeconds(0.5f);
                 }
-                
+
                 if (range < _range)
                 {
                     Debug.Log("retreat");
                     Retreat();
-                    break;
+                    continue;
                 }
 
                 if (range >= _range)
                 {
                     Debug.Log("move");
                     Move(target);
-                    break;
+                    continue;
                 }
                 /*
                  *
@@ -109,8 +109,6 @@ namespace _Game.Scripts.Character.AI
 
                 //_senses.DecreaseAP();
             }
-
-
             _senses.Next();
         }
 

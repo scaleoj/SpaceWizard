@@ -177,7 +177,7 @@ namespace _Game.Scripts.Character.Stats
            StartCoroutine(AImoveSlow(grid, path, this, ));
         }*/
 
-        public static IEnumerator AImoveSlow(TileHub grid, List<TileAttribute> path, Character character, float moveTime)
+      /**  public static IEnumerator AImoveSlow(TileHub grid, List<TileAttribute> path, Character character, float moveTime)
         {
             //0 in Path list is the tile the Character is standing on
             //Last one is the Destination, try to go as far as possible
@@ -213,7 +213,7 @@ namespace _Game.Scripts.Character.Stats
                 }
             }
             character.inMoveProcess = false;
-        }
+        }*/
 
         public static int getAPMoveCosts(int distance, CharacterStat.CharType type)
         {
