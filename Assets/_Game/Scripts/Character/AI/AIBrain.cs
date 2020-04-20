@@ -58,18 +58,25 @@ namespace _Game.Scripts.Character.AI
 
             while (_senses.ApCount() > 0)
             {
+                
                 if (range < _range)
                 {
+                    Debug.Log("retreat");
                     Retreat();
                     break;
                 }
 
                 if (range >= _range)
                 {
+                    Debug.Log("move");
                     Move(target);
                     break;
                 }
-
+                /*
+                 *
+                 *
+                */
+                
                 /* 
                 
                 for (var i = 0; i < _character.CharStats.PrimaryWeapon.Abilities.Length-1; i=i)
