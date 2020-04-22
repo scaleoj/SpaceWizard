@@ -18,6 +18,8 @@ namespace _Game.Scripts.Character.Stats
 
         [SerializeField] private QueueManager _queueManager;
 
+        [Tooltip("Defines the height the character will be placed at when repositioning.")][SerializeField] private float yPosOffset;
+
         private TileContainer CTContainer;
 
         private CharacterStat charStatCopy;
@@ -137,7 +139,7 @@ namespace _Game.Scripts.Character.Stats
                         occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
                     }
                     occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
-                    gameObject.transform.position = new Vector3(value.transform.position.x,1f,value.transform.position.z);
+                    gameObject.transform.position = new Vector3(value.transform.position.x,yPosOffset,value.transform.position.z);
                     CTContainer = occupiedTile.GetComponent<TileContainer>();
                 }
                 else
