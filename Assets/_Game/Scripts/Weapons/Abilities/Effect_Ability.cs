@@ -19,8 +19,19 @@ public class Effect_Ablity : Ability
         
         if (containedEffect != null)
         {
-            containedEffect.LeftDuration =
-                containedEffect.duration;
+            float randomNumber = UnityEngine.Random.Range(0f,1f);
+            if (randomNumber >= (distance * ParentWeapon.MissChance))
+            {
+                //HIT
+                target.GetComponent<DmgIndicator>().showHitOrMiss(true, Color.green, "Poisoned", Color.green);
+                containedEffect.LeftDuration =
+                    containedEffect.duration;
+            }
+            else
+            {
+                //MISS
+                target.GetComponent<DmgIndicator>().showHitOrMiss(false, Color.white, String.Empty, Color.white);
+            }
         }
         else
         {
