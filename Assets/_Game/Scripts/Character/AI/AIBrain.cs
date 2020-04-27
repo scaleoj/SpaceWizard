@@ -14,6 +14,7 @@ namespace _Game.Scripts.Character.AI
         private int _team;
         private int _range;
         private Stats.Character _character;
+        private bool hasAttacked;
 
         public AiBrain(AiSenses senses, TileHub hub, Stats.Character character)
         {
@@ -48,18 +49,9 @@ namespace _Game.Scripts.Character.AI
         {
             /*yield return new WaitForSeconds(time)
              yield return null <- wait one frame*/
-
+            hasAttacked = false;
             var range = 0;
             Stats.Character target = null;
-
-            foreach (var ch in _senses.GetRanges())
-            {
-                if (ch.Key.GetComponent<Stats.Character>().CharStats.Team == _team) continue;
-                target = ch.Key.GetComponent<Stats.Character>();
-                range = ch.Value;
-                break;
-            }
-
             while (_senses.ApCount() > 0)
             {
                 yield return new WaitForSeconds(0.5f);
@@ -67,6 +59,20 @@ namespace _Game.Scripts.Character.AI
                 {
                     yield return new WaitForSeconds(0.5f);
                 }
+                _senses.UpdateRanges();
+                foreach (var ch in _senses.GetRanges())
+                {
+                    if (ch.Key.GetComponent<Stats.Character>().CharStats.Team == _team) continue;
+                    target = ch.Key.GetComponent<Stats.Character>();
+                    range = ch.Value;
+                    break;
+                }
+
+                if (target == null)
+                {
+                    break;
+                }
+
 
                 if (range < _range)
                 {
@@ -75,16 +81,27 @@ namespace _Game.Scripts.Character.AI
                     continue;
                 }
 
-                if (range >= _range)
+                if (range > _range)
                 {
                     Debug.Log("move");
+                    Debug.Log("Rangelimit: " + _range + "/ Range: " + range);
                     Move(target);
                     continue;
                 }
-                /*
-                 *
-                 *
-                */
+
+                if (_character.CharStats.PrimaryWeapon.Abilities[0].ApCost < _senses.ApCount() && !hasAttacked)
+                {
+                    Debug.Log("attack");
+                    _character.CharStats.PrimaryWeapon.Abilities[0].Attack(target.gameObject, range);
+                    hasAttacked = true;
+                }
+                else
+                {
+                    Debug.Log("Break");
+                    Debug.Log("Rangelimit: " + _range + "/ Range: " + range);
+                    break;
+                }
+
                 
                 /* 
                 
