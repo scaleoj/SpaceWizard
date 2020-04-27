@@ -47,6 +47,7 @@ namespace _Game.Scripts.Character.AI
         //DecisionMaking
         public IEnumerator MakeDecision()
         {
+            yield return new WaitForSeconds(2f);
             /*yield return new WaitForSeconds(time)
              yield return null <- wait one frame*/
             hasAttacked = false;
