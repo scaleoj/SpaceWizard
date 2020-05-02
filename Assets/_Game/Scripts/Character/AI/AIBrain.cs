@@ -55,7 +55,7 @@ namespace _Game.Scripts.Character.AI
             Stats.Character target = null;
             while (_senses.ApCount() > 0)
             {
-                yield return new WaitForSeconds(0.5f);
+                yield return new WaitForSeconds(1.5f);
                 while (AiSenses.isMoving)
                 {
                     yield return new WaitForSeconds(0.5f);
@@ -103,29 +103,6 @@ namespace _Game.Scripts.Character.AI
                     break;
                 }
 
-                
-                /* 
-                
-                for (var i = 0; i < _character.CharStats.PrimaryWeapon.Abilities.Length-1; i=i)
-                {
-                if (_senses.ApCount() >= _character.CharStats.PrimaryWeapon.Abilities[i].ApCost)
-                {
-                if (_character.CharStats.PrimaryWeapon.Range <= _senses.GetRanges()[0].Value)
-                {
-                _character.CharStats.PrimaryWeapon.Abilities[i].Attack(_senses.GetRanges()[0].Key, _senses.GetRanges()[0].Value);
-                }
-                else
-                {
-                i++;
-                }
-                }
-                else
-                {
-                i++;
-                }
-                }*/
-
-                //_senses.DecreaseAP();
             }
             _senses.Next();
         }
