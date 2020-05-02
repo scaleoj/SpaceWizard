@@ -42,8 +42,12 @@ namespace _Game.Scripts.GameFlow.Grid
 
         public int GetRange(GameObject start, GameObject end)
         {
-            return FindPath(start, end).Count;
+            return FindPathOnlyRange(start, end).Count;
+        }    
+        
+        public List<TileAttribute> FindPathOnlyRange(GameObject start, GameObject end)
+        {
+            return _pathfinder.FindPathNoMove(start, end);
         }
-
     }
 }

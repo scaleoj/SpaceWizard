@@ -50,7 +50,7 @@ namespace _Game.Scripts.Character.AI
 
         public void Retreat()
         {
-            var tempPath = _hub.FindPath(_character.OccupiedTile, _hub.Retreat);
+            var tempPath = _hub.FindPathOnlyRange(_character.OccupiedTile, _hub.Retreat);
             
             if (tempPath.Count > 3)
             {
@@ -65,7 +65,7 @@ namespace _Game.Scripts.Character.AI
         public void Move(Stats.Character target)
         {
  
-            var tempPath = _hub.FindPath(_character.OccupiedTile, target.OccupiedTile); 
+            var tempPath = _hub.FindPathOnlyRange(_character.OccupiedTile, target.OccupiedTile); 
             _aiHub.startMoveRoutine(_hub, tempPath, _character, 0.5f);
             
             //StartCoroutine(AImoveSlow(_hub, tempPath, _character, 0.5f));
