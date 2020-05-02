@@ -15,7 +15,7 @@ MonoBehaviour:
   mChartype: 4
   team: 0
   initiative: 3
-  charName: Dagobert Duck(1)
+  charName: Ghostclone
   currentHealth: 6
   maxHealth: 6
   currentMp: 10

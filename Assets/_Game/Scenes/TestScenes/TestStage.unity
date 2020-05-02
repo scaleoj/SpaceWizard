@@ -1643,6 +1643,12 @@ PrefabInstance:
       propertyPath: occupiedTile
       value: 
       objectReference: {fileID: 872591159}
+    - target: {fileID: 4631635380021120509, guid: ecfbac54b8d9d5f488f2fa0c3525e3ef,
+        type: 3}
+      propertyPath: charStats
+      value: 
+      objectReference: {fileID: 11400000, guid: 3f96acca1203e974e9f00b2c9a951ede,
+        type: 2}
     - target: {fileID: 1072964364, guid: ecfbac54b8d9d5f488f2fa0c3525e3ef, type: 3}
       propertyPath: hub
       value: 
