@@ -78,7 +78,7 @@ namespace _Game.Scripts.Character.AI
                 }
                 if (!hasmoved)
                 {
-                    
+                    hasmoved = true;
                     if (range < _range)
                     {
                         Debug.Log("retreat");
@@ -92,9 +92,7 @@ namespace _Game.Scripts.Character.AI
                         Debug.Log("Rangelimit: " + _range + "/ Range: " + range);
                         Move(target);
                         continue;
-                    }
-
-                    hasmoved = true;
+                    }           
                 }
 
 
