@@ -132,15 +132,17 @@ namespace _Game.Scripts.Character.Stats
             {
                 if (value != null)
                 {
+                    TileContainer currTile = occupiedTile.GetComponent<TileContainer>();
                     if (_queueManager.Queue[_queueManager.ActivePosition].Key == gameObject)
                     {
-                        occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
+                        currTile.State = TileContainer.tileState.NORMAL;
                         occupiedTile = value;
-                        occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.SELECTED;
+                        currTile.Walkable = false;
+                        currTile.State = TileContainer.tileState.SELECTED;
                     }
-                    occupiedTile.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
+                    currTile.State = TileContainer.tileState.NORMAL;
                     gameObject.transform.position = new Vector3(value.transform.position.x,yPosOffset,value.transform.position.z);
-                    CTContainer = occupiedTile.GetComponent<TileContainer>();
+                    CTContainer = currTile;
                 }
                 else
                 {
