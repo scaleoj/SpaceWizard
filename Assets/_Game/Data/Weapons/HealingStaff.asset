@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 537e5452d4361254280c6729caab9066, type: 3}
   m_Name: HealingStaff
   m_EditorClassIdentifier: 
-  name: Grey Staff
+  weaponName: Grey Staff
+  weaponDescription: Simple Healing Staff for everyday use.
   minPhysicalDmg: 0
   maxPhysicalDmg: 0
   minMagicDmg: 0

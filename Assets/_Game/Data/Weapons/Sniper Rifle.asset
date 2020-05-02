@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Sniper Rifle
   m_EditorClassIdentifier: 
   weaponName: Long Road Ahead
-  weaponDescription: An old sniper rifle that hits its target with certainty
+  weaponDescription: An old sniper rifle that hits its target with certainty.
   minPhysicalDmg: 2
   maxPhysicalDmg: 4
   minMagicDmg: 0
