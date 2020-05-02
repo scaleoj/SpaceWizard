@@ -6,15 +6,16 @@ namespace _Game.Scripts.Character.AI
 {
     public class AiBrain
     {
-        private const int Melee = 1;
-        private const int Ranged = 3;
-        private const int Sniper = 5;
+        private const int Melee = 2;
+        private const int Ranged = 4;
+        private const int Sniper = 6;
 
         private AiSenses _senses;
         private int _team;
         private int _range;
         private Stats.Character _character;
         private bool hasAttacked;
+        private bool hasmoved;
 
         public AiBrain(AiSenses senses, TileHub hub, Stats.Character character)
         {
@@ -51,6 +52,7 @@ namespace _Game.Scripts.Character.AI
             /*yield return new WaitForSeconds(time)
              yield return null <- wait one frame*/
             hasAttacked = false;
+            hasmoved = false;
             var range = 0;
             Stats.Character target = null;
             while (_senses.ApCount() > 0)
@@ -61,6 +63,7 @@ namespace _Game.Scripts.Character.AI
                     yield return new WaitForSeconds(0.5f);
                 }
                 _senses.UpdateRanges();
+                
                 foreach (var ch in _senses.GetRanges())
                 {
                     if (ch.Key.GetComponent<Stats.Character>().CharStats.Team == _team) continue;
@@ -73,22 +76,27 @@ namespace _Game.Scripts.Character.AI
                 {
                     break;
                 }
-
-
-                if (range < _range)
+                if (!hasmoved)
                 {
-                    Debug.Log("retreat");
-                    Retreat();
-                    continue;
+                    
+                    if (range < _range)
+                    {
+                        Debug.Log("retreat");
+                        Retreat();
+                        continue;
+                    }
+
+                    if (range > _range)
+                    {
+                        Debug.Log("move");
+                        Debug.Log("Rangelimit: " + _range + "/ Range: " + range);
+                        Move(target);
+                        continue;
+                    }
+
+                    hasmoved = true;
                 }
 
-                if (range > _range)
-                {
-                    Debug.Log("move");
-                    Debug.Log("Rangelimit: " + _range + "/ Range: " + range);
-                    Move(target);
-                    continue;
-                }
 
                 if (_character.CharStats.PrimaryWeapon.Abilities[0].ApCost < _senses.ApCount() && !hasAttacked)
                 {
