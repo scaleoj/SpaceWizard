@@ -113,7 +113,7 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
 
         /*Highlight of pathtiles*/
         
-        if (lastHovered != null) //Lasthovered is the currenthovered Tile here. Its set when a viable tile is hovered. Otherwise its null
+        if (lastHovered != null && (item.GetComponent<TileContainer>().OccupiedGameObject == null) && item != null) //Lasthovered is the currenthovered Tile here. Its set when a viable tile is hovered. Otherwise its null
         {
             switch (currentHudState.SelectedAction) 
             {

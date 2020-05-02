@@ -50,13 +50,55 @@ namespace _Game.Scripts.Character.AI
 
         public void Retreat()
         {
-            var tempPath = _hub.FindPathOnlyRange(_character.OccupiedTile, _hub.Retreat);
-            
-            if (tempPath.Count > 3)
+            GameObject moveTarget = _hub.Retreat;
+            if (_hub.Retreat.GetComponent<TileContainer>().OccupiedGameObject != null)
             {
-                tempPath = tempPath.Take(4).ToList();
+                bool foundSuitableTarget = false;
+                int count = 2;
+                var hypotheticalPath = _hub.FindPathOnlyRange(_character.OccupiedTile, _hub.Retreat);
+                while (!foundSuitableTarget)
+                {
+                    if (hypotheticalPath.Count == count)
+                    {
+                        //No Suitable Path found, dont move
+                        return;
+                    }
+                    
+                    if (hypotheticalPath[hypotheticalPath.Count - count].node.GetComponent<TileContainer>()
+                        .OccupiedGameObject == null)
+                    {
+                        foundSuitableTarget = true;
+                        moveTarget = hypotheticalPath[hypotheticalPath.Count - count].node;
+                    }
+                    count++;
+                }
+                
+                var tempPath = _hub.FindPath(_character.OccupiedTile, moveTarget); 
+            
+                if (tempPath.Count > 3)
+                {
+                    tempPath = tempPath.Take(4).ToList();
+                }
+                _aiHub.startMoveRoutine(_hub, tempPath, _character, 0.5f);
             }
-            _aiHub.startMoveRoutine(_hub, tempPath, _character, 0.5f);
+            else
+            {
+                var tempPath = _hub.FindPath(_character.OccupiedTile, _hub.Retreat); 
+            
+                if (tempPath.Count > 3)
+                {
+                    tempPath = tempPath.Take(4).ToList();
+                }
+                _aiHub.startMoveRoutine(_hub, tempPath, _character, 0.5f);
+            }
+            /*if (tempPath[tempPath.Count - 1].node.GetComponent<TileContainer>().OccupiedGameObject != null)
+            {
+                _aiHub.startMoveRoutine(_hub,  tempPath.Take(tempPath.Count - 2).ToList(), _character, 0.5f);
+            }
+            else
+            {
+                _aiHub.startMoveRoutine(_hub, tempPath, _character, 0.5f);
+            }*/
             
             //StartCoroutine(AImoveSlow(_hub, tempPath, _character, 0.5f));
             //move
@@ -64,9 +106,40 @@ namespace _Game.Scripts.Character.AI
         
         public void Move(Stats.Character target)
         {
- 
-            var tempPath = _hub.FindPathOnlyRange(_character.OccupiedTile, target.OccupiedTile); 
-            _aiHub.startMoveRoutine(_hub, tempPath, _character, 0.5f);
+            GameObject moveTarget = target.OccupiedTile;
+            if (target.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject != null)
+            {
+                bool foundSuitableTarget = false;
+                int count = 2;
+                var hypotheticalPath = _hub.FindPathOnlyRange(_character.OccupiedTile, target.OccupiedTile);
+                while (!foundSuitableTarget)
+                {
+                    if (hypotheticalPath.Count == count)
+                    {
+                        //No Suitable Path found, dont move
+                        return;
+                    }
+                    
+                    if (hypotheticalPath[hypotheticalPath.Count - count].node.GetComponent<TileContainer>()
+                        .OccupiedGameObject == null)
+                    {
+                        foundSuitableTarget = true;
+                        moveTarget = hypotheticalPath[hypotheticalPath.Count - count].node;
+                    }
+                    count++;
+                }
+                
+                var tempPath = _hub.FindPath(_character.OccupiedTile, moveTarget);
+                _aiHub.startMoveRoutine(_hub, tempPath, _character, 0.5f);
+            }
+            else
+            {
+                var tempPath = _hub.FindPath(_character.OccupiedTile, target.OccupiedTile);
+                _aiHub.startMoveRoutine(_hub, tempPath, _character, 0.5f);
+            }
+            
+           // var tempPath = _hub.FindPath(_character.OccupiedTile, target.OccupiedTile); 
+           // _aiHub.startMoveRoutine(_hub, tempPath.Take(tempPath.Count - 2).ToList(), _character, 0.5f);
             
             //StartCoroutine(AImoveSlow(_hub, tempPath, _character, 0.5f));
             //move
