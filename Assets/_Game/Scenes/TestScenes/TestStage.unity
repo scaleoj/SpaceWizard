@@ -7601,6 +7601,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45fe0e2e5e72a2947a7e18bfc8bba6e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _retreat: {fileID: 2121785463}
   gridObject: {fileID: 11400000, guid: eb32c9742b2a50b49b162cbf8b950cac, type: 2}
 --- !u!4 &563496734
 Transform:
@@ -24637,6 +24638,12 @@ Light:
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &2121785463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4486421839476658966, guid: 0dc3b35e7fa2fc7499756e6fdcbe67f0,
+    type: 3}
+  m_PrefabInstance: {fileID: 27013533}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2123155123 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4486421839476658965, guid: 0dc3b35e7fa2fc7499756e6fdcbe67f0,

@@ -12,7 +12,7 @@ namespace _Game.Scripts.GameFlow.Grid
         private bool _prefabCheck;
         private TileGrid _grid;
         private Pathfinder _pathfinder;
-        private GameObject _retreat;
+        [SerializeField]private GameObject _retreat;
         private LayerMask _walkableMask;
         [SerializeField] private GridObject gridObject;
         
@@ -23,8 +23,8 @@ namespace _Game.Scripts.GameFlow.Grid
         {
             _grid = new TileGrid(gridObject.Width, gridObject.Depth, gridObject.DistanceBetweenPoints, gameObject.transform);
             _grid.ScanGrid();
+            Debug.Log("tilehub retreat"+ _retreat.name);
             _walkableMask = gridObject.Mask;
-            _retreat = gridObject.Retreat;
             _pathfinder = new Pathfinder(_grid);
             
         }
@@ -37,6 +37,7 @@ namespace _Game.Scripts.GameFlow.Grid
 
         public List<TileAttribute> FindPath(GameObject start, GameObject end)
         {
+
             return _pathfinder.FindPath(start, end);
         }
 

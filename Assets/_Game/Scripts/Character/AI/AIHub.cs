@@ -37,6 +37,7 @@ namespace _Game.Scripts.Character.AI
         {
             _state = AiState.Asleep;
             
+            
             _character = GetComponent<global::_Game.Scripts.Character.Stats.Character>();
             if (_character.CharStats.Team == 0) return;
             while (hub == null)
