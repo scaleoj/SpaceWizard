@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 public class TileContainer : MonoBehaviour
@@ -30,6 +31,7 @@ public class TileContainer : MonoBehaviour
     private tileState state = tileState.NORMAL;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
+    private Coroutine currRoutine;
     
     [Header("Other")]
     [SerializeField] private GameObject occupiedGameObject;
@@ -39,6 +41,38 @@ public class TileContainer : MonoBehaviour
     {
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
+    }
+
+    public IEnumerator wobbleRoutine(float minSize, float speedMultiplier)
+    {
+        Debug.Log("ayo");
+        Vector3 currScale = new Vector3(1f,1f,1f);
+        //Wobble in
+        for (float i = 1f; i >= minSize; i -= Time.deltaTime * speedMultiplier)
+        {
+            yield return null;
+            currScale.x = i;
+            currScale.y = i;
+            currScale.z = i;
+            gameObject.transform.localScale = currScale;
+            Debug.Log(i);
+        }
+        
+        gameObject.transform.localScale = new Vector3(minSize,minSize,minSize);
+        
+        //Wobble out
+        for (float i = minSize; i <= 1f; i += Time.deltaTime * speedMultiplier)
+        {
+            yield return null;
+            currScale.x = i;
+            currScale.y = i;
+            currScale.z = i;
+            gameObject.transform.localScale = currScale;
+        }
+        
+        gameObject.transform.localScale = new Vector3(1f,1f,1f);
+
+        currRoutine = StartCoroutine(wobbleRoutine(minSize, speedMultiplier));
     }
 
     public bool Walkable
@@ -52,6 +86,16 @@ public class TileContainer : MonoBehaviour
         get => state;
         set
         {
+           /* if (currRoutine != null)
+            {
+                StopCoroutine(currRoutine);
+            }
+            
+            if (state == tileState.HOVERING)
+            {
+                currRoutine = StartCoroutine(wobbleRoutine(0.75f, 1f));
+            }*/
+
             state = value;
             selectedHighlighter.SetActive(false);
             switch (value)

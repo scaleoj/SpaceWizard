@@ -82,7 +82,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>, IAtomL
                         Weapon1AbilityButtons[i].SetActive(false);
                     }
                 }
-
+                
                 if (item.GetComponent<Character>().CharStats.SecondaryWeapon.WeaponName != "EMPTY")
                 {
                     ShowWeaponTwoAbilities();

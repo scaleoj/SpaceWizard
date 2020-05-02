@@ -31,6 +31,7 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
 
     private bool first = true;
 
+
     void Start()
     {
         hoverGOChanged.RegisterListener(this);
@@ -47,9 +48,7 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
                 wasClicked = m_input.mouse0Down();
             }   
         }
-
     }
-
 
     public void OnEventRaised(GameObject item)
     {

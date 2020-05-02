@@ -307,7 +307,7 @@ public class CharacterStat : ScriptableObject
            primaryWeapon = value;
        }
    }
-
+   
    public Weapon SecondaryWeapon
    {
        get => secondaryWeapon;
