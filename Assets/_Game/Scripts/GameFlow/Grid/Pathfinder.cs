@@ -76,7 +76,7 @@ namespace _Game.Scripts.GameFlow.Grid
                 
                 foreach (var tiles in tilesInRange)
                 {
-                    if (tiles.node.layer != 9<<LayerMask.GetMask("Walkable") || closedList.Contains(tiles))
+                    if ((tiles.node.layer != 9<<LayerMask.GetMask("Walkable") && !tiles.node.GetComponent<TileContainer>().Walkable) || closedList.Contains(tiles))
                     {
                         continue;
                     }
