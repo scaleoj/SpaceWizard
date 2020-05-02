@@ -10,6 +10,7 @@ namespace _Game.Scripts.GameFlow
     {
         [SerializeField] private VoidEvent newQueueGameObject;
         [SerializeField] private GameObjectEvent currentQueueObjectChanged;
+        [SerializeField] private StringEvent alertBox;
         private Dictionary<GameObject, int> _initSheet; //Sheet for the initiative
         private List<KeyValuePair<GameObject, int>> _queue;
         private int _activePosition = 0;
@@ -70,6 +71,11 @@ namespace _Game.Scripts.GameFlow
                 link.CharStats.Active = true;
                 newQueueGameObject.Raise();
                 currentQueueObjectChanged.Raise(_queue[_activePosition].Key);
+
+                if (_queue[_activePosition].Key != null)
+                {
+                    alertBox.Raise(_queue[_activePosition].Key.GetComponent<Character.Stats.Character>().CharStats.CharName + "`s Turn");
+                }
                 var link2 = _queue[_activePosition].Key.GetComponent<Character.AI.AIHub>();
                 if (link2 == null) return;
                 link2.PositionUpdate(); 
@@ -84,6 +90,10 @@ namespace _Game.Scripts.GameFlow
                 link.CharStats.Active = true;
                 newQueueGameObject.Raise();
                 currentQueueObjectChanged.Raise(_queue[_activePosition].Key);
+                if (_queue[_activePosition].Key != null)
+                {
+                    alertBox.Raise(_queue[_activePosition].Key.GetComponent<Character.Stats.Character>().CharStats.CharName + "`s Turn");
+                }
                 var link2 = _queue[_activePosition].Key.GetComponent<Character.AI.AIHub>();
                 if (link2 == null) return;
                 link2.PositionUpdate();
