@@ -73,7 +73,7 @@ namespace _Game.Scripts.Character.AI
                     count++;
                 }
                 
-                var tempPath = _hub.FindPath(_character.OccupiedTile, moveTarget); 
+                var tempPath = _hub.FindPathOnlyRange(_character.OccupiedTile, moveTarget); 
             
                 if (tempPath.Count > 3)
                 {
@@ -83,7 +83,7 @@ namespace _Game.Scripts.Character.AI
             }
             else
             {
-                var tempPath = _hub.FindPath(_character.OccupiedTile, _hub.Retreat); 
+                var tempPath = _hub.FindPathOnlyRange(_character.OccupiedTile, _hub.Retreat); 
             
                 if (tempPath.Count > 3)
                 {
@@ -129,12 +129,12 @@ namespace _Game.Scripts.Character.AI
                     count++;
                 }
                 
-                var tempPath = _hub.FindPath(_character.OccupiedTile, moveTarget);
+                var tempPath = _hub.FindPathOnlyRange(_character.OccupiedTile, moveTarget);
                 _aiHub.startMoveRoutine(_hub, tempPath, _character, 0.5f);
             }
             else
             {
-                var tempPath = _hub.FindPath(_character.OccupiedTile, target.OccupiedTile);
+                var tempPath = _hub.FindPathOnlyRange(_character.OccupiedTile, target.OccupiedTile);
                 _aiHub.startMoveRoutine(_hub, tempPath, _character, 0.5f);
             }
             

@@ -83,6 +83,8 @@ namespace _Game.Scripts.Character.AI
             //character.inMoveProcess = true;
             
             AiSenses.isMoving = true;
+
+            GameObject saveOccupiedGO = null;
             for (int i = 1; i < path.Count; i++)
             {
                 if (Stats.Character.getAPMoveCosts(1, character.CharStats.MChartype) <= character.CharStats.CurrentAp)
@@ -91,7 +93,15 @@ namespace _Game.Scripts.Character.AI
                     //Debug.Log("AI moved distance: " +  distance);
                     
                     character.CharStats.MoveReduceAp(1);
-                    character.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
+                    character.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = saveOccupiedGO;
+                    if (path[i - 1].node.GetComponent<TileContainer>().OccupiedGameObject != null)
+                    {
+                        saveOccupiedGO = path[i - 1].node.GetComponent<TileContainer>().OccupiedGameObject;
+                    }
+                    else
+                    {
+                        saveOccupiedGO = null;
+                    }
                     character.OccupiedTile = path[i - 1].node;
                     character.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = character.gameObject;
                     yield return new WaitForSeconds(moveTime);
