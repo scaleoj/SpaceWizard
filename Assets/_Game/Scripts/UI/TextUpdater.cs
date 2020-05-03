@@ -34,6 +34,12 @@ public class TextUpdater : MonoBehaviour, IAtomListener<GameObject>, IAtomListen
         UpdateText(_queueManager.Queue[_queueManager.ActivePosition].Key);
     }
 
+    private void OnDestroy()
+    {
+        CurrentGameObjectChanged.UnregisterListener(this);
+        charStatChange.UnregisterListener(this);
+    }
+
     public void OnEventRaised(GameObject item)
     {
 //        Debug.Log(item);

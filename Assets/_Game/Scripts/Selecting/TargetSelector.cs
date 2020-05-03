@@ -21,6 +21,11 @@ public class TargetSelector : MonoBehaviour,IAtomListener<bool>, IAtomListener<G
         initialPos = transform.position;
     }
 
+    private void OnDestroy()
+    {
+        attackModeChanged.UnregisterListener(this);
+    }
+
     public void OnEventRaised(bool item)
     {
         if (item)

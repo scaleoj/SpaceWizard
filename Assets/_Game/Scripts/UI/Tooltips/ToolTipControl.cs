@@ -29,11 +29,6 @@ public class ToolTipControl : MonoBehaviour
 
     [Header("Config")] 
     [Tooltip("Offset gets added to the MousePosition on the Screen")][SerializeField] private Vector2 offset;
-    
-    void Awake()
-    {
-
-    }
 
     void Update()
     {

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityAtoms;
 using UnityEngine;
@@ -20,5 +21,10 @@ public class AbilityControl : MonoBehaviour, IAtomListener<int>
     public void OnEventRaised(int item)
     {
         gameflowControl.OnEventRaised(hudstate.getSelectedActionByIndex());
+    }
+
+    private void OnDestroy()
+    {
+        abilitySelectChanged.UnregisterListener(this);
     }
 }

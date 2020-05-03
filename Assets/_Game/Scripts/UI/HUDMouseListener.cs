@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityAtoms;
@@ -7,6 +8,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 using _Game.Scripts.Character.Stats;
 using _Game.Scripts.GameFlow;
+using Void = UnityAtoms.Void;
 
 public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>, IAtomListener<Void>
 {
@@ -30,13 +32,20 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>, IAtomL
 
     private GameObject lastObjectInQueue;
 
-    void Awake()
+    void Start()
     {
+        Debug.Log("RegisterListener");
         nextinQueue.RegisterListener(this);
         updateHUD.RegisterListener(this);
         _eventSystem = GetComponent<EventSystem>();
         OnEventRaised(queue.Queue[queue.ActivePosition].Key);
         lastObjectInQueue = queue.Queue[queue.ActivePosition].Key;
+    }
+
+    private void OnDestroy()
+    {
+        nextinQueue.UnregisterListener(this);
+        updateHUD.UnregisterListener(this);
     }
 
 
@@ -61,6 +70,7 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>, IAtomL
     /*-Gets raised whenever next() in the QueueManager is called, Updates UI-*/
     public void OnEventRaised(GameObject item)
     {
+        
         
         if (item != null)
         {

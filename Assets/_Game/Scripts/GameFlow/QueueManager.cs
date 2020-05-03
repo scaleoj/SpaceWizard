@@ -17,10 +17,11 @@ namespace _Game.Scripts.GameFlow
     
     
         // Start is called before the first frame update
-        private void OnEnable()
+        public void OnEnable()
         {
             _initSheet = new Dictionary<GameObject, int>();
-            var queue = new List<KeyValuePair<GameObject, int>>();
+            _queue = new List<KeyValuePair<GameObject, int>>();
+            _activePosition = 0;
         }
 
         public void SpawnUnit(GameObject c)
@@ -46,7 +47,7 @@ namespace _Game.Scripts.GameFlow
             {
                 _initSheet.Remove(c);
                 UpdateList();
-                CheckEnd();
+                //CheckEnd();
             }
             else
             {

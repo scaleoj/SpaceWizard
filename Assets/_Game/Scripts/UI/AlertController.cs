@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityAtoms;
@@ -19,6 +20,11 @@ public class AlertController : MonoBehaviour, IAtomListener<string>
     void Start()
     {
         alertEvent.RegisterListener(this);
+    }
+
+    private void OnDestroy()
+    {
+        alertEvent.UnregisterListener(this);
     }
 
 

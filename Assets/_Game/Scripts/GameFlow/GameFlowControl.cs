@@ -30,6 +30,8 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
 
     private void Awake()
     {
+        queue.OnEnable();
+        
         hudStateChanged.RegisterListener(this);
         gameobjectChanged.RegisterListener(this);
         /*for (int i = 0; i < units.Length; i++)
@@ -41,7 +43,11 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         addUnitsToQueue(units); //Remove this when wanting to be able to manually place in unity
         savedStats = new CharContainer[units.Length];
         
-        
+        Debug.Log(queue.Queue.Count);
+        for (int i = 0; i < queue.Queue.Count; i++)
+        {
+            Debug.Log(queue.Queue[i]);
+        }
         /*for (int i = 0; i < units.Length; i++)
         {
            // savedStats[i] = ScriptableObject.CreateInstance<CharacterStat>();
@@ -62,23 +68,42 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
              savedStats[i].apgain = stats.Apgain;
         }
         */
-        
-        
+
         HUDstate.SelectedAction = State.currentAction.IDLE;
 
         queue.Queue[queue.ActivePosition].Key.GetComponent<Character>().OccupiedTile.GetComponent<TileContainer>().State
             = TileContainer.tileState.SELECTED;
         
+        Debug.Log("UPDATE QUEUE");
         nextGOinQueue.Raise(queue.Queue[queue.ActivePosition].Key);
         
         gameUpdates.Value = true;
-    }
 
+        for (int i = 0; i < queue.Queue.Count; i++)
+        {
+            Debug.Log(queue.Queue[i].Key);
+        }
+        
+    }
+    
     private void OnDestroy()
     {
+        hudStateChanged.UnregisterListener(this);
+        gameobjectChanged.UnregisterListener(this);
+    }
+
+    private void OnDisable()
+    {
         gameUpdates.Value = false;
-        //queue.Queue.Clear();
+        Debug.Log(queue.Queue.Count);
+        for (int i = queue.Queue.Count - 1; i >= 0; i--)
+        {
+            queue.KillUnit(queue.Queue[i].Key);
+        }
         
+        queue.Queue.Clear();
+        Debug.Log(queue.Queue.Count);
+
         /*for (int i = 0; i < units.Length; i++)
         {
             CharacterStat stats = units[i].GetComponent<Character>().CharStats;
@@ -101,8 +126,10 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
 
     public void addUnitsToQueue(GameObject[] unitArr)
     {
-        for (int i = 0; i < unitArr.Length; i++) 
+        Debug.Log("ARRAY LENGTH " + unitArr.Length);
+        for (int i = 0; i < unitArr.Length; i++)
         {
+            Debug.Log("UNIT ARRAY "  + unitArr[i]);
             queue.SpawnUnit(unitArr[i]);
         }
     }

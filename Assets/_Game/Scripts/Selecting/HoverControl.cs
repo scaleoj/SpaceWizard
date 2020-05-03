@@ -39,6 +39,11 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
         lastHovered = null;
     }
 
+    private void OnDestroy()
+    {
+        hoverGOChanged.UnregisterListener(this);
+    }
+
     void Update()
     {
         if (!mouseOverUI.Value)

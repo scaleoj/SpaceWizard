@@ -19,6 +19,11 @@ public class CharacterKiller : MonoBehaviour, IAtomListener<GameObject>
         killChar.RegisterListener(this);
     }
 
+    private void OnDestroy()
+    {
+        killChar.UnregisterListener(this);
+    }
+
     public void OnEventRaised(GameObject item)
     {
         StartCoroutine(killWaitTime(item));
@@ -28,6 +33,7 @@ public class CharacterKiller : MonoBehaviour, IAtomListener<GameObject>
     {
         yield return new WaitForSeconds(1);
         //updateHUD.Raise();
+        Debug.Log(item);
         queue.KillUnit(item);
         item.transform.position = Vector3.one * 1000;
         Character itemChar = item.GetComponent<Character>();

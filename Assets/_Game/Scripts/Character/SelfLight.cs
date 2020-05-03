@@ -13,6 +13,11 @@ public class SelfLight : MonoBehaviour, IAtomListener<GameObject>
       currentGameObjectChanged.RegisterListener(this);
    }
 
+   private void OnDestroy()
+   {
+      currentGameObjectChanged.UnregisterListener(this);
+   }
+
    public GameObject Light
    {
       get => light;

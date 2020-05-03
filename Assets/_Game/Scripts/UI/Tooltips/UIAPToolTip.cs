@@ -23,6 +23,11 @@ public class UIAPToolTip : MonoBehaviour, IAtomListener<int>
         costText = container.GetComponentInChildren<TextMeshProUGUI>();
         currentMoveAPCost.RegisterListener(this);
     }
+    
+    private void OnDestroy()
+    {
+        currentMoveAPCost.UnregisterListener(this);
+    }
 
     private void Update()
     {

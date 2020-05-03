@@ -17,6 +17,11 @@ public class SelectorController : MonoBehaviour, IAtomListener<GameObject>
         currentGameObjectChanged.RegisterListener(this);
     }
 
+    private void OnDestroy()
+    {
+        currentGameObjectChanged.RegisterListener(this);
+    }
+
 
     public void OnEventRaised(GameObject item)
     {

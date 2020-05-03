@@ -24,6 +24,11 @@ public class CharSliderControl : MonoBehaviour, IAtomListener<Void>
         //_characterStat = GetComponentInParent<Character>().CharStats; //-------------CHANGE
         OnEventRaised(new Void());
     }
+    
+    private void OnDestroy()
+    {
+        updateHUD.UnregisterListener(this);
+    }
 
     public void OnEventRaised(Void item)
     {

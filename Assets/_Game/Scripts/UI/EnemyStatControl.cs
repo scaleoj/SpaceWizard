@@ -43,6 +43,12 @@ public class EnemyStatControl : MonoBehaviour, IAtomListener<Void>, IAtomListene
         charStatChange.RegisterListener(this);
     }
 
+    private void OnDestroy()
+    {
+        CurrentGameObjectChanged.UnregisterListener(this);
+        charStatChange.UnregisterListener(this);
+    }
+
 
     public void OnEventRaised(Void item)
     {

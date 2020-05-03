@@ -21,6 +21,11 @@ public class TrainBarrier : MonoBehaviour, IAtomListener<bool>
         StartCoroutine(moveBarrier(item));
     }
 
+    private void OnDestroy()
+    {
+        trainIsMovingChanged.UnregisterListener(this);
+    }
+
     private IEnumerator moveBarrier(bool trainIsMoving)
     {
         currTime = 0f;

@@ -23,6 +23,11 @@ public class APSliderControl : MonoBehaviour, IAtomListener<Void>
         OnEventRaised(new Void());
     }
 
+    private void OnDestroy()
+    {
+        updateHUD.UnregisterListener(this);
+    }
+
     public void OnEventRaised(Void item)
     {
         CharacterStat currentChar = _queue.Queue[_queue.ActivePosition].Key.GetComponent<Character>().CharStats;

@@ -10,6 +10,7 @@ public class Effect : ScriptableObject, IAtomListener<GameObject>
    [Header("General")]
    [Tooltip("Duration in Rounds")][SerializeField] internal int duration;
    [SerializeField] internal GameObjectEvent queueGOChanged;
+   [SerializeField] internal BoolVariable runUpdates;
    [SerializeField] internal bool infiniteEffect;
    [Tooltip(("NEEDS TO BE UNIQUE!"))][SerializeField] internal int effectID; //-> Unique ID of the Effect, when instantiating set the ID to the ID of the Original Object!
 
@@ -32,6 +33,11 @@ public class Effect : ScriptableObject, IAtomListener<GameObject>
 
    public void OnEventRaised(GameObject item)
    {
+      if (!runUpdates)
+      {
+         return;
+      }
+      
       if (isActive && item.gameObject.GetComponent<Character>() == infectedCharacter)
       {
          if (!infiniteEffect)

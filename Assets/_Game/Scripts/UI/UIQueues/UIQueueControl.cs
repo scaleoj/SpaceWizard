@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using _Game.Scripts.Character.Stats;
 using _Game.Scripts.GameFlow;
 using TMPro;
 using UnityAtoms;
 using UnityEngine;
+using Void = UnityAtoms.Void;
 
 public class UIQueueControl : MonoBehaviour, IAtomListener<Void>
 {
@@ -56,6 +58,11 @@ public class UIQueueControl : MonoBehaviour, IAtomListener<Void>
             }
         }
         
+    }
+
+    void OnDestroy()
+    {
+        updateHUD.UnregisterListener(this);
     }
 
     public void OnEventRaised(Void item)
