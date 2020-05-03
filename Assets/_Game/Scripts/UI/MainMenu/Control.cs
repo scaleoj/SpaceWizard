@@ -11,6 +11,11 @@ public class Control : MonoBehaviour
         SceneManager.LoadScene("HUD", LoadSceneMode.Additive);
     }
 
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void CloseGame()
     {
         Application.Quit();
