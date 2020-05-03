@@ -26,6 +26,7 @@ public class TrainBarrier : MonoBehaviour, IAtomListener<bool>
         currTime = 0f;
         if (trainIsMoving)
         {
+            yield return new WaitForSeconds(4f);
             float currOffset = -90f;
             while (currOffset <= 0f)
             {
