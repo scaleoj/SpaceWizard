@@ -16,15 +16,15 @@ MonoBehaviour:
   team: 0
   initiative: 1
   charName: Ghostclone
-  currentHealth: 1
-  maxHealth: 1
+  currentHealth: 4
+  maxHealth: 4
   currentMp: 2
   maxMp: 2
-  currentArmor: 1
-  maxArmor: 1
-  currentMs: 1
-  maxMs: 1
-  currentAp: 3
+  currentArmor: 3
+  maxArmor: 3
+  currentMs: 2
+  maxMs: 2
+  currentAp: 4
   maxAP: 9
   apgain: 4
   primaryWeapon: {fileID: 11400000, guid: b065b6e1f2d7836419ebd844f9cd751d, type: 2}

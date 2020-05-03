@@ -16,17 +16,17 @@ MonoBehaviour:
   team: 1
   initiative: 2
   charName: Blue Borslime
-  currentHealth: 1
-  maxHealth: 1
+  currentHealth: 5
+  maxHealth: 5
   currentMp: 1
   maxMp: 1
-  currentArmor: 1
-  maxArmor: 1
-  currentMs: 1
-  maxMs: 1
-  currentAp: 3
+  currentArmor: 3
+  maxArmor: 3
+  currentMs: 7
+  maxMs: 7
+  currentAp: 4
   maxAP: 9
-  apgain: 4
+  apgain: 5
   primaryWeapon: {fileID: 11400000, guid: b065b6e1f2d7836419ebd844f9cd751d, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: 4fc2d7d6efe137342a050288ba526ba7, type: 2}
   queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}

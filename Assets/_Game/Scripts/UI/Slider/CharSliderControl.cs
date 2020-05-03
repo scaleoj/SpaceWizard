@@ -19,18 +19,14 @@ public class CharSliderControl : MonoBehaviour, IAtomListener<Void>
     
     public void Init()
     {
-        Debug.Log(">Enable on CharSlider");
         updateHUD.RegisterListener(this);
         _slider = GetComponent<Slider>();
-        Debug.Log(_slider);
-        Debug.Log(_characterStat);
         //_characterStat = GetComponentInParent<Character>().CharStats; //-------------CHANGE
         OnEventRaised(new Void());
     }
 
     public void OnEventRaised(Void item)
     {
-        Debug.Log(">Trying to set sliders");
         switch (_type)
         {
                case CharacterStat.DamageType.Magic:

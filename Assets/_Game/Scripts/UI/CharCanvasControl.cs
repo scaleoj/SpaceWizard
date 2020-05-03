@@ -16,14 +16,12 @@ public class CharCanvasControl : MonoBehaviour
     {
         for (int i = 0; i < _gameFlowControl.Units.Length; i++)
         {
-            Debug.Log(">Setting up CharCanvas");
             GameObject currCharacterGO = _gameFlowControl.Units[i];
             GameObject newCanvas = Instantiate(canvasPreset, this.transform);
             DmgIndicator dmgIndic = currCharacterGO.GetComponent<DmgIndicator>();
             CanvasPositioner canPos = newCanvas.GetComponentInChildren<CanvasPositioner>();
             canPos.Cam = _camera;
             canPos.Target = currCharacterGO;
-            Debug.Log(currCharacterGO.GetComponent<Character>().CharStats);
             canPos.CharStats = currCharacterGO.GetComponent<Character>().CharStats;
             dmgIndic.EffectText = canPos.EffText;
             dmgIndic.HealthText = canPos.PureDmgText;

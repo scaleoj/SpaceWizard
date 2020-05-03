@@ -41,6 +41,8 @@ namespace _Game.Scripts.Character.Stats
 
             for (int i = 0; i < charStats.PrimaryWeapon.Abilities.Length; i++)
             {
+                //Debug.Log(weapOneAbilites[i]);
+                //Debug.Log(charStats.PrimaryWeapon.Abilities[i]);
                 weapOneAbilites[i] = Instantiate(charStats.PrimaryWeapon.Abilities[i]);
             }
             
