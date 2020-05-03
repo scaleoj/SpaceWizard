@@ -77,6 +77,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     private void OnDestroy()
     {
         gameUpdates.Value = false;
+        //queue.Queue.Clear();
         
         /*for (int i = 0; i < units.Length; i++)
         {

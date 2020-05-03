@@ -10,17 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 0}
-  m_Name: PoisonAbility
+  m_Name: PoisonEffect
   m_EditorClassIdentifier: Assembly-CSharp::Effect_Ablity
-  abilityName: Poison
-  abilityDescription: 'Weak Poison that does damage to the target every turn.
-
-
-    AP Cost: 3
-
-    Magic Damage: 1
-
-    Physical Damage: 1'
+  abilityName: 
+  abilityDescription: 
   aoeRange: 0
-  APCost: 3
-  _effect: {fileID: 11400000, guid: 076df399aa0a0554993f8f1326cac9fa, type: 2}
+  APCost: 0
+  _effect: {fileID: 0}

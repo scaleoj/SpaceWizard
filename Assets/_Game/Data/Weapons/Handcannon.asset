@@ -25,4 +25,3 @@ MonoBehaviour:
   critMultiplier: 1.5
   abilities:
   - {fileID: 11400000, guid: 12067bfea7e86c541b3de3316385e52a, type: 2}
-  - {fileID: 11400000, guid: 70329f603975a3c4da326a8d1cd98274, type: 2}

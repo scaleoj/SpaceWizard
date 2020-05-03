@@ -128,7 +128,7 @@ public class TileContainer : MonoBehaviour
             if (false)
             {
                 wobbleIsActive = true;
-                currScale = initialSize;
+                //currScale = initialSize;
             }
             else
             {
