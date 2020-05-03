@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
@@ -31,7 +32,13 @@ public class TileContainer : MonoBehaviour
     private tileState state = tileState.NORMAL;
     private MeshFilter meshFilter;
     private MeshRenderer meshRenderer;
-    private Coroutine currRoutine;
+    //Wobble stuff
+    private float minSize = 1.35f;
+    private float speedMultiplier = 0.6f;
+    private bool wobbleIsActive;
+    private Vector3 initialSize;
+    private Vector3 currScale;
+    private bool wobbleIn = true;
     
     [Header("Other")]
     [SerializeField] private GameObject occupiedGameObject;
@@ -41,11 +48,45 @@ public class TileContainer : MonoBehaviour
     {
         meshFilter = GetComponent<MeshFilter>();
         meshRenderer = GetComponent<MeshRenderer>();
+        initialSize = gameObject.transform.localScale;
     }
 
-    public IEnumerator wobbleRoutine(float minSize, float speedMultiplier)
+    private void Update()
     {
-        Debug.Log("ayo");
+        if (wobbleIsActive)
+        {
+            if (wobbleIn)
+            {
+                currScale.x -= Time.deltaTime * speedMultiplier;
+                //currScale.y -=  Time.deltaTime * speedMultiplier;
+                currScale.z -=  Time.deltaTime * speedMultiplier;
+
+                gameObject.transform.localScale = currScale;
+
+                if (currScale.x <= minSize)
+                {
+                    wobbleIn = false;
+                }
+            }
+            else
+            {
+                currScale.x += Time.deltaTime * speedMultiplier;
+                //currScale.y -=  Time.deltaTime * speedMultiplier;
+                currScale.z +=  Time.deltaTime * speedMultiplier;
+                
+                gameObject.transform.localScale = currScale;
+
+                if (currScale.x >= initialSize.x)
+                {
+                    wobbleIn = true;
+                    gameObject.transform.localScale = initialSize;
+                }
+            }
+        }
+    }
+
+   /* public IEnumerator wobbleRoutine(float minSize, float speedMultiplier)
+    {
         Vector3 currScale = new Vector3(1f,1f,1f);
         //Wobble in
         for (float i = 1f; i >= minSize; i -= Time.deltaTime * speedMultiplier)
@@ -71,9 +112,7 @@ public class TileContainer : MonoBehaviour
         }
         
         gameObject.transform.localScale = new Vector3(1f,1f,1f);
-
-        currRoutine = StartCoroutine(wobbleRoutine(minSize, speedMultiplier));
-    }
+    }*/
 
     public bool Walkable
     {
@@ -86,16 +125,17 @@ public class TileContainer : MonoBehaviour
         get => state;
         set
         {
-           /* if (currRoutine != null)
+            if (value == tileState.HOVERING )
             {
-                StopCoroutine(currRoutine);
+                wobbleIsActive = true;
+                currScale = initialSize;
+            }
+            else
+            {
+                wobbleIsActive = false;
+                gameObject.transform.localScale = initialSize;
             }
             
-            if (state == tileState.HOVERING)
-            {
-                currRoutine = StartCoroutine(wobbleRoutine(0.75f, 1f));
-            }*/
-
             state = value;
             selectedHighlighter.SetActive(false);
             switch (value)
