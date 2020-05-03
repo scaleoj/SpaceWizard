@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31db0d5231939e848a7c0038dae9eecc, type: 3}
   m_Name: TestChar1
   m_EditorClassIdentifier: 
-  mChartype: 4
+  mChartype: 0
   team: 0
   initiative: 3
   charName: Ghostclone
-  currentHealth: 6
-  maxHealth: 6
+  currentHealth: 1
+  maxHealth: 1
   currentMp: 10
   maxMp: 10
-  currentArmor: 10
-  maxArmor: 10
-  currentMs: 10
-  maxMs: 10
+  currentArmor: 1
+  maxArmor: 1
+  currentMs: 1
+  maxMs: 1
   currentAp: 3
   maxAP: 9
-  apgain: 2
+  apgain: 4
   primaryWeapon: {fileID: 11400000, guid: b065b6e1f2d7836419ebd844f9cd751d, type: 2}
   secondaryWeapon: {fileID: 11400000, guid: 7b7593d83253a904d9f5ecdf8ed0f8a7, type: 2}
   queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}

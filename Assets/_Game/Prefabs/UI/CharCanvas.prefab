@@ -265,8 +265,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35, y: 10.4}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 35, y: 29.38}
+  m_SizeDelta: {x: 200, y: 87.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &1777249314562759995
 MeshRenderer:
@@ -370,12 +370,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 54.55
+  m_fontSize: 96
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 200
   m_fontStyle: 1
   m_textAlignment: 514
   m_characterSpacing: 0
@@ -470,8 +470,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 220, y: 10.4}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 220, y: 29.38}
+  m_SizeDelta: {x: 200, y: 87.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5066039715605629461
 MeshRenderer:
@@ -575,12 +575,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 54.55
+  m_fontSize: 96
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 200
   m_fontStyle: 1
   m_textAlignment: 514
   m_characterSpacing: 0
@@ -675,8 +675,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35, y: 120}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: 35, y: 222.18}
+  m_SizeDelta: {x: 200, y: 87.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &7745791386582012174
 MeshRenderer:
@@ -760,8 +760,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4278232831
-  m_fontColor: {r: 1, g: 0.65117276, b: 0, a: 1}
+    rgba: 4278254591
+  m_fontColor: {r: 1, g: 0.98470926, b: 0, a: 1}
   m_enableVertexGradient: 1
   m_colorMode: 3
   m_fontColorGradient:
@@ -780,12 +780,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 54.55
+  m_fontSize: 96
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 200
   m_fontStyle: 3
   m_textAlignment: 514
   m_characterSpacing: 0
@@ -880,8 +880,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 35, y: 65}
-  m_SizeDelta: {x: 500, y: 50}
+  m_AnchoredPosition: {x: 35, y: 125.43}
+  m_SizeDelta: {x: 500, y: 87.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &6666332239606551498
 MeshRenderer:
@@ -985,12 +985,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 54.55
+  m_fontSize: 91.65
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 200
   m_fontStyle: 5
   m_textAlignment: 514
   m_characterSpacing: 0
@@ -1646,8 +1646,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -160, y: 10.4}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -160, y: 29.38}
+  m_SizeDelta: {x: 200, y: 87.96}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &9102671236175391828
 MeshRenderer:
@@ -1751,12 +1751,12 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 54.55
+  m_fontSize: 96
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
   m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_fontSizeMax: 200
   m_fontStyle: 1
   m_textAlignment: 514
   m_characterSpacing: 0
@@ -2350,9 +2350,7 @@ MonoBehaviour:
   HPSlider: {fileID: 776065911371813089}
   MSSlider: {fileID: 9195063527979744168}
   PSSlider: {fileID: 5795972089713159960}
-  characterStat: {fileID: 0}
   UIContainer: {fileID: 6389765807917199609}
-  _queueManager: {fileID: 0}
   offsetx: 0
   offsety: 2
 --- !u!1 &8643319930454825522

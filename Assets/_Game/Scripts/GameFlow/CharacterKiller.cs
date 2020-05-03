@@ -5,12 +5,14 @@ using _Game.Scripts.Character.Stats;
 using _Game.Scripts.GameFlow;
 using UnityAtoms;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterKiller : MonoBehaviour, IAtomListener<GameObject>
 {
     [SerializeField] private GameObjectEvent killChar;
     [SerializeField] private QueueManager queue;
     [SerializeField] private VoidEvent updateHUD;
+    [SerializeField] private StringEvent alertBox;
 
     private void Awake()
     {
@@ -39,5 +41,39 @@ public class CharacterKiller : MonoBehaviour, IAtomListener<GameObject>
                 itemChar.CharStats.ActiveEffects[i].DisableEffect(item);
             }
         }
+
+        bool endGame = false;
+        int firstFoundParty = queue.Queue[0].Key.GetComponent<Character>().CharStats.Team;
+
+        for (int i = 1; i < queue.Queue.Count; i++)
+        {
+            if (queue.Queue[i].Key.GetComponent<Character>().CharStats.Team != firstFoundParty)
+            {
+                endGame = false;
+                Debug.Log("Dont end the Game!");
+                break;
+            }
+            else
+            {
+                Debug.Log("End The Game!");
+                endGame = true;
+            }
+        }
+
+        if (endGame)
+        {
+            yield return new WaitForSeconds(0.2f);
+            if (firstFoundParty == 0)
+            {
+                alertBox.Raise("Congratulations: Game won");
+            }
+            else
+            {
+                alertBox.Raise("Game Over");
+            }
+            yield return new WaitForSeconds(1.5f);
+            SceneManager.LoadScene("MainMenu");
+        }
+            
     }
 }

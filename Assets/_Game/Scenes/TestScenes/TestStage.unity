@@ -23828,6 +23828,7 @@ MonoBehaviour:
   killChar: {fileID: 11400000, guid: 8975ce3e2a91efe48a38aa8f9229806c, type: 2}
   queue: {fileID: 11400000, guid: 91c18b6dd50707f4e94d48ea7439d1a9, type: 2}
   updateHUD: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}
+  alertBox: {fileID: 11400000, guid: 69f3dd08851abf847a11588e0a92eedf, type: 2}
 --- !u!4 &2066875598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4486421839476658965, guid: 0dc3b35e7fa2fc7499756e6fdcbe67f0,
@@ -33003,11 +33004,6 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: -239.36005
       objectReference: {fileID: 0}
-    - target: {fileID: 2548744696411496663, guid: 707141300f5c9374cb75ca3ca942b524,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0.40000153
-      objectReference: {fileID: 0}
     - target: {fileID: 98502511762673018, guid: 707141300f5c9374cb75ca3ca942b524,
         type: 3}
       propertyPath: m_Size.x
@@ -33032,6 +33028,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Center.x
       value: -0.5964644
+      objectReference: {fileID: 0}
+    - target: {fileID: 2548744696411496663, guid: 707141300f5c9374cb75ca3ca942b524,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0.40000153
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1058383990481094266, guid: 707141300f5c9374cb75ca3ca942b524, type: 3}

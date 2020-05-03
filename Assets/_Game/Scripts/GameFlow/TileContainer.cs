@@ -125,7 +125,7 @@ public class TileContainer : MonoBehaviour
         get => state;
         set
         {
-            if (value == tileState.HOVERING )
+            if (false)
             {
                 wobbleIsActive = true;
                 currScale = initialSize;
