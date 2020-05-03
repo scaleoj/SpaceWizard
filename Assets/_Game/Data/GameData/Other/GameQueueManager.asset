@@ -15,3 +15,4 @@ MonoBehaviour:
   newQueueGameObject: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}
   currentQueueObjectChanged: {fileID: 11400000, guid: 5e8464c2c2b1aa0468fd6a20f9c8e060,
     type: 2}
+  alertBox: {fileID: 11400000, guid: 69f3dd08851abf847a11588e0a92eedf, type: 2}

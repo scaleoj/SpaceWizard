@@ -6,11 +6,11 @@ using UnityEngine;
 
 public class DmgIndicator : MonoBehaviour
 {
-    [SerializeField] private TextMeshPro physText;
-    [SerializeField] private TextMeshPro magicText;
-    [SerializeField] private TextMeshPro healthText;
-    [SerializeField] private TextMeshPro hitText;
-    [SerializeField] private TextMeshPro effectText;
+    [SerializeField] private TextMeshProUGUI physText;
+    [SerializeField] private TextMeshProUGUI magicText;
+    [SerializeField] private TextMeshProUGUI healthText;
+    [SerializeField] private TextMeshProUGUI hitText;
+    [SerializeField] private TextMeshProUGUI effectText;
 
     public void showDamage(int phys, int magic, int health)
     {
@@ -112,5 +112,36 @@ public class DmgIndicator : MonoBehaviour
             meshRend.material = oldMat;
             charTransform.position = oldPos;
         }
+    }
+    
+    //GetSet
+    public TextMeshProUGUI PhysText
+    {
+        get => physText;
+        set => physText = value;
+    }
+
+    public TextMeshProUGUI EffectText
+    {
+        get => effectText;
+        set => effectText = value;
+    }
+
+    public TextMeshProUGUI HealthText
+    {
+        get => healthText;
+        set => healthText = value;
+    }
+
+    public TextMeshProUGUI MagicText
+    {
+        get => magicText;
+        set => magicText = value;
+    }
+
+    public TextMeshProUGUI HitText
+    {
+        get => hitText;
+        set => hitText = value;
     }
 }

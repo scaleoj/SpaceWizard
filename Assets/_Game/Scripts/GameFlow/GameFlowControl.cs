@@ -340,4 +340,10 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
             tiles[i] = null;
         }
     }
+
+    public GameObject[] Units
+    {
+        get => units;
+        set => units = value;
+    }
 }

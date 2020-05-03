@@ -17,16 +17,20 @@ public class CharSliderControl : MonoBehaviour, IAtomListener<Void>
     private CharacterStat _characterStat;
     private Slider _slider;
     
-    void Start()
+    public void Init()
     {
+        Debug.Log(">Enable on CharSlider");
         updateHUD.RegisterListener(this);
         _slider = GetComponent<Slider>();
-        _characterStat = GetComponentInParent<Character>().CharStats;
+        Debug.Log(_slider);
+        Debug.Log(_characterStat);
+        //_characterStat = GetComponentInParent<Character>().CharStats; //-------------CHANGE
         OnEventRaised(new Void());
     }
 
     public void OnEventRaised(Void item)
     {
+        Debug.Log(">Trying to set sliders");
         switch (_type)
         {
                case CharacterStat.DamageType.Magic:
@@ -45,5 +49,11 @@ public class CharSliderControl : MonoBehaviour, IAtomListener<Void>
                    textMesh.text = "PS: " + _characterStat.CurrentArmor + "/"  + _characterStat.MaxArmor;
                    break;
         }
+    }
+
+    public CharacterStat _CharacterStat
+    {
+        get => _characterStat;
+        set => _characterStat = value;
     }
 }
