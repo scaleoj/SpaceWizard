@@ -29,7 +29,7 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
 
     private TileAttribute[] currentPathTiles;
 
-    private bool first = true;
+    //private bool first = true;
 
 
     void Start()

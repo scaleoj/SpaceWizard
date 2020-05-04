@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using _Game.Scripts.Character.Stats;
 using UnityEngine;
 using UnityEngine.Serialization;
 

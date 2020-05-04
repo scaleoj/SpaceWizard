@@ -35,7 +35,7 @@ public class TileContainer : MonoBehaviour
     //Wobble stuff
     private float minSize = 1.35f;
     private float speedMultiplier = 0.6f;
-    private bool wobbleIsActive;
+    private bool wobbleIsActive = false;
     private Vector3 initialSize;
     private Vector3 currScale;
     private bool wobbleIn = true;
@@ -125,7 +125,7 @@ public class TileContainer : MonoBehaviour
         get => state;
         set
         {
-            if (false)
+            /*if (false)
             {
                 wobbleIsActive = true;
                 //currScale = initialSize;
@@ -134,7 +134,7 @@ public class TileContainer : MonoBehaviour
             {
                 wobbleIsActive = false;
                 gameObject.transform.localScale = initialSize;
-            }
+            }*/
             
             state = value;
             selectedHighlighter.SetActive(false);

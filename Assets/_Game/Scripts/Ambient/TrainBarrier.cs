@@ -9,7 +9,7 @@ public class TrainBarrier : MonoBehaviour, IAtomListener<bool>
     [SerializeField] private BoolEvent trainIsMovingChanged;
     [SerializeField] private float lerpMultiplier;
     private float currTime;
-    private bool barrierIsUp = true;
+    //private bool barrierIsUp = true;
 
     private void Awake()
     {
