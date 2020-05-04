@@ -19,6 +19,7 @@ namespace _Game.Scripts.GameFlow
         // Start is called before the first frame update
         public void OnEnable()
         {
+            Debug.Log("Enabling QUeue");
             _initSheet = new Dictionary<GameObject, int>();
             _queue = new List<KeyValuePair<GameObject, int>>();
             _activePosition = 0;
@@ -31,6 +32,10 @@ namespace _Game.Scripts.GameFlow
         
             if (!_initSheet.ContainsKey(c))
             {
+                Debug.Log("ADDING GAMEOBJECT----->" + c);
+                Debug.Log("LINK" + link);
+                Debug.Log("CHARSTATS" + link.CharStats);
+                Debug.Log("INITIATIVE" + link.CharStats.Initiative);
                 _initSheet.Add(c, link.CharStats.Initiative);
                 link.CharStats.Active = false;
                 UpdateList();

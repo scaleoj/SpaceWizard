@@ -52,7 +52,7 @@ public class CharacterStat : ScriptableObject
    [SerializeField] private Weapon secondaryWeapon;
 
    //---------ATOMS EVENTS, VARIABLES ETC-----------------//
-   [SerializeField] private QueueManager queue;
+   //[SerializeField] private QueueManager queue;
    [SerializeField] private VoidEvent updateHUD;
    [SerializeField] private BoolVariable runUpdates;
    [SerializeField] private GameObjectEvent killChar;

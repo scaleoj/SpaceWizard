@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 0}
   m_Name: EffectAbility
   m_EditorClassIdentifier: Assembly-CSharp::Effect_Ablity
-  abilityName: 
-  abilityDescription: 
+  abilityName: Poison
+  abilityDescription: Poisons the Enemy for 4 Rounds.
   aoeRange: 0
-  APCost: 0
-  _effect: {fileID: 0}
+  APCost: 2
+  _effect: {fileID: 11400000, guid: 076df399aa0a0554993f8f1326cac9fa, type: 2}

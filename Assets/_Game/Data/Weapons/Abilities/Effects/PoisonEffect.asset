@@ -14,6 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   duration: 4
   queueGOChanged: {fileID: 11400000, guid: 5e8464c2c2b1aa0468fd6a20f9c8e060, type: 2}
+  runUpdates: {fileID: 11400000, guid: fa61081840812504fb9d6e6e088cfaae, type: 2}
   infiniteEffect: 0
+  effectID: 0
   physDamage: 1
   magicDamage: 1
