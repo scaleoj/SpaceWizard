@@ -34,22 +34,22 @@ public class TileContainer : MonoBehaviour
     [SerializeField] private MeshFilter meshFilter;
     [SerializeField] private MeshRenderer meshRenderer;
     //Wobble stuff
-    private float minSize = 1.35f;
-    private float speedMultiplier = 0.6f;
+    private float minSize = 0.85f;
+    private float speedMultiplier = 0.3f;
     private bool wobbleIsActive = false;
     private Vector3 initialSize;
     private Vector3 currScale;
     private bool wobbleIn = true;
+    [SerializeField] private GameObject ViualRepGO;
     
-    [Header("Other")]
     [SerializeField] private GameObject occupiedGameObject;
     [SerializeField] private bool walkable;
 
     private void Awake()
     {
-        meshFilter = GetComponent<MeshFilter>();
-        meshRenderer = GetComponent<MeshRenderer>();
-        initialSize = gameObject.transform.localScale;
+        //meshFilter = GetComponent<MeshFilter>();
+        //meshRenderer = GetComponent<MeshRenderer>();
+        initialSize = ViualRepGO.transform.localScale;
     }
 
     private void Update()
@@ -62,7 +62,7 @@ public class TileContainer : MonoBehaviour
                 //currScale.y -=  Time.deltaTime * speedMultiplier;
                 currScale.z -=  Time.deltaTime * speedMultiplier;
 
-                gameObject.transform.localScale = currScale;
+                ViualRepGO.transform.localScale = currScale;
 
                 if (currScale.x <= minSize)
                 {
@@ -75,12 +75,12 @@ public class TileContainer : MonoBehaviour
                 //currScale.y -=  Time.deltaTime * speedMultiplier;
                 currScale.z +=  Time.deltaTime * speedMultiplier;
                 
-                gameObject.transform.localScale = currScale;
+                ViualRepGO.transform.localScale = currScale;
 
                 if (currScale.x >= initialSize.x)
                 {
                     wobbleIn = true;
-                    gameObject.transform.localScale = initialSize;
+                    ViualRepGO.transform.localScale = initialSize;
                 }
             }
         }
@@ -126,16 +126,16 @@ public class TileContainer : MonoBehaviour
         get => state;
         set
         {
-            /*if (false)
+            if (value ==  tileState.HOVERING)
             {
                 wobbleIsActive = true;
-                //currScale = initialSize;
+                currScale = initialSize;
             }
             else
             {
                 wobbleIsActive = false;
-                gameObject.transform.localScale = initialSize;
-            }*/
+                ViualRepGO.transform.localScale = initialSize;
+            }
             
             state = value;
             selectedHighlighter.SetActive(false);
