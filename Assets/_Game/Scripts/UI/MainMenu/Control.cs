@@ -8,7 +8,6 @@ public class Control : MonoBehaviour
 {
     public void LoadTestGame()
     {
-        Debug.Log("Errorr rorororororro");
         SceneManager.LoadScene("TestStage");
         SceneManager.LoadScene("HUD", LoadSceneMode.Additive);
     }

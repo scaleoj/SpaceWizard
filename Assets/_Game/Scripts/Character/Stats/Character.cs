@@ -25,21 +25,9 @@ namespace _Game.Scripts.Character.Stats
         private CharacterStat charStatCopy;
 
         private bool inMoveProcess;
-
-        private void OnEnable()
-        {
-            Debug.Log(">Character " + name + " enabled!");
-        }
         
-        private void OnDisable()
-        {
-            Debug.Log(">Character " + name + " disabled!");
-        }
-
-
-
         // Configures and copies SO`s
-        void Awake()
+        public void InitChar()
         {
             charStatCopy = Instantiate(charStats);
 

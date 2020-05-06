@@ -28826,6 +28826,12 @@ PrefabInstance:
       propertyPath: units.Array.data[3]
       value: 
       objectReference: {fileID: 83456820}
+    - target: {fileID: 3058552619920812984, guid: dfd5396492ed5d847a547a806f8e0e06,
+        type: 3}
+      propertyPath: updateHUD
+      value: 
+      objectReference: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a,
+        type: 2}
     - target: {fileID: 3058552619920812986, guid: dfd5396492ed5d847a547a806f8e0e06,
         type: 3}
       propertyPath: m_LocalPosition.x

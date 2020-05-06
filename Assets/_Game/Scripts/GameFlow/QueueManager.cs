@@ -20,7 +20,6 @@ namespace _Game.Scripts.GameFlow
         // Start is called before the first frame update
         public void OnEnable()
         {
-            Debug.Log("Enabling QUeue");
             _initSheet = new Dictionary<GameObject, int>();
             _queue = new List<KeyValuePair<GameObject, int>>();
             _activePosition = 0;

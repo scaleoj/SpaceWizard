@@ -1223,6 +1223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c189cf241d49b40aff092cd2da7fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runUpdates: {fileID: 11400000, guid: fa61081840812504fb9d6e6e088cfaae, type: 2}
   updateHUD: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}
   textMesh: {fileID: 1364661911122337014}
   _type: 2
@@ -2187,6 +2188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c189cf241d49b40aff092cd2da7fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runUpdates: {fileID: 11400000, guid: fa61081840812504fb9d6e6e088cfaae, type: 2}
   updateHUD: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}
   textMesh: {fileID: 398343897757803479}
   _type: 0
@@ -2454,6 +2456,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47c189cf241d49b40aff092cd2da7fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  runUpdates: {fileID: 11400000, guid: fa61081840812504fb9d6e6e088cfaae, type: 2}
   updateHUD: {fileID: 11400000, guid: f9ac868e6e7e4bf44ab4fb60486fe65a, type: 2}
   textMesh: {fileID: 8442476381411055086}
   _type: 1

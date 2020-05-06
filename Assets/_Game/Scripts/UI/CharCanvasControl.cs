@@ -12,7 +12,7 @@ public class CharCanvasControl : MonoBehaviour
 
     [SerializeField] private Camera _camera;
 
-    void Awake()
+    void Start()
     {
         for (int i = 0; i < _gameFlowControl.Units.Length; i++)
         {

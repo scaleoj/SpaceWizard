@@ -30,8 +30,9 @@ public class TileContainer : MonoBehaviour
     [Header("Highlighter")]
     [SerializeField]private GameObject selectedHighlighter;
     private tileState state = tileState.NORMAL;
-    private MeshFilter meshFilter;
-    private MeshRenderer meshRenderer;
+    [Header("Other Stuff")]
+    [SerializeField] private MeshFilter meshFilter;
+    [SerializeField] private MeshRenderer meshRenderer;
     //Wobble stuff
     private float minSize = 1.35f;
     private float speedMultiplier = 0.6f;

@@ -11,6 +11,7 @@ using Void = UnityAtoms.Void;
 
 public class CharSliderControl : MonoBehaviour, IAtomListener<Void>
 {
+    [SerializeField] private BoolVariable runUpdates;
     [SerializeField] private VoidEvent updateHUD;
     [SerializeField] private TextMeshProUGUI textMesh;
     [Tooltip("Normal = HP, Magic = MagicShield, Physical = Armor")][SerializeField] private CharacterStat.DamageType _type;
@@ -32,23 +33,26 @@ public class CharSliderControl : MonoBehaviour, IAtomListener<Void>
 
     public void OnEventRaised(Void item)
     {
-        switch (_type)
+        if (runUpdates.Value && _characterStat != null)
         {
-               case CharacterStat.DamageType.Magic:
-                   _slider.maxValue = _characterStat.MaxMs;
-                   _slider.value = _characterStat.CurrentMs;
-                   textMesh.text = "MS: " + _characterStat.CurrentMs  + "/"  + _characterStat.MaxMs;
-                   break;
-               case CharacterStat.DamageType.Normal:
-                   _slider.maxValue = _characterStat.MaxHealth;
-                   _slider.value = _characterStat.CurrentHealth;
-                   textMesh.text = "HP: \n" + _characterStat.CurrentHealth + "/"  + _characterStat.MaxHealth;
-                   break;
-               case CharacterStat.DamageType.Physical:
-                   _slider.maxValue = _characterStat.MaxArmor;
-                   _slider.value = _characterStat.CurrentArmor;
-                   textMesh.text = "PS: " + _characterStat.CurrentArmor + "/"  + _characterStat.MaxArmor;
-                   break;
+            switch (_type)
+            {
+                case CharacterStat.DamageType.Magic:
+                    _slider.maxValue = _characterStat.MaxMs;
+                    _slider.value = _characterStat.CurrentMs;
+                    textMesh.text = "MS: " + _characterStat.CurrentMs + "/" + _characterStat.MaxMs;
+                    break;
+                case CharacterStat.DamageType.Normal:
+                    _slider.maxValue = _characterStat.MaxHealth;
+                    _slider.value = _characterStat.CurrentHealth;
+                    textMesh.text = "HP: \n" + _characterStat.CurrentHealth + "/" + _characterStat.MaxHealth;
+                    break;
+                case CharacterStat.DamageType.Physical:
+                    _slider.maxValue = _characterStat.MaxArmor;
+                    _slider.value = _characterStat.CurrentArmor;
+                    textMesh.text = "PS: " + _characterStat.CurrentArmor + "/" + _characterStat.MaxArmor;
+                    break;
+            }
         }
     }
 

@@ -18,6 +18,7 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     [SerializeField] private IntVariable selectedAbility;
     [SerializeField] private GameObjectEvent nextGOinQueue;
     [SerializeField] private StringEvent alertEvent;
+    [SerializeField] private VoidEvent updateHUD;
 
 
     [SerializeField] private BoolVariable gameUpdates;
@@ -34,56 +35,22 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
         
         hudStateChanged.RegisterListener(this);
         gameobjectChanged.RegisterListener(this);
-        /*for (int i = 0; i < units.Length; i++)
-        {
-            queue.KillUnit(units[i]);            
-        }*/
+
         queue.ActivePosition = 0;
         
         addUnitsToQueue(units); //Remove this when wanting to be able to manually place in unity
         savedStats = new CharContainer[units.Length];
         
-        Debug.Log(queue.Queue.Count);
-        for (int i = 0; i < queue.Queue.Count; i++)
-        {
-            Debug.Log(queue.Queue[i]);
-        }
-        /*for (int i = 0; i < units.Length; i++)
-        {
-           // savedStats[i] = ScriptableObject.CreateInstance<CharacterStat>();
-            CharacterStat stats = units[i].GetComponent<Character>().CharStats;
-            //savedStats[i] = Instantiate(units[i].GetComponent<Character>().CharStats);
-
-            savedStats[i].maxArmor = stats.MaxArmor;
-             savedStats[i].maxHealth = stats.MaxHealth;
-             savedStats[i].maxMp = stats.MaxMp;
-             savedStats[i].maxMs = stats.MaxMs;
-             
-             savedStats[i].initiative = stats.Initiative;
-             savedStats[i].currentAP = stats.CurrentAp;
-             savedStats[i].currentArmor = stats.CurrentArmor;
-             savedStats[i].currentHealth = stats.CurrentHealth;
-             savedStats[i].currentMp = stats.CurrentMp;
-             savedStats[i].currentMs = stats.CurrentMs;
-             savedStats[i].apgain = stats.Apgain;
-        }
-        */
-
         HUDstate.SelectedAction = State.currentAction.IDLE;
 
         queue.Queue[queue.ActivePosition].Key.GetComponent<Character>().OccupiedTile.GetComponent<TileContainer>().State
             = TileContainer.tileState.SELECTED;
         
-        Debug.Log("UPDATE QUEUE");
         nextGOinQueue.Raise(queue.Queue[queue.ActivePosition].Key);
         
         gameUpdates.Value = true;
-
-        for (int i = 0; i < queue.Queue.Count; i++)
-        {
-            Debug.Log(queue.Queue[i].Key);
-        }
         
+        updateHUD.Raise(new Void());
     }
     
     private void OnDestroy()
@@ -95,14 +62,11 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
     private void OnDisable()
     {
         gameUpdates.Value = false;
-        Debug.Log(queue.Queue.Count);
         for (int i = queue.Queue.Count - 1; i >= 0; i--)
         {
             queue.KillUnit(queue.Queue[i].Key);
         }
-        
         queue.Queue.Clear();
-        Debug.Log(queue.Queue.Count);
 
         /*for (int i = 0; i < units.Length; i++)
         {
@@ -126,10 +90,9 @@ public class GameFlowControl : MonoBehaviour, IAtomListener<int>, IAtomListener<
 
     public void addUnitsToQueue(GameObject[] unitArr)
     {
-        Debug.Log("ARRAY LENGTH " + unitArr.Length);
         for (int i = 0; i < unitArr.Length; i++)
         {
-            Debug.Log("UNIT ARRAY "  + unitArr[i]);
+            unitArr[i].GetComponent<Character>().InitChar();
             queue.SpawnUnit(unitArr[i]);
         }
     }
