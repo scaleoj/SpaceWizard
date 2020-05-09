@@ -16,4 +16,4 @@ MonoBehaviour:
   abilityDescription: Heals the targets Health Points.
   dmgColor: {r: 0, g: 1, b: 1, a: 1}
   aoeRange: 0
-  APCost: 0
+  APCost: 2
