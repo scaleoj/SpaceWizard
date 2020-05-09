@@ -9,6 +9,7 @@ public class Ability : ScriptableObject
     //ToolTip and purely visual Stuff
     [TextArea][SerializeField] private string abilityName;
     [TextArea][SerializeField] private string abilityDescription;
+    [SerializeField] internal Color dmgColor;
     
     //Parameter
     [SerializeField] private int aoeRange;

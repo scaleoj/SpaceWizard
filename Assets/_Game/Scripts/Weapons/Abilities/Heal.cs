@@ -26,5 +26,6 @@ public class Heal : Ability
         target.GetComponent<Character>().CharStats.TakeHeal(health_heal,physical_heal, magic_heal, target);
         //Visual Representation
         //TODO DIFFERENT REPRESENTATION THAN WHEN HIT
+        target.GetComponent<DmgIndicator>().showHitOrMiss(true, dmgColor, "Healed", Color.cyan);
     }
 }

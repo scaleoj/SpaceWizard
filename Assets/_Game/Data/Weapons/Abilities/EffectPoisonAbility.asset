@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c59bfb8c8fbd93a4fae210c1dfac0131, type: 3}
+  m_Name: EffectPoisonAbility
+  m_EditorClassIdentifier: 
+  abilityName: Poison
+  abilityDescription: 'Poisons the target.
+
+
+    Duration: 4 Turns
+
+    Magic Damage: 1
+
+    Physical Damage: 1'
+  dmgColor: {r: 0, g: 1, b: 0, a: 0}
+  aoeRange: 0
+  APCost: 3
+  effect: {fileID: 11400000, guid: 076df399aa0a0554993f8f1326cac9fa, type: 2}

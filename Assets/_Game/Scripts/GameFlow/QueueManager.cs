@@ -32,10 +32,10 @@ namespace _Game.Scripts.GameFlow
         
             if (!_initSheet.ContainsKey(c))
             {
-                Debug.Log("ADDING GAMEOBJECT----->" + c);
-                Debug.Log("LINK" + link);
-                Debug.Log("CHARSTATS" + link.CharStats);
-                Debug.Log("INITIATIVE" + link.CharStats.Initiative);
+                //Debug.Log("ADDING GAMEOBJECT----->" + c);
+                //Debug.Log("LINK" + link);
+                //Debug.Log("CHARSTATS" + link.CharStats);
+                //Debug.Log("INITIATIVE" + link.CharStats.Initiative);
                 _initSheet.Add(c, link.CharStats.Initiative);
                 link.CharStats.Active = false;
                 UpdateList();

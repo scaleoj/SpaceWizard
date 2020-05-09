@@ -26,14 +26,21 @@ public class HCBaseATK : Ability
          target.GetComponent<Character>().CharStats.TakeDamage( physdmg,magicdmg, target);
          
          //Visual Representation
-         target.GetComponent<DmgIndicator>().showHitOrMiss(true, Color.red, String.Empty, Color.white);
-         //Debug.Log("Hit, Character took " + magicdmg + " MagicDamage and " + physdmg + " PhysicalDamage"); //TODO Visual implementation of a HIT / raising an event for that
+         if (crit > 1.0f)
+         {
+            //Crit
+            target.GetComponent<DmgIndicator>().showHitOrMiss(true, dmgColor, "CRIT", Color.red);
+         }
+         else
+         {
+            //No Crit
+            target.GetComponent<DmgIndicator>().showHitOrMiss(true, dmgColor, String.Empty, Color.white);
+         }
       }
       else
       {
          //Visual Representation
          target.GetComponent<DmgIndicator>().showHitOrMiss(false, Color.white, String.Empty, Color.white);
-         //Debug.Log("MISS"); //TODO Visual implementation of a MISS / raising an event for that
       }
    }
 }

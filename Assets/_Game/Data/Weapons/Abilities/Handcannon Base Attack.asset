@@ -15,5 +15,6 @@ MonoBehaviour:
   abilityName: Shoot
   abilityDescription: "Shoots a simple shot at the specified target in range. \n\nAP
     Cost: 2"
+  dmgColor: {r: 0, g: 0, b: 0, a: 0}
   aoeRange: 0
   APCost: 2

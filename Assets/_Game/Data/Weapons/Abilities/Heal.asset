@@ -17,5 +17,6 @@ MonoBehaviour:
 
 
     AP Cost: 2'
+  dmgColor: {r: 0.6462264, g: 0.9771864, b: 1, a: 0}
   aoeRange: 2
   APCost: 2

@@ -13,6 +13,12 @@ MonoBehaviour:
   m_Name: Snipe
   m_EditorClassIdentifier: 
   abilityName: Snipeshot
-  abilityDescription: Shoots a long distance snipe shot at the specified target.
+  abilityDescription: 'Shoots a long distance snipe shot at the specified target.
+
+
+    Physical Damage: 2 - 4
+
+    Range: 7'
+  dmgColor: {r: 1, g: 0, b: 0, a: 0}
   aoeRange: 0
   APCost: 4

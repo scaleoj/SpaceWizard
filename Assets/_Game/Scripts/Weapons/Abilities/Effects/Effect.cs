@@ -14,6 +14,11 @@ public class Effect : ScriptableObject, IAtomListener<GameObject>
    [SerializeField] internal bool infiniteEffect;
    [Tooltip(("NEEDS TO BE UNIQUE!"))][SerializeField] internal int effectID; //-> Unique ID of the Effect, when instantiating set the ID to the ID of the Original Object!
 
+   [Header("Visual Representation")] 
+   [SerializeField] internal Color fontColor;
+   [SerializeField] internal Color dmgColor;
+   [SerializeField] internal string onHitText;
+
 
    //Internal Variables
    internal bool isActive = false;
@@ -57,4 +62,22 @@ public class Effect : ScriptableObject, IAtomListener<GameObject>
    
    //Properties
    public int LeftDuration { get; set; }
+
+   public Color FontColor
+   {
+      get => fontColor;
+      set => fontColor = value;
+   }
+
+   public Color DmgColor
+   {
+      get => dmgColor;
+      set => dmgColor = value;
+   }
+
+   public string OnHitText
+   {
+      get => onHitText;
+      set => onHitText = value;
+   }
 }
