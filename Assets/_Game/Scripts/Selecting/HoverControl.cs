@@ -20,7 +20,7 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
     private GameObject lastHovered;
 
     private bool wasClicked;
-
+    
     private TileContainer.tileState saveTileState;
 
     private TileContainer.tileState[] savedPathTileStates;
@@ -51,12 +51,30 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
             if (!wasClicked)
             {
                 wasClicked = m_input.mouse0Down();
+
+               /* Debug.Log("Wasnt clicked");
+                Debug.Log(clickedGameObject.Value);
+                Debug.Log(clickedGameObject.Value.GetComponent<TileContainer>());
+                if (clickedGameObject.Value != null && clickedGameObject.Value.GetComponent<TileContainer>() == null) 
+                { 
+                    Debug.Log("ELLOM8");
+                    return;
+                }
+                else
+                {
+                    wasClicked = m_input.mouse0Down();
+                }*/
             }   
         }
     }
 
     public void OnEventRaised(GameObject item)
     {
+        if (wasClicked && item == null)
+        {
+            wasClicked = false;
+        }
+        
         if (item != null && item.layer == 9)
         {
             TileContainer itemTileContainer = item.GetComponent<TileContainer>(); //Optimization
@@ -68,7 +86,7 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
                    {
                        lastHovered.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
                        wasClicked = false;
-                       
+                       Debug.Log("Switch was clicked to false");
                    }
                    else
                    {
