@@ -21,9 +21,7 @@ namespace _Game.Scripts.Character.Stats
         [Tooltip("Defines the height the character will be placed at when repositioning.")][SerializeField] private float yPosOffset;
 
         private TileContainer CTContainer;
-
         private CharacterStat charStatCopy;
-
         private bool inMoveProcess;
         
         // Configures and copies SO`s
@@ -225,8 +223,8 @@ namespace _Game.Scripts.Character.Stats
             switch (type)
             {
                 case CharacterStat.CharType.Base: return distance;
-                case CharacterStat.CharType.Melee: return  distance / 3 + 1;
-                case CharacterStat.CharType.Support: return distance / 2 + 1;
+                case CharacterStat.CharType.Melee: return  distance;
+                case CharacterStat.CharType.Support: return distance;
                 case CharacterStat.CharType.Tank: return distance;
                 case CharacterStat.CharType.Sniper: return  distance;
                 default: return 0;

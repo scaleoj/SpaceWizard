@@ -351,9 +351,9 @@ namespace _Game.Scripts.Character.Stats
             {
                 case CharType.Base: CurrentAp -= distance;
                     break;
-                case CharType.Melee: CurrentAp -= distance / 3 + 1;
+                case CharType.Melee: CurrentAp -= distance ;
                     break;
-                case CharType.Support: CurrentAp -= distance / 2 + 1;
+                case CharType.Support: CurrentAp -= distance ;
                     break;
                 case CharType.Tank: CurrentAp -= distance;
                     break;

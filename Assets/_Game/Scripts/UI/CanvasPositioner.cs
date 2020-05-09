@@ -19,6 +19,7 @@ public class CanvasPositioner : MonoBehaviour
     private Camera cam;
     private Vector3 offset;
     private float distance;
+    private Vector3 originalScale = new Vector3(0.4f,0.5f,0.4f);
 
     // Update is called once per frame
     void Update()
@@ -31,10 +32,8 @@ public class CanvasPositioner : MonoBehaviour
         offset.y = 1.2f + (distance / 750f);
         offset.x = 0.5f;
         offset.z = 0.5f;
-        /*Transform uiTrans = UIContainer.transform;
-        var localScale = uiTrans.localScale;
-        localScale = new Vector3(localScale.x - distance * 1f,localScale.y - distance * 1f, localScale.z);
-        uiTrans.localScale = localScale;*/
+        //Transform uiTrans = UIContainer.transform;
+        //uiTrans.localScale = new Vector3(originalScale.x / distance * 100f,originalScale.y / distance * 100f, originalScale.z);
         UIContainer.transform.position = cam.WorldToScreenPoint(target.transform.position + offset);
     }
 
