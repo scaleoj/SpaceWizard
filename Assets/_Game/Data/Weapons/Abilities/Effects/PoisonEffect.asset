@@ -17,8 +17,8 @@ MonoBehaviour:
   runUpdates: {fileID: 11400000, guid: fa61081840812504fb9d6e6e088cfaae, type: 2}
   infiniteEffect: 0
   effectID: 0
-  fontColor: {r: 0, g: 0.7735849, b: 0, a: 0}
-  dmgColor: {r: 0.079197526, g: 1, b: 0, a: 0}
+  fontColor: {r: 0, g: 0.7735849, b: 0, a: 1}
+  dmgColor: {r: 0.079197526, g: 1, b: 0, a: 1}
   onHitText: Poisoned
   physDamage: 1
   magicDamage: 1

@@ -16,12 +16,12 @@ MonoBehaviour:
   abilityDescription: 'Poisons the target.
 
 
-    Duration: 4 Turns
+    Duration: 4
 
-    Magic Damage: 1
+    Magic DMG: 1
 
-    Physical Damage: 1'
-  dmgColor: {r: 0, g: 1, b: 0, a: 0}
+    Physical DMG: 1'
+  dmgColor: {r: 0, g: 1, b: 0, a: 1}
   aoeRange: 0
   APCost: 3
   effect: {fileID: 11400000, guid: 076df399aa0a0554993f8f1326cac9fa, type: 2}

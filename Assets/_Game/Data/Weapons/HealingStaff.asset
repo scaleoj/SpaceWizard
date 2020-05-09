@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponName: Grey Staff
   weaponDescription: Simple Healing Staff for everyday use.
-  minPhysicalDmg: 0
-  maxPhysicalDmg: 0
-  minMagicDmg: 0
-  maxMagicDmg: 0
+  minPhysicalDmg: 2
+  maxPhysicalDmg: 3
+  minMagicDmg: 2
+  maxMagicDmg: 3
   minPureDmg: 2
   maxPureDmg: 3
   range: 3
   missChance: 0
   critMultiplier: 1.2
   abilities:
-  - {fileID: 11400000, guid: a05069d285919a34089bb441bbbd6d1e, type: 2}
+  - {fileID: 11400000, guid: a11955c60e476724ca666b741230c7ee, type: 2}
+  - {fileID: 11400000, guid: 1281fd3a72d1c1645a06e084220a2689, type: 2}
+  - {fileID: 11400000, guid: 8b3b4b7b3a3866c4ba10c70f24ec22ee, type: 2}

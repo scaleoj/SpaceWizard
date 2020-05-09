@@ -90,7 +90,6 @@ namespace _Game.Scripts.Character.AI
                     if (range > _range)
                     {
                         Debug.Log("move");
-                        Debug.Log("Rangelimit: " + _range + "/ Range: " + range);
                         Move(target);
                         continue;
                     }           
@@ -106,7 +105,6 @@ namespace _Game.Scripts.Character.AI
                 else
                 {
                     Debug.Log("Break");
-                    Debug.Log("Rangelimit: " + _range + "/ Range: " + range);
                     break;
                 }
 

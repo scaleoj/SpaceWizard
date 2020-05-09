@@ -9,12 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54fc04d52438f364eaeda64cb6d9f61d, type: 3}
-  m_Name: Handcannon Base Attack
+  m_Script: {fileID: 11500000, guid: 80c134b60bf82234fa7737fe233c5979, type: 3}
+  m_Name: HealMagicArmor
   m_EditorClassIdentifier: 
-  abilityName: Shoot
-  abilityDescription: "Shoots a simple shot at the specified target in range. \n\nAP
-    Cost: 2"
-  dmgColor: {r: 0, g: 0, b: 0, a: 1}
+  abilityName: Restore Magic Shield
+  abilityDescription: Restores the targets Magic Shield.
+  dmgColor: {r: 0, g: 1, b: 1, a: 1}
   aoeRange: 0
   APCost: 2

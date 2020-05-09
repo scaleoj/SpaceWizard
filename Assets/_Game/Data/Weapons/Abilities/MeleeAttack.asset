@@ -15,6 +15,6 @@ MonoBehaviour:
   abilityName: Punch
   abilityDescription: Punches the selected Character in Melee Range. Deals heavy physical
     damage.
-  dmgColor: {r: 1, g: 0, b: 0, a: 0}
+  dmgColor: {r: 1, g: 0, b: 0, a: 1}
   aoeRange: 0
   APCost: 3

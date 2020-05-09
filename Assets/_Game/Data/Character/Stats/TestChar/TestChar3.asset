@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 31db0d5231939e848a7c0038dae9eecc, type: 3}
   m_Name: TestChar3
   m_EditorClassIdentifier: 
-  mChartype: 2
+  mChartype: 0
   team: 0
   initiative: 1
   charName: Ghostclone

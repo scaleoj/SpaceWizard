@@ -34,7 +34,6 @@ public class HUDMouseListener : MonoBehaviour, IAtomListener<GameObject>, IAtomL
 
     void Start()
     {
-        Debug.Log("RegisterListener");
         nextinQueue.RegisterListener(this);
         updateHUD.RegisterListener(this);
         _eventSystem = GetComponent<EventSystem>();

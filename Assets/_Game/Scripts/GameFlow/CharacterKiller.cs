@@ -13,6 +13,7 @@ public class CharacterKiller : MonoBehaviour, IAtomListener<GameObject>
     [SerializeField] private QueueManager queue;
     [SerializeField] private VoidEvent updateHUD;
     [SerializeField] private StringEvent alertBox;
+    private int killWaitTimeCounter = 0;
 
     private void Awake()
     {
@@ -31,14 +32,20 @@ public class CharacterKiller : MonoBehaviour, IAtomListener<GameObject>
 
     private IEnumerator killWaitTime(GameObject item)
     {
-        yield return new WaitForSeconds(1);
-        //updateHUD.Raise();
-        Debug.Log(item);
+        killWaitTimeCounter++;
+        Debug.Log(killWaitTimeCounter);
+        if (item == queue.Queue[queue.ActivePosition].Key)
+        {
+            queue.Next();
+        }
         queue.KillUnit(item);
-        item.transform.position = Vector3.one * 1000;
+        
         Character itemChar = item.GetComponent<Character>();
         itemChar.OccupiedTile.GetComponent<TileContainer>().OccupiedGameObject = null;
         itemChar.OccupiedTile = null;
+        
+        yield return new WaitForSeconds(1);
+        item.transform.position = Vector3.one * 1000;
         //Disable all effects
         if (itemChar.CharStats.ActiveEffects.Count != 0)
         {
@@ -56,12 +63,10 @@ public class CharacterKiller : MonoBehaviour, IAtomListener<GameObject>
             if (queue.Queue[i].Key.GetComponent<Character>().CharStats.Team != firstFoundParty)
             {
                 endGame = false;
-                Debug.Log("Dont end the Game!");
                 break;
             }
             else
             {
-                Debug.Log("End The Game!");
                 endGame = true;
             }
         }

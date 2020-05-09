@@ -60,6 +60,7 @@ namespace _Game.Scripts.Character.Stats
         //--------NOT EDITOR EXPOSED VARIABLES--------------//
         private int _moveRange; //Move Range gets controlled by the AP count, look into the "GDD Tabelle" for the details.
         private bool _active; //ShowinInspector missing
+        private bool isDead = false;
         private List<Effect> _activeEffects;
 
         //ENUMS
@@ -102,6 +103,7 @@ namespace _Game.Scripts.Character.Stats
             CurrentMs += magicAmount;
        
             //TODO DAMAGE INDICATOR
+            target.GetComponent<DmgIndicator>().showDamage(phyAmount, magicAmount, healthAmount);
         }
    
         public void TakeDamage(int phyAmount, int magicAmount, GameObject target)
@@ -124,7 +126,7 @@ namespace _Game.Scripts.Character.Stats
 
             //Magic
             int saveMagicDMG = CurrentMs - magicAmount;
-            if (saveMagicDMG < 0)
+            if (saveMagicDMG < 0 && !isDead)
             {
                 reduceHealth_Deathcheck(-saveMagicDMG, target); //Working?
                 CurrentMs = 0;
@@ -249,6 +251,7 @@ namespace _Game.Scripts.Character.Stats
             {
                 CurrentHealth -= value;
                 killChar.Raise(target);
+                isDead = true;
             }
             else
             {
