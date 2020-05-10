@@ -20,7 +20,7 @@ MonoBehaviour:
   maxMagicDmg: 3
   minPureDmg: 2
   maxPureDmg: 3
-  range: 3
+  range: 5
   missChance: 0
   critMultiplier: 1.2
   abilities:

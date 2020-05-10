@@ -20,7 +20,7 @@ MonoBehaviour:
 
     Magic DMG: 1
 
-    Physical DMG: 1'
+    Phys. DMG: 1'
   dmgColor: {r: 0, g: 1, b: 0, a: 1}
   aoeRange: 0
   APCost: 3

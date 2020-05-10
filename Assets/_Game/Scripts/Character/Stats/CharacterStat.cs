@@ -82,9 +82,9 @@ namespace _Game.Scripts.Character.Stats
             {
                 case CharType.Soldier: MoveRange = CurrentAp;
                     break;
-                case CharType.Melee: MoveRange = CurrentAp * 3;
+                case CharType.Melee: MoveRange = CurrentAp;
                     break;
-                case CharType.Support: MoveRange = CurrentAp * 2;
+                case CharType.Support: MoveRange = CurrentAp;
                     break;
                 case CharType.Tank: MoveRange = CurrentAp;
                     break;
@@ -221,9 +221,9 @@ namespace _Game.Scripts.Character.Stats
                 {
                     case CharType.Soldier: MoveRange = CurrentAp;
                         break;
-                    case CharType.Melee: MoveRange = CurrentAp * 3;
+                    case CharType.Melee: MoveRange = CurrentAp;
                         break;
-                    case CharType.Support: MoveRange = CurrentAp * 2;
+                    case CharType.Support: MoveRange = CurrentAp;
                         break;
                     case CharType.Tank: MoveRange = CurrentAp;
                         break;

@@ -10,20 +10,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 31db0d5231939e848a7c0038dae9eecc, type: 3}
-  m_Name: EnemySlimeBlue
+  m_Name: EnemySlimeYellow
   m_EditorClassIdentifier: 
-  mChartype: 0
+  mChartype: 3
   team: 1
   initiative: 2
-  charName: Blue Borslime
-  currentHealth: 7
-  maxHealth: 7
-  currentMp: 1
-  maxMp: 1
-  currentArmor: 3
-  maxArmor: 3
-  currentMs: 7
-  maxMs: 7
+  charName: Bossslime
+  currentHealth: 16
+  maxHealth: 16
+  currentMp: 0
+  maxMp: 0
+  currentArmor: 2
+  maxArmor: 2
+  currentMs: 3
+  maxMs: 3
   currentAp: 9
   maxAP: 9
   apgain: 9

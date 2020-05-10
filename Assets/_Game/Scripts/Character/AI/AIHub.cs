@@ -85,6 +85,11 @@ namespace _Game.Scripts.Character.AI
             AiSenses.isMoving = true;
 
             GameObject saveOccupiedGO = null;
+
+            path[path.Count - 2].node.GetComponent<TileContainer>().State = TileContainer.tileState.HIGHLIGHTED;
+            
+            yield return new WaitForSeconds(moveTime);
+
             for (int i = 1; i < path.Count; i++)
             {
                 if (Stats.Character.getAPMoveCosts(1, character.CharStats.MChartype) <= character.CharStats.CurrentAp)

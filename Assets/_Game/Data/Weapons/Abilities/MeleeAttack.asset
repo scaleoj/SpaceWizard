@@ -13,8 +13,15 @@ MonoBehaviour:
   m_Name: MeleeAttack
   m_EditorClassIdentifier: 
   abilityName: Punch
-  abilityDescription: Punches the selected Character in Melee Range. Deals heavy physical
-    damage.
+  abilityDescription: 'Punches the selected Character in Melee Range. Can deal heavy
+    physical damage.
+
+
+    Phys. DMG: 2 - 5
+
+    Range: 1
+
+    AP Cost: 3'
   dmgColor: {r: 1, g: 0, b: 0, a: 1}
   aoeRange: 0
   APCost: 3

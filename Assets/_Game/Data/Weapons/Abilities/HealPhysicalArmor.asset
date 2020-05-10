@@ -13,7 +13,14 @@ MonoBehaviour:
   m_Name: HealPhysicalArmor
   m_EditorClassIdentifier: 
   abilityName: Restore Physical Armor
-  abilityDescription: Restores the targets Physical Armor.
+  abilityDescription: 'Restores the targets Physical Armor.
+
+
+    PA Heal: 2 - 3
+
+    Range: 5
+
+    AP Cost: 2'
   dmgColor: {r: 0, g: 1, b: 1, a: 1}
   aoeRange: 0
   APCost: 2

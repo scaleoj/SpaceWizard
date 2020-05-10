@@ -784,8 +784,8 @@ MonoBehaviour:
 
     Wizards'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: baa5fbe0e7810da42a3e5466ee68b057, type: 2}
-  m_sharedMaterial: {fileID: 1406206501544995581, guid: baa5fbe0e7810da42a3e5466ee68b057,
+  m_fontAsset: {fileID: 11400000, guid: 7e7eace408f2beb459306351902b5f63, type: 2}
+  m_sharedMaterial: {fileID: -6353465752357600119, guid: 7e7eace408f2beb459306351902b5f63,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -812,7 +812,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 75.2
+  m_fontSize: 33.4
   m_fontSizeBase: 120
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1378,7 +1378,7 @@ MonoBehaviour:
 
     -
 
-    Game Design, Core Systems, AI
+    Game Design, Core System & AI Programming
 
     ------------------
 
@@ -1428,7 +1428,7 @@ MonoBehaviour:
   m_enableWordWrapping: 1
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 69
+  m_firstOverflowCharacterIndex: 81
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1452,10 +1452,10 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_textInfo:
     textComponent: {fileID: 1105223489}
-    characterCount: 88
+    characterCount: 100
     spriteCount: 0
-    spaceCount: 10
-    wordCount: 10
+    spaceCount: 12
+    wordCount: 11
     linkCount: 0
     lineCount: 8
     pageCount: 1

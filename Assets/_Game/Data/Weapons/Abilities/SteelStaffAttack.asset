@@ -9,18 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 80c134b60bf82234fa7737fe233c5979, type: 3}
-  m_Name: HealMagicArmor
+  m_Script: {fileID: 11500000, guid: 54fc04d52438f364eaeda64cb6d9f61d, type: 3}
+  m_Name: SteelStaffAttack
   m_EditorClassIdentifier: 
-  abilityName: Restore Magic Shield
-  abilityDescription: 'Restores the targets Magic Shield.
-
-
-    MS Heal: 2 - 3
-
-    Range: 5
-
-    AP Cost: 2'
-  dmgColor: {r: 0, g: 1, b: 1, a: 1}
+  abilityName: Hit
+  abilityDescription: "Hits the Enemy with your weapon. \n\nPhys. DMG: 1\nRange: 2\nAP
+    Cost: 3"
+  dmgColor: {r: 1, g: 0, b: 0, a: 1}
   aoeRange: 0
-  APCost: 2
+  APCost: 3

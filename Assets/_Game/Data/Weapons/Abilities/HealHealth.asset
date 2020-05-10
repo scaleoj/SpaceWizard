@@ -13,7 +13,14 @@ MonoBehaviour:
   m_Name: HealHealth
   m_EditorClassIdentifier: 
   abilityName: Heal Health
-  abilityDescription: Heals the targets Health Points.
+  abilityDescription: 'Heals the targets Health Points.
+
+
+    HP Heal: 2 - 3
+
+    Range: 5
+
+    AP Cost: 2'
   dmgColor: {r: 0, g: 1, b: 1, a: 1}
   aoeRange: 0
   APCost: 2
