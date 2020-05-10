@@ -48,8 +48,8 @@ namespace _Game.Scripts.GameFlow
 
         public void KillUnit(GameObject c)
         {
-            Debug.Log(this._queue[_activePosition].Key);
-            Debug.Log(c);
+            //Debug.Log(this._queue[_activePosition].Key);
+            //Debug.Log(c);
             if (_initSheet.ContainsKey(c))
             {
                 _initSheet.Remove(c);

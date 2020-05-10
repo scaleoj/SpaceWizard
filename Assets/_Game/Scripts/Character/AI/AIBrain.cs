@@ -25,7 +25,7 @@ namespace _Game.Scripts.Character.AI
             _team = character.CharStats.Team;
             switch (character.CharStats.MChartype)
             {
-                case CharacterStat.CharType.Base:
+                case CharacterStat.CharType.Soldier:
                     _range = Ranged;
                     break;
                 case CharacterStat.CharType.Sniper:
@@ -82,14 +82,14 @@ namespace _Game.Scripts.Character.AI
                     hasmoved = true;
                     if (range < _range)
                     {
-                        Debug.Log("retreat");
+                        //Debug.Log("retreat");
                         Retreat();
                         continue;
                     }
 
                     if (range > _range)
                     {
-                        Debug.Log("move");
+                        //Debug.Log("move");
                         Move(target);
                         continue;
                     }           
@@ -98,13 +98,13 @@ namespace _Game.Scripts.Character.AI
 
                 if (_character.CharStats.PrimaryWeapon.Abilities[0].ApCost < _senses.ApCount() && !hasAttacked)
                 {
-                    Debug.Log("attack");
+                    //Debug.Log("attack");
                     _character.CharStats.PrimaryWeapon.Abilities[0].Attack(target.gameObject, range);
                     hasAttacked = true;
                 }
                 else
                 {
-                    Debug.Log("Break");
+                    //Debug.Log("Break");
                     break;
                 }
 

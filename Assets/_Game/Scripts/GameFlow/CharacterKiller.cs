@@ -33,7 +33,7 @@ public class CharacterKiller : MonoBehaviour, IAtomListener<GameObject>
     private IEnumerator killWaitTime(GameObject item)
     {
         killWaitTimeCounter++;
-        Debug.Log(killWaitTimeCounter);
+        //Debug.Log(killWaitTimeCounter);
         if (item == queue.Queue[queue.ActivePosition].Key)
         {
             queue.Next();

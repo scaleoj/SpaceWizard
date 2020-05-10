@@ -64,7 +64,7 @@ namespace _Game.Scripts.Character.Stats
         private List<Effect> _activeEffects;
 
         //ENUMS
-        public enum CharType {Base, Melee, Support, Tank, Sniper}
+        public enum CharType {Soldier, Melee, Support, Tank, Sniper}
         public enum DamageType{Normal,Physical, Magic} //Normal is for the Heal to just Heal the HP
    
         //--------METHODS----------------------------------//
@@ -80,7 +80,7 @@ namespace _Game.Scripts.Character.Stats
         {
             switch (mChartype)
             {
-                case CharType.Base: MoveRange = CurrentAp;
+                case CharType.Soldier: MoveRange = CurrentAp;
                     break;
                 case CharType.Melee: MoveRange = CurrentAp * 3;
                     break;
@@ -219,7 +219,7 @@ namespace _Game.Scripts.Character.Stats
                 currentAp = Mathf.Clamp(value, 0, maxAP);
                 switch (mChartype)
                 {
-                    case CharType.Base: MoveRange = CurrentAp;
+                    case CharType.Soldier: MoveRange = CurrentAp;
                         break;
                     case CharType.Melee: MoveRange = CurrentAp * 3;
                         break;
@@ -349,7 +349,7 @@ namespace _Game.Scripts.Character.Stats
         {
             switch (mChartype)
             {
-                case CharType.Base: CurrentAp -= distance;
+                case CharType.Soldier: CurrentAp -= distance;
                     break;
                 case CharType.Melee: CurrentAp -= distance ;
                     break;

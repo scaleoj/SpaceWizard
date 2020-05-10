@@ -23,7 +23,7 @@ namespace _Game.Scripts.GameFlow.Grid
         {
             _grid = new TileGrid(gridObject.Width, gridObject.Depth, gridObject.DistanceBetweenPoints, gameObject.transform);
             _grid.ScanGrid();
-            Debug.Log("tilehub retreat"+ _retreat.name);
+            //Debug.Log("tilehub retreat"+ _retreat.name);
             _walkableMask = gridObject.Mask;
             _pathfinder = new Pathfinder(_grid);
             

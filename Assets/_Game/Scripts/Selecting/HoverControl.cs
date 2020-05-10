@@ -86,7 +86,7 @@ public class HoverControl : MonoBehaviour, IAtomListener<GameObject>
                    {
                        lastHovered.GetComponent<TileContainer>().State = TileContainer.tileState.NORMAL;
                        wasClicked = false;
-                       Debug.Log("Switch was clicked to false");
+                       //Debug.Log("Switch was clicked to false");
                    }
                    else
                    {

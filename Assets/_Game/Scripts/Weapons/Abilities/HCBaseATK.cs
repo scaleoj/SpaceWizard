@@ -12,7 +12,7 @@ public class HCBaseATK : Ability
    {
       if (target == null)
       {
-         Debug.Log("MISS");
+         //Debug.Log("MISS");
          return;
       }
       

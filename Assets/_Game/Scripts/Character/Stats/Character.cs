@@ -222,7 +222,7 @@ namespace _Game.Scripts.Character.Stats
         {
             switch (type)
             {
-                case CharacterStat.CharType.Base: return distance;
+                case CharacterStat.CharType.Soldier: return distance;
                 case CharacterStat.CharType.Melee: return  distance;
                 case CharacterStat.CharType.Support: return distance;
                 case CharacterStat.CharType.Tank: return distance;

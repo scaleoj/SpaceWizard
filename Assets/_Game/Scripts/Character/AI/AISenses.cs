@@ -69,19 +69,19 @@ namespace _Game.Scripts.Character.AI
                     if (hypotheticalPath.Count == count)
                     {
                         //No Suitable Path found, dont move
-                        Debug.Log("No Suitable Path found!");
+                        //Debug.Log("No Suitable Path found!");
                         return;
                     }
 
                     if (hypotheticalPath[hypotheticalPath.Count - count].node.GetComponent<TileContainer>()
                         .OccupiedGameObject != null)
                     {
-                        Debug.Log("Unsuitable Target!");
+                        //Debug.Log("Unsuitable Target!");
                         count++;
                     }
                     else
                     {
-                        Debug.Log("Path found!");
+                        //Debug.Log("Path found!");
                         foundSuitableTarget = true;
                         hypotheticalPath = hypotheticalPath.Take(hypotheticalPath.Count + 2 - count).ToList();
                     }
